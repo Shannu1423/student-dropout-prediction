@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}System Notifications - Sanskriti University{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-3 px-lg-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold text-navy mb-1">
+                <i class="fa-solid fa-bell text-warning me-2"></i> In-Portal Notifications & Risk Alerts
+            </h3>
+            <p class="text-secondary small mb-0">
+                System notifications generated from AI risk flags, case escalations, and counselling milestones.
+            </p>
+        </div>
+        <div>
+            <form action="{{ url_for('mark_all_notifications_read') }}" method="POST">
+                <button type="submit" class="btn btn-outline-secondary btn-sm">
+                    <i class="fa-solid fa-check-double me-1"></i> Mark All as Read
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body p-0">
+            <div class="list-group list-group-flush rounded-4">
+                {% for n in notifications %}
+                <div class="list-group-item p-3 d-flex justify-content-between align-items-start {% if not n.is_read %}bg-light{% endif %}">
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="rounded-circle p-2 mt-1 
+                            {% if n.category == 'danger' %}bg-danger-subtle text-danger
+                            {% elif n.category == 'warning' %}bg-warning-subtle text-warning-emphasis
+                            {% elif n.category == 'success' %}bg-success-subtle text-success
+                            {% else %}bg-primary-subtle text-primary{% endif %}">
+                            <i class="fa-solid 
+                                {% if n.category == 'danger' %}fa-triangle-exclamation
+                                {% elif n.category == 'warning' %}fa-bell
+                                {% elif n.category == 'success' %}fa-circle-check
+                                {% else %}fa-info{% endif %}"></i>
+                        </div>
+                        <div>
+                            <div class="d-flex align-items-center gap-2">
+                                <h6 class="fw-bold text-dark mb-0">{{ n.title }}</h6>
+                                {% if not n.is_read %}
+                                <span class="badge bg-primary fs-xs">New</span>
+                                {% endif %}
+                            </div>
+                            <p class="text-secondary small mb-1 mt-1">{{ n.message }}</p>
+                            <small class="text-muted font-monospace fs-xs">
+                                <i class="fa-regular fa-clock me-1"></i> {{ n.created_at.strftime('%d-%m-%Y %H:%M') }}
+                            </small>
+                        </div>
+                    </div>
+
+                    {% if not n.is_read %}
+                    <form action="{{ url_for('mark_notification_read', notif_id=n.id) }}" method="POST">
+                        <button type="submit" class="btn btn-sm btn-link text-decoration-none text-muted" title="Mark as read">
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                    </form>
+                    {% endif %}
+                </div>
+                {% else %}
+                <div class="text-center py-5 text-muted">
+                    <i class="fa-regular fa-bell-slash fs-1 text-secondary mb-2 d-block"></i>
+                    No notifications in the portal.
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

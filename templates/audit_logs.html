@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}System Audit Logs - Sanskriti University{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-3 px-lg-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold text-navy mb-1">
+                <i class="fa-solid fa-shield-halved text-primary me-2"></i> System Audit Trail & Security Logs
+            </h3>
+            <p class="text-secondary small mb-0">
+                Immutable chronological log of authentication, dataset uploads, AI prediction batches, status transitions, and counselling records.
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-header bg-white border-0 py-3 d-flex justify-content-between align-items-center">
+            <h6 class="fw-bold text-dark mb-0">Audit Events ({{ logs|length }} recorded entries)</h6>
+            <span class="badge bg-light text-secondary border font-monospace">Local Authority Node</span>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 small">
+                    <thead class="table-light text-secondary">
+                        <tr>
+                            <th>Timestamp (UTC)</th>
+                            <th>User</th>
+                            <th>Action Triggered</th>
+                            <th>Action Details</th>
+                            <th>Origin IP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for log in logs %}
+                        <tr>
+                            <td class="font-monospace text-muted">{{ log.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td>
+                                <strong>{{ log.username }}</strong>
+                            </td>
+                            <td>
+                                <span class="badge 
+                                    {% if 'LOGIN' in log.action %}bg-info-subtle text-info border border-info-subtle
+                                    {% elif 'UPLOAD' in log.action %}bg-primary-subtle text-primary border border-primary-subtle
+                                    {% elif 'PREDICTION' in log.action %}bg-warning-subtle text-warning-emphasis border border-warning-subtle
+                                    {% elif 'COUNSELLING' in log.action %}bg-success-subtle text-success border border-success-subtle
+                                    {% elif 'ESCALATION' in log.action %}bg-danger-subtle text-danger border border-danger-subtle
+                                    {% else %}bg-light text-secondary border{% endif %} fs-xs font-monospace">
+                                    {{ log.action }}
+                                </span>
+                            </td>
+                            <td class="text-dark">{{ log.details }}</td>
+                            <td class="font-monospace text-muted">{{ log.ip_address or '127.0.0.1' }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center py-5 text-muted">
+                                No audit log records available.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

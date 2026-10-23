@@ -1,0 +1,432 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Profile - {{ student.name }} ({{ student.enrollment_no }}){% endblock %}
+
+{% block content %}
+<div class="container-fluid px-3 px-lg-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb small">
+            <li class="breadcrumb-item"><a href="{{ url_for('dashboard') }}" class="text-decoration-none">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('students_list') }}" class="text-decoration-none">Students</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ student.name }} ({{ student.enrollment_no }})</li>
+        </ol>
+    </nav>
+
+    <!-- Header Card -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden">
+        <div class="card-body p-4 bg-white">
+            <div class="row align-items-center g-3">
+                <div class="col-md-7 d-flex align-items-center gap-3">
+                    <div class="avatar-lg bg-navy text-white rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 70px; height: 70px; font-size: 1.8rem;">
+                        {{ student.name[0] }}
+                    </div>
+                    <div>
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                            <h4 class="fw-bold text-navy mb-0">{{ student.name }}</h4>
+                            <span class="badge bg-light text-dark border font-monospace">{{ student.enrollment_no }}</span>
+                            <span class="badge {% if student.risk_level == 'At Risk' %}bg-danger{% else %}bg-success{% endif %}">
+                                {{ student.risk_level }}
+                            </span>
+                        </div>
+                        <div class="text-secondary small mt-1">
+                            <span><i class="fa-solid fa-building-columns me-1"></i> {{ student.department }} &bull; Sem {{ student.semester }}</span>
+                            <span class="mx-2">&bull;</span>
+                            <span><i class="fa-solid fa-location-dot me-1"></i> {{ student.campus_location }}</span>
+                            <span class="mx-2">&bull;</span>
+                            <span><i class="fa-solid fa-envelope me-1"></i> {{ student.email }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5 text-md-end d-flex flex-wrap justify-content-md-end gap-2">
+                    {% if current_user.get('role') in ['Admin', 'Department Head', 'Faculty Mentor'] %}
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editMetricsModal">
+                        <i class="fa-solid fa-arrows-rotate me-1"></i> Update Metrics & Recalculate
+                    </button>
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addCounsellingModal">
+                        <i class="fa-solid fa-clipboard-check me-1"></i> Log Counselling Session
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Grid: AI Prediction & Reason Analysis on Left, Details & Workflow on Right -->
+    <div class="row g-4">
+        <!-- Left Column: AI Prediction & Explainable AI (XAI) -->
+        <div class="col-lg-5">
+            <!-- AI Risk Prediction Card -->
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-header bg-white border-0 py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold text-dark mb-0">
+                        <i class="fa-solid fa-brain text-primary me-2"></i> AI Dropout Risk Evaluation
+                    </h6>
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle">scikit-learn Random Forest</span>
+                </div>
+                <div class="card-body p-4 text-center">
+                    <div class="risk-gauge-container mb-3">
+                        <div class="display-4 fw-bold {% if student.risk_score >= 0.70 %}text-danger{% elif student.risk_score >= 0.50 %}text-warning{% else %}text-success{% endif %}">
+                            {{ (student.risk_score * 100)|round(1) }}%
+                        </div>
+                        <div class="text-uppercase small fw-bold tracking-wider text-muted">Predicted Dropout Risk Score</div>
+                    </div>
+
+                    <div class="progress mb-3" style="height: 10px;">
+                        <div class="progress-bar {% if student.risk_score >= 0.70 %}bg-danger{% elif student.risk_score >= 0.50 %}bg-warning{% else %}bg-success{% endif %}" 
+                             role="progressbar" style="width: {{ student.risk_score * 100 }}%">
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between text-muted fs-xs px-1 mb-3">
+                        <span>0% (Safe)</span>
+                        <span>Threshold (50%)</span>
+                        <span>100% (Critical)</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center p-3 rounded-3 bg-light border">
+                        <div class="text-start">
+                            <small class="text-secondary d-block">Lifecycle Intervention Stage</small>
+                            <strong class="text-dark">{{ student.lifecycle_status }}</strong>
+                        </div>
+                        <div>
+                            <span class="badge 
+                                {% if student.lifecycle_status == 'Closed' %}bg-success
+                                {% elif student.lifecycle_status == 'Intervened' %}bg-info text-dark
+                                {% elif student.lifecycle_status == 'Counselling' %}bg-warning text-dark
+                                {% elif student.lifecycle_status == 'Under Review' %}bg-secondary
+                                {% else %}bg-danger{% endif %} fs-6 py-2 px-3">
+                                {{ student.lifecycle_status }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Explainable AI (XAI) Reason Analysis Card -->
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-header bg-white border-0 py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold text-dark mb-0">
+                        <i class="fa-solid fa-list-check text-warning me-2"></i> Reason Analysis (XAI)
+                    </h6>
+                    <small class="text-muted">Feature Attribution</small>
+                </div>
+                <div class="card-body p-4">
+                    <p class="text-secondary small mb-3">
+                        The AI engine computes the weighted contribution of student risk factors by evaluating academic, attendance, and financial deficits against model feature importance benchmarks:
+                    </p>
+
+                    <div class="reasons-list d-flex flex-column gap-3">
+                        {% for r in student.reasons_list %}
+                        <div class="p-3 rounded-3 border bg-light">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="fw-bold text-dark small">
+                                    <i class="fa-solid 
+                                        {% if r.severity == 'danger' %}fa-circle-xmark text-danger
+                                        {% elif r.severity == 'warning' %}fa-triangle-exclamation text-warning
+                                        {% else %}fa-circle-check text-success{% endif %} me-1"></i>
+                                    {{ r.factor }}
+                                </span>
+                                {% if r.contribution_percentage is defined %}
+                                <span class="badge bg-white text-dark border fw-semibold small">
+                                    {{ r.contribution_percentage }}% Impact
+                                </span>
+                                {% endif %}
+                            </div>
+                            <div class="text-secondary small mb-2">{{ r.description }}</div>
+                            {% if r.contribution_percentage is defined %}
+                            <div class="progress" style="height: 5px;">
+                                <div class="progress-bar {% if r.severity == 'danger' %}bg-danger{% elif r.severity == 'warning' %}bg-warning{% else %}bg-success{% endif %}" 
+                                     style="width: {{ r.contribution_percentage }}%"></div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% else %}
+                        <div class="alert alert-success border-0 small mb-0">
+                            <i class="fa-solid fa-check-circle me-1"></i> No critical risk indicators detected. Student is performing within normal parameters.
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Student Metrics & Counselling History -->
+        <div class="col-lg-7">
+            <!-- Current Academic & Administrative Metrics Grid -->
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-header bg-white border-0 py-3">
+                    <h6 class="fw-bold text-dark mb-0">
+                        <i class="fa-solid fa-sliders text-secondary me-2"></i> Student Performance & Financial Indicators
+                    </h6>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row g-3">
+                        <!-- Attendance -->
+                        <div class="col-sm-6 col-md-4">
+                            <div class="p-3 rounded-3 bg-light border text-center h-100">
+                                <small class="text-muted text-uppercase fw-bold fs-xs d-block mb-1">Attendance</small>
+                                <h4 class="fw-bold {% if student.attendance_percentage < 65 %}text-danger{% elif student.attendance_percentage < 75 %}text-warning{% else %}text-success{% endif %} mb-1">
+                                    {{ student.attendance_percentage }}%
+                                </h4>
+                                <small class="text-muted fs-xs">Min threshold: 75%</small>
+                            </div>
+                        </div>
+
+                        <!-- Internal Marks -->
+                        <div class="col-sm-6 col-md-4">
+                            <div class="p-3 rounded-3 bg-light border text-center h-100">
+                                <small class="text-muted text-uppercase fw-bold fs-xs d-block mb-1">Internal Marks</small>
+                                <h4 class="fw-bold {% if student.internal_marks_avg < 50 %}text-danger{% elif student.internal_marks_avg < 60 %}text-warning{% else %}text-dark{% endif %} mb-1">
+                                    {{ student.internal_marks_avg }}%
+                                </h4>
+                                <small class="text-muted fs-xs">Passing standard: 50%</small>
+                            </div>
+                        </div>
+
+                        <!-- Backlogs -->
+                        <div class="col-sm-6 col-md-4">
+                            <div class="p-3 rounded-3 bg-light border text-center h-100">
+                                <small class="text-muted text-uppercase fw-bold fs-xs d-block mb-1">Active Backlogs</small>
+                                <h4 class="fw-bold {% if student.backlog_count >= 2 %}text-danger{% elif student.backlog_count > 0 %}text-warning{% else %}text-success{% endif %} mb-1">
+                                    {{ student.backlog_count }}
+                                </h4>
+                                <small class="text-muted fs-xs">Pending subjects</small>
+                            </div>
+                        </div>
+
+                        <!-- Fee Status -->
+                        <div class="col-sm-6 col-md-4">
+                            <div class="p-3 rounded-3 bg-light border text-center h-100">
+                                <small class="text-muted text-uppercase fw-bold fs-xs d-block mb-1">Fee Status</small>
+                                <h4 class="fw-bold {% if student.fee_status == 'Due' %}text-danger{% elif student.fee_status == 'Partial' %}text-warning{% else %}text-success{% endif %} mb-1">
+                                    {{ student.fee_status }}
+                                </h4>
+                                <small class="text-muted fs-xs">Tuition Accounts</small>
+                            </div>
+                        </div>
+
+                        <!-- Engagement Score -->
+                        <div class="col-sm-6 col-md-4">
+                            <div class="p-3 rounded-3 bg-light border text-center h-100">
+                                <small class="text-muted text-uppercase fw-bold fs-xs d-block mb-1">LMS Engagement</small>
+                                <h4 class="fw-bold {% if student.engagement_score < 40 %}text-danger{% else %}text-dark{% endif %} mb-1">
+                                    {{ student.engagement_score }}/100
+                                </h4>
+                                <small class="text-muted fs-xs">Portal activity</small>
+                            </div>
+                        </div>
+
+                        <!-- Assigned Mentor -->
+                        <div class="col-sm-6 col-md-4">
+                            <div class="p-3 rounded-3 bg-light border text-center h-100">
+                                <small class="text-muted text-uppercase fw-bold fs-xs d-block mb-1">Faculty Mentor</small>
+                                <div class="fw-bold text-dark text-truncate mb-1">
+                                    {% if student.assigned_mentor_id %}
+                                    {{ student.mentor.name if student.mentor else 'Assigned' }}
+                                    {% else %}
+                                    <span class="text-danger small">Unassigned</span>
+                                    {% endif %}
+                                </div>
+                                {% if current_user.get('role') in ['Admin', 'Department Head'] %}
+                                <a href="#" class="fs-xs text-primary" data-bs-toggle="modal" data-bs-target="#assignMentorModal">Change</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Structured Counselling Workflow & Historical Case Logs -->
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-header bg-white border-0 py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold text-dark mb-0">
+                        <i class="fa-solid fa-notes-medical text-primary me-2"></i> Structured Counselling Trail & Interventions
+                    </h6>
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addCounsellingModal">
+                        <i class="fa-solid fa-plus me-1"></i> Add Record
+                    </button>
+                </div>
+                <div class="card-body p-4">
+                    {% if counselling_history %}
+                    <div class="timeline position-relative ps-3">
+                        {% for session_case in counselling_history %}
+                        <div class="timeline-entry position-relative mb-4 pb-2 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle fs-xs">
+                                    Stage: {{ session_case.status_at_time }}
+                                </span>
+                                <small class="text-muted font-monospace">
+                                    <i class="fa-regular fa-calendar me-1"></i> {{ session_case.session_date.strftime('%d %B %Y') }}
+                                </small>
+                            </div>
+
+                            <div class="text-secondary small mt-2">
+                                <strong class="text-dark">Mentor Remarks:</strong>
+                                <p class="mb-2 mt-1">{{ session_case.mentor_remarks }}</p>
+
+                                {% if session_case.action_plan %}
+                                <strong class="text-dark">Documented Action Plan:</strong>
+                                <div class="bg-light p-2 rounded-2 mt-1 mb-2 font-monospace fs-xs text-dark">
+                                    {{ session_case.action_plan }}
+                                </div>
+                                {% endif %}
+
+                                <div class="d-flex justify-content-between align-items-center fs-xs text-muted mt-2">
+                                    <span><i class="fa-solid fa-user-tie me-1"></i> Recorded by: <strong>{{ session_case.mentor.name }}</strong></span>
+                                    {% if session_case.next_followup_date %}
+                                    <span class="text-warning-emphasis"><i class="fa-solid fa-bell me-1"></i> Next Follow-up: <strong>{{ session_case.next_followup_date.strftime('%d %b %Y') }}</strong></span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5 text-muted">
+                        <i class="fa-solid fa-clipboard-user fs-1 text-secondary mb-2 d-block"></i>
+                        <h6 class="text-dark fw-bold mb-1">No Counselling Sessions Recorded Yet</h6>
+                        <p class="small text-secondary mb-3">Document mentor reviews, remedial tutoring agreements, or fee payment arrangements.</p>
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addCounsellingModal">
+                            <i class="fa-solid fa-plus me-1"></i> Document First Session
+                        </button>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Log Counselling Session -->
+<div class="modal fade" id="addCounsellingModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header bg-navy text-white">
+                <h5 class="modal-title fw-bold">
+                    <i class="fa-solid fa-clipboard-check me-2"></i> Record Mentor Counselling Session
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" action="{{ url_for('add_counselling_session', student_id=student.id) }}">
+                <div class="modal-body p-4">
+                    <div class="alert alert-light border small text-secondary mb-3">
+                        Student: <strong>{{ student.name }}</strong> ({{ student.enrollment_no }}) &bull; Current Risk: <span class="badge bg-danger">{{ (student.risk_score*100)|round(1) }}%</span>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-dark">Update Lifecycle Stage</label>
+                            <select name="lifecycle_status" class="form-select">
+                                {% for st in ['At Risk', 'Under Review', 'Counselling', 'Intervened', 'Closed'] %}
+                                <option value="{{ st }}" {% if student.lifecycle_status == st %}selected{% endif %}>{{ st }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-bold text-dark">Next Follow-up Date (Optional)</label>
+                            <input type="date" name="next_followup_date" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-dark">Mentor Observations & Counselling Notes <span class="text-danger">*</span></label>
+                        <textarea name="mentor_remarks" class="form-control" rows="3" placeholder="Document student's feedback, causes for low attendance/backlogs, parental discussions..." required></textarea>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label small fw-bold text-dark">Action Plan & Corrective Interventions</label>
+                        <textarea name="action_plan" class="form-control" rows="2" placeholder="e.g. Remedial classes assigned for Mathematics, fee installment plan agreed, weekly progress reporting..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 bg-light">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa-solid fa-save me-1"></i> Save Counselling Record
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Update Metrics & Recalculate Prediction -->
+<div class="modal fade" id="editMetricsModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header bg-navy text-white">
+                <h5 class="modal-title fw-bold">
+                    <i class="fa-solid fa-arrows-rotate me-2"></i> Update Metrics & Recalculate Risk
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" action="{{ url_for('recalculate_prediction', student_id=student.id) }}">
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-dark">Attendance Percentage (%)</label>
+                        <input type="number" step="0.1" min="0" max="100" name="attendance_percentage" value="{{ student.attendance_percentage }}" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-dark">Internal Marks Average (%)</label>
+                        <input type="number" step="0.1" min="0" max="100" name="internal_marks_avg" value="{{ student.internal_marks_avg }}" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-dark">Backlog Count</label>
+                        <input type="number" min="0" max="20" name="backlog_count" value="{{ student.backlog_count }}" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-dark">Fee Status</label>
+                        <select name="fee_status" class="form-select">
+                            <option value="Paid" {% if student.fee_status == 'Paid' %}selected{% endif %}>Paid</option>
+                            <option value="Partial" {% if student.fee_status == 'Partial' %}selected{% endif %}>Partial</option>
+                            <option value="Due" {% if student.fee_status == 'Due' %}selected{% endif %}>Due</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-dark">Engagement Score (0-100)</label>
+                        <input type="number" step="0.1" min="0" max="100" name="engagement_score" value="{{ student.engagement_score }}" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 bg-light">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa-solid fa-bolt me-1"></i> Re-run ML Prediction
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Assign Mentor -->
+<div class="modal fade" id="assignMentorModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header bg-navy text-white">
+                <h5 class="modal-title fw-bold"><i class="fa-solid fa-user-tie me-2"></i> Assign Faculty Mentor</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" action="{{ url_for('assign_mentor', student_id=student.id) }}">
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-dark">Select Mentor</label>
+                        <select name="mentor_id" class="form-select" required>
+                            <option value="">-- Choose Faculty Mentor --</option>
+                            {% for m in mentors %}
+                            <option value="{{ m.id }}" {% if student.assigned_mentor_id == m.id %}selected{% endif %}>
+                                {{ m.name }} ({{ m.department }})
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 bg-light">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Assign Mentor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

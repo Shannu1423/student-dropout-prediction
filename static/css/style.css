@@ -1,0 +1,95 @@
+/* Custom Styling for Sanskriti University Student Dropout Prediction Portal */
+
+:root {
+    --primary-color: #1a56db;
+    --navy-color: #0f172a;
+    --navy-header: #1e293b;
+    --accent-warning: #f59e0b;
+    --accent-danger: #ef4444;
+    --accent-success: #10b981;
+    --bg-light: #f8fafc;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #1e293b;
+    background-color: var(--bg-light);
+}
+
+.bg-navy {
+    background-color: var(--navy-color) !important;
+}
+
+.text-navy {
+    color: var(--navy-color) !important;
+}
+
+.fs-xs {
+    font-size: 0.75rem !important;
+}
+
+/* Brand badge */
+.brand-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: #f59e0b;
+}
+
+/* User Avatar */
+.avatar-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #3b82f6;
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* Metric KPI Cards */
+.metric-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08) !important;
+}
+
+.metric-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+/* Tables */
+.table th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+}
+
+/* Timeline */
+.timeline-entry::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+}

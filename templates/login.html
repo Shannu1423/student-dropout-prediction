@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign In - Sanskriti University Student Dropout Portal{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-5">
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                <div class="card-header bg-navy text-white text-center py-4">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white text-navy rounded-circle mb-3 shadow" style="width: 65px; height: 65px; font-size: 1.8rem;">
+                        <i class="fa-solid fa-graduation-cap text-primary"></i>
+                    </div>
+                    <h4 class="fw-bold mb-1">Sanskriti University</h4>
+                    <p class="text-white-50 small mb-0">AI-Based Prediction of Reasons for Student Dropout</p>
+                </div>
+
+                <div class="card-body p-4 p-md-5">
+                    <h5 class="fw-bold text-dark mb-3 text-center">Portal Authentication</h5>
+                    
+                    <form method="POST" action="{{ url_for('login') }}">
+                        <div class="mb-3">
+                            <label for="username" class="form-label text-secondary small fw-bold">Username or ID</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-user text-muted"></i></span>
+                                <input type="text" class="form-control border-start-0" id="username" name="username" placeholder="e.g. satyam or admin" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="password" class="form-label text-secondary small fw-bold">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-lock text-muted"></i></span>
+                                <input type="password" class="form-control border-start-0" id="password" name="password" placeholder="Enter password" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold shadow-sm rounded-3">
+                            <i class="fa-solid fa-right-to-bracket me-2"></i> Sign In to Portal
+                        </button>
+                    </form>
+
+                    <div class="mt-4 pt-3 border-top">
+                        <p class="text-muted small fw-bold mb-2 text-center text-uppercase fs-xs">
+                            <i class="fa-solid fa-bolt text-warning me-1"></i> Quick Demo Access
+                        </p>
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary text-start py-2 px-3 d-flex justify-content-between align-items-center" onclick="fillCredentials('admin', 'password123')">
+                                <div>
+                                    <strong class="d-block text-dark">Admin</strong>
+                                    <small class="text-muted">Dr. A.K. Sharma &bull; Executive Authority</small>
+                                </div>
+                                <span class="badge bg-danger">Full Control</span>
+                            </button>
+
+                            <button type="button" class="btn btn-sm btn-outline-secondary text-start py-2 px-3 d-flex justify-content-between align-items-center" onclick="fillCredentials('satyam', 'password123')">
+                                <div>
+                                    <strong class="d-block text-dark">Faculty Guide / HOD</strong>
+                                    <small class="text-muted">Mr. Satyam Dwivedi &bull; Computer Science</small>
+                                </div>
+                                <span class="badge bg-primary">Dept Head</span>
+                            </button>
+
+                            <button type="button" class="btn btn-sm btn-outline-secondary text-start py-2 px-3 d-flex justify-content-between align-items-center" onclick="fillCredentials('priya', 'password123')">
+                                <div>
+                                    <strong class="d-block text-dark">Faculty Mentor</strong>
+                                    <small class="text-muted">Dr. Priya Verma &bull; Student Counsellor</small>
+                                </div>
+                                <span class="badge bg-success">Mentor</span>
+                            </button>
+
+                            <button type="button" class="btn btn-sm btn-outline-secondary text-start py-2 px-3 d-flex justify-content-between align-items-center" onclick="fillCredentials('ramesh', 'password123')">
+                                <div>
+                                    <strong class="d-block text-dark">Student Account</strong>
+                                    <small class="text-muted">D. Ramesh (Enr: 2302320099)</small>
+                                </div>
+                                <span class="badge bg-secondary">Student</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer bg-light text-center py-3 border-0">
+                    <small class="text-muted">
+                        Prototype build ready for SQLite, PostgreSQL & MySQL deployment.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function fillCredentials(user, pass) {
+    document.getElementById('username').value = user;
+    document.getElementById('password').value = pass;
+}
+</script>
+{% endblock %}

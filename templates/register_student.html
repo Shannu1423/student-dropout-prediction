@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %}Register Student - Sanskriti University{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-header bg-navy text-white p-4">
+                    <h5 class="fw-bold mb-1">
+                        <i class="fa-solid fa-user-plus text-primary me-2"></i> Register New Student Record
+                    </h5>
+                    <p class="text-white-50 small mb-0">
+                        Enter student demographic, academic, attendance, and financial data. The AI prediction engine will evaluate dropout risk instantly upon submission.
+                    </p>
+                </div>
+
+                <div class="card-body p-4">
+                    <form method="POST" action="{{ url_for('register_student') }}">
+                        <h6 class="text-navy fw-bold mb-3 border-bottom pb-2">
+                            <i class="fa-solid fa-id-card text-muted me-1"></i> Student Identification
+                        </h6>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-dark">Enrollment Number <span class="text-danger">*</span></label>
+                                <input type="text" name="enrollment_no" class="form-control" placeholder="e.g. 2302320099" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-dark">Full Name <span class="text-danger">*</span></label>
+                                <input type="text" name="name" class="form-control" placeholder="e.g. D. Ramesh" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-dark">Official Email</label>
+                                <input type="email" name="email" class="form-control" placeholder="student@sanskriti.edu.in">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-dark">Phone Number</label>
+                                <input type="text" name="phone" class="form-control" placeholder="+91-9876543210">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-dark">Department <span class="text-danger">*</span></label>
+                                <select name="department" class="form-select" required>
+                                    <option value="Computer Science & Engineering">Computer Science & Engineering</option>
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                    <option value="Civil Engineering">Civil Engineering</option>
+                                    <option value="Electrical Engineering">Electrical Engineering</option>
+                                    <option value="Management">Management</option>
+                                    <option value="Biotechnology">Biotechnology</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label small fw-bold text-dark">Semester <span class="text-danger">*</span></label>
+                                <select name="semester" class="form-select" required>
+                                    {% for s in range(1, 9) %}
+                                    <option value="{{ s }}">Semester {{ s }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label small fw-bold text-dark">Campus Location</label>
+                                <select name="campus_location" class="form-select">
+                                    <option value="Main Campus">Main Campus</option>
+                                    <option value="North Campus">North Campus</option>
+                                    <option value="South Campus">South Campus</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h6 class="text-navy fw-bold mb-3 border-bottom pb-2">
+                            <i class="fa-solid fa-chart-simple text-muted me-1"></i> Academic, Attendance & Financial Features
+                        </h6>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label small fw-bold text-dark">Attendance Percentage (%) <span class="text-danger">*</span></label>
+                                <input type="number" step="0.1" min="0" max="100" name="attendance_percentage" class="form-control" placeholder="0 - 100" value="85.0" required>
+                                <small class="text-muted fs-xs">Threshold: 75%</small>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small fw-bold text-dark">Internal Marks Avg (%) <span class="text-danger">*</span></label>
+                                <input type="number" step="0.1" min="0" max="100" name="internal_marks_avg" class="form-control" placeholder="0 - 100" value="70.0" required>
+                                <small class="text-muted fs-xs">Passing standard: 50%</small>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small fw-bold text-dark">Active Backlogs <span class="text-danger">*</span></label>
+                                <input type="number" min="0" max="20" name="backlog_count" class="form-control" value="0" required>
+                                <small class="text-muted fs-xs">Pending failed subjects</small>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-dark">Tuition Fee Status <span class="text-danger">*</span></label>
+                                <select name="fee_status" class="form-select" required>
+                                    <option value="Paid">Paid (No Dues)</option>
+                                    <option value="Partial">Partial Dues Pending</option>
+                                    <option value="Due">Due / Defaulted</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-dark">LMS Engagement Score (0 - 100)</label>
+                                <input type="number" step="0.1" min="0" max="100" name="engagement_score" class="form-control" value="75.0" required>
+                                <small class="text-muted fs-xs">Digital activity / portal logins</small>
+                            </div>
+                        </div>
+
+                        <h6 class="text-navy fw-bold mb-3 border-bottom pb-2">
+                            <i class="fa-solid fa-user-tie text-muted me-1"></i> Mentorship Assignment
+                        </h6>
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-dark">Assigned Faculty Mentor</label>
+                            <select name="assigned_mentor_id" class="form-select">
+                                <option value="">-- Assign Later --</option>
+                                {% for m in mentors %}
+                                <option value="{{ m.id }}">{{ m.name }} ({{ m.department }})</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a href="{{ url_for('students_list') }}" class="btn btn-outline-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="fa-solid fa-cloud-arrow-up me-1"></i> Register & Run AI Evaluation
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

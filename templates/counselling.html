@@ -1,0 +1,298 @@
+{% extends 'base.html' %}
+
+{% block title %}Lifecycle Retention Hub - Sanskriti University{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-3 px-lg-4">
+    <!-- Header with Administrative Control Link -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+        <div>
+            <h3 class="fw-bold text-navy mb-1">
+                <i class="fa-solid fa-hand-holding-heart text-primary me-2"></i> Student Retention Lifecycle Hub
+            </h3>
+            <p class="text-secondary small mb-0">
+                Prioritized in risk-level order: <strong class="text-danger">Critical Risk (Top)</strong> &rarr; <strong class="text-warning">Active Intervention</strong> &rarr; <strong class="text-success">Manageable / Resolved (Last)</strong>.
+            </p>
+        </div>
+        <div class="d-flex gap-2">
+            {% if current_user.get('role') in ['Admin', 'Department Head'] %}
+            <a href="{{ url_for('admin_settings') }}" class="btn btn-outline-secondary btn-sm shadow-sm" title="Configure capacity limits for each stage">
+                <i class="fa-solid fa-sliders me-1"></i> Configure Stage Limits
+            </a>
+            {% endif %}
+            <a href="{{ url_for('students_list') }}" class="btn btn-outline-primary btn-sm shadow-sm">
+                <i class="fa-solid fa-users me-1"></i> Student Directory
+            </a>
+        </div>
+    </div>
+
+    <!-- Administrative Stage Capacity & Risk-Level Pipeline Overview Cards -->
+    <div class="row g-3 mb-4">
+        {% for st in stages %}
+        {% set s_stat = stage_stats[st] %}
+        {% set s_meta = stage_meta[st] %}
+        <div class="col-6 col-md-4 col-xl-2">
+            <div class="card border-0 shadow-sm rounded-3 h-100 {% if s_stat.is_overflow %}border border-danger border-2{% endif %}">
+                <div class="card-body p-3 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="fs-xs fw-bold text-uppercase text-secondary">
+                                <i class="fa-solid {{ s_meta.icon }} me-1"></i> {{ st }}
+                            </span>
+                            {% if s_stat.is_overflow %}
+                            <span class="badge bg-danger fs-xs" title="Capacity Limit Exceeded!">Overflow</span>
+                            {% endif %}
+                        </div>
+                        <div class="d-flex align-items-baseline gap-1">
+                            <h4 class="fw-bold text-dark mb-0">{{ s_stat.count }}</h4>
+                            <span class="text-muted small">/ {{ s_stat.limit }} limit</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <div class="progress" style="height: 5px;">
+                            <div class="progress-bar {% if s_stat.is_overflow %}bg-danger{% elif s_stat.capacity_percent >= 75 %}bg-warning{% elif st in ['Closed', 'Low Risk'] %}bg-success{% else %}bg-primary{% endif %}" 
+                                 style="width: {{ s_stat.capacity_percent }}%">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between text-muted fs-xs mt-1">
+                            <span>{{ s_stat.capacity_percent }}% capacity</span>
+                            {% if s_stat.critical_count > 0 %}
+                            <span class="text-danger fw-bold">{{ s_stat.critical_count }} Crit</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Risk-Level Ordered Tabs / Sections -->
+    <ul class="nav nav-pills nav-fill mb-4 p-1 bg-white rounded-3 shadow-sm border" id="counsellingTabs" role="tablist">
+        {% for st in stages %}
+        {% set s_stat = stage_stats[st] %}
+        <li class="nav-item" role="presentation">
+            <button class="nav-link py-2 fw-semibold {% if loop.first %}active{% endif %} d-flex align-items-center justify-content-center gap-1" 
+                    id="tab-{{ loop.index }}" data-bs-toggle="pill" data-bs-target="#pane-{{ loop.index }}" type="button" role="tab">
+                <span>{{ st }}</span>
+                <span class="badge rounded-pill {% if s_stat.is_overflow %}bg-danger{% elif st == 'At Risk' %}bg-danger{% elif st in ['Closed', 'Low Risk'] %}bg-success{% else %}bg-secondary{% endif %}">
+                    {{ s_stat.count }}
+                </span>
+                {% if s_stat.is_overflow %}
+                <i class="fa-solid fa-triangle-exclamation text-danger ms-1" title="Stage Limit Exceeded"></i>
+                {% endif %}
+            </button>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Tab Panes for Each Stage (Ordered High Risk Top, Manageable Last) -->
+    <div class="tab-content" id="counsellingTabContent">
+        {% for st in stages %}
+        {% set s_stat = stage_stats[st] %}
+        {% set s_meta = stage_meta[st] %}
+        <div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="pane-{{ loop.index }}" role="tabpanel">
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <!-- Stage Header with Urgency Ranking & Capacity Controls -->
+                <div class="card-header bg-white border-0 py-3 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+                    <div>
+                        <div class="d-flex align-items-center gap-2">
+                            <h5 class="fw-bold text-dark mb-0">
+                                <i class="fa-solid {{ s_meta.icon }} me-1"></i> {{ s_meta.title }}
+                            </h5>
+                            <span class="badge {{ s_meta.badge }} fs-xs">{{ s_meta.urgency }}</span>
+                            {% if s_stat.is_overflow %}
+                            <span class="badge bg-danger fs-xs"><i class="fa-solid fa-triangle-exclamation me-1"></i> Queue Overflow (+{{ s_stat.count - s_stat.limit }})</span>
+                            {% endif %}
+                        </div>
+                        <p class="text-secondary small mb-0 mt-1">{{ s_meta.desc }}</p>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="text-md-end small">
+                            <span class="text-muted d-block fs-xs">Stage Capacity Limit</span>
+                            <strong>{{ s_stat.count }} active / {{ s_stat.limit }} max allowed</strong>
+                        </div>
+                        {% if current_user.get('role') in ['Admin', 'Department Head'] %}
+                        <a href="{{ url_for('admin_settings') }}" class="btn btn-outline-secondary btn-sm" title="Adjust stage limit">
+                            <i class="fa-solid fa-gear"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Overflow Alert Banner (if limit exceeded) -->
+                {% if s_stat.is_overflow %}
+                <div class="alert alert-danger border-0 rounded-0 mb-0 py-2 px-4 d-flex align-items-center justify-content-between">
+                    <div class="small">
+                        <i class="fa-solid fa-triangle-exclamation me-2"></i>
+                        <strong>Queue Overflow Warning:</strong> This stage has {{ s_stat.count }} cases, exceeding the administrative limit of {{ s_stat.limit }}. Immediate intervention is recommended to rebalance caseloads.
+                    </div>
+                    {% if current_user.get('role') in ['Admin', 'Department Head'] %}
+                    <a href="{{ url_for('admin_settings') }}" class="btn btn-danger btn-sm py-0 px-2 fs-xs">Adjust Limit</a>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                <!-- Student List for Stage (Sorted Highest Risk on Top) -->
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light small text-secondary">
+                                <tr>
+                                    <th>Priority & Risk Tier</th>
+                                    <th>Student Details</th>
+                                    <th>Department</th>
+                                    <th>Attendance</th>
+                                    <th>Backlogs</th>
+                                    <th>Fee Status</th>
+                                    <th>AI Risk Score</th>
+                                    <th>Assigned Mentor</th>
+                                    <th class="text-end">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for s in stage_cases[st] %}
+                                <tr>
+                                    <td>
+                                        {% if s.risk_score >= critical_threshold %}
+                                        <span class="badge bg-danger fs-xs fw-bold">
+                                            <i class="fa-solid fa-angles-up me-1"></i> Critical Risk
+                                        </span>
+                                        {% elif s.risk_score >= medium_threshold %}
+                                        <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle fs-xs fw-semibold">
+                                            <i class="fa-solid fa-angle-up me-1"></i> Moderate Risk
+                                        </span>
+                                        {% else %}
+                                        <span class="badge bg-success-subtle text-success border border-success-subtle fs-xs">
+                                            <i class="fa-solid fa-check me-1"></i> Manageable
+                                        </span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="fw-bold text-dark">{{ s.name }}</div>
+                                        <small class="text-muted font-monospace">{{ s.enrollment_no }}</small>
+                                    </td>
+                                    <td>
+                                        <div>{{ s.department }}</div>
+                                        <small class="text-muted fs-xs">Sem {{ s.semester }}</small>
+                                    </td>
+                                    <td>
+                                        <span class="{% if s.attendance_percentage < 65 %}text-danger fw-bold{% elif s.attendance_percentage < 75 %}text-warning fw-semibold{% else %}text-success{% endif %}">
+                                            {{ s.attendance_percentage }}%
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {% if s.backlog_count > 0 %}
+                                        <span class="badge bg-danger-subtle text-danger fw-bold">{{ s.backlog_count }} active</span>
+                                        {% else %}
+                                        <span class="text-muted">0</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <span class="badge {% if s.fee_status == 'Paid' %}bg-success-subtle text-success{% elif s.fee_status == 'Partial' %}bg-warning-subtle text-warning-emphasis{% else %}bg-danger-subtle text-danger{% endif %} fs-xs">
+                                            {{ s.fee_status }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="progress flex-grow-1" style="height: 6px; width: 60px;">
+                                                <div class="progress-bar {% if s.risk_score >= critical_threshold %}bg-danger{% elif s.risk_score >= medium_threshold %}bg-warning{% else %}bg-success{% endif %}" 
+                                                     style="width: {{ s.risk_score * 100 }}%">
+                                                </div>
+                                            </div>
+                                            <strong class="small">{{ (s.risk_score * 100)|round(1) }}%</strong>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="small text-secondary">
+                                            {% if s.assigned_mentor_id %}
+                                            <i class="fa-solid fa-user-check text-success me-1"></i> {{ s.mentor.name if s.mentor else 'Assigned' }}
+                                            {% else %}
+                                            <span class="badge bg-danger-subtle text-danger fs-xs">Unassigned</span>
+                                            {% endif %}
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <a href="{{ url_for('student_detail', student_id=s.id) }}" class="btn btn-sm btn-primary py-1 px-3">
+                                            <i class="fa-solid fa-clipboard-user me-1"></i> Review
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="9" class="text-center py-5 text-muted">
+                                        <i class="fa-regular fa-circle-check fs-2 mb-2 d-block text-success"></i>
+                                        No students currently in the <strong>{{ st }}</strong> stage.
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Recent Case Trail Across All Stages -->
+    <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-header bg-white border-0 py-3">
+            <h6 class="fw-bold text-dark mb-0">
+                <i class="fa-solid fa-clock-rotate-left text-primary me-2"></i> Recent Mentor Actions & Follow-ups
+            </h6>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 small">
+                    <thead class="table-light text-secondary">
+                        <tr>
+                            <th>Date</th>
+                            <th>Student</th>
+                            <th>Mentor</th>
+                            <th>Status at Time</th>
+                            <th>Mentor Remarks</th>
+                            <th>Action Plan</th>
+                            <th>Next Follow-up</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sc in recent_sessions %}
+                        <tr>
+                            <td class="font-monospace">{{ sc.session_date.strftime('%d-%m-%Y') }}</td>
+                            <td>
+                                <strong>{{ sc.student.name }}</strong>
+                                <div class="text-muted fs-xs font-monospace">{{ sc.student.enrollment_no }}</div>
+                            </td>
+                            <td>{{ sc.mentor.name }}</td>
+                            <td>
+                                <span class="badge bg-primary-subtle text-primary border border-primary-subtle fs-xs">
+                                    {{ sc.status_at_time }}
+                                </span>
+                            </td>
+                            <td>{{ sc.mentor_remarks }}</td>
+                            <td class="text-muted">{{ sc.action_plan or '-' }}</td>
+                            <td>
+                                {% if sc.next_followup_date %}
+                                <span class="text-danger fw-semibold">{{ sc.next_followup_date.strftime('%d-%m-%Y') }}</span>
+                                {% else %}
+                                <span class="text-muted">-</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center py-4 text-muted">
+                                No counselling sessions on record.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

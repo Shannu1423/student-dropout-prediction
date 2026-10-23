@@ -1,0 +1,321 @@
+{% extends 'base.html' %}
+
+{% block title %}Administrative Configuration & Risk Policy Rules - Sanskriti University{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-3 px-lg-4">
+    <!-- Header with Quick Action Controls -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+        <div>
+            <h3 class="fw-bold text-navy mb-1">
+                <i class="fa-solid fa-gears text-primary me-2"></i> Administrative Governance & Risk Policy Rules
+            </h3>
+            <p class="text-secondary small mb-0">
+                Configure student risk factor limits (attendance, backlogs, marks), define routing destinations, set stage capacities, or restore nominal global defaults.
+            </p>
+        </div>
+        <div class="d-flex flex-wrap gap-2">
+            <!-- Reset to Nominal Defaults Button -->
+            <form method="POST" action="{{ url_for('reset_nominal_settings') }}" onsubmit="return confirm('Restore all risk factor limits and thresholds to Sanskriti University nominal global defaults?');" class="d-inline">
+                <button type="submit" class="btn btn-outline-warning btn-sm shadow-sm" title="Restore nominal institutional standards">
+                    <i class="fa-solid fa-rotate-left me-1"></i> Restore Nominal Defaults
+                </button>
+            </form>
+
+            <!-- Reapply Rules to All Students Button -->
+            <form method="POST" action="{{ url_for('reapply_rules_to_all_students') }}" onsubmit="return confirm('Re-evaluate all current student records with the active risk limits and routing rules?');" class="d-inline">
+                <button type="submit" class="btn btn-outline-success btn-sm shadow-sm" title="Recalculate risk scores for all students">
+                    <i class="fa-solid fa-arrows-spin me-1"></i> Re-Apply Rules to All Students
+                </button>
+            </form>
+
+            <a href="{{ url_for('counselling_hub') }}" class="btn btn-primary btn-sm shadow-sm">
+                <i class="fa-solid fa-hand-holding-heart me-1"></i> View Lifecycle Hub
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Left Column: Academic & Risk Factor Policy Configuration -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-header bg-white border-0 py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold text-dark mb-0">
+                        <i class="fa-solid fa-scale-balanced text-primary me-2"></i> Academic Risk Factor Limits & Routing Policy
+                    </h6>
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Policy Control</span>
+                </div>
+                <div class="card-body p-4">
+                    <p class="text-secondary small mb-3">
+                        Define what limits of attendance, backlogs, marks, and fees trigger risk classification, and choose which lifecycle stage newly flagged students are routed to:
+                    </p>
+
+                    <form method="POST" action="{{ url_for('admin_settings') }}">
+                        <!-- 1. Attendance Limits -->
+                        <div class="p-3 bg-light rounded-3 border mb-3">
+                            <h6 class="text-navy fw-bold small text-uppercase mb-2">
+                                <i class="fa-solid fa-user-check text-primary me-1"></i> Attendance Limits (%)
+                            </h6>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <label class="form-label fs-xs fw-bold text-dark mb-1">Warning Threshold</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="number" step="0.5" min="50" max="95" name="rule_attendance_warning" value="{{ settings.rule_attendance_warning }}" class="form-control" required>
+                                        <span class="input-group-text bg-white">%</span>
+                                    </div>
+                                    <span class="text-muted fs-xs">Nominal: 75%</span>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label fs-xs fw-bold text-danger mb-1">Critical Threshold</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="number" step="0.5" min="20" max="80" name="rule_attendance_critical" value="{{ settings.rule_attendance_critical }}" class="form-control" required>
+                                        <span class="input-group-text bg-white">%</span>
+                                    </div>
+                                    <span class="text-muted fs-xs">Nominal: 60%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. Backlog Count Limits -->
+                        <div class="p-3 bg-light rounded-3 border mb-3">
+                            <h6 class="text-navy fw-bold small text-uppercase mb-2">
+                                <i class="fa-solid fa-triangle-exclamation text-danger me-1"></i> Active Backlogs Limits
+                            </h6>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <label class="form-label fs-xs fw-bold text-dark mb-1">Warning Limit</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="number" min="0" max="10" name="rule_backlogs_warning" value="{{ settings.rule_backlogs_warning }}" class="form-control" required>
+                                        <span class="input-group-text bg-white">subject(s)</span>
+                                    </div>
+                                    <span class="text-muted fs-xs">Nominal: 1 backlog</span>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label fs-xs fw-bold text-danger mb-1">Critical Limit</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="number" min="1" max="15" name="rule_backlogs_critical" value="{{ settings.rule_backlogs_critical }}" class="form-control" required>
+                                        <span class="input-group-text bg-white">subject(s)</span>
+                                    </div>
+                                    <span class="text-muted fs-xs">Nominal: 3 backlogs</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. Internal Marks & LMS Engagement -->
+                        <div class="p-3 bg-light rounded-3 border mb-3">
+                            <h6 class="text-navy fw-bold small text-uppercase mb-2">
+                                <i class="fa-solid fa-graduation-cap text-success me-1"></i> Academic Marks & LMS Engagement
+                            </h6>
+                            <div class="row g-2 mb-2">
+                                <div class="col-6">
+                                    <label class="form-label fs-xs fw-bold text-dark mb-1">Marks Passing Benchmark</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="number" step="0.5" min="30" max="80" name="rule_marks_warning" value="{{ settings.rule_marks_warning }}" class="form-control" required>
+                                        <span class="input-group-text bg-white">%</span>
+                                    </div>
+                                    <span class="text-muted fs-xs">Nominal: 55%</span>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label fs-xs fw-bold text-danger mb-1">Critical Failing Mark</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="number" step="0.5" min="15" max="60" name="rule_marks_critical" value="{{ settings.rule_marks_critical }}" class="form-control" required>
+                                        <span class="input-group-text bg-white">%</span>
+                                    </div>
+                                    <span class="text-muted fs-xs">Nominal: 40%</span>
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col-12">
+                                    <label class="form-label fs-xs fw-bold text-dark mb-1">LMS Activity Critical Level (0-100)</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="number" step="0.5" min="10" max="70" name="rule_engagement_critical" value="{{ settings.rule_engagement_critical }}" class="form-control" required>
+                                        <span class="input-group-text bg-white">score</span>
+                                    </div>
+                                    <span class="text-muted fs-xs">Nominal: 40.0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Risk Destination & Routing Policy -->
+                        <div class="p-3 bg-light rounded-3 border mb-4">
+                            <h6 class="text-navy fw-bold small text-uppercase mb-2">
+                                <i class="fa-solid fa-route text-warning me-1"></i> Risk Factor Destination & Routing Target
+                            </h6>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <label class="form-label fs-xs fw-bold text-dark mb-1">Target Lifecycle Stage for Flagged Students</label>
+                                    <select name="rule_auto_lifecycle_target" class="form-select form-select-sm">
+                                        <option value="At Risk" {% if settings.rule_auto_lifecycle_target == 'At Risk' %}selected{% endif %}>At Risk (Immediate Attention Queue)</option>
+                                        <option value="Under Review" {% if settings.rule_auto_lifecycle_target == 'Under Review' %}selected{% endif %}>Under Review (Direct to Diagnostic)</option>
+                                        <option value="Counselling" {% if settings.rule_auto_lifecycle_target == 'Counselling' %}selected{% endif %}>Counselling (Direct to Mentorship)</option>
+                                    </select>
+                                    <span class="text-muted fs-xs">Which stage flagged students automatically enter</span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fs-xs fw-bold text-dark mb-1">Tuition Fee Default Impact</label>
+                                    <select name="rule_fee_due_severity" class="form-select form-select-sm">
+                                        <option value="danger" {% if settings.rule_fee_due_severity == 'danger' %}selected{% endif %}>High Risk Factor (Danger Alert)</option>
+                                        <option value="warning" {% if settings.rule_fee_due_severity == 'warning' %}selected{% endif %}>Moderate Risk Factor (Warning Alert)</option>
+                                    </select>
+                                    <span class="text-muted fs-xs">Attributed weight for fee dues</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. Stage Capacity Limits -->
+                        <div class="p-3 bg-light rounded-3 border mb-4">
+                            <h6 class="text-navy fw-bold small text-uppercase mb-2">
+                                <i class="fa-solid fa-list-ol text-secondary me-1"></i> Stage Capacity Limits (Queue Meters)
+                            </h6>
+                            <div class="row g-2">
+                                <div class="col-4">
+                                    <label class="form-label fs-xs fw-bold text-danger mb-1">At Risk Limit</label>
+                                    <input type="number" min="1" max="100" name="stage_limit_At_Risk" value="{{ settings.stage_limit_At_Risk }}" class="form-control form-control-sm" required>
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-label fs-xs fw-bold text-dark mb-1">Under Review</label>
+                                    <input type="number" min="1" max="100" name="stage_limit_Under_Review" value="{{ settings.stage_limit_Under_Review }}" class="form-control form-control-sm" required>
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-label fs-xs fw-bold text-primary mb-1">Counselling</label>
+                                    <input type="number" min="1" max="100" name="stage_limit_Counselling" value="{{ settings.stage_limit_Counselling }}" class="form-control form-control-sm" required>
+                                </div>
+                                <div class="col-4 mt-2">
+                                    <label class="form-label fs-xs fw-bold text-info mb-1">Intervened</label>
+                                    <input type="number" min="1" max="200" name="stage_limit_Intervened" value="{{ settings.stage_limit_Intervened }}" class="form-control form-control-sm" required>
+                                </div>
+                                <div class="col-4 mt-2">
+                                    <label class="form-label fs-xs fw-bold text-success mb-1">Closed Archive</label>
+                                    <input type="number" min="1" max="1000" name="stage_limit_Closed" value="{{ settings.stage_limit_Closed }}" class="form-control form-control-sm" required>
+                                </div>
+                                <div class="col-4 mt-2">
+                                    <label class="form-label fs-xs fw-bold text-secondary mb-1">Low Risk Display</label>
+                                    <input type="number" min="1" max="1000" name="stage_limit_Low_Risk" value="{{ settings.stage_limit_Low_Risk }}" class="form-control form-control-sm" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6. Scoring Thresholds -->
+                        <div class="p-3 bg-light rounded-3 border mb-4">
+                            <h6 class="text-navy fw-bold small text-uppercase mb-2">
+                                <i class="fa-solid fa-gauge-high text-danger me-1"></i> AI Risk Score Thresholds
+                            </h6>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <label class="form-label fs-xs fw-bold text-danger mb-1">Critical High Risk (&ge; %)</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="number" min="50" max="95" name="critical_risk_threshold" value="{{ settings.critical_risk_threshold }}" class="form-control" required>
+                                        <span class="input-group-text bg-white">%</span>
+                                    </div>
+                                    <span class="text-muted fs-xs">Nominal: 70%</span>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label fs-xs fw-bold text-warning mb-1">Moderate Risk (&ge; %)</label>
+                                    <div class="input-group input-group-sm">
+                                        <input type="number" min="20" max="60" name="medium_risk_threshold" value="{{ settings.medium_risk_threshold }}" class="form-control" required>
+                                        <span class="input-group-text bg-white">%</span>
+                                    </div>
+                                    <span class="text-muted fs-xs">Nominal: 50%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary px-4 fw-semibold">
+                                <i class="fa-solid fa-save me-1"></i> Save Risk Factor Limits
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Guidance & One-Click Retraining -->
+        <div class="col-lg-6">
+            <!-- Educational Guidance Card -->
+            <div class="card border-0 shadow-sm rounded-4 mb-4 bg-navy text-white">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-2">
+                        <i class="fa-solid fa-circle-question text-warning me-2"></i> Should I Retrain if I Upload a New List?
+                    </h5>
+                    <p class="text-white-70 small mb-3">
+                        Administrative rule for managing student uploads vs model retraining:
+                    </p>
+
+                    <div class="d-flex flex-column gap-3">
+                        <div class="p-3 bg-white bg-opacity-10 rounded-3 border border-white border-opacity-10">
+                            <strong class="text-warning d-block mb-1">
+                                <i class="fa-solid fa-circle-info me-1"></i> Uploading Active Student Rosters for Monitoring
+                            </strong>
+                            <p class="small text-white-50 mb-0">
+                                <strong>NO RETRAINING REQUIRED.</strong> When uploading a semester CSV list of students to monitor, use <em>Bulk CSV Upload</em> on the Students page. The AI prediction engine immediately evaluates the risk scores, detects attendance/backlog deficits, and routes them according to your active limits.
+                            </p>
+                        </div>
+
+                        <div class="p-3 bg-white bg-opacity-10 rounded-3 border border-white border-opacity-10">
+                            <strong class="text-success d-block mb-1">
+                                <i class="fa-solid fa-circle-check me-1"></i> Uploading Historical Data with Verified Dropout Outcomes
+                            </strong>
+                            <p class="small text-white-50 mb-0">
+                                <strong>YES, RETRAIN.</strong> When an academic cycle concludes and you have actual historical outcome records (with <code>dropped_out = 1/0</code>), use the retraining options below to update the model's predictive weights.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- One-Click Retraining Card -->
+            <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-header bg-white border-0 py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="fw-bold text-dark mb-0">
+                        <i class="fa-solid fa-brain text-primary me-2"></i> Trigger AI Model Retraining
+                    </h6>
+                    <span class="badge bg-success-subtle text-success border border-success-subtle">
+                        Current Acc: {{ (metrics['Random Forest']['Accuracy'] * 100)|round(1) }}%
+                    </span>
+                </div>
+                <div class="card-body p-4">
+                    <p class="text-secondary small mb-3">
+                        You can retrain both the <strong>Random Forest</strong> and <strong>Logistic Regression</strong> pipelines right now:
+                    </p>
+
+                    <!-- Form 1: One-Click Retrain on Updated Benchmark Data -->
+                    <form method="POST" action="{{ url_for('retrain_model_endpoint') }}" class="mb-4">
+                        <div class="p-3 rounded-3 bg-light border mb-3">
+                            <h6 class="fw-bold text-dark mb-1">Option 1: Recalibrate on Historical Distributions</h6>
+                            <p class="text-muted small mb-2">
+                                Regenerates and recalibrates model weights based on comprehensive institutional parameters (attendance, internal marks, backlogs, fee defaults).
+                            </p>
+                            <button type="submit" class="btn btn-outline-primary btn-sm">
+                                <i class="fa-solid fa-arrows-rotate me-1"></i> Retrain Model Now
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Form 2: Retrain with Custom Labeled CSV -->
+                    <form method="POST" action="{{ url_for('retrain_model_endpoint') }}" enctype="multipart/form-data">
+                        <div class="p-3 rounded-3 bg-light border">
+                            <h6 class="fw-bold text-dark mb-1">Option 2: Upload New Ground-Truth CSV & Retrain</h6>
+                            <p class="text-muted small mb-3">
+                                Upload a historical CSV containing past students with the actual target column: <code>dropped_out</code> (1 for dropped out, 0 for retained).
+                            </p>
+
+                            <div class="mb-3">
+                                <input type="file" name="training_file" accept=".csv" class="form-control form-control-sm" required>
+                                <small class="text-muted fs-xs">
+                                    Must contain: <code>attendance_percentage, internal_marks_avg, backlog_count, fee_status, engagement_score, semester, dropped_out</code>
+                                </small>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa-solid fa-cloud-arrow-up me-1"></i> Upload Labeled CSV & Retrain
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,101 @@
+enrollment,name,email,phone,department,semester,attendance_percentage,internal_marks_avg,backlog_count,fee_status,engagement_score,campus_location,dropped_out
+2301000003,Pari Naidu,pari.naidu80@college.edu.in,6358847190,Chemical Engineering,3,59.7,47.9,3,Partial,39,East Campus,1
+2301000006,Amit Shetty,amit.shetty68@college.edu.in,7941447207,Chemical Engineering,1,86.3,53.0,0,Paid,72,North Campus,0
+2301000009,Sanjay Bhat,sanjay.bhat56@college.edu.in,6562621200,Chemical Engineering,4,61.5,62.2,0,Paid,75,North Campus,0
+2301000012,Anvi Shetty,anvi.shetty65@college.edu.in,8175944850,Computer Science,2,78.7,86.4,0,Partial,33,South Campus,0
+2301000013,Shaurya Sen,shaurya.sen84@college.edu.in,9764873249,Mechanical Engineering,5,59.5,67.6,2,Paid,73,East Campus,0
+2301000018,Diya Kapoor,diya.kapoor24@college.edu.in,9604077624,Chemical Engineering,6,97.0,63.9,0,Paid,62,South Campus,0
+2301000022,Atharv Dutta,atharv.dutta71@college.edu.in,9443545274,Chemical Engineering,3,54.2,26.5,4,Paid,25,South Campus,1
+2301000022,Priya Kapoor,priya.kapoor83@college.edu.in,7507199272,Civil Engineering,1,76.6,66.8,0,Paid,81,North Campus,0
+2301000027,Shreya Mukherjee,shreya.mukherjee65@college.edu.in,7891622698,Electrical Engineering,7,87.1,74.2,0,Due,25,North Campus,0
+2301000028,Dhruv Hegde,dhruv.hegde19@college.edu.in,9579207368,Chemical Engineering,7,76.7,65.1,0,Paid,77,Main Campus,0
+2301000034,Aisha Menon,aisha.menon57@college.edu.in,6236136822,Computer Science,4,32.7,37.3,7,Paid,15,East Campus,0
+2301000037,Rajesh Sen,rajesh.sen54@college.edu.in,6636638725,Computer Science,1,60.0,67.8,1,Partial,30,South Campus,0
+2301000038,Tanvi Hegde,tanvi.hegde49@college.edu.in,9665989337,Information Technology,7,40.8,35.7,6,Paid,39,East Campus,0
+2301000044,Aadhya Shah,aadhya.shah70@college.edu.in,6273981199,Civil Engineering,2,89.2,59.1,0,Paid,64,North Campus,0
+2301000043,Deepak Joshi,deepak.joshi39@college.edu.in,7627017294,Computer Science,8,81.9,81.3,0,Partial,33,North Campus,0
+2301000048,Pooja Das,pooja.das39@college.edu.in,9792718463,Mechanical Engineering,7,76.9,65.6,0,Paid,91,East Campus,0
+2301000053,Sara Banerjee,sara.banerjee33@college.edu.in,7946795151,Computer Science,6,62.3,86.4,1,Paid,97,Main Campus,0
+2301000055,Aryan Gowda,aryan.gowda75@college.edu.in,8188129807,Chemical Engineering,2,95.3,84.8,1,Partial,13,North Campus,1
+2301000058,Sneha Biswas,sneha.biswas13@college.edu.in,7986768834,Biotechnology,6,77.0,71.4,0,Paid,60,North Campus,1
+2301000061,Lata Mehta,lata.mehta48@college.edu.in,7149747093,Management,1,80.0,64.0,0,Due,29,Main Campus,0
+2301000064,Prisha Desai,prisha.desai42@college.edu.in,6592874520,Chemical Engineering,7,77.0,80.4,3,Paid,31,South Campus,0
+2301000067,Dev Jain,dev.jain60@college.edu.in,8306051788,Chemical Engineering,2,64.7,72.2,0,Partial,28,East Campus,0
+2301000069,Kiara Desai,kiara.desai22@college.edu.in,6595075437,Chemical Engineering,6,85.0,77.8,2,Paid,97,Main Campus,0
+2301000074,Avni Das,avni.das18@college.edu.in,7443900908,Civil Engineering,6,69.4,64.7,1,Paid,68,South Campus,0
+2301000077,Parth Sharma,parth.sharma70@college.edu.in,9881986975,Civil Engineering,1,64.2,64.2,2,Due,21,East Campus,1
+2301000077,Nisha Bose,nisha.bose54@college.edu.in,9902847589,Civil Engineering,2,60.8,69.3,1,Due,40,Main Campus,1
+2301000079,Ritu Hegde,ritu.hegde71@college.edu.in,7867744765,Computer Science,5,89.7,58.1,0,Paid,86,South Campus,0
+2301000085,Prisha Ghosh,prisha.ghosh71@college.edu.in,9575203099,Information Technology,1,63.0,69.9,1,Due,42,East Campus,1
+2301000087,Aditya Nair,aditya.nair80@college.edu.in,9122409907,Civil Engineering,2,78.1,86.8,2,Partial,48,East Campus,0
+2301000092,Vivek Malhotra,vivek.malhotra45@college.edu.in,9712714387,Chemical Engineering,3,67.9,85.4,2,Paid,97,North Campus,0
+2301000093,Deepak Bhat,deepak.bhat20@college.edu.in,8177206954,Electronics & Communication,3,65.1,88.5,0,Partial,34,Main Campus,1
+2301000097,Vikram Bansal,vikram.bansal23@college.edu.in,9484862230,Information Technology,1,33.4,44.0,1,Paid,49,North Campus,1
+2301000097,Diya Jain,diya.jain29@college.edu.in,7867540062,Civil Engineering,6,65.7,84.8,0,Paid,80,North Campus,0
+2301000102,Vivaan Reddy,vivaan.reddy29@college.edu.in,9288363948,Information Technology,2,39.8,42.9,1,Due,21,South Campus,1
+2301000104,Sanjay Malhotra,sanjay.malhotra71@college.edu.in,8987225633,Computer Science,7,58.1,55.1,0,Paid,50,East Campus,1
+2301000107,Aditya Kulkarni,aditya.kulkarni78@college.edu.in,9695048914,Mechanical Engineering,3,47.9,50.8,1,Paid,13,East Campus,1
+2301000110,Suresh Kapoor,suresh.kapoor46@college.edu.in,8757256821,Biotechnology,7,74.2,86.6,1,Paid,91,South Campus,0
+2301000114,Neha Paul,neha.paul66@college.edu.in,9323017770,Information Technology,1,76.1,61.6,0,Paid,89,North Campus,0
+2301000119,Ananya Roy,ananya.roy48@college.edu.in,9887267789,Chemical Engineering,7,52.0,43.6,4,Paid,31,South Campus,1
+2301000121,Shreya Mondal,shreya.mondal82@college.edu.in,7280074075,Electrical Engineering,5,90.6,47.9,1,Partial,42,East Campus,0
+2301000124,Riya Banerjee,riya.banerjee77@college.edu.in,6269791442,Civil Engineering,1,37.5,22.9,7,Due,34,Main Campus,1
+2301000128,Avni Chauhan,avni.chauhan29@college.edu.in,8817472065,Biotechnology,7,84.9,43.6,5,Paid,37,East Campus,1
+2301000131,Aanya Bose,aanya.bose26@college.edu.in,7129846720,Chemical Engineering,4,97.4,77.2,0,Partial,51,East Campus,0
+2301000134,Rahul Kapoor,rahul.kapoor95@college.edu.in,6317939342,Management,6,70.8,53.5,1,Paid,92,North Campus,0
+2301000133,Yash Rathore,yash.rathore23@college.edu.in,9386009825,Mechanical Engineering,7,77.0,82.2,2,Due,38,North Campus,0
+2301000138,Yash Ghosh,yash.ghosh46@college.edu.in,6974130224,Chemical Engineering,2,42.2,38.6,7,Paid,25,North Campus,1
+2301000139,Siya Das,siya.das56@college.edu.in,6671828171,Computer Science,7,82.9,80.8,0,Paid,82,North Campus,0
+2301000145,Kiran Biswas,kiran.biswas21@college.edu.in,9422242375,Civil Engineering,1,63.1,84.8,2,Paid,58,South Campus,0
+2301000145,Jiya Sen,jiya.sen15@college.edu.in,9746244700,Management,6,72.7,65.0,0,Paid,85,Main Campus,0
+2301000151,Anjali Nair,anjali.nair13@college.edu.in,6995587918,Management,4,86.2,49.0,0,Paid,84,East Campus,0
+2301000152,Jyoti Shetty,jyoti.shetty93@college.edu.in,7790396167,Management,2,75.0,93.2,0,Paid,53,Main Campus,0
+2301000155,Riya Mehta,riya.mehta15@college.edu.in,6690861794,Management,6,51.3,49.7,2,Partial,15,South Campus,1
+2301000159,Kiran Patel,kiran.patel32@college.edu.in,6155384553,Biotechnology,3,85.8,76.7,0,Paid,48,South Campus,0
+2301000161,Ramesh Pandey,ramesh.pandey61@college.edu.in,6843091000,Biotechnology,4,60.5,89.2,0,Paid,65,North Campus,0
+2301000165,Aarav Banerjee,aarav.banerjee44@college.edu.in,8972331834,Biotechnology,6,92.2,65.5,0,Due,34,North Campus,0
+2301000168,Vivaan Pandey,vivaan.pandey74@college.edu.in,7540203413,Information Technology,6,84.5,63.6,3,Due,48,North Campus,0
+2301000169,Swati Menon,swati.menon91@college.edu.in,6167015440,Computer Science,7,37.2,44.0,5,Paid,32,North Campus,1
+2301000172,Parth Gowda,parth.gowda71@college.edu.in,8403108704,Management,3,92.2,61.6,0,Paid,64,North Campus,0
+2301000176,Sanjay Sen,sanjay.sen80@college.edu.in,8672267413,Management,1,43.4,39.8,5,Paid,29,Main Campus,1
+2301000182,Rhea Kumar,rhea.kumar82@college.edu.in,9347825712,Management,7,41.9,35.9,1,Paid,49,East Campus,1
+2301000183,Kavita Singh,kavita.singh43@college.edu.in,7572650398,Civil Engineering,7,52.1,44.9,2,Paid,52,North Campus,1
+2301000186,Navya Sharma,navya.sharma72@college.edu.in,6583249321,Biotechnology,1,63.3,66.8,0,Paid,75,Main Campus,0
+2301000191,Jiya Hegde,jiya.hegde11@college.edu.in,7736975360,Civil Engineering,7,62.0,93.4,0,Paid,79,North Campus,0
+2301000192,Meera Biswas,meera.biswas68@college.edu.in,9273888731,Electrical Engineering,4,64.3,69.3,0,Paid,68,East Campus,0
+2301000196,Vihaan Mondal,vihaan.mondal67@college.edu.in,8886552373,Electrical Engineering,3,88.0,63.7,1,Paid,93,South Campus,0
+2301000198,Rahul Nair,rahul.nair84@college.edu.in,9117808138,Electronics & Communication,8,97.4,58.0,0,Paid,89,Main Campus,0
+2301000202,Neha Saxena,neha.saxena40@college.edu.in,7402651503,Computer Science,3,65.5,56.6,1,Due,20,East Campus,1
+2301000205,Aryan Pandey,aryan.pandey74@college.edu.in,8496145555,Electrical Engineering,3,92.5,81.3,0,Paid,60,North Campus,0
+2301000209,Ramesh Bansal,ramesh.bansal75@college.edu.in,7645892835,Electrical Engineering,3,72.4,84.8,1,Paid,62,North Campus,0
+2301000209,Myra Roy,myra.roy45@college.edu.in,7192906647,Management,2,64.8,80.2,0,Paid,53,Main Campus,0
+2301000212,Harsh Joshi,harsh.joshi90@college.edu.in,8477409677,Civil Engineering,5,88.2,93.4,0,Partial,27,Main Campus,0
+2301000217,Suresh Saxena,suresh.saxena76@college.edu.in,9552188880,Chemical Engineering,6,54.4,38.9,2,Due,37,Main Campus,1
+2301000217,Shaurya Verma,shaurya.verma99@college.edu.in,8730046841,Management,8,73.6,76.4,1,Due,35,South Campus,0
+2301000221,Shreya Nair,shreya.nair36@college.edu.in,6967951649,Mechanical Engineering,1,81.3,68.9,0,Paid,51,Main Campus,0
+2301000227,Saanvi Menon,saanvi.menon14@college.edu.in,8136922568,Computer Science,5,88.6,47.2,5,Paid,43,Main Campus,1
+2301000229,Swati Kumar,swati.kumar67@college.edu.in,9595535381,Biotechnology,6,44.0,38.6,1,Paid,27,North Campus,1
+2301000232,Aryan Menon,aryan.menon35@college.edu.in,8780298584,Civil Engineering,3,38.3,36.1,3,Paid,37,North Campus,1
+2301000234,Pooja Kapoor,pooja.kapoor45@college.edu.in,7962913569,Mechanical Engineering,1,67.8,93.5,0,Paid,82,South Campus,0
+2301000235,Ananya Thakur,ananya.thakur18@college.edu.in,6453847557,Electrical Engineering,7,40.9,27.7,2,Paid,30,North Campus,1
+2301000238,Mahi Mehta,mahi.mehta68@college.edu.in,6731876992,Chemical Engineering,2,71.0,70.9,0,Due,12,East Campus,1
+2301000244,Ramesh Thakur,ramesh.thakur15@college.edu.in,7591798693,Biotechnology,5,89.8,44.2,4,Due,37,Main Campus,1
+2301000248,Lata Chauhan,lata.chauhan44@college.edu.in,9209180067,Electrical Engineering,8,63.2,84.4,0,Due,33,South Campus,1
+2301000248,Priya Mukherjee,priya.mukherjee64@college.edu.in,8730452078,Civil Engineering,5,81.9,91.4,3,Paid,29,East Campus,0
+2301000250,Lata Nambiar,lata.nambiar55@college.edu.in,9715923295,Chemical Engineering,1,74.6,48.4,0,Paid,89,South Campus,0
+2301000257,Siddharth Mehta,siddharth.mehta29@college.edu.in,6277641535,Electronics & Communication,5,84.7,80.2,0,Paid,60,Main Campus,0
+2301000257,Aisha Nambiar,aisha.nambiar48@college.edu.in,7872309523,Information Technology,6,34.5,49.9,2,Partial,14,South Campus,1
+2301000262,Rahul Kulkarni,rahul.kulkarni15@college.edu.in,9297025908,Information Technology,6,41.9,28.1,6,Paid,31,Main Campus,1
+2301000266,Sneha Das,sneha.das20@college.edu.in,7603701900,Electrical Engineering,6,43.5,41.3,3,Paid,31,Main Campus,1
+2301000266,Sanjay Rathore,sanjay.rathore19@college.edu.in,7622370971,Civil Engineering,5,58.3,42.8,1,Paid,49,Main Campus,1
+2301000269,Inaya Yadav,inaya.yadav84@college.edu.in,7138499102,Electronics & Communication,8,29.0,37.3,2,Paid,50,South Campus,1
+2301000273,Jyoti Mukherjee,jyoti.mukherjee40@college.edu.in,9672068303,Computer Science,2,30.4,32.9,3,Paid,30,East Campus,1
+2301000274,Navya Sen,navya.sen28@college.edu.in,8459883059,Information Technology,5,94.3,91.3,2,Partial,23,East Campus,0
+2301000279,Sai Hegde,sai.hegde32@college.edu.in,8853371435,Mechanical Engineering,3,64.5,64.5,1,Paid,90,North Campus,0
+2301000280,Sneha Bhat,sneha.bhat17@college.edu.in,8839591183,Information Technology,5,33.8,29.9,7,Paid,35,East Campus,1
+2301000284,Aaradhya Bose,aaradhya.bose41@college.edu.in,9626889706,Electrical Engineering,8,86.7,66.2,0,Paid,89,East Campus,0
+2301000290,Zara Patel,zara.patel46@college.edu.in,9788215813,Electronics & Communication,8,82.7,93.1,2,Partial,37,Main Campus,0
+2301000292,Rhea Naidu,rhea.naidu55@college.edu.in,7165358853,Chemical Engineering,8,83.4,67.3,2,Paid,62,South Campus,0
+2301000294,Vivaan Banerjee,vivaan.banerjee40@college.edu.in,6331065103,Electronics & Communication,8,59.9,79.6,1,Paid,60,North Campus,0
+2301000297,Om Mondal,om.mondal42@college.edu.in,7984697246,Electrical Engineering,4,66.1,78.1,0,Due,36,South Campus,0
+2301000301,Siddharth Kumar,siddharth.kumar52@college.edu.in,7203458023,Biotechnology,3,67.9,82.8,0,Paid,79,East Campus,0

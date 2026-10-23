@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Directory - Sanskriti University{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-3 px-lg-4">
+    <!-- Header with Action Buttons -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+        <div>
+            <h3 class="fw-bold text-navy mb-1">
+                <i class="fa-solid fa-users text-primary me-2"></i> Student Monitoring Directory
+            </h3>
+            <p class="text-secondary small mb-0">
+                Multi-parameter search, AI dropout risk evaluation, and bulk dataset management.
+            </p>
+        </div>
+        <div class="d-flex flex-wrap gap-2">
+            <button type="button" class="btn btn-outline-primary btn-sm shadow-sm" data-bs-toggle="modal" data-bs-target="#uploadCsvModal">
+                <i class="fa-solid fa-file-arrow-up me-1"></i> Bulk CSV Upload
+            </button>
+            <a href="{{ url_for('register_student') }}" class="btn btn-primary btn-sm shadow-sm">
+                <i class="fa-solid fa-user-plus me-1"></i> Register Student
+            </a>
+            <a href="{{ url_for('export_students_csv') }}" class="btn btn-outline-success btn-sm shadow-sm">
+                <i class="fa-solid fa-download me-1"></i> Export Data
+            </a>
+        </div>
+    </div>
+
+    <!-- Search & Multi-parameter Filters -->
+    <div class="card border-0 shadow-sm rounded-3 mb-4">
+        <div class="card-body p-3">
+            <form method="GET" action="{{ url_for('students_list') }}" class="row g-2 align-items-end">
+                <div class="col-md-3">
+                    <label class="form-label small fw-bold text-secondary mb-1">Search Keyword</label>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text bg-light"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                        <input type="text" name="q" value="{{ filters.q }}" class="form-control" placeholder="Enrollment, Name, or Email...">
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-bold text-secondary mb-1">Department</label>
+                    <select name="department" class="form-select form-select-sm">
+                        <option value="">All Departments</option>
+                        {% for d in departments %}
+                        <option value="{{ d }}" {% if filters.department == d %}selected{% endif %}>{{ d }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-6 col-md-1">
+                    <label class="form-label small fw-bold text-secondary mb-1">Semester</label>
+                    <select name="semester" class="form-select form-select-sm">
+                        <option value="">All</option>
+                        {% for sem in range(1, 9) %}
+                        <option value="{{ sem }}" {% if filters.semester == sem|string %}selected{% endif %}>Sem {{ sem }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-bold text-secondary mb-1">Risk Level</label>
+                    <select name="risk_level" class="form-select form-select-sm">
+                        <option value="">All Risk Levels</option>
+                        <option value="At Risk" {% if filters.risk_level == 'At Risk' %}selected{% endif %}>At Risk</option>
+                        <option value="Low Risk" {% if filters.risk_level == 'Low Risk' %}selected{% endif %}>Low Risk</option>
+                    </select>
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-bold text-secondary mb-1">Lifecycle Status</label>
+                    <select name="lifecycle_status" class="form-select form-select-sm">
+                        <option value="">All Stages</option>
+                        {% for st in ['Low Risk', 'At Risk', 'Under Review', 'Counselling', 'Intervened', 'Closed'] %}
+                        <option value="{{ st }}" {% if filters.lifecycle_status == st %}selected{% endif %}>{{ st }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-6 col-md-1">
+                    <label class="form-label small fw-bold text-secondary mb-1">Campus</label>
+                    <select name="campus_location" class="form-select form-select-sm">
+                        <option value="">All</option>
+                        {% for c in campuses %}
+                        <option value="{{ c }}" {% if filters.campus_location == c %}selected{% endif %}>{{ c }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-6 col-md-1 d-flex gap-1">
+                    <button type="submit" class="btn btn-primary btn-sm w-100" title="Apply Filters">
+                        <i class="fa-solid fa-filter"></i>
+                    </button>
+                    <a href="{{ url_for('students_list') }}" class="btn btn-outline-secondary btn-sm" title="Clear Filters">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Student Table -->
+    <div class="card border-0 shadow-sm rounded-3">
+        <div class="card-header bg-white border-0 py-3 d-flex justify-content-between align-items-center">
+            <h6 class="fw-bold text-dark mb-0">
+                Student Records ({{ students|length }} matching)
+            </h6>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light small text-secondary">
+                        <tr>
+                            <th>Enrollment No</th>
+                            <th>Student Name</th>
+                            <th>Dept / Sem</th>
+                            <th>Attendance</th>
+                            <th>Marks</th>
+                            <th>Backlogs</th>
+                            <th>Fee Status</th>
+                            <th>Engagement</th>
+                            <th>AI Risk Score</th>
+                            <th>Lifecycle Status</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for s in students %}
+                        <tr>
+                            <td class="font-monospace fw-semibold text-primary">
+                                <a href="{{ url_for('student_detail', student_id=s.id) }}" class="text-decoration-none">
+                                    {{ s.enrollment_no }}
+                                </a>
+                            </td>
+                            <td>
+                                <div class="fw-bold text-dark">{{ s.name }}</div>
+                                <small class="text-muted">{{ s.email }}</small>
+                            </td>
+                            <td>
+                                <div>{{ s.department }}</div>
+                                <span class="badge bg-light text-secondary border fs-xs">Sem {{ s.semester }}</span>
+                            </td>
+                            <td>
+                                <span class="badge {% if s.attendance_percentage < 60 %}bg-danger-subtle text-danger border border-danger-subtle{% elif s.attendance_percentage < 75 %}bg-warning-subtle text-warning-emphasis border border-warning-subtle{% else %}bg-success-subtle text-success border border-success-subtle{% endif %}">
+                                    {{ s.attendance_percentage }}%
+                                </span>
+                            </td>
+                            <td>{{ s.internal_marks_avg }}%</td>
+                            <td>
+                                {% if s.backlog_count > 0 %}
+                                <span class="badge bg-danger-subtle text-danger fw-bold">{{ s.backlog_count }}</span>
+                                {% else %}
+                                <span class="text-muted">0</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="badge {% if s.fee_status == 'Paid' %}bg-success-subtle text-success{% elif s.fee_status == 'Partial' %}bg-warning-subtle text-warning-emphasis{% else %}bg-danger-subtle text-danger{% endif %} fs-xs">
+                                    {{ s.fee_status }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center gap-1">
+                                    <small>{{ s.engagement_score }}</small>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="progress flex-grow-1" style="height: 6px; width: 55px;">
+                                        <div class="progress-bar {% if s.risk_score >= 0.70 %}bg-danger{% elif s.risk_score >= 0.50 %}bg-warning{% else %}bg-success{% endif %}" 
+                                             style="width: {{ s.risk_score * 100 }}%">
+                                        </div>
+                                    </div>
+                                    <strong class="fs-xs">{{ (s.risk_score * 100)|round(1) }}%</strong>
+                                </div>
+                                <span class="badge {% if s.risk_level == 'At Risk' %}bg-danger{% else %}bg-success{% endif %} fs-xs mt-1">
+                                    {{ s.risk_level }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge 
+                                    {% if s.lifecycle_status == 'Closed' %}bg-success-subtle text-success border border-success-subtle
+                                    {% elif s.lifecycle_status == 'Intervened' %}bg-info-subtle text-info border border-info-subtle
+                                    {% elif s.lifecycle_status == 'Counselling' %}bg-warning-subtle text-warning-emphasis border border-warning-subtle
+                                    {% elif s.lifecycle_status == 'Under Review' %}bg-secondary-subtle text-secondary border border-secondary-subtle
+                                    {% elif s.lifecycle_status == 'At Risk' %}bg-danger-subtle text-danger border border-danger-subtle
+                                    {% else %}bg-light text-muted border{% endif %} fs-xs">
+                                    {{ s.lifecycle_status }}
+                                </span>
+                            </td>
+                            <td class="text-end">
+                                <a href="{{ url_for('student_detail', student_id=s.id) }}" class="btn btn-sm btn-outline-primary py-1 px-2" title="Inspect Profile & AI Reason Analysis">
+                                    <i class="fa-solid fa-chart-simple me-1"></i> Reasons
+                                </a>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="11" class="text-center py-5 text-muted">
+                                <i class="fa-solid fa-folder-open fs-2 mb-2 d-block text-secondary"></i>
+                                No students match the selected filter criteria.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bulk CSV Upload Modal -->
+<div class="modal fade" id="uploadCsvModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header bg-navy text-white">
+                <h5 class="modal-title fw-bold"><i class="fa-solid fa-file-csv me-2"></i> Bulk Student CSV Upload</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" action="{{ url_for('upload_csv') }}" enctype="multipart/form-data">
+                <div class="modal-body p-4">
+                    <p class="text-secondary small">
+                        Upload student batch records. The AI prediction engine will automatically clean, scale, and compute dropout risk probabilities and contributing reasons for all imported records.
+                    </p>
+
+                    <div class="mb-3">
+                        <label for="csv_file" class="form-label small fw-bold text-dark">Select CSV File</label>
+                        <input type="file" class="form-control" id="csv_file" name="csv_file" accept=".csv" required>
+                    </div>
+
+                    <div class="alert alert-light border small text-muted">
+                        <strong><i class="fa-solid fa-circle-info text-primary me-1"></i> Required Columns:</strong><br>
+                        <code>enrollment_no, name, department, semester, attendance_percentage, internal_marks_avg, backlog_count, fee_status, engagement_score</code>
+                        <div class="mt-2 text-dark">
+                            <em>Note: You can use the generated <code>sample_students.csv</code> located in the project folder to test instantly.</em>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 bg-light">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa-solid fa-cloud-arrow-up me-1"></i> Upload & Run AI Prediction
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+enrollment_no,name,email,phone,department,semester,attendance_percentage,internal_marks_avg,backlog_count,fee_status,engagement_score,campus_location
+2302320301,Harsh Vardhan,harsh.v@sanskriti.edu.in,+91-9811001122,Computer Science & Engineering,3,44.5,41.0,3,Due,28.0,Main Campus
+2302320302,Prachi Singh,prachi.s@sanskriti.edu.in,+91-9822002233,Computer Science & Engineering,3,86.0,82.5,0,Paid,89.0,Main Campus
+2302320303,Abhishek Pandey,abhishek.p@sanskriti.edu.in,+91-9833003344,Mechanical Engineering,5,58.0,50.0,2,Partial,48.0,Main Campus
+2302320304,Megha Saxena,megha.s@sanskriti.edu.in,+91-9844004455,Civil Engineering,4,92.5,88.0,0,Paid,94.0,South Campus
+2302320305,Siddharth Rao,siddharth.r@sanskriti.edu.in,+91-9855005566,Electrical Engineering,6,39.0,34.0,4,Due,20.0,North Campus
+2302320306,Tanvi Bhatt,tanvi.b@sanskriti.edu.in,+91-9866006677,Management,2,76.5,70.0,0,Paid,72.0,Main Campus
+2302320307,Nitin Sharma,nitin.s@sanskriti.edu.in,+91-9877007788,Computer Science & Engineering,5,62.0,54.0,1,Due,52.0,Main Campus
+2302320308,Kavita Rawat,kavita.r@sanskriti.edu.in,+91-9888008899,Mechanical Engineering,4,84.0,79.0,0,Paid,80.0,South Campus
+2302320309,Arjun Nair,arjun.n@sanskriti.edu.in,+91-9899009900,Civil Engineering,5,48.0,45.0,2,Partial,38.0,Main Campus
+2302320310,Swati Jain,swati.j@sanskriti.edu.in,+91-9900000011,Management,6,90.0,85.0,0,Paid,91.0,Main Campus
