@@ -1,16 +1,21 @@
 """
-Sanskriti University B.Tech Project Report HTML Generator
-Converts PROJECT_REPORT.md into a beautifully styled, print-ready HTML file (A4 format).
+Sanskriti University B.Tech Project Report Compiler
+Converts PROJECT_REPORT.md into:
+1. PROJECT_REPORT.html (Styled, responsive academic web report)
+2. PROJECT_REPORT.pdf (Official submission-ready A4 PDF document)
 """
 import os
 import re
+import subprocess
+import time
 import markdown
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 MD_PATH = os.path.join(PROJECT_DIR, "PROJECT_REPORT.md")
 HTML_PATH = os.path.join(PROJECT_DIR, "PROJECT_REPORT.html")
+PDF_PATH = os.path.join(PROJECT_DIR, "PROJECT_REPORT.pdf")
 
-def generate_report_html():
+def build_report():
     if not os.path.exists(MD_PATH):
         print(f"Error: {MD_PATH} not found.")
         return
@@ -18,15 +23,36 @@ def generate_report_html():
     with open(MD_PATH, "r", encoding="utf-8") as f:
         md_text = f.read()
 
-    # Pre-process markdown for clean page breaks and chapter styling
-    # Replace horizontal rules or break comments with page break divs if needed
+    # Normalize existing page breaks
     md_text = re.sub(
         r'<div style="page-break-after:\s*always;"></div>',
         r'<div class="page-break"></div>',
         md_text
     )
 
-    # Convert Markdown to HTML with tables, code fences, and attributes
+    # Ensure clean page breaks before major structural divisions
+    page_break_headers = [
+        r"(# Department of Computer Science and Engineering &ndash; School of Engineering and Information Technology \(SOEIT\)\s*\n\s*## CERTIFICATE)",
+        r"(# Department of Computer Science and Engineering &ndash; School of Engineering and Information Technology \(SOEIT\)\s*\n\s*## DECLARATION)",
+        r"(# ACKNOWLEDGEMENT)",
+        r"(# ABSTRACT)",
+        r"(# TABLE OF CONTENTS)",
+        r"(# LIST OF TABLES)",
+        r"(# LIST OF FIGURES)",
+        r"(# LIST OF ABBREVIATIONS)",
+        r"(# CHAPTER \d+)",
+        r"(# REFERENCES)",
+        r"(# APPENDIX)"
+    ]
+
+    for pattern in page_break_headers:
+        md_text = re.sub(
+            r'(?<!<div class="page-break"></div>\n\n)' + pattern,
+            r'<div class="page-break"></div>\n\n\1',
+            md_text
+        )
+
+    # Convert Markdown to HTML with full academic extensions
     md_converter = markdown.Markdown(extensions=[
         'tables',
         'fenced_code',
@@ -36,13 +62,13 @@ def generate_report_html():
     ])
     body_html = md_converter.convert(md_text)
 
-    # Academic stylesheet for Sanskriti University guidelines
+    # Comprehensive academic print stylesheet
     html_template = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI-Based Prediction of Reasons for Student Dropout - Project Report</title>
+<title>AI-Based Prediction of Reasons for Student Dropout - Sanskriti University</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -51,11 +77,11 @@ def generate_report_html():
     --primary-color: #1a365d;
     --secondary-color: #2b6cb0;
     --accent-color: #c53030;
-    --text-color: #2d3748;
+    --text-color: #1a202c;
     --bg-color: #ffffff;
     --table-border: #cbd5e0;
     --table-header: #edf2f7;
-    --code-bg: #f7fafc;
+    --code-bg: #f8fafc;
     --code-border: #e2e8f0;
   }}
 
@@ -66,7 +92,7 @@ def generate_report_html():
   body {{
     font-family: 'Times New Roman', Times, 'Crimson Pro', Georgia, serif;
     font-size: 12pt;
-    line-height: 1.6;
+    line-height: 1.55;
     color: var(--text-color);
     background-color: #e2e8f0;
     margin: 0;
@@ -79,7 +105,7 @@ def generate_report_html():
     min-height: 297mm;
     margin: 0 auto;
     background: #ffffff;
-    padding: 30mm 20mm 25mm 30mm; /* Standard Indian thesis margins: 1.25 in left, 1 in others */
+    padding: 25mm 20mm 20mm 30mm; /* Standard Indian university thesis margins: 30mm left for binding */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     border-radius: 4px;
     position: relative;
@@ -93,7 +119,7 @@ def generate_report_html():
     z-index: 1000;
     background: #1a202c;
     color: #ffffff;
-    padding: 12px 20px;
+    padding: 10px 18px;
     border-radius: 50px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     display: flex;
@@ -132,42 +158,41 @@ def generate_report_html():
     font-family: 'Times New Roman', Times, Georgia, serif;
     color: #000000;
     margin-top: 1.4em;
-    margin-bottom: 0.6em;
+    margin-bottom: 0.5em;
     page-break-after: avoid;
     break-after: avoid;
   }}
 
   h1 {{
-    font-size: 18pt;
+    font-size: 17pt;
     text-transform: uppercase;
     text-align: center;
     border-bottom: 2px solid #2d3748;
-    padding-bottom: 8px;
-    margin-top: 2em;
+    padding-bottom: 6px;
+    margin-top: 1.8em;
     letter-spacing: 0.5px;
   }}
 
-  /* Special chapter title styling */
   h1:has(+ h1), h1 + h1 {{
-    margin-top: 0.3em;
+    margin-top: 0.2em;
     border-bottom: none;
   }}
 
   h2 {{
-    font-size: 14pt;
+    font-size: 13.5pt;
     font-weight: bold;
     border-bottom: 1px solid #e2e8f0;
     padding-bottom: 4px;
   }}
 
   h3 {{
-    font-size: 12.5pt;
+    font-size: 12pt;
     font-weight: bold;
   }}
 
   p {{
-    margin-top: 0.5em;
-    margin-bottom: 0.8em;
+    margin-top: 0.4em;
+    margin-bottom: 0.7em;
     text-indent: 1.5em;
   }}
 
@@ -179,15 +204,15 @@ def generate_report_html():
   table {{
     width: 100%;
     border-collapse: collapse;
-    margin: 1.5em 0;
-    font-size: 10.5pt;
+    margin: 1.2em 0;
+    font-size: 10pt;
     page-break-inside: avoid;
     break-inside: avoid;
   }}
 
   th, td {{
     border: 1px solid var(--table-border);
-    padding: 8px 10px;
+    padding: 7px 9px;
     text-align: left;
     vertical-align: top;
   }}
@@ -200,7 +225,7 @@ def generate_report_html():
   }}
 
   tr:nth-child(even) td {{
-    background-color: #fcfcfc;
+    background-color: #fafafa;
   }}
 
   /* Code Blocks & Terminal */
@@ -208,20 +233,22 @@ def generate_report_html():
     background-color: var(--code-bg);
     border: 1px solid var(--code-border);
     border-left: 4px solid var(--secondary-color);
-    padding: 12px 16px;
+    padding: 10px 14px;
     border-radius: 4px;
     overflow-x: auto;
     font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
-    font-size: 9.5pt;
-    line-height: 1.45;
+    font-size: 8.5pt;
+    line-height: 1.4;
     page-break-inside: avoid;
     break-inside: avoid;
-    margin: 1.2em 0;
+    margin: 1em 0;
+    white-space: pre-wrap;
+    word-break: break-word;
   }}
 
   code {{
     font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
-    font-size: 10pt;
+    font-size: 9.5pt;
     background: #edf2f7;
     padding: 2px 4px;
     border-radius: 3px;
@@ -236,54 +263,47 @@ def generate_report_html():
 
   /* Lists */
   ul, ol {{
-    margin-top: 0.4em;
-    margin-bottom: 0.8em;
-    padding-left: 2em;
+    margin-top: 0.3em;
+    margin-bottom: 0.6em;
+    padding-left: 1.8em;
   }}
 
   li {{
-    margin-bottom: 0.3em;
-  }}
-
-  /* Blockquotes & Notes */
-  blockquote {{
-    border-left: 4px solid #4a5568;
-    margin: 1em 0;
-    padding: 0.5em 1em;
-    color: #4a5568;
-    background: #f7fafc;
-    font-style: italic;
+    margin-bottom: 0.25em;
   }}
 
   /* Page breaks */
   .page-break {{
-    page-break-after: always;
-    break-after: page;
-    height: 1px;
+    page-break-before: always;
+    break-before: page;
+    height: 0;
     margin: 0;
     border: none;
+    display: block;
   }}
 
   hr {{
     border: none;
     border-top: 1px solid #e2e8f0;
-    margin: 2em 0;
+    margin: 1.5em 0;
   }}
 
   /* Print specific rules for generating pristine PDF */
   @media print {{
     body {{
-      background: none;
-      padding: 0;
-      color: #000000;
+      background: #ffffff !important;
+      padding: 0 !important;
+      color: #000000 !important;
+      font-size: 11pt !important;
+      line-height: 1.45 !important;
     }}
 
     .document-container {{
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      box-shadow: none;
-      border-radius: 0;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
     }}
 
     .no-print, .control-bar {{
@@ -292,27 +312,30 @@ def generate_report_html():
 
     @page {{
       size: A4 portrait;
-      margin: 25mm 20mm 20mm 30mm;
+      margin: 25mm 20mm 20mm 30mm; /* Top 25mm, Right 20mm, Bottom 20mm, Left 30mm for binding */
     }}
 
     a {{
-      color: #000000;
-      text-decoration: none;
+      color: #000000 !important;
+      text-decoration: none !important;
     }}
 
     pre, table, blockquote {{
-      page-break-inside: avoid;
-      break-inside: avoid;
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
     }}
 
     h1, h2, h3 {{
-      page-break-after: avoid;
-      break-after: avoid;
+      page-break-after: avoid !important;
+      break-after: avoid !important;
     }}
 
     .page-break {{
-      page-break-after: always;
-      break-after: page;
+      page-break-before: always !important;
+      break-before: page !important;
+      height: 0 !important;
+      margin: 0 !important;
+      display: block !important;
     }}
   }}
 </style>
@@ -335,8 +358,44 @@ def generate_report_html():
     with open(HTML_PATH, "w", encoding="utf-8") as f:
         f.write(html_template)
 
-    print(f"Success: {HTML_PATH} generated successfully.")
-    print(f"File size: {os.path.getsize(HTML_PATH)} bytes")
+    print(f"[OK] Generated HTML: {HTML_PATH} ({os.path.getsize(HTML_PATH)} bytes)")
+
+    # Generate Official PDF using Headless Edge / Chrome
+    candidate_browsers = [
+        r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+        r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+        r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+    ]
+
+    browser_bin = None
+    for path in candidate_browsers:
+        if os.path.exists(path):
+            browser_bin = path
+            break
+
+    if not browser_bin:
+        print("[!] No headless browser found for automated PDF compilation.")
+        return
+
+    html_file_url = "file:///" + HTML_PATH.replace("\\", "/")
+    print(f"[*] Compiling PDF using: {browser_bin}")
+    cmd = [
+        browser_bin,
+        "--headless",
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw",
+        "--no-pdf-header-footer",
+        f"--print-to-pdf={PDF_PATH}",
+        html_file_url
+    ]
+
+    proc = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+    if os.path.exists(PDF_PATH) and os.path.getsize(PDF_PATH) > 0:
+        print(f"[SUCCESS] Official PDF Generated: {PDF_PATH}")
+        print(f"          PDF Size: {os.path.getsize(PDF_PATH)} bytes")
+    else:
+        print(f"[!] PDF generation failed: {proc.stderr}")
 
 if __name__ == "__main__":
-    generate_report_html()
+    build_report()

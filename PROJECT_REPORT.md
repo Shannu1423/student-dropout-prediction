@@ -16,7 +16,8 @@
 <br>
 
 **Submitted by:**
-* **D. Ramesh** &mdash; Enrollment No: `2302320099`
+* **DESIREDDY RAMESH** &mdash; Enrollment No: `2302320099`
+* **SHAIK SHAFI** &mdash; Enrollment No: `2302320151`
 
 <br>
 
@@ -39,7 +40,7 @@
 
 ## CERTIFICATE
 
-This is to certify that the work embodied in this project report entitled **‘AI-Based Prediction of Reasons for Student Dropout’**, submitted by **D. Ramesh** (Enrollment No: **2302320099**), in partial fulfillment of the requirement for the award of the degree of **Bachelor of Technology in Computer Science and Engineering** of **Sanskriti University, Mathura**, during the academic year **2026&ndash;2027**, is a record of bonafide work carried out by the candidate under the supervision of the undersigned.
+This is to certify that the work embodied in this project report entitled **‘AI-Based Prediction of Reasons for Student Dropout’**, submitted by **DESIREDDY RAMESH** (Enrollment No: **2302320099**) and **SHAIK SHAFI** (Enrollment No: **2302320151**), in partial fulfillment of the requirement for the award of the degree of **Bachelor of Technology in Computer Science and Engineering** of **Sanskriti University, Mathura**, during the academic year **2026&ndash;2027**, is a record of bonafide work carried out by the candidates under the supervision of the undersigned.
 
 <br><br>
 
@@ -73,20 +74,34 @@ Date: ____________________
 
 ## DECLARATION
 
-I, **D. Ramesh**, student of **Bachelor of Technology in Computer Science and Engineering**, Session **2026&ndash;2027**, Sanskriti University, Mathura, hereby declare that the work presented in this project report entitled **“AI-Based Prediction of Reasons for Student Dropout”** is the outcome of my own bonafide work, is correct to the best of my knowledge, and has been carried out with due regard to engineering ethics. The report contains no material previously published or written by another person, and no material accepted for the award of any other degree or diploma of this or any other institution, except where due acknowledgement has been made in the text and in the list of references.
+We, **DESIREDDY RAMESH** (Enrollment No: **2302320099**) and **SHAIK SHAFI** (Enrollment No: **2302320151**), students of **Bachelor of Technology in Computer Science and Engineering**, Session **2026&ndash;2027**, Sanskriti University, Mathura, hereby declare that the work presented in this project report entitled **“AI-Based Prediction of Reasons for Student Dropout”** is the outcome of our own bonafide work, is correct to the best of our knowledge, and has been carried out with due regard to engineering ethics. The report contains no material previously published or written by another person, and no material accepted for the award of any other degree or diploma of this or any other institution, except where due acknowledgement has been made in the text and in the list of references.
 
 <br><br><br>
 
-**D. Ramesh**  
-Enrollment No: `2302320099`  
-
-Signature: ____________________________________  
-
-Date: ____________________  
+<table style="width:100%; border:none; background:transparent;">
+<tr style="border:none; background:transparent;">
+<td style="border:none; background:transparent; width:50%; vertical-align:top;">
+________________________________________<br>
+**(Signature of Candidate 1)**<br>
+**DESIREDDY RAMESH**<br>
+Enrollment No: `2302320099`<br>
+B.Tech CSE &ndash; Sanskriti University<br>
+Date: ____________________
+</td>
+<td style="border:none; background:transparent; width:50%; vertical-align:top; text-align:right;">
+________________________________________<br>
+**(Signature of Candidate 2)**<br>
+**SHAIK SHAFI**<br>
+Enrollment No: `2302320151`<br>
+B.Tech CSE &ndash; Sanskriti University<br>
+Date: ____________________
+</td>
+</tr>
+</table>
 
 <br><br>
 
-*Note: Signature and date fields are left blank for completion by the student at the time of formal submission.*
+*Note: Signature and date fields are left blank for completion by the students at the time of formal submission.*
 
 <div align="center"><strong>iii</strong></div>
 <div style="page-break-after: always;"></div>
@@ -95,22 +110,34 @@ Date: ____________________
 
 # ACKNOWLEDGEMENT
 
-I express my sincere gratitude to the Hon’ble Chancellor, the Hon’ble Vice Chancellor, and the management of **Sanskriti University, Mathura**, for providing an academic environment in which students are encouraged to translate engineering theory and data science principles into robust, working software.
+We express our sincere gratitude to the Hon’ble Chancellor, the Hon’ble Vice Chancellor, and the management of **Sanskriti University, Mathura**, for providing an academic environment in which students are encouraged to translate engineering theory and data science principles into robust, working software.
 
-I am deeply thankful to the **Dean of the School of Engineering and Information Technology (SOEIT)** for the institutional facilities, laboratory resources, and encouragement extended throughout this capstone project. I also extend my gratitude to the faculty members of the Department of Computer Science and Engineering for providing a rigorous foundation in algorithms, database engineering, web development, and applied machine learning.
+We are deeply thankful to the **Dean of the School of Engineering and Information Technology (SOEIT)** for the institutional facilities, laboratory resources, and encouragement extended throughout this capstone project. We also extend our gratitude to the faculty members of the Department of Computer Science and Engineering for providing a rigorous foundation in algorithms, database engineering, web development, and applied machine learning.
 
-I owe special thanks to my Faculty Guide, **Mr. Satyam Dwivedi**, Assistant Professor, SOEIT, whose technical guidance, constructive reviews, and persistent encouragement shaped the design and architecture of this system. His rigorous evaluation of my progress, including the Mid-Term Checkpoint review, kept the project focused on solving institutional retention bottlenecks through Explainable AI (XAI) rather than generic black-box prediction.
+We owe special thanks to our Faculty Guide, **Mr. Satyam Dwivedi**, Assistant Professor, SOEIT, whose technical guidance, constructive reviews, and persistent encouragement shaped the design and architecture of this system. His rigorous evaluation of our progress, including the Mid-Term Checkpoint review, kept the project focused on solving institutional retention bottlenecks through Explainable AI (XAI) rather than generic black-box prediction.
 
-I also acknowledge the open-source software communities and maintainers of Python, Flask, scikit-learn, SQLite, SQLAlchemy, Bootstrap 5, and Chart.js, whose well-documented libraries and tools made the implementation of this production-ready application possible.
+We also acknowledge the open-source software communities and maintainers of Python, Flask, scikit-learn, SQLite, SQLAlchemy, Bootstrap 5, and Chart.js, whose well-documented libraries and tools made the implementation of this production-ready application possible.
 
-Finally, I convey my deepest appreciation to my parents, family, and peers for their unconditional moral support, patience, and encouragement throughout the duration of this project work.
+Finally, we convey our deepest appreciation to our parents, family, and peers for their unconditional moral support, patience, and encouragement throughout the duration of this project work.
 
 <br><br>
 
-**D. Ramesh**  
-Enrollment No: `2302320099`  
-B.Tech &ndash; Computer Science and Engineering  
-Sanskriti University, Mathura  
+<table style="width:100%; border:none; background:transparent;">
+<tr style="border:none; background:transparent;">
+<td style="border:none; background:transparent; width:50%; vertical-align:top;">
+**DESIREDDY RAMESH**<br>
+Enrollment No: `2302320099`<br>
+B.Tech CSE, SOEIT<br>
+Sanskriti University, Mathura
+</td>
+<td style="border:none; background:transparent; width:50%; vertical-align:top; text-align:right;">
+**SHAIK SHAFI**<br>
+Enrollment No: `2302320151`<br>
+B.Tech CSE, SOEIT<br>
+Sanskriti University, Mathura
+</td>
+</tr>
+</table>  
 
 <div align="center"><strong>iv</strong></div>
 <div style="page-break-after: always;"></div>
@@ -436,7 +463,7 @@ Project Title            AI-Based Prediction of Reasons for Student Dropout
 Project Type             Machine Learning & Full-Stack Web Application (Undergraduate Capstone Project)
 Academic Department      Department of Computer Science and Engineering
 School / University      School of Engineering and Information Technology (SOEIT), Sanskriti University, Mathura
-Student Candidate        D. Ramesh (Enrollment No: 2302320099)
+Student Candidates       DESIREDDY RAMESH (2302320099) & SHAIK SHAFI (2302320151)
 Faculty Guide            Mr. Satyam Dwivedi, Assistant Professor, SOEIT
 Project Start Date       25/08/2026
 Mid-Term Review Date     28/09/2026
@@ -1927,14 +1954,21 @@ Quality Assurance & Testing      Automated test suite (test_app.py) implementing
 ```
 Table 7.3 Individual contribution table
 ------------------------------------------------------------------------------------------------------------------------
-Student Name  Enrollment No  Assigned Project Scope and Delivered Contributions
+Student Name     Enrollment No  Assigned Project Scope and Delivered Contributions
 ------------------------------------------------------------------------------------------------------------------------
-D. Ramesh     2302320099     Full-stack architecture engineering: implemented Python Flask backend routes,
-                             developed scikit-learn Random Forest and Logistic Regression classification pipelines,
-                             designed the localized Explainable AI (XAI) feature attribution algorithm, engineered
-                             the 5-stage Counselling Lifecycle Hub with queue capacity meters, implemented dynamic
-                             admin policy controls and on-demand model retraining, created automated test suite
-                             (test_app.py), authored administrative handover manuals, and managed GitHub repository.
+DESIREDDY RAMESH 2302320099     Machine Learning & Core Backend Architecture:
+                                Developed scikit-learn Random Forest and Logistic Regression classification pipelines,
+                                designed the localized Explainable AI (XAI) feature attribution algorithm, engineered
+                                the Flask application factory and core REST API route architecture, modeled SQLite /
+                                SQLAlchemy relational database schemas, built dynamic admin threshold recalculation
+                                engines, implemented model serialization (joblib), and managed Git version control.
+
+SHAIK SHAFI      2302320151     Frontend Engineering, RBAC Security & Testing Suite:
+                                Architected the responsive Bootstrap 5 interface, interactive Chart.js analytics graphs,
+                                implemented 4-tier Role-Based Access Control (RBAC) security decorators with strict
+                                student peer data privacy isolation, built the 5-stage Counselling Lifecycle Hub with
+                                dynamic queue workload capacity overflow meters, developed automated integration test
+                                suite (test_app.py with 8 test cases), and implemented bulk CSV header alias mapping.
 ------------------------------------------------------------------------------------------------------------------------
 ```
 
@@ -2295,7 +2329,10 @@ Table A.2 Project candidate and supervision details
 ------------------------------------------------------------------------------------------------------------------------
 Student Name     Enrollment No  Degree & Specialization             Department & Institution
 ------------------------------------------------------------------------------------------------------------------------
-D. Ramesh        2302320099     B.Tech &ndash; Computer Science      School of Engineering and Information
+DESIREDDY RAMESH 2302320099     B.Tech &ndash; Computer Science      School of Engineering and Information
+                                and Engineering                     Technology (SOEIT), Sanskriti University, Mathura
+
+SHAIK SHAFI      2302320151     B.Tech &ndash; Computer Science      School of Engineering and Information
                                 and Engineering                     Technology (SOEIT), Sanskriti University, Mathura
 ------------------------------------------------------------------------------------------------------------------------
 Faculty Guide:   Mr. Satyam Dwivedi, Assistant Professor, Department of Computer Science and Engineering,

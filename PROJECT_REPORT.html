@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI-Based Prediction of Reasons for Student Dropout - Project Report</title>
+<title>AI-Based Prediction of Reasons for Student Dropout - Sanskriti University</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -12,11 +12,11 @@
     --primary-color: #1a365d;
     --secondary-color: #2b6cb0;
     --accent-color: #c53030;
-    --text-color: #2d3748;
+    --text-color: #1a202c;
     --bg-color: #ffffff;
     --table-border: #cbd5e0;
     --table-header: #edf2f7;
-    --code-bg: #f7fafc;
+    --code-bg: #f8fafc;
     --code-border: #e2e8f0;
   }
 
@@ -27,7 +27,7 @@
   body {
     font-family: 'Times New Roman', Times, 'Crimson Pro', Georgia, serif;
     font-size: 12pt;
-    line-height: 1.6;
+    line-height: 1.55;
     color: var(--text-color);
     background-color: #e2e8f0;
     margin: 0;
@@ -40,7 +40,7 @@
     min-height: 297mm;
     margin: 0 auto;
     background: #ffffff;
-    padding: 30mm 20mm 25mm 30mm; /* Standard Indian thesis margins: 1.25 in left, 1 in others */
+    padding: 25mm 20mm 20mm 30mm; /* Standard Indian university thesis margins: 30mm left for binding */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     border-radius: 4px;
     position: relative;
@@ -54,7 +54,7 @@
     z-index: 1000;
     background: #1a202c;
     color: #ffffff;
-    padding: 12px 20px;
+    padding: 10px 18px;
     border-radius: 50px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     display: flex;
@@ -93,42 +93,41 @@
     font-family: 'Times New Roman', Times, Georgia, serif;
     color: #000000;
     margin-top: 1.4em;
-    margin-bottom: 0.6em;
+    margin-bottom: 0.5em;
     page-break-after: avoid;
     break-after: avoid;
   }
 
   h1 {
-    font-size: 18pt;
+    font-size: 17pt;
     text-transform: uppercase;
     text-align: center;
     border-bottom: 2px solid #2d3748;
-    padding-bottom: 8px;
-    margin-top: 2em;
+    padding-bottom: 6px;
+    margin-top: 1.8em;
     letter-spacing: 0.5px;
   }
 
-  /* Special chapter title styling */
   h1:has(+ h1), h1 + h1 {
-    margin-top: 0.3em;
+    margin-top: 0.2em;
     border-bottom: none;
   }
 
   h2 {
-    font-size: 14pt;
+    font-size: 13.5pt;
     font-weight: bold;
     border-bottom: 1px solid #e2e8f0;
     padding-bottom: 4px;
   }
 
   h3 {
-    font-size: 12.5pt;
+    font-size: 12pt;
     font-weight: bold;
   }
 
   p {
-    margin-top: 0.5em;
-    margin-bottom: 0.8em;
+    margin-top: 0.4em;
+    margin-bottom: 0.7em;
     text-indent: 1.5em;
   }
 
@@ -140,15 +139,15 @@
   table {
     width: 100%;
     border-collapse: collapse;
-    margin: 1.5em 0;
-    font-size: 10.5pt;
+    margin: 1.2em 0;
+    font-size: 10pt;
     page-break-inside: avoid;
     break-inside: avoid;
   }
 
   th, td {
     border: 1px solid var(--table-border);
-    padding: 8px 10px;
+    padding: 7px 9px;
     text-align: left;
     vertical-align: top;
   }
@@ -161,7 +160,7 @@
   }
 
   tr:nth-child(even) td {
-    background-color: #fcfcfc;
+    background-color: #fafafa;
   }
 
   /* Code Blocks & Terminal */
@@ -169,20 +168,22 @@
     background-color: var(--code-bg);
     border: 1px solid var(--code-border);
     border-left: 4px solid var(--secondary-color);
-    padding: 12px 16px;
+    padding: 10px 14px;
     border-radius: 4px;
     overflow-x: auto;
     font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
-    font-size: 9.5pt;
-    line-height: 1.45;
+    font-size: 8.5pt;
+    line-height: 1.4;
     page-break-inside: avoid;
     break-inside: avoid;
-    margin: 1.2em 0;
+    margin: 1em 0;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 
   code {
     font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
-    font-size: 10pt;
+    font-size: 9.5pt;
     background: #edf2f7;
     padding: 2px 4px;
     border-radius: 3px;
@@ -197,54 +198,47 @@
 
   /* Lists */
   ul, ol {
-    margin-top: 0.4em;
-    margin-bottom: 0.8em;
-    padding-left: 2em;
+    margin-top: 0.3em;
+    margin-bottom: 0.6em;
+    padding-left: 1.8em;
   }
 
   li {
-    margin-bottom: 0.3em;
-  }
-
-  /* Blockquotes & Notes */
-  blockquote {
-    border-left: 4px solid #4a5568;
-    margin: 1em 0;
-    padding: 0.5em 1em;
-    color: #4a5568;
-    background: #f7fafc;
-    font-style: italic;
+    margin-bottom: 0.25em;
   }
 
   /* Page breaks */
   .page-break {
-    page-break-after: always;
-    break-after: page;
-    height: 1px;
+    page-break-before: always;
+    break-before: page;
+    height: 0;
     margin: 0;
     border: none;
+    display: block;
   }
 
   hr {
     border: none;
     border-top: 1px solid #e2e8f0;
-    margin: 2em 0;
+    margin: 1.5em 0;
   }
 
   /* Print specific rules for generating pristine PDF */
   @media print {
     body {
-      background: none;
-      padding: 0;
-      color: #000000;
+      background: #ffffff !important;
+      padding: 0 !important;
+      color: #000000 !important;
+      font-size: 11pt !important;
+      line-height: 1.45 !important;
     }
 
     .document-container {
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      box-shadow: none;
-      border-radius: 0;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
     }
 
     .no-print, .control-bar {
@@ -253,27 +247,30 @@
 
     @page {
       size: A4 portrait;
-      margin: 25mm 20mm 20mm 30mm;
+      margin: 25mm 20mm 20mm 30mm; /* Top 25mm, Right 20mm, Bottom 20mm, Left 30mm for binding */
     }
 
     a {
-      color: #000000;
-      text-decoration: none;
+      color: #000000 !important;
+      text-decoration: none !important;
     }
 
     pre, table, blockquote {
-      page-break-inside: avoid;
-      break-inside: avoid;
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
     }
 
     h1, h2, h3 {
-      page-break-after: avoid;
-      break-after: avoid;
+      page-break-after: avoid !important;
+      break-after: avoid !important;
     }
 
     .page-break {
-      page-break-after: always;
-      break-after: page;
+      page-break-before: always !important;
+      break-before: page !important;
+      height: 0 !important;
+      margin: 0 !important;
+      display: block !important;
     }
   }
 </style>
@@ -299,7 +296,8 @@
 
 <p><br></p>
 <p><strong>Submitted by:</strong>
-* <strong>D. Ramesh</strong> &mdash; Enrollment No: <code>2302320099</code></p>
+* <strong>DESIREDDY RAMESH</strong> &mdash; Enrollment No: <code>2302320099</code>
+* <strong>SHAIK SHAFI</strong> &mdash; Enrollment No: <code>2302320151</code></p>
 <p><br></p>
 <p><strong>Under the supervision of:</strong>
 * <strong>Mr. Satyam Dwivedi</strong>
@@ -312,9 +310,11 @@
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="department-of-computer-science-and-engineering-school-of-engineering-and-information-technology-soeit">Department of Computer Science and Engineering &ndash; School of Engineering and Information Technology (SOEIT)</h1>
 <h2 id="certificate">CERTIFICATE</h2>
-<p>This is to certify that the work embodied in this project report entitled <strong>‘AI-Based Prediction of Reasons for Student Dropout’</strong>, submitted by <strong>D. Ramesh</strong> (Enrollment No: <strong>2302320099</strong>), in partial fulfillment of the requirement for the award of the degree of <strong>Bachelor of Technology in Computer Science and Engineering</strong> of <strong>Sanskriti University, Mathura</strong>, during the academic year <strong>2026&ndash;2027</strong>, is a record of bonafide work carried out by the candidate under the supervision of the undersigned.</p>
+<p>This is to certify that the work embodied in this project report entitled <strong>‘AI-Based Prediction of Reasons for Student Dropout’</strong>, submitted by <strong>DESIREDDY RAMESH</strong> (Enrollment No: <strong>2302320099</strong>) and <strong>SHAIK SHAFI</strong> (Enrollment No: <strong>2302320151</strong>), in partial fulfillment of the requirement for the award of the degree of <strong>Bachelor of Technology in Computer Science and Engineering</strong> of <strong>Sanskriti University, Mathura</strong>, during the academic year <strong>2026&ndash;2027</strong>, is a record of bonafide work carried out by the candidates under the supervision of the undersigned.</p>
 <p><br><br></p>
 <p><strong>Approved and Supervised by</strong></p>
 <p><br><br></p>
@@ -334,35 +334,71 @@ Date: ____________________  </p>
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="department-of-computer-science-and-engineering-school-of-engineering-and-information-technology-soeit_1">Department of Computer Science and Engineering &ndash; School of Engineering and Information Technology (SOEIT)</h1>
 <h2 id="declaration">DECLARATION</h2>
-<p>I, <strong>D. Ramesh</strong>, student of <strong>Bachelor of Technology in Computer Science and Engineering</strong>, Session <strong>2026&ndash;2027</strong>, Sanskriti University, Mathura, hereby declare that the work presented in this project report entitled <strong>“AI-Based Prediction of Reasons for Student Dropout”</strong> is the outcome of my own bonafide work, is correct to the best of my knowledge, and has been carried out with due regard to engineering ethics. The report contains no material previously published or written by another person, and no material accepted for the award of any other degree or diploma of this or any other institution, except where due acknowledgement has been made in the text and in the list of references.</p>
+<p>We, <strong>DESIREDDY RAMESH</strong> (Enrollment No: <strong>2302320099</strong>) and <strong>SHAIK SHAFI</strong> (Enrollment No: <strong>2302320151</strong>), students of <strong>Bachelor of Technology in Computer Science and Engineering</strong>, Session <strong>2026&ndash;2027</strong>, Sanskriti University, Mathura, hereby declare that the work presented in this project report entitled <strong>“AI-Based Prediction of Reasons for Student Dropout”</strong> is the outcome of our own bonafide work, is correct to the best of our knowledge, and has been carried out with due regard to engineering ethics. The report contains no material previously published or written by another person, and no material accepted for the award of any other degree or diploma of this or any other institution, except where due acknowledgement has been made in the text and in the list of references.</p>
 <p><br><br><br></p>
-<p><strong>D. Ramesh</strong><br />
-Enrollment No: <code>2302320099</code>  </p>
-<p>Signature: ____________________________________  </p>
-<p>Date: ____________________  </p>
+<table style="width:100%; border:none; background:transparent;">
+<tr style="border:none; background:transparent;">
+<td style="border:none; background:transparent; width:50%; vertical-align:top;">
+________________________________________<br>
+**(Signature of Candidate 1)**<br>
+**DESIREDDY RAMESH**<br>
+Enrollment No: `2302320099`<br>
+B.Tech CSE &ndash; Sanskriti University<br>
+Date: ____________________
+</td>
+<td style="border:none; background:transparent; width:50%; vertical-align:top; text-align:right;">
+________________________________________<br>
+**(Signature of Candidate 2)**<br>
+**SHAIK SHAFI**<br>
+Enrollment No: `2302320151`<br>
+B.Tech CSE &ndash; Sanskriti University<br>
+Date: ____________________
+</td>
+</tr>
+</table>
+
 <p><br><br></p>
-<p><em>Note: Signature and date fields are left blank for completion by the student at the time of formal submission.</em></p>
+<p><em>Note: Signature and date fields are left blank for completion by the students at the time of formal submission.</em></p>
 <div align="center"><strong>iii</strong></div>
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="acknowledgement">ACKNOWLEDGEMENT</h1>
-<p>I express my sincere gratitude to the Hon’ble Chancellor, the Hon’ble Vice Chancellor, and the management of <strong>Sanskriti University, Mathura</strong>, for providing an academic environment in which students are encouraged to translate engineering theory and data science principles into robust, working software.</p>
-<p>I am deeply thankful to the <strong>Dean of the School of Engineering and Information Technology (SOEIT)</strong> for the institutional facilities, laboratory resources, and encouragement extended throughout this capstone project. I also extend my gratitude to the faculty members of the Department of Computer Science and Engineering for providing a rigorous foundation in algorithms, database engineering, web development, and applied machine learning.</p>
-<p>I owe special thanks to my Faculty Guide, <strong>Mr. Satyam Dwivedi</strong>, Assistant Professor, SOEIT, whose technical guidance, constructive reviews, and persistent encouragement shaped the design and architecture of this system. His rigorous evaluation of my progress, including the Mid-Term Checkpoint review, kept the project focused on solving institutional retention bottlenecks through Explainable AI (XAI) rather than generic black-box prediction.</p>
-<p>I also acknowledge the open-source software communities and maintainers of Python, Flask, scikit-learn, SQLite, SQLAlchemy, Bootstrap 5, and Chart.js, whose well-documented libraries and tools made the implementation of this production-ready application possible.</p>
-<p>Finally, I convey my deepest appreciation to my parents, family, and peers for their unconditional moral support, patience, and encouragement throughout the duration of this project work.</p>
+<p>We express our sincere gratitude to the Hon’ble Chancellor, the Hon’ble Vice Chancellor, and the management of <strong>Sanskriti University, Mathura</strong>, for providing an academic environment in which students are encouraged to translate engineering theory and data science principles into robust, working software.</p>
+<p>We are deeply thankful to the <strong>Dean of the School of Engineering and Information Technology (SOEIT)</strong> for the institutional facilities, laboratory resources, and encouragement extended throughout this capstone project. We also extend our gratitude to the faculty members of the Department of Computer Science and Engineering for providing a rigorous foundation in algorithms, database engineering, web development, and applied machine learning.</p>
+<p>We owe special thanks to our Faculty Guide, <strong>Mr. Satyam Dwivedi</strong>, Assistant Professor, SOEIT, whose technical guidance, constructive reviews, and persistent encouragement shaped the design and architecture of this system. His rigorous evaluation of our progress, including the Mid-Term Checkpoint review, kept the project focused on solving institutional retention bottlenecks through Explainable AI (XAI) rather than generic black-box prediction.</p>
+<p>We also acknowledge the open-source software communities and maintainers of Python, Flask, scikit-learn, SQLite, SQLAlchemy, Bootstrap 5, and Chart.js, whose well-documented libraries and tools made the implementation of this production-ready application possible.</p>
+<p>Finally, we convey our deepest appreciation to our parents, family, and peers for their unconditional moral support, patience, and encouragement throughout the duration of this project work.</p>
 <p><br><br></p>
-<p><strong>D. Ramesh</strong><br />
-Enrollment No: <code>2302320099</code><br />
-B.Tech &ndash; Computer Science and Engineering<br />
-Sanskriti University, Mathura  </p>
+<table style="width:100%; border:none; background:transparent;">
+<tr style="border:none; background:transparent;">
+<td style="border:none; background:transparent; width:50%; vertical-align:top;">
+**DESIREDDY RAMESH**<br>
+Enrollment No: `2302320099`<br>
+B.Tech CSE, SOEIT<br>
+Sanskriti University, Mathura
+</td>
+<td style="border:none; background:transparent; width:50%; vertical-align:top; text-align:right;">
+**SHAIK SHAFI**<br>
+Enrollment No: `2302320151`<br>
+B.Tech CSE, SOEIT<br>
+Sanskriti University, Mathura
+</td>
+</tr>
+</table>
+
 <div align="center"><strong>iv</strong></div>
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="abstract">ABSTRACT</h1>
 <p>Student attrition represents a critical challenge in higher education, affecting institutional reputation, financial sustainability, and the academic trajectories of vulnerable learners. Conventional academic administration relies heavily on retrospective measures &mdash; end-of-term grade registers, delayed attendance compilations, and informal faculty warnings &mdash; by which time academic disengagement or financial distress has often reached an irreversible threshold. This project, <strong>AI-Based Prediction of Reasons for Student Dropout</strong>, presents a fully realized, multi-tier early-warning and decision-support web application developed for <strong>Sanskriti University</strong>. The system shifts institutional intervention from reactive damage control to proactive, algorithmic risk mitigation.</p>
 <p>The core computational engine utilizes machine learning classification algorithms implemented with Python and <code>scikit-learn</code>. A primary <strong>Random Forest Classifier</strong> (100 ensemble estimators) is benchmarked against a baseline <strong>Logistic Regression</strong> model across six key behavioral and socio-academic features: class attendance percentage, internal examination averages, active subject backlog counts, fee payment compliance status, Learning Management System (LMS) engagement scores, and academic semester progression. The trained model demonstrates high predictive discrimination, achieving <strong>90.4% empirical classification accuracy</strong> and an <strong>Area Under the ROC Curve (ROC-AUC) of 0.942</strong>.</p>
@@ -375,6 +411,8 @@ Sanskriti University, Mathura  </p>
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="table-of-contents">TABLE OF CONTENTS</h1>
 <ul>
 <li><strong>CERTIFICATE</strong> ................................................................................................... <strong>ii</strong></li>
@@ -385,7 +423,8 @@ Sanskriti University, Mathura  </p>
 <li><strong>LIST OF FIGURES</strong> ............................................................................................. <strong>x</strong></li>
 <li><strong>LIST OF ABBREVIATIONS</strong> ................................................................................ <strong>xi</strong></li>
 </ul>
-<h3 id="chapter-1-introduction-1">CHAPTER 1: Introduction ................................................................................. 1</h3>
+<h2 id="_1"><div class="page-break"></div></h2>
+<h1 id="chapter-1-introduction-1">CHAPTER 1: Introduction ................................................................................. 1</h1>
 <ul>
 <li>1.1 Introduction to Educational Data Mining &amp; Dropout Prediction ............................... 1</li>
 <li>1.2 Background of the Project ................................................................................ 1</li>
@@ -397,7 +436,8 @@ Sanskriti University, Mathura  </p>
 <li>1.8 Motivation and Rationale ................................................................................... 4</li>
 <li>1.9 Organization of the Report ............................................................................... 4</li>
 </ul>
-<h3 id="chapter-2-literature-review-5">CHAPTER 2: Literature Review .......................................................................... 5</h3>
+<h2 id="_2"><div class="page-break"></div></h2>
+<h1 id="chapter-2-literature-review-5">CHAPTER 2: Literature Review .......................................................................... 5</h1>
 <ul>
 <li>2.1 Introduction .................................................................................................. 5</li>
 <li>2.2 Evolution of Student Retention Systems ............................................................. 5</li>
@@ -408,7 +448,8 @@ Sanskriti University, Mathura  </p>
 <li>2.7 Research Gap and Identified Problems ............................................................... 9</li>
 <li>2.8 Summary ...................................................................................................... 9</li>
 </ul>
-<h3 id="chapter-3-system-analysis-and-requirements-10">CHAPTER 3: System Analysis and Requirements .............................................. 10</h3>
+<h2 id="_3"><div class="page-break"></div></h2>
+<h1 id="chapter-3-system-analysis-and-requirements-10">CHAPTER 3: System Analysis and Requirements .............................................. 10</h1>
 <ul>
 <li>3.1 Existing System ............................................................................................ 10</li>
 <li>3.2 Limitations of the Existing System .................................................................... 10</li>
@@ -421,7 +462,8 @@ Sanskriti University, Mathura  </p>
 <li>3.9 Feasibility Study ............................................................................................ 13</li>
 <li>3.10 Use Case Analysis ........................................................................................ 14</li>
 </ul>
-<h3 id="chapter-4-system-design-and-methodology-15">CHAPTER 4: System Design and Methodology ................................................. 15</h3>
+<h2 id="_4"><div class="page-break"></div></h2>
+<h1 id="chapter-4-system-design-and-methodology-15">CHAPTER 4: System Design and Methodology ................................................. 15</h1>
 <ul>
 <li>4.1 System Architecture ....................................................................................... 15</li>
 <li>4.2 Overall System Architecture Diagram ................................................................. 15</li>
@@ -442,7 +484,8 @@ Sanskriti University, Mathura  </p>
 <li>4.17 Development Methodology ............................................................................. 27</li>
 <li>4.18 Project Workflow ......................................................................................... 28</li>
 </ul>
-<h3 id="chapter-5-system-implementation-29">CHAPTER 5: System Implementation ................................................................. 29</h3>
+<h2 id="_5"><div class="page-break"></div></h2>
+<h1 id="chapter-5-system-implementation-29">CHAPTER 5: System Implementation ................................................................. 29</h1>
 <ul>
 <li>5.1 Introduction ................................................................................................... 29</li>
 <li>5.2 Development Environment ................................................................................ 29</li>
@@ -462,7 +505,8 @@ Sanskriti University, Mathura  </p>
 <li>5.16 Frontend-Backend Integration .......................................................................... 35</li>
 <li>5.17 GitHub Version Control &amp; Offline Local Deployment ........................................... 35</li>
 </ul>
-<h3 id="chapter-6-testing-and-results-36">CHAPTER 6: Testing and Results ...................................................................... 36</h3>
+<h2 id="_6"><div class="page-break"></div></h2>
+<h1 id="chapter-6-testing-and-results-36">CHAPTER 6: Testing and Results ...................................................................... 36</h1>
 <ul>
 <li>6.1 Introduction to Testing .................................................................................... 36</li>
 <li>6.2 Testing Methodology ...................................................................................... 36</li>
@@ -477,7 +521,8 @@ Sanskriti University, Mathura  </p>
 <li>6.11 Empirical ML Performance and Results ............................................................ 47</li>
 <li>6.12 Performance and Usability Discussion ............................................................. 48</li>
 </ul>
-<h3 id="chapter-7-project-management-and-work-allocation-49">CHAPTER 7: Project Management and Work Allocation ..................................... 49</h3>
+<h2 id="_7"><div class="page-break"></div></h2>
+<h1 id="chapter-7-project-management-and-work-allocation-49">CHAPTER 7: Project Management and Work Allocation ..................................... 49</h1>
 <ul>
 <li>7.1 Project Timeline ............................................................................................ 49</li>
 <li>7.2 Project Planning ............................................................................................ 49</li>
@@ -489,7 +534,8 @@ Sanskriti University, Mathura  </p>
 <li>7.8 Challenges Faced ........................................................................................... 51</li>
 <li>7.9 Solutions Implemented .................................................................................... 52</li>
 </ul>
-<h3 id="chapter-8-learning-outcomes-and-discussion-53">CHAPTER 8: Learning Outcomes and Discussion ............................................. 53</h3>
+<h2 id="_8"><div class="page-break"></div></h2>
+<h1 id="chapter-8-learning-outcomes-and-discussion-53">CHAPTER 8: Learning Outcomes and Discussion ............................................. 53</h1>
 <ul>
 <li>8.1 Technical Skills Acquired ................................................................................. 53</li>
 <li>8.2 Machine Learning &amp; Data Mining Learning .......................................................... 53</li>
@@ -502,12 +548,14 @@ Sanskriti University, Mathura  </p>
 <li>8.9 Ethical Considerations in Predictive Education ..................................................... 55</li>
 <li>8.10 Discussion ................................................................................................... 55</li>
 </ul>
-<h3 id="chapter-9-limitations-and-future-enhancements-56">CHAPTER 9: Limitations and Future Enhancements ......................................... 56</h3>
+<h2 id="_9"><div class="page-break"></div></h2>
+<h1 id="chapter-9-limitations-and-future-enhancements-56">CHAPTER 9: Limitations and Future Enhancements ......................................... 56</h1>
 <ul>
 <li>9.1 Current System Limitations .............................................................................. 56</li>
 <li>9.2 Future Scope and Proposed Enhancements ......................................................... 57</li>
 </ul>
-<h3 id="chapter-10-conclusion-58">CHAPTER 10: Conclusion ................................................................................ 58</h3>
+<h2 id="_10"><div class="page-break"></div></h2>
+<h1 id="chapter-10-conclusion-58">CHAPTER 10: Conclusion ................................................................................ 58</h1>
 <ul>
 <li>10.1 Project Summary .......................................................................................... 58</li>
 <li>10.2 Achievement of Project Objectives ................................................................. 58</li>
@@ -531,6 +579,8 @@ Sanskriti University, Mathura  </p>
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="list-of-tables">LIST OF TABLES</h1>
 <ul>
 <li><strong>Table 1.1:</strong> Project Summary and Technical Specifications &bull; <em>Page 2</em></li>
@@ -576,6 +626,8 @@ Sanskriti University, Mathura  </p>
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="list-of-figures">LIST OF FIGURES</h1>
 <ul>
 <li><strong>Figure 4.1:</strong> High-Level Multi-Tier System Architecture Diagram &bull; <em>Page 16</em></li>
@@ -605,6 +657,8 @@ Sanskriti University, Mathura  </p>
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="list-of-abbreviations">LIST OF ABBREVIATIONS</h1>
 <table>
 <thead>
@@ -748,6 +802,8 @@ Sanskriti University, Mathura  </p>
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="chapter-1">CHAPTER 1</h1>
 <h1 id="introduction">INTRODUCTION</h1>
 <h2 id="11-introduction-to-educational-data-mining-dropout-prediction">1.1 Introduction to Educational Data Mining &amp; Dropout Prediction</h2>
@@ -776,7 +832,7 @@ Project Title            AI-Based Prediction of Reasons for Student Dropout
 Project Type             Machine Learning &amp; Full-Stack Web Application (Undergraduate Capstone Project)
 Academic Department      Department of Computer Science and Engineering
 School / University      School of Engineering and Information Technology (SOEIT), Sanskriti University, Mathura
-Student Candidate        D. Ramesh (Enrollment No: 2302320099)
+Student Candidates       DESIREDDY RAMESH (2302320099) &amp; SHAIK SHAFI (2302320151)
 Faculty Guide            Mr. Satyam Dwivedi, Assistant Professor, SOEIT
 Project Start Date       25/08/2026
 Mid-Term Review Date     28/09/2026
@@ -833,6 +889,8 @@ Machine Learning Stack   scikit-learn 1.9+, pandas 3.0+, numpy 2.5+, joblib 1.6+
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="chapter-2">CHAPTER 2</h1>
 <h1 id="literature-review">LITERATURE REVIEW</h1>
 <h2 id="21-introduction">2.1 Introduction</h2>
@@ -892,6 +950,8 @@ System Deployment &amp; Cost     Spreadsheet licenses         Expensive cloud su
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="chapter-3">CHAPTER 3</h1>
 <h1 id="system-analysis-and-requirements">SYSTEM ANALYSIS AND REQUIREMENTS</h1>
 <h2 id="31-existing-system">3.1 Existing System</h2>
@@ -1025,6 +1085,8 @@ UC-12        Student Self-Service    Student         Student credentials valid  
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="chapter-4">CHAPTER 4</h1>
 <h1 id="system-design-and-methodology">SYSTEM DESIGN AND METHODOLOGY</h1>
 <h2 id="41-system-architecture">4.1 System Architecture</h2>
@@ -1598,6 +1660,8 @@ Figure 4.9 Project lifecycle and development workflow
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="chapter-5">CHAPTER 5</h1>
 <h1 id="system-implementation">SYSTEM IMPLEMENTATION</h1>
 <h2 id="51-introduction">5.1 Introduction</h2>
@@ -1767,6 +1831,8 @@ for st in stages:
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="chapter-6">CHAPTER 6</h1>
 <h1 id="testing-and-results">TESTING AND RESULTS</h1>
 <h2 id="61-introduction-to-testing">6.1 Introduction to Testing</h2>
@@ -2044,6 +2110,8 @@ Feature Importance Ranking  Attendance (34%), Marks (26%), Coefficients (Att: -1
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="chapter-7">CHAPTER 7</h1>
 <h1 id="project-management-and-work-allocation">PROJECT MANAGEMENT AND WORK ALLOCATION</h1>
 <h2 id="71-project-timeline">7.1 Project Timeline</h2>
@@ -2090,14 +2158,21 @@ Quality Assurance &amp; Testing      Automated test suite (test_app.py) implemen
 <h2 id="76-individual-contributions">7.6 Individual Contributions</h2>
 <pre><code>Table 7.3 Individual contribution table
 ------------------------------------------------------------------------------------------------------------------------
-Student Name  Enrollment No  Assigned Project Scope and Delivered Contributions
+Student Name     Enrollment No  Assigned Project Scope and Delivered Contributions
 ------------------------------------------------------------------------------------------------------------------------
-D. Ramesh     2302320099     Full-stack architecture engineering: implemented Python Flask backend routes,
-                             developed scikit-learn Random Forest and Logistic Regression classification pipelines,
-                             designed the localized Explainable AI (XAI) feature attribution algorithm, engineered
-                             the 5-stage Counselling Lifecycle Hub with queue capacity meters, implemented dynamic
-                             admin policy controls and on-demand model retraining, created automated test suite
-                             (test_app.py), authored administrative handover manuals, and managed GitHub repository.
+DESIREDDY RAMESH 2302320099     Machine Learning &amp; Core Backend Architecture:
+                                Developed scikit-learn Random Forest and Logistic Regression classification pipelines,
+                                designed the localized Explainable AI (XAI) feature attribution algorithm, engineered
+                                the Flask application factory and core REST API route architecture, modeled SQLite /
+                                SQLAlchemy relational database schemas, built dynamic admin threshold recalculation
+                                engines, implemented model serialization (joblib), and managed Git version control.
+
+SHAIK SHAFI      2302320151     Frontend Engineering, RBAC Security &amp; Testing Suite:
+                                Architected the responsive Bootstrap 5 interface, interactive Chart.js analytics graphs,
+                                implemented 4-tier Role-Based Access Control (RBAC) security decorators with strict
+                                student peer data privacy isolation, built the 5-stage Counselling Lifecycle Hub with
+                                dynamic queue workload capacity overflow meters, developed automated integration test
+                                suite (test_app.py with 8 test cases), and implemented bulk CSV header alias mapping.
 ------------------------------------------------------------------------------------------------------------------------
 </code></pre>
 <h2 id="77-project-coordination-and-version-control">7.7 Project Coordination and Version Control</h2>
@@ -2130,6 +2205,8 @@ Student Data Privacy Vulnerability Implemented strict session identity checks in
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="chapter-8">CHAPTER 8</h1>
 <h1 id="learning-outcomes-and-discussion">LEARNING OUTCOMES AND DISCUSSION</h1>
 <h2 id="81-technical-skills-acquired">8.1 Technical Skills Acquired</h2>
@@ -2182,6 +2259,8 @@ Student Data Privacy Vulnerability Implemented strict session identity checks in
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="chapter-9">CHAPTER 9</h1>
 <h1 id="limitations-and-future-enhancements">LIMITATIONS AND FUTURE ENHANCEMENTS</h1>
 <h2 id="91-current-system-limitations">9.1 Current System Limitations</h2>
@@ -2222,6 +2301,8 @@ Native Flutter Mobile App        Build cross-platform iOS/Android mobile apps fo
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="chapter-10">CHAPTER 10</h1>
 <h1 id="conclusion">CONCLUSION</h1>
 <h2 id="101-project-summary">10.1 Project Summary</h2>
@@ -2255,6 +2336,8 @@ No. Objective Specification                                               Final 
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="references">REFERENCES</h1>
 <ul>
 <li>[1] <strong>Berens, G., Schneider, K., Görtz, S., Oster, S., &amp; Burghoff, F.</strong> (2019). Early Detection of Students at Risk of Dropping Out in Higher Education: Machine Learning vs. Traditional Approaches. <em>Journal of Educational Data Mining</em>, 11(2), 1&ndash;28.</li>
@@ -2282,6 +2365,8 @@ No. Objective Specification                                               Final 
 <div class="page-break"></div>
 
 <hr />
+<div class="page-break"></div>
+
 <h1 id="appendix">APPENDIX</h1>
 <h2 id="a1-project-links">A.1 Project Links</h2>
 <pre><code>Table A.1 Project links and local file references
@@ -2422,7 +2507,10 @@ Student Registration Test Passed: Test Candidate predicted risk: 0.999
 ------------------------------------------------------------------------------------------------------------------------
 Student Name     Enrollment No  Degree &amp; Specialization             Department &amp; Institution
 ------------------------------------------------------------------------------------------------------------------------
-D. Ramesh        2302320099     B.Tech &amp;ndash; Computer Science      School of Engineering and Information
+DESIREDDY RAMESH 2302320099     B.Tech &amp;ndash; Computer Science      School of Engineering and Information
+                                and Engineering                     Technology (SOEIT), Sanskriti University, Mathura
+
+SHAIK SHAFI      2302320151     B.Tech &amp;ndash; Computer Science      School of Engineering and Information
                                 and Engineering                     Technology (SOEIT), Sanskriti University, Mathura
 ------------------------------------------------------------------------------------------------------------------------
 Faculty Guide:   Mr. Satyam Dwivedi, Assistant Professor, Department of Computer Science and Engineering,
