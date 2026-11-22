@@ -360,42 +360,9 @@ def build_report():
 
     print(f"[OK] Generated HTML: {HTML_PATH} ({os.path.getsize(HTML_PATH)} bytes)")
 
-    # Generate Official PDF using Headless Edge / Chrome
-    candidate_browsers = [
-        r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
-        r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
-        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
-        r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-    ]
-
-    browser_bin = None
-    for path in candidate_browsers:
-        if os.path.exists(path):
-            browser_bin = path
-            break
-
-    if not browser_bin:
-        print("[!] No headless browser found for automated PDF compilation.")
-        return
-
-    html_file_url = "file:///" + HTML_PATH.replace("\\", "/")
-    print(f"[*] Compiling PDF using: {browser_bin}")
-    cmd = [
-        browser_bin,
-        "--headless",
-        "--disable-gpu",
-        "--run-all-compositor-stages-before-draw",
-        "--no-pdf-header-footer",
-        f"--print-to-pdf={PDF_PATH}",
-        html_file_url
-    ]
-
-    proc = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
-    if os.path.exists(PDF_PATH) and os.path.getsize(PDF_PATH) > 0:
-        print(f"[SUCCESS] Official PDF Generated: {PDF_PATH}")
-        print(f"          PDF Size: {os.path.getsize(PDF_PATH)} bytes")
-    else:
-        print(f"[!] PDF generation failed: {proc.stderr}")
+    # Call compile_77_page_report to maintain exact 77 pages
+    from compile_77_page_report import build_pdf
+    build_pdf()
 
 if __name__ == "__main__":
     build_report()

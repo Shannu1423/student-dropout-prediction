@@ -7,7 +7,7 @@
 <br>
 
 <div align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Sanskriti_University_logo.png/220px-Sanskriti_University_logo.png" alt="Sanskriti University Logo" width="180"/>
+  <img src="static/images/sanskriti_logo.png" alt="Sanskriti University Logo" width="180"/>
   <br><br>
   <h3><strong>SANSKRITI UNIVERSITY</strong></h3>
   <p><em>FOR EXCELLENCE IN LIFE</em></p>

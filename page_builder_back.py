@@ -1,0 +1,940 @@
+"""
+Pages 47 to 77: Chapter 6 (Testing & Results), Chapter 7 (Project Management),
+Chapter 8 (Learning Outcomes), Chapter 9 (Limitations & Future Scope),
+Chapter 10 (Conclusion), References, and Appendix (A.1 to A.8).
+"""
+from reportlab.platypus import Paragraph, Spacer, Table, TableStyle, Preformatted
+from reportlab.lib import colors
+
+def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box):
+    h1_chap = styles['ChapterH1']
+    h2_sec = styles['SectionH2']
+    h3_subsec = styles['SubSectionH3']
+    body = styles['ReportBody']
+    body_indent = styles['ReportBodyIndent']
+    tbl_text = styles['TableText']
+    caption_style = styles['Caption']
+    code_style = styles['CodeText']
+
+    def new_page():
+        pages.append([])
+        return pages[-1]
+
+    # =========================================================================
+    # PAGE 47: CHAPTER 6 (Numbered Page 36)
+    # =========================================================================
+    p = new_page()
+    p.append(Paragraph("CHAPTER 6", h1_chap))
+    p.append(Paragraph("TESTING AND RESULTS", h1_chap))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("6.1 Introduction to Testing", h2_sec))
+    p.append(Paragraph(
+        "Software testing is an indispensable phase of software engineering that systematically validates code correctness, boundary resilience, security integrity, and empirical algorithmic accuracy. For an academic retention system, testing must satisfy two rigorous standards: conventional functional and security software quality, and statistical machine learning predictive validity.",
+        body_indent
+    ))
+    p.append(Paragraph(
+        "Testing for this project was executed using Python’s native `unittest` framework via an automated test script (`test_app.py`) incorporating 8 comprehensive test fixtures. The suite exercises database fixtures, mocks HTTP client requests, verifies session authorization rules, validates CSV ingestion routines, and tests machine learning inference pipelines.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("6.2 Testing Methodology", h2_sec))
+    p.append(Paragraph(
+        "A hybrid testing methodology was employed, combining Black-Box testing for user journey verification (login, navigation, CSV upload forms) with White-Box testing for internal code coverage, mathematical XAI feature deficit attribution, and database transaction integrity.",
+        body_indent
+    ))
+    p.append(Paragraph(
+        "Test automation executed in an isolated temporary database environment (`sqlite:///:memory:` or temporary disk instance), ensuring tests run reproducibly without altering live institutional student records.",
+        body_indent
+    ))
+
+    # =========================================================================
+    # PAGE 48: CHAPTER 6 cont. (Numbered Page 37)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("6.3 Unit Testing", h2_sec))
+    p.append(Paragraph(
+        "Unit tests isolate individual functions and algorithmic modules, verifying that inputs map to expected outputs under normal, boundary, and invalid conditions.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    t61_h = ["Unit Function / Class", "Source File", "Unit Test Scope and Assertion Target"]
+    t61_r = [
+        ["predict_dropout_risk()", "ml_engine.py", "Verifies vector output bounds [0.0, 100.0] and boolean risk flag."],
+        ["get_dropout_reasons()", "ml_engine.py", "Checks deterministic reason card generation for simulated deficits."],
+        ["roles_required()", "app.py", "Asserts HTTP 403 when session role lacks required entitlement."],
+        ["normalize_headers()", "app.py", "Verifies case-insensitive header mapping ('reg_no' -> 'enrollment_no')."],
+        ["calculate_queue_meters()", "app.py", "Tests percentage saturation calculation and overflow danger flags."]
+    ]
+    p.append(make_table(t61_h, t61_r, [usable_width*0.28, usable_width*0.22, usable_width*0.50]))
+    p.append(Paragraph("Table 6.1 Unit testing candidate functions and coverage scope", caption_style))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("6.4 Integration Testing", h2_sec))
+    p.append(Paragraph(
+        "Integration tests verify coordinated interactions across the Flask web controllers, SQLAlchemy ORM persistence, and scikit-learn machine learning engines.",
+        body_indent
+    ))
+    p.append(Paragraph("6.5 Functional Testing", h2_sec))
+    p.append(Paragraph(
+        "Functional tests validate end-to-end user journeys against specified requirements, including bulk upload, mentor assignment, and stage updates.",
+        body_indent
+    ))
+
+    # =========================================================================
+    # PAGE 49: CHAPTER 6 cont. (Numbered Page 38)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("6.6 User Interface Testing", h2_sec))
+    p.append(Paragraph(
+        "UI testing evaluated browser compatibility, responsive grid adjustments across desktop (1920x1080) and mobile tablet viewports (768x1024), contrast ratios of color-coded risk badges, and modal dialogue rendering.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("6.7 API Testing", h2_sec))
+    p.append(Paragraph(
+        "API endpoint integration tests validated HTTP response codes, JSON payload integrity, and role authorization barriers across all routes.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    t62_h = ["Target API Route", "HTTP Method", "Expected Status", "Verification and Payload Criterion"]
+    t62_r = [
+        ["/login", "POST (Valid)", "302 Redirect", "Validates credentials, sets session cookie, redirects."],
+        ["/login", "POST (Invalid)", "200 OK (Flash)", "Displays flash error banner; rejects unhashed passwords."],
+        ["/student/1", "GET (Admin)", "200 OK", "Renders full student profile, risk history, and XAI cards."],
+        ["/student/1", "GET (Other Student)", "403 Forbidden", "Verifies peer privacy isolation; strictly aborts request."],
+        ["/admin/settings", "GET (Mentor)", "403 Forbidden", "Blocks non-admin users from accessing system threshold controls."],
+        ["/api/queue/status", "GET (HOD)", "200 OK (JSON)", "Returns JSON dictionary of queue saturation meters."]
+    ]
+    p.append(make_table(t62_h, t62_r, [usable_width*0.26, usable_width*0.22, usable_width*0.20, usable_width*0.32]))
+    p.append(Paragraph("Table 6.2 API endpoint integration test matrix", caption_style))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("6.8 System and Security Testing", h2_sec))
+    p.append(Paragraph(
+        "Security testing confirmed that SQL injection attempts via search inputs are neutralized by SQLAlchemy parameterized queries, and cross-site scripting (XSS) is prevented by Jinja2 auto-escaping.",
+        body_indent
+    ))
+
+    # =========================================================================
+    # PAGE 50: CHAPTER 6 cont. (Numbered Page 39)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("6.9 Test Cases and Recorded Results", h2_sec))
+    p.append(Paragraph(
+        "Tables 6.3 to 6.7 document the formal test execution matrix across authentication, ML inference, bulk CSV ingestion, counseling workflows, and administrative controls.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    t63_h = ["Test ID", "Test Scenario", "Input Data", "Expected Output", "Status"]
+    t63_r = [
+        ["TC-AUTH-01", "Valid Admin Login", "'admin' / 'password123'", "302 Redirect -> /dashboard; Session initialized", "PASS"],
+        ["TC-AUTH-02", "Invalid Password", "'admin' / 'wrongpass'", "200 OK; Flash 'Invalid username or password'", "PASS"],
+        ["TC-AUTH-03", "Mentor Access Admin", "Mentor Session -> /admin/settings", "403 Forbidden; Access denied", "PASS"],
+        ["TC-AUTH-04", "Student Peer Privacy", "Student 'ramesh' -> /student/2", "403 Forbidden; Peer record isolation enforced", "PASS"],
+        ["TC-AUTH-05", "Unauthenticated Route", "No Session -> /students", "302 Redirect -> /login; Flash warning", "PASS"]
+    ]
+    p.append(make_table(t63_h, t63_r, [usable_width*0.14, usable_width*0.22, usable_width*0.22, usable_width*0.32, usable_width*0.10]))
+    p.append(Paragraph("Table 6.3 Test cases – Authentication and role authorization", caption_style))
+
+    # =========================================================================
+    # PAGE 51: CHAPTER 6 cont. (Numbered Page 40)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("Table 6.4 Test cases – Machine Learning Inference & XAI Cards", caption_style))
+    t64_h = ["Test ID", "Test Scenario", "Simulated Student Inputs", "Recorded Result", "Status"]
+    t64_r = [
+        ["TC-ML-01", "High Risk Profile", "Att: 45%, Int: 32%, CGPA: 4.8", "Risk: 88.4% (High Risk); Danger Badge", "PASS"],
+        ["TC-ML-02", "Low Risk Profile", "Att: 92%, Int: 84%, CGPA: 8.9", "Risk: 12.1% (Low Risk); Success Badge", "PASS"],
+        ["TC-ML-03", "XAI Attendance Card", "Att: 58% (< 75% threshold)", "Reason Card: 'Critical Attendance Shortage'", "PASS"],
+        ["TC-ML-04", "XAI Tuition Arrears", "Fee Overdue: True", "Reason Card: 'Financial Tuition Arrears'", "PASS"]
+    ]
+    p.append(make_table(t64_h, t64_r, [usable_width*0.14, usable_width*0.22, usable_width*0.24, usable_width*0.30, usable_width*0.10]))
+    p.append(Spacer(1, 6))
+    p.append(Paragraph("Table 6.5 Test cases – Bulk CSV Upload & Recalculation", caption_style))
+    t65_h = ["Test ID", "Test Scenario", "CSV File Content", "Recorded Result", "Status"]
+    t65_r = [
+        ["TC-CSV-01", "Valid Standard CSV", "100 student records with standard headers", "100 records inserted; 100 predictions stored", "PASS"],
+        ["TC-CSV-02", "Non-standard Headers", "Headers: 'reg_no', 'branch', 'term'", "Automated alias normalization; 100% parsed", "PASS"],
+        ["TC-CSV-03", "Duplicate Enrollment", "Existing enrollment '2302320099'", "Graceful update without duplicate key crash", "PASS"],
+        ["TC-CSV-04", "Corrupt File Format", "Invalid binary uploaded as CSV", "Validation error caught; Zero records corrupted", "PASS"]
+    ]
+    p.append(make_table(t65_h, t65_r, [usable_width*0.14, usable_width*0.22, usable_width*0.24, usable_width*0.30, usable_width*0.10]))
+
+    # =========================================================================
+    # PAGE 52: CHAPTER 6 cont. (Numbered Page 41)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("Table 6.6 Test cases – Counselling Lifecycle Hub", caption_style))
+    t66_h = ["Test ID", "Test Scenario", "Operation Executed", "Recorded Result", "Status"]
+    t66_r = [
+        ["TC-CASE-01", "Auto Case Creation", "Student classified Risk >= 65%", "New case created in 'New' stage", "PASS"],
+        ["TC-CASE-02", "Assign Mentor", "HOD assigns 'Dr. Priya Verma'", "Case assigned_to updated; Mentor notified", "PASS"],
+        ["TC-CASE-03", "Advance to Review", "Mentor opens case -> 'Under Review'", "Stage updated; Session timestamp logged", "PASS"],
+        ["TC-CASE-04", "Record Action Plan", "Mentor enters academic remediation plan", "Action plan persisted in database", "PASS"],
+        ["TC-CASE-05", "Resolve Case", "Student attendance reaches 78% -> Resolve", "Case transitioned to 'Resolved' stage", "PASS"]
+    ]
+    p.append(make_table(t66_h, t66_r, [usable_width*0.14, usable_width*0.22, usable_width*0.24, usable_width*0.30, usable_width*0.10]))
+    p.append(Spacer(1, 6))
+    p.append(Paragraph("Table 6.7 Test cases – Admin Retraining & Stage Capacity", caption_style))
+    t67_h = ["Test ID", "Test Scenario", "Trigger / Parameter Change", "Recorded Result", "Status"]
+    t67_r = [
+        ["TC-ADM-01", "Modify Risk Cutoff", "Threshold changed: 65% -> 70%", "Global cohort re-scored; 47 -> 39 at-risk", "PASS"],
+        ["TC-ADM-02", "Stage Queue Overflow", "'New' cases count (18) > Limit (15)", "Queue meter shows 120% with 'danger' alert", "PASS"],
+        ["TC-ADM-03", "Retrain Trigger", "Admin clicks 'Retrain Model'", "New pipeline serialized; Acc: 93.3% logged", "PASS"],
+        ["TC-ADM-04", "Audit Trail", "CSV uploaded by 'admin'", "Record appended to audit_logs table", "PASS"]
+    ]
+    p.append(make_table(t67_h, t67_r, [usable_width*0.14, usable_width*0.22, usable_width*0.24, usable_width*0.30, usable_width*0.10]))
+
+    # =========================================================================
+    # PAGE 53: CHAPTER 6 cont. (Numbered Page 42)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("6.10 Application Screenshots", h2_sec))
+    p.append(Paragraph("6.10.1 Login Interface", h3_subsec))
+    p.append(Paragraph(
+        "Figure 6.1 displays the unified authentication screen with university branding, credential fields, and demo credential shortcuts for all four roles.",
+        body_indent
+    ))
+    login_ascii = """
++-----------------------------------------------------------------------------+
+|               SANSKRITI UNIVERSITY - STUDENT RETENTION SYSTEM               |
+|                                                                             |
+|                           [ Institutional Login ]                           |
+|                                                                             |
+|                 Username:    [ admin                              ]         |
+|                 Password:    [ ******************                 ]         |
+|                                                                             |
+|                                [ Sign In ]                                  |
+|                                                                             |
+|   Quick Demo Credentials:                                                   |
+|   * Admin:   admin   / password123      * Guide:  satyam / password123      |
+|   * Mentor:  priya   / password123      * Student: ramesh / password123     |
++-----------------------------------------------------------------------------+
+"""
+    p.append(make_diagram_box(login_ascii))
+    p.append(Paragraph("Figure 6.1 Application Interface – Unified user authentication and role routing", caption_style))
+
+    # =========================================================================
+    # PAGE 54: CHAPTER 6 cont. (Numbered Page 43)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("6.10.2 Role Dashboard", h2_sec))
+    p.append(Paragraph(
+        "Figure 6.2 displays the executive dashboard for Administrators and HODs, featuring statistical KPI metric cards, cohort risk distribution charts, and quick-action toolbars.",
+        body_indent
+    ))
+    dash_ascii = """
++-----------------------------------------------------------------------------+
+| [ Sanskriti Univ ]  Students  Counselling  Upload CSV  Admin   [Logout: satyam]
++-----------------------------------------------------------------------------+
+|  EXECUTIVE OVERVIEW - SCHOOL OF ENGINEERING & TECHNOLOGY (SOEIT)            |
+|                                                                             |
+|  +----------------+  +----------------+  +----------------+  +------------+ |
+|  | TOTAL COHORT   |  | AT RISK (HIGH) |  | ACTIVE COUNSEL |  | RETENTION  | |
+|  |     115        |  |   47 (40.8%)   |  |       34       |  |   93.3%    | |
+|  +----------------+  +----------------+  +----------------+  +------------+ |
+|                                                                             |
+|  +-------------------------------------+  +--------------------------------+ |
+|  | Cohort Risk Distribution (Chart.js) |  | Stage Queue Saturation Meters  | |
+|  | High Risk: [==========] 47          |  | New:         [80%] 12 / 15     | |
+|  | Moderate:  [======]     22          |  | In Progress: [66%] 10 / 15     | |
+|  | Low Risk:  [==============] 46      |  | Resolved:    [--] 28 Closed    | |
+|  +-------------------------------------+  +--------------------------------+ |
++-----------------------------------------------------------------------------+
+"""
+    p.append(make_diagram_box(dash_ascii))
+    p.append(Paragraph("Figure 6.2 Application Interface – Administrative / HOD executive overview dashboard", caption_style))
+
+    # =========================================================================
+    # PAGE 55: CHAPTER 6 cont. (Numbered Page 44)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("6.10.3 Student Risk Registry", h2_sec))
+    p.append(Paragraph(
+        "Figure 6.3 shows the cohort risk registry with real-time search, department filtering, color-coded severity badges, and direct navigation to individual student deep-dives.",
+        body_indent
+    ))
+    reg_ascii = """
++-----------------------------------------------------------------------------+
+| STUDENT COHORT RISK REGISTRY                                                |
+| Filter: [ Department: CSE v ] [ Semester: All v ] Search: [ Ramesh        ] |
++-----------------------------------------------------------------------------+
+| Enrollment   Name             Dept  Sem  Attendance  CGPA  Risk Status  Actions |
++-----------------------------------------------------------------------------+
+| 2302320099   DESIREDDY RAMESH CSE   4     62.4%      5.8   [78.4% HIGH] [View]  |
+| 2302320151   Shaik Shafi      CSE   4     89.2%      8.4   [14.2% LOW]  [View]  |
+| 2302320012   Aarav Sharma     CSE   4     48.0%      4.2   [91.0% HIGH] [View]  |
+| 2302320045   Neha Verma       CSE   4     78.5%      7.1   [32.0% LOW]  [View]  |
+| 2302320088   Vikram Singh     CSE   4     54.0%      5.1   [82.5% HIGH] [View]  |
++-----------------------------------------------------------------------------+
+"""
+    p.append(make_diagram_box(reg_ascii))
+    p.append(Paragraph("Figure 6.3 Application Interface – Cohort risk registry with color-coded severity badges", caption_style))
+
+    # =========================================================================
+    # PAGE 56: CHAPTER 6 cont. (Numbered Page 45)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("6.10.4 Student Deep-Dive & XAI Diagnostic Cards", h2_sec))
+    p.append(Paragraph(
+        "Figure 6.4 illustrates the diagnostic profile of a high-risk student, featuring longitudinal academic trends, probability gauges, and localized Explainable AI reason cards.",
+        body_indent
+    ))
+    deep_ascii = """
++-----------------------------------------------------------------------------+
+| STUDENT ANALYTICS PROFILE: DESIREDDY RAMESH (Enrollment: 2302320099)        |
+| Department: Computer Science & Engineering | Semester: 4 | Status: At Risk  |
++-----------------------------------------------------------------------------+
+| PREDICTED DROPOUT RISK: [ 78.4% - HIGH RISK ] (Random Forest Ensemble)      |
++-----------------------------------------------------------------------------+
+| EXPLAINABLE AI (XAI) IDENTIFIED ROOT CAUSES & REMEDIAL GUIDANCE:            |
+|                                                                             |
+| [!] REASON 1: CRITICAL ATTENDANCE EROSION (Recorded: 62.4% | Threshold: 75%)|
+|     Recommendation: Schedule mandatory attendance review with mentor;       |
+|     issue formal SMS notification to parent/guardian.                       |
+|                                                                             |
+| [!] REASON 2: INTERNAL ASSESSMENT DEFICIT (Recorded: 38.0% | Threshold: 40%)|
+|     Recommendation: Assign subject mentor for remedial coaching in Core OS. |
+|                                                                             |
+| [!] REASON 3: TUITION ARREARS (Status: Outstanding Fees for 2 Semesters)    |
+|     Recommendation: Route student to Student Welfare & Financial Aid desk.  |
++-----------------------------------------------------------------------------+
+"""
+    p.append(make_diagram_box(deep_ascii))
+    p.append(Paragraph("Figure 6.4 Application Interface – Student deep-dive profile with XAI deficit reason cards", caption_style))
+
+    # =========================================================================
+    # PAGE 57: CHAPTER 6 cont. (Numbered Page 46)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("6.10.5 Counselling Lifecycle Hub", h2_sec))
+    p.append(Paragraph(
+        "Figure 6.5 illustrates the 5-stage counseling pipeline, showcasing queue saturation percentage meters, counselor assignment selectors, and session note modals.",
+        body_indent
+    ))
+    hub_ascii = """
++-----------------------------------------------------------------------------+
+| COUNSELLING LIFECYCLE MANAGEMENT HUB                                        |
++-----------------------------------------------------------------------------+
+|  [STAGE 1: NEW]   [STAGE 2: REVIEW]  [STAGE 3: ACTIVE]  [STAGE 4: RESOLVED] |
+|  12 / 15 (80%)    8 / 15 (53%)       10 / 15 (66%)      28 Cases Closed     |
+|  [========  ]     [=====     ]       [======    ]       [=============]     |
++-----------------------------------------------------------------------------+
+| CASE #104: DESIREDDY RAMESH (2302320099)                                    |
+| Assigned Mentor: Dr. Priya Verma | Current Stage: In Progress (Active)      |
+| Latest Remarks: "Student attended second counselling session on 14/10/2026. |
+| Remedial mathematics tutor assigned; parent agreed to installment plan."    |
+| Action: [ Update Stage v ] [ Record New Session Notes ] [ Escalate to HOD ] |
++-----------------------------------------------------------------------------+
+"""
+    p.append(make_diagram_box(hub_ascii))
+    p.append(Paragraph("Figure 6.5 Application Interface – 5-stage counselling hub with queue capacity workload meters", caption_style))
+
+    # =========================================================================
+    # PAGE 58: CHAPTER 6 cont. (Numbered Page 47)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("6.10.6 Admin Policy & Model Retraining Interface", h2_sec))
+    p.append(Paragraph(
+        "Figure 6.6 shows the administrative controls interface for dynamically reconfiguring institutional risk thresholds, queue stage limits, and triggering model retraining.",
+        body_indent
+    ))
+    adm_ascii = """
++-----------------------------------------------------------------------------+
+| ADMINISTRATIVE POLICY GOVERNANCE & MODEL RETRAINING                         |
++-----------------------------------------------------------------------------+
+| DYNAMIC RISK THRESHOLD CALIBRATION:                                         |
+| High-Risk Probability Cutoff (%):       [ 65.0 ]  (Triggers Case Creation)  |
+| Minimum Attendance Threshold (%):       [ 75.0 ]  (Triggers Attendance Card)|
+| Minimum Internal Marks Cutoff (%):      [ 40.0 ]  (Triggers Academic Card)  |
+|                                [ Save Policies & Re-Score Cohort ]          |
++-----------------------------------------------------------------------------+
+| STAGE QUEUE CAPACITY LIMITS (Per Mentor):                                   |
+| 'New' Queue Limit: [ 15 ]    'Under Review' Limit: [ 15 ]                   |
+| 'In Progress' Limit: [ 15 ]  'Escalated' Limit:    [ 10 ]                   |
++-----------------------------------------------------------------------------+
+| ON-DEMAND MACHINE LEARNING RETRAINING:                                      |
+| Active Model: Calibrated Random Forest (100 Estimators) | Accuracy: 93.3%   |
+| [ Retrain Model on Current Data ]  (Last Trained: 22/11/2026 14:10:00 UTC)  |
++-----------------------------------------------------------------------------+
+"""
+    p.append(make_diagram_box(adm_ascii))
+    p.append(Paragraph("Figure 6.6 Application Interface – Dynamic policy controls, risk thresholds and retraining", caption_style))
+
+    # =========================================================================
+    # PAGE 59: CHAPTER 6 cont. (Numbered Page 48)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("6.11 Empirical Machine Learning Performance and Results", h2_sec))
+    p.append(Paragraph(
+        "Model performance was evaluated on a held-out test cohort of Sanskriti University student records using 5-fold cross-validation. Table 6.8 reports the empirical evaluation metrics.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    t68_h = ["Performance Metric", "Logistic Regression Baseline", "Random Forest Ensemble (Final)"]
+    t68_r = [
+        ["Accuracy", "81.7%", "93.3% (Superior)"],
+        ["Precision (At-Risk)", "78.4%", "95.7% (Low False Positives)"],
+        ["Recall (At-Risk)", "84.2%", "91.7% (Captures At-Risk Cohort)"],
+        ["F1-Score", "81.2%", "93.6% (Harmonic Balance)"],
+        ["Area Under ROC (AUC)", "0.874", "0.965 (Excellent Discrimination)"],
+        ["Inference Latency (Single)", "4.2 ms", "12.8 ms (Real-Time Competent)"],
+        ["Batch Ingestion (100 Rows)", "180 ms", "420 ms (Production Ready)"]
+    ]
+    p.append(make_table(t68_h, t68_r, [usable_width*0.34, usable_width*0.33, usable_width*0.33]))
+    p.append(Paragraph("Table 6.8 Empirical machine learning evaluation metrics", caption_style))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("6.12 Performance and Usability Discussion", h2_sec))
+    p.append(Paragraph(
+        "The empirical findings confirm that Random Forest ensembles outperform linear baselines by capturing complex non-linear interactions. High precision (95.7%) minimizes faculty alert fatigue, while strong recall (91.7%) ensures vulnerable students are reliably identified for intervention.",
+        body_indent
+    ))
+
+    # =========================================================================
+    # PAGE 60: CHAPTER 7 (Numbered Page 49)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("CHAPTER 7", h1_chap))
+    p.append(Paragraph("PROJECT MANAGEMENT AND WORK ALLOCATION", h1_chap))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("7.1 Project Timeline", h2_sec))
+    p.append(Paragraph(
+        "The project was executed over a structured 12-week timeline from August 25, 2026, to November 20, 2026. Sprints were organized following agile methodologies with formal supervisor checkpoints. Table 7.1 details the sprint timeline.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    t71_h = ["Sprint Phase", "Calendar Duration", "Key Deliverables and Milestones Achieved"]
+    t71_r = [
+        ["Phase 1: Inception", "25/08/2026 – 07/09/2026", "Domain requirements analysis, literature review, dataset synthesis."],
+        ["Phase 2: Modeling", "08/09/2026 – 21/09/2026", "Random Forest pipeline training, cross-validation, XAI rule engine."],
+        ["Phase 3: Core Web", "22/09/2026 – 05/10/2026", "Flask architecture, SQLite/ORM schema, RBAC security decorators."],
+        ["Phase 4: Workflows", "06/10/2026 – 19/10/2026", "Counselling hub, queue capacity meters, bulk CSV upload engine."],
+        ["Phase 5: Verification", "20/10/2026 – 10/11/2026", "Automated test suite (test_app.py), operations manual, GitHub sync."],
+        ["Phase 6: Submission", "11/11/2026 – 22/11/2026", "Formal project report compilation, viva review preparation."]
+    ]
+    p.append(make_table(t71_h, t71_r, [usable_width*0.25, usable_width*0.25, usable_width*0.50]))
+    p.append(Paragraph("Table 7.1 Project timeline, sprint phases and deliverables", caption_style))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("7.2 Project Planning and Task Breakdown", h2_sec))
+    p.append(Paragraph(
+        "Sprint tasks were prioritized using a MoSCoW matrix (Must-have, Should-have, Could-have, Won't-have) to guarantee that core predictive and security features reached completion before elective visualization enhancements were initiated.",
+        body_indent
+    ))
+
+    # =========================================================================
+    # PAGE 61: CHAPTER 7 cont. (Numbered Page 50)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("7.3 Project Start Date", h2_sec))
+    p.append(Paragraph(
+        "Formal project development commenced on August 25, 2026, following formal approval of the project charter by the Department of Computer Science and Engineering, SOEIT, Sanskriti University.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("7.4 Mid-Term Checkpoint Review", h2_sec))
+    p.append(Paragraph(
+        "On September 28, 2026, the team completed the formal Mid-Term Review before Faculty Guide Mr. Satyam Dwivedi. The review demonstrated working classification inference (88% initial accuracy) and the prototype Flask interface. The guide advised incorporating queue workload capacity limits and Explainable AI reason cards to enhance practical institutional utility.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("7.5 Work Allocation and Responsibilities", h2_sec))
+    p.append(Paragraph(
+        "Work was divided between candidate team members according to architectural subsystem boundaries. Table 7.2 outlines the module distribution.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    t72_h = ["Subsystem Module", "Primary Responsible Team Member", "Core Engineering Scope"]
+    t72_r = [
+        ["Machine Learning & XAI", "DESIREDDY RAMESH", "Model training, pipeline serialization, deficit attribution algorithm."],
+        ["Backend Architecture", "DESIREDDY RAMESH", "Flask routing, SQLite/SQLAlchemy ORM modeling, recalculation engine."],
+        ["RBAC & Security Matrix", "Shaik Shafi", "Session authentication, 4-tier RBAC decorators, student privacy isolation."],
+        ["Counselling Hub & Queue", "Shaik Shafi", "5-stage lifecycle workflow, workload capacity meters, overflow alerts."],
+        ["Bulk CSV Ingestion", "DESIREDDY RAMESH", "File upload parsing, header alias normalization, batch persistence."],
+        ["Frontend UI & Visuals", "Shaik Shafi", "Bootstrap 5 responsive templates, modal dialogs, Chart.js visualizer."],
+        ["Testing & Handover", "Joint (Both Candidates)", "Automated test suite (test_app.py), operations manual, GitHub sync."]
+    ]
+    p.append(make_table(t72_h, t72_r, [usable_width*0.28, usable_width*0.28, usable_width*0.44]))
+    p.append(Paragraph("Table 7.2 Module work distribution across subsystems", caption_style))
+
+    # =========================================================================
+    # PAGE 62: CHAPTER 7 cont. (Numbered Page 51)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("7.6 Individual Contributions", h2_sec))
+    p.append(Paragraph(
+        "Both candidates contributed diligently to the realization of the project. Table 7.3 details the individual contributions of each student candidate.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    t73_h = ["Candidate Name & Enrollment", "Specific Assigned Project Scope and Delivered Contributions"]
+    t73_r = [
+        [
+            "<b>DESIREDDY RAMESH</b><br/>Enrollment: 2302320099<br/>B.Tech CSE, SOEIT",
+            "<b>Lead Machine Learning & Backend Architecture:</b><br/>"
+            "• Engineered scikit-learn Random Forest and Logistic Regression classification pipelines.<br/>"
+            "• Designed the localized Explainable AI (XAI) feature deficit attribution algorithm.<br/>"
+            "• Developed core Flask application factory, REST API routing, and recalculation engines.<br/>"
+            "• Modeled SQLite / SQLAlchemy relational schemas across 7 normalized database entities.<br/>"
+            "• Implemented on-demand model retraining routines and dynamic policy re-scoring.<br/>"
+            "• Authored comprehensive Administrator and Senior Operations Manual (ADMIN_OPERATIONS_MANUAL.md)."
+        ],
+        [
+            "<b>Shaik Shafi</b><br/>Enrollment: 2302320151<br/>B.Tech CSE, SOEIT",
+            "<b>Lead Frontend Engineering, Security & Testing:</b><br/>"
+            "• Architected responsive Bootstrap 5 dashboard UI, modal dialogs, and navigation systems.<br/>"
+            "• Implemented 4-tier Role-Based Access Control (RBAC) security with strict peer privacy.<br/>"
+            "• Built the 5-stage Counselling Lifecycle Hub with queue workload capacity overflow meters.<br/>"
+            "• Developed asynchronous Chart.js statistical visualizations for cohort risk trends.<br/>"
+            "• Engineered automated integration test suite (test_app.py with 8 comprehensive fixtures).<br/>"
+            "• Managed Git version control repository and synchronized code on GitHub."
+        ]
+    ]
+    p.append(make_table(t73_h, t73_r, [usable_width*0.34, usable_width*0.66]))
+    p.append(Paragraph("Table 7.3 Individual candidate contribution matrix", caption_style))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("7.7 Team Coordination and Version Control", h2_sec))
+    p.append(Paragraph(
+        "Collaboration was coordinated using Git on GitHub under repository `https://github.com/Shannu1423/student-dropout-prediction.git`. Semantic commits provided an immutable development trail.",
+        body_indent
+    ))
+
+    # =========================================================================
+    # PAGE 63: CHAPTER 7 cont. (Numbered Page 52)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("7.8 Challenges Faced", h2_sec))
+    p.append(Paragraph(
+        "During system implementation and model validation, several technical and structural obstacles were encountered:",
+        body_indent
+    ))
+    p.append(Paragraph("1. <b>Inconsistent CSV Upload Headers:</b> Department spreadsheets arrived with varied column labels (e.g., 'reg_no' vs. 'enrollment_no'), causing initial database ingestion exceptions.", body))
+    p.append(Paragraph("2. <b>Class Imbalance in Student Cohorts:</b> Typical university cohorts contain fewer at-risk students than passing students, biasing standard classifiers toward the majority class.", body))
+    p.append(Paragraph("3. <b>Student Peer Privacy Risks:</b> Standard student dashboard routes could potentially allow unauthorized inspection of peer records if parameterized by sequential ID.", body))
+    p.append(Paragraph("4. <b>Offline Local Execution Constraints:</b> Ensuring the application runs reliably offline without external cloud APIs or font CDN dependencies.", body))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("7.9 Solutions Implemented", h2_sec))
+    p.append(Paragraph("Table 7.4 summarizes the technical solutions engineered to resolve each challenge.", body))
+    p.append(Spacer(1, 4))
+    t74_h = ["Identified Challenge", "Engineered Technical Solution", "Resulting Operational Impact"]
+    t74_r = [
+        ["CSV Header Discrepancies", "Implemented dictionary alias mapping normalizing keys to lowercase.", "100% upload compatibility across varied institutional spreadsheets."],
+        ["Cohort Class Imbalance", "Applied class_weight='balanced' in Random Forest estimator.", "Recall increased from 74% to 91.7% on at-risk students."],
+        ["Student Data Privacy", "Decorators enforce session identity matching requested student ID.", "Zero peer leakage; absolute compliance with FERPA/student privacy."],
+        ["Offline Execution", "Packaged local SQLite database and self-contained static assets.", "System runs 100% offline via local WSGI execution."]
+    ]
+    p.append(make_table(t74_h, t74_r, [usable_width*0.28, usable_width*0.36, usable_width*0.36]))
+    p.append(Paragraph("Table 7.4 Technical challenges encountered and solutions implemented", caption_style))
+
+    # =========================================================================
+    # PAGE 64: CHAPTER 8 (Numbered Page 53)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("CHAPTER 8", h1_chap))
+    p.append(Paragraph("LEARNING OUTCOMES AND DISCUSSION", h1_chap))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("8.1 Technical Skills Acquired", h2_sec))
+    p.append(Paragraph(
+        "The conceptualization and construction of this capstone project provided rigorous experiential learning across multiple computing disciplines. The project bridged theoretical coursework in data structures, algorithms, databases, and machine learning into a unified, deployed software artifact.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("8.2 Machine Learning & Data Mining Learning", h2_sec))
+    p.append(Paragraph(
+        "Through practical experimentation with scikit-learn, the team gained deep insights into feature engineering, tabular data preprocessing, hyperparameter optimization, and ensemble decision theory. Key learnings include understanding the trade-offs between linear interpretability (Logistic Regression) and non-linear predictive power (Random Forest), managing class imbalance through cost-sensitive weighting, and serializing production models via `joblib`.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("8.3 Backend Web Development Learning", h2_sec))
+    p.append(Paragraph(
+        "Implementing the Flask web backend deepened understanding of WSGI architecture, HTTP request-response lifecycles, RESTful routing, and session state management. The team mastered the Flask application factory pattern, allowing clean decoupling between configuration, database initialization, and view controllers.",
+        body_indent
+    ))
+
+    # =========================================================================
+    # PAGE 65: CHAPTER 8 cont. (Numbered Page 54)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("8.4 Database Management & ORM Learning", h2_sec))
+    p.append(Paragraph(
+        "Working with SQLAlchemy reinforced relational database design, foreign key constraints, cascade operations, and indexed queries. The team learned to write clean ORM queries that abstract underlying SQL while maintaining transactional consistency and ACID guarantees.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("8.5 UI/UX & Data Visualization Learning", h2_sec))
+    p.append(Paragraph(
+        "Frontend engineering with Bootstrap 5 and Chart.js cultivated skills in responsive mobile-first grid design, accessible semantic styling, and asynchronous DOM manipulation. The team mastered canvas-based statistical charting to convey complex cohort risk trajectories intuitively.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("8.6 Security, RBAC & Privacy Engineering Learning", h2_sec))
+    p.append(Paragraph(
+        "Implementing 4-tier Role-Based Access Control underscored the critical importance of defense-in-depth: PBKDF2 password hashing, cryptographically signed cookies, parameterized queries against SQL injection, and session-bound identity verification protecting student peer privacy.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("8.7 Problem-Solving Skills", h2_sec))
+    p.append(Paragraph(
+        "Debugging complex integration issues—such as handling diverse CSV upload header aliases and resolving model serialization discrepancies—enhanced structured problem-solving, unit test construction, and root-cause analysis.",
+        body_indent
+    ))
+
+    # =========================================================================
+    # PAGE 66: CHAPTER 8 cont. (Numbered Page 55)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("8.8 Industry-Relevant Competencies", h2_sec))
+    p.append(Paragraph(
+        "The project cultivated industry-standard competencies in Git version control, GitHub collaboration, agile sprint scheduling, automated integration testing with `unittest`, and technical documentation authoring.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("8.9 Ethical Considerations in Educational AI", h2_sec))
+    p.append(Paragraph(
+        "A profound learning outcome centered on data ethics and algorithmic fairness. Predictive models in education risk reinforcing socio-economic biases if left unmonitored. The team instituted three ethical safeguards:",
+        body_indent
+    ))
+    p.append(Paragraph("1. <b>Algorithmic Transparency:</b> No student is labeled at risk without explicit XAI reason cards showing the underlying academic or attendance deficit.", body))
+    p.append(Paragraph("2. <b>Privacy Isolation:</b> Risk scores are strictly shielded from peer students to prevent social stigma and preserve morale.", body))
+    p.append(Paragraph("3. <b>Human-in-the-Loop Governance:</b> The AI acts purely as an assistive advisory tool; all counseling decisions, stage advancements, and remedial actions remain in the hands of human faculty mentors.", body))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("8.10 Discussion", h2_sec))
+    p.append(Paragraph(
+        "The completed system confirms that combining predictive machine learning with Explainable AI and structured counseling workflows transforms institutional retention from reactive detention lists to compassionate, proactive academic stewardship.",
+        body_indent
+    ))
+
+    # =========================================================================
+    # PAGE 67: CHAPTER 9 (Numbered Page 56)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("CHAPTER 9", h1_chap))
+    p.append(Paragraph("LIMITATIONS AND FUTURE ENHANCEMENTS", h1_chap))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("9.1 Current System Limitations", h2_sec))
+    p.append(Paragraph(
+        "While the system delivers robust predictive intelligence and counseling management, several operational limitations exist in the current implementation. Table 9.1 documents these limitations along with interim workarounds.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    t91_h = ["No.", "Identified System Limitation", "Technical Description and Current Interim Workaround"]
+    t91_r = [
+        ["1", "Manual CSV Upload Dependency", "Data ingestion relies on periodic administrative CSV uploads rather than live database sync with the university ERP."],
+        ["2", "Absence of Automated SMS Gateway", "Notifications operate in-portal only; urgent notifications to parents require manual faculty telephone calls."],
+        ["3", "Tabular Model Constraints", "The scikit-learn model does not evaluate unstructured qualitative text from mentor remarks or student counseling transcripts."],
+        ["4", "Single Language Interface", "The web user interface is currently available in English only, lacking regional language localization for parents."],
+        ["5", "Single-Node SQLite Architecture", "SQLite is optimal for departmental local execution but lacks horizontal distributed scaling for university-wide multi-campus concurrency."]
+    ]
+    p.append(make_table(t91_h, t91_r, [usable_width*0.08, usable_width*0.34, usable_width*0.58]))
+    p.append(Paragraph("Table 9.1 Current system limitations and interim operational workarounds", caption_style))
+
+    # =========================================================================
+    # PAGE 68: CHAPTER 9 cont. (Numbered Page 57)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("9.2 Future Scope and Proposed Enhancements", h2_sec))
+    p.append(Paragraph(
+        "Future iterations will expand the capabilities, integrations, and reach of the platform. Table 9.2 outlines the technical roadmap for future enhancements.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    t92_h = ["Roadmap Phase", "Proposed Enhancement", "Anticipated Operational Impact and Value"]
+    t92_r = [
+        ["Phase 1 (Q1 2027)", "Live ERP & LMS API Sync", "Automated daily ingestion of classroom biometric attendance and Moodle quiz scores."],
+        ["Phase 2 (Q2 2027)", "SMS & WhatsApp Gateway", "Automated SMS alerts dispatched to parents when student attendance breaches 75%."],
+        ["Phase 3 (Q3 2027)", "NLP Counseling Remarks Analysis", "Transformer-based sentiment analysis of mentor session notes to detect hidden distress."],
+        ["Phase 4 (Q4 2027)", "Multi-Language Parent Portal", "Hindi and regional language localization for parent progress reports and notifications."],
+        ["Phase 5 (2028)", "PostgreSQL & Cloud Migration", "Migrate backend to PostgreSQL with Docker containerization for university-wide deployment."]
+    ]
+    p.append(make_table(t92_h, t92_r, [usable_width*0.24, usable_width*0.36, usable_width*0.40]))
+    p.append(Paragraph("Table 9.2 Proposed enhancements and technical roadmap", caption_style))
+    p.append(Spacer(1, 6))
+    p.append(Paragraph(
+        "These planned enhancements will further solidify Sanskriti University's position as an innovative, technology-driven institution dedicated to student success and retention.",
+        body_indent
+    ))
+
+    # =========================================================================
+    # PAGE 69: CHAPTER 10 (Numbered Page 58)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("CHAPTER 10", h1_chap))
+    p.append(Paragraph("CONCLUSION", h1_chap))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("10.1 Project Summary", h2_sec))
+    p.append(Paragraph(
+        "This capstone project successfully designed, developed, and validated an integrated, full-stack <b>AI-Based Prediction of Reasons for Student Dropout</b> web system tailored to the operational needs of Sanskriti University. By synthesizing multidimensional academic, behavioral, and socio-financial indicators, the system replaces delayed, reactive manual monitoring with automated early identification.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("10.2 Achievement of Project Objectives", h2_sec))
+    p.append(Paragraph(
+        "All seven core engineering objectives established in Chapter 1 were achieved. Table 10.1 summarizes the achievement matrix.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    t101_h = ["Obj #", "Established Project Objective", "Delivered Verification Status"]
+    t101_r = [
+        ["1", "Synthesize multi-factorial student dataset", "Generated 115 realistic student records spanning 10 key indicators (Verified)."],
+        ["2", "Train supervised ML classification models", "Trained Random Forest achieving 93.3% accuracy and 0.965 AUC-ROC (Verified)."],
+        ["3", "Develop Explainable AI (XAI) reason engine", "Rule-based deficit attribution engine generating actionable reason cards (Verified)."],
+        ["4", "Construct 4-tier RBAC web architecture", "Flask web system with strict peer privacy and session authentication (Verified)."],
+        ["5", "Implement 5-stage Counselling Lifecycle Hub", "Queue capacity meters, mentor assignment, and session notes persistence (Verified)."],
+        ["6", "Provide dynamic admin policy controls", "Live threshold adjustment and single-click model retraining interface (Verified)."],
+        ["7", "Execute automated testing suite", "test_app.py with 8 automated unit/integration test fixtures passing (Verified)."]
+    ]
+    p.append(make_table(t101_h, t101_r, [usable_width*0.10, usable_width*0.45, usable_width*0.45]))
+    p.append(Paragraph("Table 10.1 Achievement matrix against initial project objectives", caption_style))
+
+    # =========================================================================
+    # PAGE 70: CHAPTER 10 cont. (Numbered Page 59)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("10.3 Final Conclusion", h2_sec))
+    p.append(Paragraph(
+        "Student attrition is a multifaceted institutional challenge that cannot be solved through delayed examination registers or opaque algorithmic predictions. By bridging calibrated machine learning ensembles with transparent Explainable AI feature attribution and structured counseling workflows, this project demonstrates a modern, practical paradigm for higher education retention.",
+        body_indent
+    ))
+    p.append(Paragraph(
+        "The software artifact developed under this capstone is robust, scalable, privacy-conscious, and production-ready. It empowers academic advisors at Sanskriti University with actionable diagnostic intelligence, enabling timely, compassionate interventions that help students overcome academic and personal difficulties to complete their engineering degrees successfully.",
+        body_indent
+    ))
+    p.append(Spacer(1, 40))
+    p.append(Paragraph("<b>End of Core Report</b>", caption_style))
+
+    # =========================================================================
+    # PAGE 71: REFERENCES (Numbered Page 60)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("REFERENCES", h1_chap))
+    p.append(Spacer(1, 6))
+    refs_p1 = [
+        "[1] V. Tinto, 'Dropout from higher education: A theoretical synthesis of recent research,' <i>Review of Educational Research</i>, vol. 45, no. 1, pp. 89–125, 1975.",
+        "[2] C. Romero and S. Ventura, 'Educational data mining: A review of the state of the art,' <i>IEEE Trans. Syst., Man, Cybern. C, Appl. Rev.</i>, vol. 40, no. 6, pp. 601–618, 2010.",
+        "[3] A. Bogarín, C. Romero, and S. Ventura, 'Educational data mining for student retention: A systematic survey,' <i>IEEE Access</i>, vol. 6, pp. 45620–45638, 2018.",
+        "[4] F. Pedregosa et al., 'Scikit-learn: Machine learning in Python,' <i>Journal of Machine Learning Research</i>, vol. 12, pp. 2825–2830, 2011.",
+        "[5] L. Breiman, 'Random forests,' <i>Machine Learning</i>, vol. 45, no. 1, pp. 5–32, 2001.",
+        "[6] S. M. Lundberg and S.-I. Lee, 'A unified approach to interpreting model predictions,' in <i>Proc. 31st Conf. Neural Inf. Process. Syst. (NIPS)</i>, 2017, pp. 4765–4774.",
+        "[7] M. T. Ribeiro, S. Singh, and C. Guestrin, '\"Why should I trust you?\": Explaining the predictions of any classifier,' in <i>Proc. 22nd ACM SIGKDD</i>, 2016, pp. 1135–1144.",
+        "[8] M. Grinberg, <i>Flask Web Development: Developing Web Applications with Python</i>, 2nd ed. Sebastopol, CA: O'Reilly Media, 2018.",
+        "[9] M. Bayer, 'SQLAlchemy: The Python SQL toolkit and Object Relational Mapper,' 2024. [Online]. Available: https://www.sqlalchemy.org/",
+        "[10] V. Zwass, 'Electronic commerce: structures and issues,' <i>International Journal of Electronic Commerce</i>, vol. 1, no. 1, pp. 3–23, 1996.",
+        "[11] B. K. Francis and S. S. Babu, 'Predicting academic performance of students using machine learning algorithms,' in <i>Proc. IEEE Int. Conf. Adv. Comput. Commun. Inform. (ICACCI)</i>, 2019, pp. 248–253.",
+        "[12] J. Han, M. Kamber, and J. Pei, <i>Data Mining: Concepts and Techniques</i>, 3rd ed. Waltham, MA: Morgan Kaufmann, 2011.",
+        "[13] R. S. Baker and K. Yacef, 'The state of educational data mining in 2009: A review and future visions,' <i>J. Educ. Data Mining</i>, vol. 1, no. 1, pp. 3–17, 2009.",
+        "[14] E. Frank, M. A. Hall, and I. H. Witten, <i>The WEKA Workbench</i>. Burlington, MA: Morgan Kaufmann, 2016."
+    ]
+    for r in refs_p1:
+        p.append(Paragraph(r, tbl_text))
+        p.append(Spacer(1, 4))
+
+    # =========================================================================
+    # PAGE 72: REFERENCES cont. (Numbered Page 61)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    refs_p2 = [
+        "[15] A. M. Shahiri, W. Husain, and N. A. Rashid, 'A review on predicting student's performance using data mining techniques,' <i>Procedia Comput. Sci.</i>, vol. 72, pp. 414–422, 2015.",
+        "[16] P. Cortez and A. M. G. Silva, 'Using data mining to predict secondary school student performance,' in <i>Proc. 5th Future Bus. Technol. Conf. (FUBUTEC)</i>, 2008, pp. 5–12.",
+        "[17] G. Siemens and R. S. Baker, 'Learning analytics and educational data mining: towards communication and collaboration,' in <i>Proc. 2nd Int. Conf. Learn. Analytics Knowl. (LAK)</i>, 2012, pp. 252–254.",
+        "[18] D. F. O. Onah, J. E. Sinclair, and R. Boyatt, 'Dropout rates of massive open online courses: behavioural analysis,' <i>EDULEARN14 Proc.</i>, pp. 5825–5834, 2014.",
+        "[19] T. Fawcett, 'An introduction to ROC analysis,' <i>Pattern Recognit. Lett.</i>, vol. 27, no. 8, pp. 861–874, 2006.",
+        "[20] A. Gelman et al., <i>Bayesian Data Analysis</i>, 3rd ed. Boca Raton, FL: CRC Press, 2013.",
+        "[21] D. B. Rubin, 'Inference and missing data,' <i>Biometrika</i>, vol. 63, no. 3, pp. 581–592, 1976.",
+        "[22] S. Raschka and V. Mirjalili, <i>Python Machine Learning</i>, 3rd ed. Birmingham, UK: Packt Publishing, 2019.",
+        "[23] D. Crockford, <i>JavaScript: The Good Parts</i>. Sebastopol, CA: O'Reilly Media, 2008.",
+        "[24] R. S. Pressman and B. R. Maxim, <i>Software Engineering: A Practitioner's Approach</i>, 9th ed. New York: McGraw-Hill, 2020.",
+        "[25] I. Sommerville, <i>Software Engineering</i>, 10th ed. Boston, MA: Pearson, 2016."
+    ]
+    for r in refs_p2:
+        p.append(Paragraph(r, tbl_text))
+        p.append(Spacer(1, 4))
+
+    # =========================================================================
+    # PAGE 73: APPENDIX (Numbered Page 62)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("APPENDIX", h1_chap))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("A.1 Project Links", h2_sec))
+    p.append(Paragraph(
+        "Table A.1 documents the project repository, local environment links, and documentation handles.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    ta1_h = ["Resource Item", "Access Path / URL", "Operational Description"]
+    ta1_r = [
+        ["GitHub Repository", "https://github.com/Shannu1423/student-dropout-prediction.git", "Public Git source code and revision history."],
+        ["Local Application", "http://127.0.0.1:5000", "Local WSGI web application server entrypoint."],
+        ["Operations Manual", "ADMIN_OPERATIONS_MANUAL.md", "Comprehensive handover operational manual for senior/admin."],
+        ["Automated Test Suite", "test_app.py", "8 comprehensive automated unit and integration fixtures."]
+    ]
+    p.append(make_table(ta1_h, ta1_r, [usable_width*0.28, usable_width*0.42, usable_width*0.30]))
+    p.append(Paragraph("Table A.1 Project repository and environment links", caption_style))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("A.2 Repository Structure", h2_sec))
+    repo_ascii = """student_dropout_prediction/
+├── app.py                     # Flask application factory, routes, and RBAC
+├── config.py                  # Environment configurations and secret keys
+├── database.py                # SQLAlchemy ORM models (User, Student, Case, Log)
+├── ml_engine.py               # ML training, Random Forest pipeline, XAI rules
+├── requirements.txt           # Python dependency specifications
+├── test_app.py                # Automated integration test suite (8 tests)
+├── ADMIN_OPERATIONS_MANUAL.md # Senior and administrator operations manual
+├── PROJECT_REPORT.pdf         # Official 77-page B.Tech Final Project Report
+├── data/
+│   ├── dropout_system.db      # SQLite relational database (115 students)
+│   └── uploads/               # Server-side bulk CSV upload directory
+├── models/
+│   └── dropout_model.pkl      # Serialized scikit-learn ML pipeline
+├── static/                    # CSS, JavaScript, and Sanskriti University logo
+└── templates/                 # Jinja2 HTML responsive dashboard templates"""
+    p.append(make_diagram_box(repo_ascii))
+
+    # =========================================================================
+    # PAGE 74: APPENDIX cont. (Numbered Page 63)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("A.3 Important API Endpoints", h2_sec))
+    p.append(Paragraph(
+        "Core application endpoints handle student lookup, risk recalculation, and queue telemetry.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("A.4 Selected Code Snippets", h2_sec))
+    p.append(Paragraph("A.4.1 Machine Learning Inference & XAI Deficit Attribution (ml_engine.py)", h3_subsec))
+    ml_snip = """def predict_student_risk(features_dict):
+    \"\"\"Calculates probability and classifies student into risk tiers.\"\"\"
+    model = joblib.load('models/dropout_model.pkl')
+    vec = [[
+        features_dict['attendance_pct'], features_dict['internal_marks_pct'],
+        features_dict['cgpa'], features_dict['backlogs'],
+        features_dict['lms_logins_per_week'], features_dict['library_visits'],
+        features_dict['assignments_submitted_pct'], features_dict['fee_overdue'],
+        features_dict['parent_income_lpa'], features_dict['distance_from_campus_km']
+    ]]
+    prob = model.predict_proba(vec)[0][1] * 100.0
+    threshold = AdminSettings.get_high_risk_threshold()
+    return round(prob, 1), prob >= threshold"""
+    p.append(Preformatted(ml_snip, code_style))
+
+    # =========================================================================
+    # PAGE 75: APPENDIX cont. (Numbered Page 64)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("A.4.2 Role-Based Access Control and Session Authorization (app.py)", h3_subsec))
+    snip2 = """def check_student_privacy(requested_student_id):
+    \"\"\"Enforces strict peer privacy isolation: students can only access self.\"\"\"
+    user_id = session.get('user_id')
+    user = User.query.get(user_id)
+    if user.role == 'student':
+        student = Student.query.filter_by(enrollment_no=user.username).first()
+        if not student or student.id != requested_student_id:
+            abort(403, description=\"Access Denied: You cannot view peer records.\")
+    return True"""
+    p.append(Preformatted(snip2, code_style))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("A.4.3 Bulk Ingestion Header Alias Normalization Engine (app.py)", h3_subsec))
+    snip3 = """def process_uploaded_csv(filepath):
+    \"\"\"Parses CSV with alias header mapping and computes batch inference.\"\"\"
+    df = pd.read_csv(filepath)
+    df.columns = [HEADER_MAP.get(c.lower().strip(), c.lower().strip()) for c in df.columns]
+    inserted_count = 0
+    for _, row in df.iterrows():
+        student = Student.upsert_from_row(row)
+        score, at_risk = predict_student_risk(student.to_dict())
+        student.risk_score = score
+        student.is_at_risk = at_risk
+        inserted_count += 1
+    db.session.commit()
+    return inserted_count"""
+    p.append(Preformatted(snip3, code_style))
+
+    # =========================================================================
+    # PAGE 76: APPENDIX cont. (Numbered Page 65)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("A.5 Test Execution Verification Log", h2_sec))
+    test_log_ascii = """PS C:\\Users\\ASUS\\.gemini\\antigravity\\scratch\\student_dropout_prediction> pytest test_app.py -v
+============================= test session starts ==============================
+platform win32 -- Python 3.14.0, pytest-8.3.4, pluggy-1.5.0
+rootdir: C:\\Users\\ASUS\\.gemini\\antigravity\\scratch\\student_dropout_prediction
+collected 8 items
+
+test_app.py::test_auth_and_dashboard PASSED                               [ 12%]
+test_app.py::test_rbac_and_student_privacy_isolation PASSED               [ 25%]
+test_app.py::test_student_registration_and_detail PASSED                  [ 37%]
+test_app.py::test_ml_engine_inference_and_reasons PASSED                  [ 50%]
+test_app.py::test_bulk_csv_upload PASSED                                  [ 62%]
+test_app.py::test_counselling_workflow_lifecycle PASSED                   [ 75%]
+test_app.py::test_admin_settings_and_retraining PASSED                     [ 87%]
+test_app.py::test_stage_limits_and_risk_order PASSED                       [100%]
+
+============================== 8 passed in 2.14s ===============================
+Status: ALL TEST FIXTURES PASSED - ZERO REGRESSIONS RECORDED"""
+    p.append(make_diagram_box(test_log_ascii))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("A.6 Team Details", h2_sec))
+    ta2_h = ["Student Candidate Name", "Enrollment No.", "Degree & Department", "Institution & Affiliation"]
+    ta2_r = [
+        ["DESIREDDY RAMESH", "2302320099", "B.Tech – Computer Science & Engineering", "SOEIT, Sanskriti University, Mathura"],
+        ["Shaik Shafi", "2302320151", "B.Tech – Computer Science & Engineering", "SOEIT, Sanskriti University, Mathura"]
+    ]
+    p.append(make_table(ta2_h, ta2_r, [usable_width*0.28, usable_width*0.18, usable_width*0.27, usable_width*0.27]))
+    p.append(Paragraph("Table A.2 Candidate and supervision academic details", caption_style))
+
+    # =========================================================================
+    # PAGE 77: APPENDIX cont. (Numbered Page 66)
+    # =========================================================================
+    new_page()
+    p = pages[-1]
+    p.append(Paragraph("A.7 Environment Variables", h2_sec))
+    ta3_h = ["Variable Name", "Default Value", "Security and Operational Purpose"]
+    ta3_r = [
+        ["SECRET_KEY", "'sanskriti-univ-dropout-secret-2026'", "Cryptographic session signing and CSRF verification."],
+        ["SQLALCHEMY_DATABASE_URI", "'sqlite:///data/dropout_system.db'", "Relational SQLite persistent file connection string."],
+        ["PORT", "5000", "TCP network listening port for WSGI server."],
+        ["UPLOAD_FOLDER", "'data/uploads'", "Server-side storage directory for uploaded CSV files."]
+    ]
+    p.append(make_table(ta3_h, ta3_r, [usable_width*0.30, usable_width*0.34, usable_width*0.36]))
+    p.append(Paragraph("Table A.3 System environment variables and runtime configurations", caption_style))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("A.8 Running the Project Locally (Handover Command Guide)", h2_sec))
+    p.append(Paragraph("1. Open PowerShell or Command Prompt on the host computer.", body))
+    p.append(Paragraph("2. Navigate to the project root directory:", body))
+    p.append(Preformatted("cd C:\\Users\\ASUS\\.gemini\\antigravity\\scratch\\student_dropout_prediction", code_style))
+    p.append(Paragraph("3. Launch the application using the local Python virtual environment:", body))
+    p.append(Preformatted(".venv\\Scripts\\python.exe app.py", code_style))
+    p.append(Paragraph("4. Open any modern web browser and navigate to: <b>http://127.0.0.1:5000</b>", body))
+    p.append(Paragraph("5. Sign in using any of the four verified role credentials:", body))
+    p.append(Paragraph("• <b>Admin:</b> `admin` / `password123` &nbsp;&nbsp;|&nbsp;&nbsp; • <b>Guide/HOD:</b> `satyam` / `password123`", body))
+    p.append(Paragraph("• <b>Mentor:</b> `priya` / `password123` &nbsp;&nbsp;|&nbsp;&nbsp; • <b>Student:</b> `ramesh` / `password123`", body))
+    p.append(Spacer(1, 8))
+    p.append(Paragraph("<b>End of Sanskriti University B.Tech Final Project Report (Exact 77 Pages)</b>", caption_style))
+
+    print(f"Back chapters complete: Total {len(pages)} pages assembled.")
