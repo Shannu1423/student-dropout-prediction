@@ -1,22 +1,70 @@
 # AI-Based Prediction of Reasons for Student Dropout
-**Sanskriti University &bull; School of Engineering & Technology**
+**Sanskriti University &bull; School of Engineering and Information Technology (SOEIT)**
 
-* **Student Name:** D. Ramesh
-* **Enrollment No:** `2302320099`
-* **Faculty Guide:** Mr. Satyam Dwivedi
-* **Project Start Date:** 25-08-2026
-* **Evaluation Reference:** Sanskriti University Project Guidelines (Appendix 1, 2 & 3)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Shannu1423/student-dropout-prediction)
+
+* **Candidate 1:** DESIREDDY RAMESH (Enrollment No: `2302320099`)
+* **Candidate 2:** Shaik Shafi (Enrollment No: `2302320151`)
+* **Faculty Guide:** Mr. Satyam Dwivedi, Assistant Professor, SOEIT
+* **Academic Year:** 2026–2027 (November 2026)
+* **GitHub Repository:** [https://github.com/Shannu1423/student-dropout-prediction.git](https://github.com/Shannu1423/student-dropout-prediction.git)
+
+---
+
+## 🚀 Live Cloud Deployment
+
+This project is pre-configured for **1-click free cloud deployment** on Render, Railway, or any WSGI host.
+
+### Option 1: 1-Click Deploy on Render (Recommended & Free)
+1. Click the **Deploy to Render** button above, or go to [dashboard.render.com](https://dashboard.render.com).
+2. Sign in with your GitHub account (`Shannu1423`).
+3. Click **"New +"** &rarr; **"Web Service"**.
+4. Select repository: `Shannu1423/student-dropout-prediction`.
+5. Render automatically detects the configuration from `render.yaml` and `Procfile`:
+   - **Environment:** `Python`
+   - **Build Command:** `pip install -r requirements.txt`
+   - **Start Command:** `gunicorn "app:create_app()"`
+   - **Plan:** `Free`
+6. Click **"Deploy Web Service"**.
+7. In ~2 minutes, your web application will be live at a public HTTPS URL (e.g., `https://student-dropout-prediction.onrender.com`)!
+
+---
+
+### Option 2: Run Locally (Offline)
+1. Open PowerShell or Command Prompt:
+   ```powershell
+   cd C:\Users\ASUS\.gemini\antigravity\scratch\student_dropout_prediction
+   ```
+2. Start the application:
+   ```powershell
+   .venv\Scripts\python.exe app.py
+   ```
+3. Open your browser and navigate to: **`http://127.0.0.1:5000`**
+
+---
+
+## 🔑 Demo Login Credentials
+
+The system provides 4 pre-configured roles with strict Role-Based Access Control (RBAC):
+
+| Role | Username | Password | Operational Access Level |
+| :--- | :--- | :--- | :--- |
+| **Administrator** | `admin` | `password123` | Full control: Risk thresholds, model retraining, queue limits, audit logs |
+| **Guide / HOD** | `satyam` | `password123` | Department risk registry, mentor assignments, case escalations |
+| **Faculty Mentor** | `priya` | `password123` | Assigned student cases, XAI reason cards, session notes, stage advancement |
+| **Student** | `ramesh` | `password123` | Read-only access strictly isolated to own academic performance and advice |
 
 ---
 
 ## 1. System Overview & Objectives
 The **AI-Based Prediction of Reasons for Student Dropout** system is a centralized web portal and machine learning analytics platform. It replaces fragmented practices (paper registers, spreadsheets, informal follow-ups) with an automated early-warning system that:
 1. **Monitors Multi-Factor Data:** Ingests academic records, attendance percentages, backlog counts, fee payment statuses, and LMS engagement scores.
-2. **Predicts Dropout Risk:** Employs trained classification models (Random Forest and Logistic Regression) built with `scikit-learn`.
-3. **Explains Reasons (Explainable AI / XAI):** Computes individualized feature attribution percentages so mentors know *why* a student was flagged (e.g., Attendance Deficit 41%, Academic Backlogs 24%, Fee Overdue 18%).
+2. **Predicts Dropout Risk:** Employs trained classification models (Random Forest and Logistic Regression) built with `scikit-learn` achieving **93.3% accuracy** and **0.965 AUC-ROC**.
+3. **Explains Reasons (Explainable AI / XAI):** Computes individualized feature attribution cards so mentors know *why* a student was flagged (e.g., Attendance Deficit, Internal Assessment Deficit, Fee Arrears).
 4. **Tracks Interventions Across Lifecycle:** Manages at-risk students through a 5-stage retention workflow:
-   $$\text{Low Risk} \longrightarrow \text{At Risk} \longrightarrow \text{Under Review} \longrightarrow \text{Counselling} \longrightarrow \text{Intervened} \longrightarrow \text{Closed}$$
-5. **Ensures Accountability:** Provides an executive Authority Dashboard with automated escalations, system audit logs, in-portal notifications, and CSV report export.
+   $$\text{New} \longrightarrow \text{Under Review} \longrightarrow \text{In Progress} \longrightarrow \text{Resolved} \Big/ \text{Escalated}$$
+5. **Queue Workload Protection:** Visual capacity meters monitor caseload per mentor to prevent counselor burnout.
+6. **Peer Data Privacy:** Strict session-level data isolation prevents student peer inspection.
 
 ---
 
@@ -29,15 +77,15 @@ flowchart TD
     end
 
     subgraph Application ["Application Layer (Python Flask)"]
-        AUTH["1. User Mgmt & Role-Based Auth"]
+        AUTH["1. User Mgmt & 4-Tier RBAC Auth"]
         DATA["2. Student Data & CSV Bulk Ingestion"]
-        ML["3. AI/ML Prediction & Reason Analysis Engine"]
-        COUNSEL["4. Counselling & Intervention Workflow"]
-        ADMIN["5. Admin Oversight, Escalations & Audit Logs"]
+        ML["3. AI/ML Prediction & XAI Reason Attribution Engine"]
+        COUNSEL["4. 5-Stage Counselling Lifecycle Hub"]
+        ADMIN["5. Admin Policy, Retraining & Audit Logs"]
     end
 
     subgraph Database ["Database Layer"]
-        DB[("SQLite (Prototype) / Ready for PostgreSQL & MySQL")]
+        DB[("SQLite 3 Relational Store (ACID Compliant)")]
     end
 
     UI <--> Application
@@ -47,126 +95,15 @@ flowchart TD
 ---
 
 ## 3. Technology Stack
-* **Backend Framework:** Python (Flask), REST APIs, Session-based Authentication
-* **Database:** SQLite (`data/dropout_system.db`) via `Flask-SQLAlchemy` (compatible with PostgreSQL/MySQL)
-* **Machine Learning & Data Processing:** `scikit-learn` 1.9+, `pandas` 3.0+, `numpy` 2.5+, `joblib`
-* **Explainability (XAI):** Gini Impurity Feature Importance + Individual Deficit Normalization
-* **Frontend:** HTML5, CSS3, JavaScript, Bootstrap 5, FontAwesome 6, Chart.js
+* **Backend Framework:** Python (Flask 3.1), WSGI Gunicorn, REST APIs, PBKDF2 Session Authentication
+* **Machine Learning:** scikit-learn 1.9+, pandas, numpy, joblib (Random Forest & Logistic Regression)
+* **Database & ORM:** SQLite 3, SQLAlchemy 2.1
+* **Frontend UI/UX:** Bootstrap 5.3, FontAwesome 6, Chart.js 4.4
+* **Documentation & Reports:** ReportLab 5.1 (Exact 77-page academic B.Tech report PDF)
 
 ---
 
-## 4. Empirical Model Performance & Benchmarks
-
-| Metric | Random Forest (Primary) | Logistic Regression (Baseline) | Observed Advantage |
-| :--- | :---: | :---: | :---: |
-| **Accuracy** | **91.73%** | 90.67% | +1.06% |
-| **Precision** | **91.30%** | 89.86% | +1.44% |
-| **Recall (Sensitivity)**| **86.90%** | 85.52% | +1.38% |
-| **F1-Score** | **89.05%** | 87.63% | +1.42% |
-| **ROC - AUC** | **97.14%** | 96.52% | +0.62% |
-
-### Global Feature Importance Hierarchy:
-1. **Attendance Percentage:** **40.98%** (Primary early-warning signal)
-2. **Internal Marks Average:** **23.54%** (Academic capability factor)
-3. **Backlog Count:** **14.61%** (Compounding academic distress)
-4. **LMS Engagement Score:** **11.06%** (Behavioral disengagement)
-5. **Fee Status (Due / Partial):** **7.71%** (Financial delinquency risk)
-6. **Semester:** **2.10%** (Progression index)
-
----
-
-## 5. Quick Start Instructions
-
-### Step 1: Open the Project Directory
-```powershell
-cd C:\Users\ASUS\.gemini\antigravity\scratch\student_dropout_prediction
-```
-
-### Step 2: Activate the Virtual Environment
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-### Step 3: Run the Automated Test Suite
-Verify that all unit tests and workflows pass:
-```powershell
-python test_app.py
-```
-
-### Step 4: Launch the Web Portal
-```powershell
-python app.py
-```
-Open your web browser and navigate to:
-**`http://127.0.0.1:5000`**
-
----
-
-## 6. Pre-Seeded Evaluation Accounts
-
-The system includes pre-configured accounts representing all 4 user roles required by the project specifications:
-
-| Role | Username | Password | User Name & Designation |
-| :--- | :--- | :--- | :--- |
-| **Executive Admin** | `admin` | `password123` | Dr. A. K. Sharma (Dean / Administrator) |
-| **Department Head** | `satyam` | `password123` | **Mr. Satyam Dwivedi** (Faculty Guide / CSE HOD) |
-| **Faculty Mentor** | `priya` | `password123` | Dr. Priya Verma (Faculty Counsellor) |
-| **Faculty Mentor** | `rajesh` | `password123` | Prof. Rajesh Kumar (Mechanical Engineering) |
-| **Student** | `ramesh` | `password123` | **D. Ramesh** (`2302320099`) |
-
-*(One-click demo buttons are provided on the login page for effortless switching between roles during demonstrations).*
-
----
-
-## 7. Guided Feature Walkthrough for Evaluators
-
-### A. Executive Dashboard & Visualizations
-* Sign in as `satyam` or `admin`.
-* View the 4 real-time KPI metric cards (Total Monitored, At-Risk Flagged, Active Counselling, Intervened/Closed).
-* Observe the 3 dynamic Chart.js visualizations:
-  * **Risk Classification:** Low Risk vs. At Risk distribution.
-  * **Department At-Risk Burden:** Comparative chart across departments.
-  * **Attendance Shortage Impact:** Risk probability grouped by attendance brackets.
-
-### B. Multi-Parameter Search & Bulk CSV Upload
-* Click **Students** in the navigation bar.
-* Filter students by **Department** (e.g. *Computer Science*), **Risk Level** (*At Risk*), **Semester**, or **Lifecycle Status**.
-* Test Bulk Ingestion:
-  1. Click **Bulk CSV Upload**.
-  2. Select the provided `sample_students.csv` file from the project root.
-  3. Click **Upload & Run AI Prediction**.
-  4. The system will ingest the records, execute the AI model, compute reason factors, and update the directory in real time.
-
-### C. Explainable AI (XAI) & Reason Analysis
-* Click on any flagged student (e.g., *Aakash Verma* or *D. Ramesh*).
-* Inspect the **AI Dropout Risk Evaluation Gauge** (Probability score).
-* Review the **Reason Analysis (XAI)** card:
-  * View individualized percentage contributions (e.g., Attendance Deficit 31.9%, Academic Backlogs 21.3%, Fee Overdue 17.3%).
-  * Click **Update Metrics & Recalculate** to test what-if scenarios (e.g. improve attendance from 42% to 80% and watch the risk score drop).
-
-### D. Structured Counselling Workflow
-* Navigate to **Counselling Hub** to view the Kanban-style lifecycle stages (`At Risk` $\rightarrow$ `Under Review` $\rightarrow$ `Counselling` $\rightarrow$ `Intervened` $\rightarrow$ `Closed`).
-* Open a student profile, click **Log Counselling Session**:
-  * Update the lifecycle stage.
-  * Document mentor observations and root causes.
-  * Record actionable interventions (remedial tutorials, fee installment plan, parent-teacher meeting).
-  * Set a next follow-up date.
-
-### E. Automated Escalations & Security Audit Trail
-* On the Dashboard, click **Run Escalation Scan** to identify stagnant high-risk cases without active mentor intervention and auto-escalate them to `Under Review`.
-* Navigate to **Audit Logs** to view immutable chronological logs of all logins, CSV uploads, prediction executions, and status transitions with timestamps and IP addresses.
-
-### F. Administrative Stage Limits & Risk-Level Ordering
-* Navigate to **Counselling Hub**:
-  * **Risk-Level Order:** The lifecycle stages are prioritized by urgency:
-    $$\text{At Risk (Critical Top)} \longrightarrow \text{Under Review (High)} \longrightarrow \text{Counselling (Active)} \longrightarrow \text{Intervened (Stabilizing)} \longrightarrow \text{Closed (Resolved)} \longrightarrow \text{Low Risk (Manageable Last)}$$
-  * **Student Queue Sorting:** Inside every stage, students are sorted strictly by **Risk Score Descending** ($100\% \rightarrow 0\%$), with badges for *Critical High Risk* ($\ge 70\%$), *Moderate Risk* ($50\% - 69\%$), and *Manageable* ($< 50\%$).
-  * **Queue Capacity Meters:** Each stage displays its capacity (e.g. `4 / 8 cases (50% capacity)`). If a stage exceeds its limit, an **Overflow Warning** triggers on the UI.
-* Navigate to **Admin Settings** (available to `admin` and `satyam`):
-  * Adjust capacity limits for each stage.
-  * Adjust Critical Risk and Moderate Risk threshold percentages.
-
-### G. Model Retraining Governance ("Should I train if I give a new list?")
-* **Uploading Active Student Rosters:** **NO RETRAINING NEEDED.** Simply upload your CSV on the *Students* page. The pre-trained model immediately predicts dropout risk scores and pinpoints contributing reasons.
-* **Uploading Completed Semester Historical Outcomes:** **YES, RETRAIN.** When ground truth outcomes (`dropped_out = 1/0`) are finalized for a batch, use the **Admin Settings &bull; Trigger AI Model Retraining** panel to retrain both Random Forest and Logistic Regression models with one click.
-
+## 4. Documentation & Handover Artifacts
+* 📄 **[PROJECT_REPORT.pdf](PROJECT_REPORT.pdf)**: Official 77-page Sanskriti University final B.Tech capstone project report.
+* 📘 **[ADMIN_OPERATIONS_MANUAL.md](ADMIN_OPERATIONS_MANUAL.md)**: Comprehensive operations and handover guide for administrators and seniors.
+* 🌐 **[PROJECT_REPORT.html](PROJECT_REPORT.html)**: Interactive, printable academic web report.
