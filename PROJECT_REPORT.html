@@ -1964,122 +1964,36 @@ TC-PRIV-04   Unauthorized Hub     Student ramesh attempts  Access denied flash; 
 </code></pre>
 <h2 id="610-screenshots-of-the-application">6.10 Screenshots of the Application</h2>
 <p>The figures below document the visual interfaces of the deployed system running locally.</p>
-<pre><code>+---------------------------------------------------------------------------------------------------+
-|  [Sanskriti University Logo]         SANSKRITI UNIVERSITY                                         |
-|                                                                                                   |
-|                                       PORTAL LOGIN                                                |
-|                             Enter institutional credentials to continue                           |
-|                                                                                                   |
-|                       Username: [ admin                   ]                                       |
-|                       Password: [ **********              ]                                       |
-|                                                                                                   |
-|                                 [ Sign In to Portal ]                                             |
-|                                                                                                   |
-|       +-----------------------------------------------------------------------------------+       |
-|       | QUICK DEMO ACCESS:                                                                |       |
-|       | * Admin: Dr. A.K. Sharma [Full Control]        * HOD: Mr. Satyam Dwivedi [Dept]   |       |
-|       | * Mentor: Dr. Priya Verma [Counsellor]        * Student: D. Ramesh [Student]      |       |
-|       +-----------------------------------------------------------------------------------+       |
-+---------------------------------------------------------------------------------------------------+
-Figure 6.1 Role-based login screen with quick demo access triggers
-</code></pre>
-<pre><code>+---------------------------------------------------------------------------------------------------+
-| Sanskriti University | Dashboard  Students  Counselling Hub  AI Engine  Admin Settings | (A) Admin|
-+---------------------------------------------------------------------------------------------------+
-| EXECUTIVE ANALYTICS DASHBOARD                                                                     |
-| Academic Session 2026-2027 • School of Engineering and Information Technology (SOEIT)             |
-|                                                                                                   |
-| +-------------------+  +-------------------+  +-------------------+  +-------------------+        |
-| | TOTAL MONITORED   |  | AT RISK (CRITICAL)|  | ACTIVE COUNSELLING|  | RESOLVED / CLOSED |        |
-| |       115         |  |        47         |  |        14         |  |        18         |        |
-| | Active Cohort     |  | High Priority     |  | In Progress       |  | Normalized        |        |
-| +-------------------+  +-------------------+  +-------------------+  +-------------------+        |
-|                                                                                                   |
-| [!] High-Risk Attention Alert: 8 student(s) have predicted risk &gt;= 70% without assigned mentors!  |
-|                                                                                                   |
-| [Chart 1: Risk Distribution]    [Chart 2: Department Burden]    [Chart 3: Attendance vs Risk]     |
-|     (Doughnut Chart)                  (Bar Chart)                   (Stacked Distribution)        |
-|  * Low Risk: 68 (59.1%)           * Computer Science: 18         * &lt; 50% Att: 100% At Risk        |
-|  * At Risk:  47 (40.9%)           * Mechanical: 14               * 50-65% Att: 78% At Risk        |
-|                                   * Civil Eng: 9                 * 65-75% Att: 42% At Risk        |
-+---------------------------------------------------------------------------------------------------+
-Figure 6.2 Executive analytics dashboard &amp; KPI metric cards
-</code></pre>
-<pre><code>+---------------------------------------------------------------------------------------------------+
-| PRIORITY FLAGGED STUDENTS (TOP AT-RISK QUEUE)                                          [View All] |
-+---------------------------------------------------------------------------------------------------+
-| Student Name &amp; Enr   Department      Attendance  Backlogs  Risk Score &amp; Tier  Lifecycle   Action  |
-+---------------------------------------------------------------------------------------------------+
-| D. Ramesh (2302320099) CSE • Sem 4     62.4% (Warn) 2 Active [==== 78.4% ====] [Under Review] [View] |
-| Pari Naidu (2301000003) Chem • Sem 3   59.7% (Crit) 3 Active [===== 86.2% ===] [At Risk]      [View] |
-| Atharv Dutta(23010022) Chem • Sem 3    54.2% (Crit) 4 Active [====== 92.1% ==] [At Risk]      [View] |
-| Priya Verma (23010018) Mech • Sem 2    61.0% (Warn) 2 Active [==== 74.0% ====] [Counselling]  [View] |
-+---------------------------------------------------------------------------------------------------+
-Figure 6.3 High-priority flagged students table with risk tier badges and min-width column styling
-</code></pre>
-<pre><code>+---------------------------------------------------------------------------------------------------+
-| STUDENT ACADEMIC PROFILE &amp; AI DIAGNOSTIC REPORT                                                   |
-| D. Ramesh • Enrollment No: 2302320099 • Computer Science &amp; Engineering (Sem 4)                    |
-+-------------------------------------------------+-------------------------------------------------+
-| PREDICTED DROPOUT RISK: 78.4% [CRITICAL HIGH]   | ACADEMIC &amp; INSTITUTIONAL METRICS                |
-| [========================                      ]| * Attendance: 62.4% (Below 75% Rule)            |
-| Primary Recommendation: Immediate 1-on-1 mentor | * Internal Exam Average: 52.0%                  |
-| counseling &amp; remedial attendance recovery.      | * Active Backlogs: 2 uncleared courses          |
-|                                                 | * Fee Payment Status: Partial (Installment due) |
-| ROOT-CAUSE EXPLAINABLE AI (XAI) ATTRIBUTION:    | * LMS Engagement Score: 44.0 / 100              |
-| 1. Attendance Shortage (41.2% Impact)           |-------------------------------------------------|
-|    Attendance is 62.4% (12.6% below rule).      | MENTORSHIP &amp; ACTION TRAIL                       |
-| 2. Uncleared Academic Backlogs (28.4% Impact)   | Assigned Mentor: Mr. Satyam Dwivedi             |
-|    Student carries 2 active failed courses.     | Current Status: Under Review                    |
-| 3. Outstanding Fee Default (18.1% Impact)       | Next Follow-up: 15-11-2026                      |
-|    Partial fee status creates drop probability. | Action Plan: Remedial classes for Mathematics-II|
-| 4. Low Portal Activity (12.3% Impact)           | and student accounts installment clearance.     |
-+-------------------------------------------------+-------------------------------------------------+
-Figure 6.4 Student academic profile and Explainable AI (XAI) reason attribution card
-</code></pre>
-<pre><code>+---------------------------------------------------------------------------------------------------+
-| COUNSELLING LIFECYCLE HUB &amp; MENTOR WORKLOAD GOVERNANCE                                            |
-| Stages arranged in strict risk-level priority (High Risk at Top, Manageable at Bottom)            |
-+---------------------------------------------------------------------------------------------------+
-| 1. CRITICAL AT-RISK QUEUE [Limit: 10 | Current: 8 assigned]                [ 80% Capacity Meter ] |
-|    Urgent mentor assignment required. Students with risk &gt;= 70%.                                  |
-|    * Atharv Dutta (92.1%)   * Pari Naidu (86.2%)   * Shaurya Sen (79.0%)                          |
-|---------------------------------------------------------------------------------------------------|
-| 2. UNDER DIAGNOSTIC REVIEW [Limit: 20 | Current: 12 assigned]              [ 60% Capacity Meter ] |
-|    Preliminary investigation and parent contact in progress.                                      |
-|    * D. Ramesh (78.4%)      * Priya Verma (74.0%)                                                 |
-|---------------------------------------------------------------------------------------------------|
-| 3. ACTIVE COUNSELLING [Limit: 14 | Current: 11 assigned]                   [ 78% Capacity Meter ] |
-|    Formal 1-on-1 counseling underway with designated faculty mentor.                              |
-|---------------------------------------------------------------------------------------------------|
-| 4. INTERVENED [Limit: 20 | Current: 15 assigned]                           [ 75% Capacity Meter ] |
-|    Student attending remedial classes and following structured fee payment plans.                 |
-|---------------------------------------------------------------------------------------------------|
-| 5. CLOSED &amp; RESOLVED [Archive Limit: 150 | Current: 18 resolved]           [ Safe Standing ]      |
-|    Student cleared backlogs, attendance normalized above 75%, and dues cleared.                   |
-|---------------------------------------------------------------------------------------------------|
-| 6. LOW RISK BASELINE [Display Limit: 200 | Current: 68 students]           [ Normal Standing ]    |
-+---------------------------------------------------------------------------------------------------+
-Figure 6.5 Counselling Lifecycle Hub with risk-ordered queues and capacity meters
-</code></pre>
-<pre><code>+---------------------------------------------------------------------------------------------------+
-| ADMIN SETTINGS &amp; POLICY CONTROLS                                                                  |
-+-------------------------------------------------+-------------------------------------------------+
-| RISK FACTOR TRIGGER THRESHOLDS                  | STAGE CAPACITY LIMITS (QUEUE WORKLOAD METERS)   |
-| * Attendance Warning Limit:  [ 75.0 ] %         | * At Risk Queue Max Limit:      [ 10 ] students |
-| * Attendance Critical Limit: [ 60.0 ] %         | * Under Review Max Limit:       [ 20 ] students |
-| * Backlog Warning Limit:     [  1   ] backlog   | * Active Counselling Max Limit: [ 14 ] students |
-| * Backlog Critical Limit:    [  3   ] backlogs  | * Remedial Intervened Max Limit:[ 20 ] students |
-| * Internal Marks Warning:    [ 55.0 ] %         |-------------------------------------------------|
-| * Internal Marks Critical:   [ 40.0 ] %         | AI MODEL RETRAINING ENGINE                      |
-| * Auto-Routing Target Stage: [ At Risk      v ] | Current Accuracy: 90.4% | ROC-AUC: 0.942        |
-| * Fee Due Severity Tier:     [ Danger (Crit)v ] | [ Retrain Model Now (Recalibrate Benchmarks) ]  |
-|                                                 | Or upload labeled ground-truth CSV:             |
-| [ Save Policy Limits ]  [ Reset to Nominal ]    | [ Choose File: dataset.csv ] [ Upload &amp; Retrain]|
-| [ Re-Apply Rules to All 115 Students Now ]      |                                                 |
-+-------------------------------------------------+-------------------------------------------------+
-Figure 6.8 Admin Settings: risk factor limits, queue meters, and on-demand retraining panel
-</code></pre>
+<div align="center" style="margin: 20px 0;">
+  <img src="static/images/screenshots/fig6_1_login.png" alt="Unified Portal Authentication" style="max-width:320px; border:1px solid #CBD5E0; border-radius:6px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:block; margin:0 auto 8px auto;">
+  <em>Figure 6.1 Role-based login screen with quick demo access triggers</em>
+</div>
+
+<div align="center" style="margin: 20px 0;">
+  <img src="static/images/screenshots/fig6_2_dashboard.jpg" alt="Executive Analytics Dashboard" style="max-width:100%; border:1px solid #CBD5E0; border-radius:6px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:block; margin:0 auto 8px auto;">
+  <em>Figure 6.2 Executive analytics dashboard & KPI metric cards</em>
+</div>
+
+<div align="center" style="margin: 20px 0;">
+  <img src="static/images/screenshots/fig6_2b_flagged_mentor.jpg" alt="Priority Flagged Students" style="max-width:100%; border:1px solid #CBD5E0; border-radius:6px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:block; margin:0 auto 8px auto;">
+  <em>Figure 6.3 High-priority flagged students table with risk tier badges and mentor feed</em>
+</div>
+
+<div align="center" style="margin: 20px 0;">
+  <img src="static/images/screenshots/fig6_3_student_directory.jpg" alt="Student Directory" style="max-width:100%; border:1px solid #CBD5E0; border-radius:6px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:block; margin:0 auto 8px auto;">
+  <em>Figure 6.4 Student monitoring directory and cohort risk registry</em>
+</div>
+
+<div align="center" style="margin: 20px 0;">
+  <img src="static/images/screenshots/fig6_5_counselling_hub.jpg" alt="Counselling Hub" style="max-width:100%; border:1px solid #CBD5E0; border-radius:6px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:block; margin:0 auto 8px auto;">
+  <em>Figure 6.5 Counselling Lifecycle Hub with risk-ordered queues and capacity meters</em>
+</div>
+
+<div align="center" style="margin: 20px 0;">
+  <img src="static/images/screenshots/fig6_6_admin_governance.jpg" alt="Admin Settings" style="max-width:100%; border:1px solid #CBD5E0; border-radius:6px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:block; margin:0 auto 8px auto;">
+  <em>Figure 6.6 Admin Settings: risk factor limits, queue meters, and on-demand retraining panel</em>
+</div>
+
 <h2 id="611-empirical-ml-performance-and-results">6.11 Empirical ML Performance and Results</h2>
 <p>The machine learning models were evaluated using stratified 80/20 train-test splitting across 1,000 curated student records reflecting historical institutional distributions. The primary <strong>Random Forest Classifier</strong> was benchmarked against the baseline <strong>Logistic Regression</strong> model across five standard classification metrics:</p>
 <p>$$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}$$</p>

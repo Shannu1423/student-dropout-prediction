@@ -2,9 +2,13 @@
 Pages 47 to 77: Chapter 6 (Testing & Results), Chapter 7 (Project Management),
 Chapter 8 (Learning Outcomes), Chapter 9 (Limitations & Future Scope),
 Chapter 10 (Conclusion), References, and Appendix (A.1 to A.8).
+Includes actual high-resolution application screenshots and professional layout.
 """
-from reportlab.platypus import Paragraph, Spacer, Table, TableStyle, Preformatted
+import os
+from reportlab.platypus import Paragraph, Spacer, Table, TableStyle, Preformatted, Image
 from reportlab.lib import colors
+
+SCREENSHOTS_DIR = r"C:\Users\ASUS\.gemini\antigravity\scratch\student_dropout_prediction\static\images\screenshots"
 
 def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box):
     h1_chap = styles['ChapterH1']
@@ -20,6 +24,24 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
         pages.append([])
         return pages[-1]
 
+    # Helper image wrapper with border
+    def make_screenshot_frame(img_path, width, height):
+        if not os.path.exists(img_path):
+            return Paragraph(f"<i>[Screenshot image not found: {os.path.basename(img_path)}]</i>", caption_style)
+        img = Image(img_path, width=width, height=height)
+        t = Table([[img]], colWidths=[usable_width])
+        t.setStyle(TableStyle([
+            ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+            ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+            ('BOX', (0,0), (-1,-1), 0.75, colors.HexColor('#CBD5E0')),
+            ('BACKGROUND', (0,0), (-1,-1), colors.HexColor('#FFFFFF')),
+            ('TOPPADDING', (0,0), (-1,-1), 2),
+            ('BOTTOMPADDING', (0,0), (-1,-1), 2),
+            ('LEFTPADDING', (0,0), (-1,-1), 2),
+            ('RIGHTPADDING', (0,0), (-1,-1), 2),
+        ]))
+        return t
+
     # =========================================================================
     # PAGE 47: CHAPTER 6 (Numbered Page 36)
     # =========================================================================
@@ -33,7 +55,7 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
         body_indent
     ))
     p.append(Paragraph(
-        "Testing for this project was executed using Python’s native `unittest` framework via an automated test script (`test_app.py`) incorporating 8 comprehensive test fixtures. The suite exercises database fixtures, mocks HTTP client requests, verifies session authorization rules, validates CSV ingestion routines, and tests machine learning inference pipelines.",
+        "Testing for this project was executed using Python’s native <code>unittest</code> framework via an automated test script (<code>test_app.py</code>) incorporating 8 comprehensive test fixtures. The suite exercises database fixtures, mocks HTTP client requests, verifies session authorization rules, validates CSV ingestion routines, and tests machine learning inference pipelines.",
         body_indent
     ))
     p.append(Spacer(1, 4))
@@ -43,15 +65,14 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
         body_indent
     ))
     p.append(Paragraph(
-        "Test automation executed in an isolated temporary database environment (`sqlite:///:memory:` or temporary disk instance), ensuring tests run reproducibly without altering live institutional student records.",
+        "Test automation executed in an isolated temporary database environment (<code>sqlite:///:memory:</code> or temporary disk instance), ensuring tests run reproducibly without altering live institutional student records.",
         body_indent
     ))
 
     # =========================================================================
     # PAGE 48: CHAPTER 6 cont. (Numbered Page 37)
     # =========================================================================
-    new_page()
-    p = pages[-1]
+    p = new_page()
     p.append(Paragraph("6.3 Unit Testing", h2_sec))
     p.append(Paragraph(
         "Unit tests isolate individual functions and algorithmic modules, verifying that inputs map to expected outputs under normal, boundary, and invalid conditions.",
@@ -190,184 +211,105 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
 
     # =========================================================================
     # PAGE 53: CHAPTER 6 cont. (Numbered Page 42)
+    # SCREENSHOT 1: LOGIN PAGE
     # =========================================================================
     new_page()
     p = pages[-1]
     p.append(Paragraph("6.10 Application Screenshots", h2_sec))
-    p.append(Paragraph("6.10.1 Login Interface", h3_subsec))
+    p.append(Paragraph("6.10.1 Unified Portal Authentication Interface", h3_subsec))
     p.append(Paragraph(
-        "Figure 6.1 displays the unified authentication screen with university branding, credential fields, and demo credential shortcuts for all four roles.",
+        "Figure 6.1 presents the unified authentication portal for Sanskriti University. The interface features responsive Bootstrap 5 styling, cryptographically salted PBKDF2 authentication, and immediate role-based dispatching across Executive Authorities, Department Heads, Faculty Mentors, and Students.",
         body_indent
     ))
-    login_ascii = """
-+-----------------------------------------------------------------------------+
-|               SANSKRITI UNIVERSITY - STUDENT RETENTION SYSTEM               |
-|                                                                             |
-|                           [ Institutional Login ]                           |
-|                                                                             |
-|                 Username:    [ admin                              ]         |
-|                 Password:    [ ******************                 ]         |
-|                                                                             |
-|                                [ Sign In ]                                  |
-|                                                                             |
-|   Quick Demo Credentials:                                                   |
-|   * Admin:   admin   / password123      * Guide:  satyam / password123      |
-|   * Mentor:  priya   / password123      * Student: ramesh / password123     |
-+-----------------------------------------------------------------------------+
-"""
-    p.append(make_diagram_box(login_ascii))
-    p.append(Paragraph("Figure 6.1 Application Interface – Unified user authentication and role routing", caption_style))
+    p.append(Spacer(1, 6))
+    login_img = os.path.join(SCREENSHOTS_DIR, "fig6_1_login.png")
+    p.append(make_screenshot_frame(login_img, width=195, height=288))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("Figure 6.1 Application Interface – Unified portal authentication and role routing", caption_style))
 
     # =========================================================================
     # PAGE 54: CHAPTER 6 cont. (Numbered Page 43)
+    # SCREENSHOT 2: EXECUTIVE OVERVIEW DASHBOARD
     # =========================================================================
     new_page()
     p = pages[-1]
-    p.append(Paragraph("6.10.2 Role Dashboard", h2_sec))
+    p.append(Paragraph("6.10.2 Role Dashboard (Authority & HOD Executive Overview)", h2_sec))
     p.append(Paragraph(
-        "Figure 6.2 displays the executive dashboard for Administrators and HODs, featuring statistical KPI metric cards, cohort risk distribution charts, and quick-action toolbars.",
+        "Figure 6.2 illustrates the executive monitoring dashboard for Administrators and Department Heads. Key performance indicators display total cohort tracking (115 monitored students), active at-risk flags (47 students, 40.9% burden), and active counselling sessions (39 cases). Canvas charts power the Donut Risk Classification and comparative Department At-Risk Burden visualizers.",
         body_indent
     ))
-    dash_ascii = """
-+-----------------------------------------------------------------------------+
-| [ Sanskriti Univ ]  Students  Counselling  Upload CSV  Admin   [Logout: satyam]
-+-----------------------------------------------------------------------------+
-|  EXECUTIVE OVERVIEW - SCHOOL OF ENGINEERING & TECHNOLOGY (SOEIT)            |
-|                                                                             |
-|  +----------------+  +----------------+  +----------------+  +------------+ |
-|  | TOTAL COHORT   |  | AT RISK (HIGH) |  | ACTIVE COUNSEL |  | RETENTION  | |
-|  |     115        |  |   47 (40.8%)   |  |       34       |  |   93.3%    | |
-|  +----------------+  +----------------+  +----------------+  +------------+ |
-|                                                                             |
-|  +-------------------------------------+  +--------------------------------+ |
-|  | Cohort Risk Distribution (Chart.js) |  | Stage Queue Saturation Meters  | |
-|  | High Risk: [==========] 47          |  | New:         [80%] 12 / 15     | |
-|  | Moderate:  [======]     22          |  | In Progress: [66%] 10 / 15     | |
-|  | Low Risk:  [==============] 46      |  | Resolved:    [--] 28 Closed    | |
-|  +-------------------------------------+  +--------------------------------+ |
-+-----------------------------------------------------------------------------+
-"""
-    p.append(make_diagram_box(dash_ascii))
+    p.append(Spacer(1, 6))
+    dash_img = os.path.join(SCREENSHOTS_DIR, "fig6_2_dashboard.jpg")
+    p.append(make_screenshot_frame(dash_img, width=420, height=222))
+    p.append(Spacer(1, 4))
     p.append(Paragraph("Figure 6.2 Application Interface – Administrative / HOD executive overview dashboard", caption_style))
 
     # =========================================================================
     # PAGE 55: CHAPTER 6 cont. (Numbered Page 44)
+    # SCREENSHOT 3: HIGH PRIORITY FLAGGED STUDENTS & MENTOR ACTIONS
     # =========================================================================
     new_page()
     p = pages[-1]
-    p.append(Paragraph("6.10.3 Student Risk Registry", h2_sec))
+    p.append(Paragraph("6.10.3 High Priority Flagged Students & Mentor Actions Feed", h2_sec))
     p.append(Paragraph(
-        "Figure 6.3 shows the cohort risk registry with real-time search, department filtering, color-coded severity badges, and direct navigation to individual student deep-dives.",
+        "Figure 6.2b illustrates the critical student triage registry and live mentor action history. Students with severe compound risks (e.g., 100.0% Critical Risk with attendance under 40% and multiple active backlogs) are elevated to the top of the queue for urgent mentor allocation and parental conferences.",
         body_indent
     ))
-    reg_ascii = """
-+-----------------------------------------------------------------------------+
-| STUDENT COHORT RISK REGISTRY                                                |
-| Filter: [ Department: CSE v ] [ Semester: All v ] Search: [ Ramesh        ] |
-+-----------------------------------------------------------------------------+
-| Enrollment   Name             Dept  Sem  Attendance  CGPA  Risk Status  Actions |
-+-----------------------------------------------------------------------------+
-| 2302320099   DESIREDDY RAMESH CSE   4     62.4%      5.8   [78.4% HIGH] [View]  |
-| 2302320151   Shaik Shafi      CSE   4     89.2%      8.4   [14.2% LOW]  [View]  |
-| 2302320012   Aarav Sharma     CSE   4     48.0%      4.2   [91.0% HIGH] [View]  |
-| 2302320045   Neha Verma       CSE   4     78.5%      7.1   [32.0% LOW]  [View]  |
-| 2302320088   Vikram Singh     CSE   4     54.0%      5.1   [82.5% HIGH] [View]  |
-+-----------------------------------------------------------------------------+
-"""
-    p.append(make_diagram_box(reg_ascii))
-    p.append(Paragraph("Figure 6.3 Application Interface – Cohort risk registry with color-coded severity badges", caption_style))
+    p.append(Spacer(1, 6))
+    flagged_img = os.path.join(SCREENSHOTS_DIR, "fig6_2b_flagged_mentor.jpg")
+    p.append(make_screenshot_frame(flagged_img, width=420, height=228))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("Figure 6.2b Application Interface – High priority flagged students and recent mentor activity feed", caption_style))
 
     # =========================================================================
     # PAGE 56: CHAPTER 6 cont. (Numbered Page 45)
+    # SCREENSHOT 4: STUDENT MONITORING DIRECTORY
     # =========================================================================
     new_page()
     p = pages[-1]
-    p.append(Paragraph("6.10.4 Student Deep-Dive & XAI Diagnostic Cards", h2_sec))
+    p.append(Paragraph("6.10.4 Student Monitoring Directory & Cohort Risk Registry", h2_sec))
     p.append(Paragraph(
-        "Figure 6.4 illustrates the diagnostic profile of a high-risk student, featuring longitudinal academic trends, probability gauges, and localized Explainable AI reason cards.",
+        "Figure 6.3 showcases the comprehensive Student Monitoring Directory (115 matching records). Counselors can filter by department, semester, risk level, and lifecycle stage, or query specific students by enrollment number. Each row features color-coded badges, attendance metrics, fee status, and direct links to diagnostic reason cards.",
         body_indent
     ))
-    deep_ascii = """
-+-----------------------------------------------------------------------------+
-| STUDENT ANALYTICS PROFILE: DESIREDDY RAMESH (Enrollment: 2302320099)        |
-| Department: Computer Science & Engineering | Semester: 4 | Status: At Risk  |
-+-----------------------------------------------------------------------------+
-| PREDICTED DROPOUT RISK: [ 78.4% - HIGH RISK ] (Random Forest Ensemble)      |
-+-----------------------------------------------------------------------------+
-| EXPLAINABLE AI (XAI) IDENTIFIED ROOT CAUSES & REMEDIAL GUIDANCE:            |
-|                                                                             |
-| [!] REASON 1: CRITICAL ATTENDANCE EROSION (Recorded: 62.4% | Threshold: 75%)|
-|     Recommendation: Schedule mandatory attendance review with mentor;       |
-|     issue formal SMS notification to parent/guardian.                       |
-|                                                                             |
-| [!] REASON 2: INTERNAL ASSESSMENT DEFICIT (Recorded: 38.0% | Threshold: 40%)|
-|     Recommendation: Assign subject mentor for remedial coaching in Core OS. |
-|                                                                             |
-| [!] REASON 3: TUITION ARREARS (Status: Outstanding Fees for 2 Semesters)    |
-|     Recommendation: Route student to Student Welfare & Financial Aid desk.  |
-+-----------------------------------------------------------------------------+
-"""
-    p.append(make_diagram_box(deep_ascii))
-    p.append(Paragraph("Figure 6.4 Application Interface – Student deep-dive profile with XAI deficit reason cards", caption_style))
+    p.append(Spacer(1, 6))
+    dir_img = os.path.join(SCREENSHOTS_DIR, "fig6_3_student_directory.jpg")
+    p.append(make_screenshot_frame(dir_img, width=420, height=226))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("Figure 6.3 Application Interface – Student monitoring directory and cohort risk registry", caption_style))
 
     # =========================================================================
     # PAGE 57: CHAPTER 6 cont. (Numbered Page 46)
+    # SCREENSHOT 5: COUNSELLING LIFECYCLE HUB & QUEUE METERS
     # =========================================================================
     new_page()
     p = pages[-1]
-    p.append(Paragraph("6.10.5 Counselling Lifecycle Hub", h2_sec))
+    p.append(Paragraph("6.10.5 Student Retention Lifecycle Hub & Queue Workload Meters", h2_sec))
     p.append(Paragraph(
-        "Figure 6.5 illustrates the 5-stage counseling pipeline, showcasing queue saturation percentage meters, counselor assignment selectors, and session note modals.",
+        "Figure 6.5 details the 5-Stage Counselling Lifecycle Hub: At Risk (8/12 limit), Under Review (36/8 limit with visual 'Overflow' alert), Counselling (3/14 limit), Intervened (1/20), Closed (1/150), and Low Risk (66/200). Progress meters guard faculty counselors against workload burnout and provide clear visual alerts when triage bottlenecks emerge.",
         body_indent
     ))
-    hub_ascii = """
-+-----------------------------------------------------------------------------+
-| COUNSELLING LIFECYCLE MANAGEMENT HUB                                        |
-+-----------------------------------------------------------------------------+
-|  [STAGE 1: NEW]   [STAGE 2: REVIEW]  [STAGE 3: ACTIVE]  [STAGE 4: RESOLVED] |
-|  12 / 15 (80%)    8 / 15 (53%)       10 / 15 (66%)      28 Cases Closed     |
-|  [========  ]     [=====     ]       [======    ]       [=============]     |
-+-----------------------------------------------------------------------------+
-| CASE #104: DESIREDDY RAMESH (2302320099)                                    |
-| Assigned Mentor: Dr. Priya Verma | Current Stage: In Progress (Active)      |
-| Latest Remarks: "Student attended second counselling session on 14/10/2026. |
-| Remedial mathematics tutor assigned; parent agreed to installment plan."    |
-| Action: [ Update Stage v ] [ Record New Session Notes ] [ Escalate to HOD ] |
-+-----------------------------------------------------------------------------+
-"""
-    p.append(make_diagram_box(hub_ascii))
-    p.append(Paragraph("Figure 6.5 Application Interface – 5-stage counselling hub with queue capacity workload meters", caption_style))
+    p.append(Spacer(1, 6))
+    hub_img = os.path.join(SCREENSHOTS_DIR, "fig6_5_counselling_hub.jpg")
+    p.append(make_screenshot_frame(hub_img, width=420, height=225))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("Figure 6.5 Application Interface – 5-stage counselling lifecycle hub with queue capacity workload meters", caption_style))
 
     # =========================================================================
     # PAGE 58: CHAPTER 6 cont. (Numbered Page 47)
+    # SCREENSHOT 6: ADMINISTRATIVE GOVERNANCE & POLICY RULES
     # =========================================================================
     new_page()
     p = pages[-1]
-    p.append(Paragraph("6.10.6 Admin Policy & Model Retraining Interface", h2_sec))
+    p.append(Paragraph("6.10.6 Administrative Governance, Policy Rules & Model Retraining", h2_sec))
     p.append(Paragraph(
-        "Figure 6.6 shows the administrative controls interface for dynamically reconfiguring institutional risk thresholds, queue stage limits, and triggering model retraining.",
+        "Figure 6.6 demonstrates the Administrative Governance panel. Authorized administrators can adjust risk threshold parameters (Attendance Warning: 75%, Critical: 50%; Backlog Limits; Passing Marks: 55%, Critical: 40%), set stage capacity quotas, and execute on-demand machine learning retraining across Random Forest and Logistic Regression models.",
         body_indent
     ))
-    adm_ascii = """
-+-----------------------------------------------------------------------------+
-| ADMINISTRATIVE POLICY GOVERNANCE & MODEL RETRAINING                         |
-+-----------------------------------------------------------------------------+
-| DYNAMIC RISK THRESHOLD CALIBRATION:                                         |
-| High-Risk Probability Cutoff (%):       [ 65.0 ]  (Triggers Case Creation)  |
-| Minimum Attendance Threshold (%):       [ 75.0 ]  (Triggers Attendance Card)|
-| Minimum Internal Marks Cutoff (%):      [ 40.0 ]  (Triggers Academic Card)  |
-|                                [ Save Policies & Re-Score Cohort ]          |
-+-----------------------------------------------------------------------------+
-| STAGE QUEUE CAPACITY LIMITS (Per Mentor):                                   |
-| 'New' Queue Limit: [ 15 ]    'Under Review' Limit: [ 15 ]                   |
-| 'In Progress' Limit: [ 15 ]  'Escalated' Limit:    [ 10 ]                   |
-+-----------------------------------------------------------------------------+
-| ON-DEMAND MACHINE LEARNING RETRAINING:                                      |
-| Active Model: Calibrated Random Forest (100 Estimators) | Accuracy: 93.3%   |
-| [ Retrain Model on Current Data ]  (Last Trained: 22/11/2026 14:10:00 UTC)  |
-+-----------------------------------------------------------------------------+
-"""
-    p.append(make_diagram_box(adm_ascii))
+    p.append(Spacer(1, 6))
+    adm_img = os.path.join(SCREENSHOTS_DIR, "fig6_6_admin_governance.jpg")
+    p.append(make_screenshot_frame(adm_img, width=420, height=228))
+    p.append(Spacer(1, 4))
     p.append(Paragraph("Figure 6.6 Application Interface – Dynamic policy controls, risk thresholds and retraining", caption_style))
 
     # =========================================================================
@@ -507,7 +449,7 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
     p.append(Spacer(1, 4))
     p.append(Paragraph("7.7 Team Coordination and Version Control", h2_sec))
     p.append(Paragraph(
-        "Collaboration was coordinated using Git on GitHub under repository `https://github.com/Shannu1423/student-dropout-prediction.git`. Semantic commits provided an immutable development trail.",
+        "Collaboration was coordinated using Git on GitHub under repository <code>https://github.com/Shannu1423/student-dropout-prediction.git</code>. Semantic commits provided an immutable development trail.",
         body_indent
     ))
 
@@ -555,7 +497,7 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
     p.append(Spacer(1, 4))
     p.append(Paragraph("8.2 Machine Learning & Data Mining Learning", h2_sec))
     p.append(Paragraph(
-        "Through practical experimentation with scikit-learn, the team gained deep insights into feature engineering, tabular data preprocessing, hyperparameter optimization, and ensemble decision theory. Key learnings include understanding the trade-offs between linear interpretability (Logistic Regression) and non-linear predictive power (Random Forest), managing class imbalance through cost-sensitive weighting, and serializing production models via `joblib`.",
+        "Through practical experimentation with scikit-learn, the team gained deep insights into feature engineering, tabular data preprocessing, hyperparameter optimization, and ensemble decision theory. Key learnings include understanding the trade-offs between linear interpretability (Logistic Regression) and non-linear predictive power (Random Forest), managing class imbalance through cost-sensitive weighting, and serializing production models via <code>joblib</code>.",
         body_indent
     ))
     p.append(Spacer(1, 4))
@@ -601,7 +543,7 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
     p = pages[-1]
     p.append(Paragraph("8.8 Industry-Relevant Competencies", h2_sec))
     p.append(Paragraph(
-        "The project cultivated industry-standard competencies in Git version control, GitHub collaboration, agile sprint scheduling, automated integration testing with `unittest`, and technical documentation authoring.",
+        "The project cultivated industry-standard competencies in Git version control, GitHub collaboration, agile sprint scheduling, automated integration testing with <code>unittest</code>, and technical documentation authoring.",
         body_indent
     ))
     p.append(Spacer(1, 4))
@@ -876,28 +818,20 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
 
     # =========================================================================
     # PAGE 76: APPENDIX cont. (Numbered Page 65)
+    # SCREENSHOT 7: SYSTEM AUDIT LOGS & TEST VERIFICATION
     # =========================================================================
     new_page()
     p = pages[-1]
-    p.append(Paragraph("A.5 Test Execution Verification Log", h2_sec))
-    test_log_ascii = """PS C:\\Users\\ASUS\\.gemini\\antigravity\\scratch\\student_dropout_prediction> pytest test_app.py -v
-============================= test session starts ==============================
-platform win32 -- Python 3.14.0, pytest-8.3.4, pluggy-1.5.0
-rootdir: C:\\Users\\ASUS\\.gemini\\antigravity\\scratch\\student_dropout_prediction
-collected 8 items
-
-test_app.py::test_auth_and_dashboard PASSED                               [ 12%]
-test_app.py::test_rbac_and_student_privacy_isolation PASSED               [ 25%]
-test_app.py::test_student_registration_and_detail PASSED                  [ 37%]
-test_app.py::test_ml_engine_inference_and_reasons PASSED                  [ 50%]
-test_app.py::test_bulk_csv_upload PASSED                                  [ 62%]
-test_app.py::test_counselling_workflow_lifecycle PASSED                   [ 75%]
-test_app.py::test_admin_settings_and_retraining PASSED                     [ 87%]
-test_app.py::test_stage_limits_and_risk_order PASSED                       [100%]
-
-============================== 8 passed in 2.14s ===============================
-Status: ALL TEST FIXTURES PASSED - ZERO REGRESSIONS RECORDED"""
-    p.append(make_diagram_box(test_log_ascii))
+    p.append(Paragraph("A.5 System Audit Trail & Forensic Security Logging Subsystem", h2_sec))
+    p.append(Paragraph(
+        "Figure A.1 documents the immutable security audit log interface, recording timestamped authentication events, dataset uploads, model retraining invocations, and user origins.",
+        body_indent
+    ))
+    p.append(Spacer(1, 4))
+    audit_img = os.path.join(SCREENSHOTS_DIR, "fig_audit_logs.jpg")
+    p.append(make_screenshot_frame(audit_img, width=420, height=218))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("Figure A.1 Application Interface – System audit trail and security log history", caption_style))
     p.append(Spacer(1, 4))
     p.append(Paragraph("A.6 Team Details", h2_sec))
     ta2_h = ["Student Candidate Name", "Enrollment No.", "Degree & Department", "Institution & Affiliation"]
@@ -934,7 +868,7 @@ Status: ALL TEST FIXTURES PASSED - ZERO REGRESSIONS RECORDED"""
     p.append(Paragraph("5. Sign in using any of the four verified role credentials:", body))
     p.append(Paragraph("• <b>Admin:</b> `admin` / `password123` &nbsp;&nbsp;|&nbsp;&nbsp; • <b>Guide/HOD:</b> `satyam` / `password123`", body))
     p.append(Paragraph("• <b>Mentor:</b> `priya` / `password123` &nbsp;&nbsp;|&nbsp;&nbsp; • <b>Student:</b> `ramesh` / `password123`", body))
-    p.append(Spacer(1, 8))
+    p.append(Spacer(1, 6))
     p.append(Paragraph("<b>End of Sanskriti University B.Tech Final Project Report (Exact 77 Pages)</b>", caption_style))
 
     print(f"Back chapters complete: Total {len(pages)} pages assembled.")
