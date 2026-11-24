@@ -836,8 +836,10 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
     p.append(Paragraph("A.6 Team Details", h2_sec))
     ta2_h = ["Student Candidate Name", "Enrollment No.", "Degree & Department", "Institution & Affiliation"]
     ta2_r = [
-        ["DESIREDDY RAMESH", "2302320099", "B.Tech – Computer Science & Engineering", "SOEIT, Sanskriti University, Mathura"],
-        ["Shaik Shafi", "2302320151", "B.Tech – Computer Science & Engineering", "SOEIT, Sanskriti University, Mathura"]
+        ["SHAIK SHAFI", "2302320151", "B.Tech – Computer Science & Engineering", "SOEIT, Sanskriti University, Mathura"],
+        ["SHAIK MOHAMMAD ALI", "2302320119", "B.Tech – Computer Science & Engineering", "SOEIT, Sanskriti University, Mathura"],
+        ["SHAIK MAHAMAD YASEEN", "2302320118", "B.Tech – Computer Science & Engineering", "SOEIT, Sanskriti University, Mathura"],
+        ["DESIREDDY RAMESH", "2302320099", "B.Tech – Computer Science & Engineering", "SOEIT, Sanskriti University, Mathura"]
     ]
     p.append(make_table(ta2_h, ta2_r, [usable_width*0.28, usable_width*0.18, usable_width*0.27, usable_width*0.27]))
     p.append(Paragraph("Table A.2 Candidate and supervision academic details", caption_style))

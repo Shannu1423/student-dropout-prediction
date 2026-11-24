@@ -1,5 +1,5 @@
 """
-Generate Markdown and HTML versions of the Complete Codebase and System Architecture Report.
+Generate Markdown and HTML versions of the Complete Codebase and System Architecture Report with exact Sanskriti University structure and 4 candidates.
 """
 import os
 import markdown
@@ -34,48 +34,209 @@ files = [
 ]
 
 md = []
-md.append("# SANSKRITI UNIVERSITY")
-md.append("### School of Engineering & Information Technology (SOEIT) — Department of Computer Science & Engineering\n")
-md.append("# AI-BASED PREDICTION OF REASONS FOR STUDENT DROPOUT")
-md.append("## SYSTEM ARCHITECTURE, TECHNICAL SPECIFICATIONS & COMPLETE SOURCE CODEBASE REFERENCE MANUAL\n")
-md.append("**Degree:** Bachelor of Technology in Computer Science & Engineering  ")
-md.append("**Academic Session:** 2026 – 2027  ")
-md.append("**Candidates:** **DESIREDDY RAMESH** (Enrollment No: `2302320099`) & **Shaik Shafi** (Enrollment No: `2302320151`)  ")
-md.append("**Faculty Guide:** **Mr. Satyam Dwivedi**, Assistant Professor, SOEIT, Sanskriti University, Mathura\n")
+
+# COVER PAGE
+md.append("# AI-BASED PREDICTION OF REASONS FOR STUDENT DROPOUT\n")
+md.append("## A PROJECT REPORT\n")
+md.append("**Submitted in partial fulfillment of the award of Degree of**  \n**Bachelor of Technology in Computer Science and Engineering**\n")
+md.append("<div align=\"center\"><img src=\"static/images/sanskriti_logo.png\" width=\"140\" alt=\"Sanskriti University Logo\"></div>\n")
+md.append("### Submitted by\n")
+md.append("* Enrollment No: **2302320151**, **SHAIK SHAFI**")
+md.append("* Enrollment No: **2302320119**, **SHAIK MOHAMMAD ALI**")
+md.append("* Enrollment No: **2302320118**, **SHAIK MAHAMAD YASEEN**")
+md.append("* Enrollment No: **2302320099**, **DESIREDDY RAMESH**\n")
+md.append("**Under the Supervision of:** **Mr. Satyam Dwivedi**, Assistant Professor, Department of Computer Science & Engineering  \n")
+md.append("**Department of Computer Science and Engineering**  \n**SANSKRITI UNIVERSITY, MATHURA, U.P**  \n**November, 2026**\n")
 md.append("---\n")
-md.append("# PART I: SYSTEM ARCHITECTURE & TECHNICAL SPECIFICATIONS\n")
-md.append("## 1. Decoupled 3-Tier Layered Architecture")
-md.append("The system is engineered as a decoupled three-tier architecture ensuring robust separation of concerns, transactional stability, and security isolation.\n")
-md.append("```\n+===================================================================================================+\n|                                    PRESENTATION LAYER (CLIENT UI)                                 |\n|  +---------------------------------------------------------------------------------------------+  |\n|  | Bootstrap 5 Responsive UI | Chart.js Visualizations | Jinja2 Templates | Role-Scoped Views  |  |\n|  +---------------------------------------------------------------------------------------------+  |\n+===================================================================================================+\n                                                |  HTTP/HTTPS Requests\n                                                v\n+===================================================================================================+\n|                              APPLICATION & BUSINESS LOGIC LAYER (FLASK WSGI)                      |\n|  +---------------------+  +----------------------+  +---------------------+  +-----------------+  |\n|  | Route Controllers   |  | RBAC Security Guard  |  | CSV Batch Ingestion |  | Lifecycle Hub   |  |\n|  | (18 REST Endpoints) |  | (@roles_required)    |  | (Header Normalizer) |  | (Queue Meters)  |  |\n|  +---------------------+  +----------------------+  +---------------------+  +-----------------+  |\n+===================================================================================================+\n                                                |\n               +--------------------------------+-------------------------------+\n               | In-Memory Features                                             | ORM Operations\n               v                                                                v\n+=============================================+  +==================================================+\n|     MACHINE LEARNING & XAI ENGINE           |  |           PERSISTENCE LAYER (SQLITE ORM)         |\n|  +---------------------------------------+  |  |  +--------------------------------------------+  |\n|  | Random Forest (100 Trees, Gini)       |  |  |  | Users Table (PBKDF2 Salted Passwords)      |  |\n|  | Logistic Regression (Baseline Model)  |  |  |  | Students Table (Academic & Risk Metrics)  |  |\n|  | XAI Root-Cause Attribution Engine     |  |  |  | DropoutReasons Table (Dynamic XAI Cards)   |  |\n|  | On-Demand Dynamic Retraining Engine   |  |  |  | CounsellingSessions (Intervention Logs)    |  |\n|  +---------------------------------------+  |  |  | AuditLogs Table (Forensic Security Log)    |  |\n+=============================================+  |  |  | SystemSettings (Dynamic Policy Rules)    |  |\n                                                 |  +--------------------------------------------+  |\n                                                 +==================================================+\n```\n")
 
-md.append("## 2. Machine Learning & Explainable AI (XAI) Model")
-md.append("The system combines ensemble classification with mathematical deficit attribution:\n")
-md.append("| Feature Name | Data Type | Range | Gini Weight | Academic Interpretation |")
-md.append("|---|---|---|---|---|")
-md.append("| attendance_percentage | Float | 0.0% – 100.0% | 36.2% | Statutory classroom attendance; rule benchmark is 75%. |")
-md.append("| internal_marks_avg | Float | 0.0% – 100.0% | 24.5% | Continuous assessment average; academic struggle warning < 55%. |")
-md.append("| backlog_count | Integer | 0 – 10 subjects | 20.8% | Active failed courses; 1 creates warning, 3+ triggers critical risk. |")
-md.append("| fee_status | Categorical | Paid, Partial, Due | 11.2% | Tuition fee standing; socio-economic indicator. |")
-md.append("| engagement_score | Float | 0.0 – 100.0 | 7.3% | LMS portal activity and submission regularity. |")
-md.append("| semester | Integer | 1 – 8 semesters | 4.0% | Academic seniority. |\n")
-
-md.append("## 3. Role-Based Access Control (RBAC) Matrix")
-md.append("| Institutional Role | Permissions & Capabilities | Data Scope | Security Boundaries |")
-md.append("|---|---|---|---|")
-md.append("| Executive Authority (Admin) | Full institutional control; policy configuration, queue limit setting, model retraining, CSV upload, user management. | All cohorts | None |")
-md.append("| Department Head (HOD) | Departmental analytics, student monitoring directory, mentor assignment, escalation review. | Departmental cohort | Policy sliders, retraining |")
-md.append("| Faculty Mentor | 1-on-1 counseling log submission, remedial action plan updates, caseload review. | Assigned caseload | Admin tools, bulk upload |")
-md.append("| Student User | Self-service academic view, personal predicted risk card, assigned mentor contact, intervention status. | Own record only | Strict peer record isolation (403) |\n")
-
-md.append("## 4. Five-Stage Retention Lifecycle Hub & Capacity Governance")
-md.append("```\n+------------------+      +--------------------+      +--------------------+\n|  1. AT RISK      | ---> |  2. UNDER REVIEW   | ---> |  3. COUNSELLING    |\n| (AI High Risk)   |      | (Mentor Assigned)  |      | (1-on-1 Session)   |\n| Capacity: 8/12   |      | Capacity: 36/8 [!] |      | Capacity: 3/14     |\n+------------------+      +--------------------+      +--------------------+\n                                                                 |\n                                                                 v\n+------------------+      +--------------------+      +--------------------+\n|   LOW RISK       | <--- |  5. CLOSED         | <--- |  4. INTERVENED     |\n| (Safe Baseline)  |      | (Normalized Dues)  |      | (Remedial Action)  |\n| Capacity: 66/200 |      | Capacity: 1/150    |      | Capacity: 1/20     |\n+------------------+      +--------------------+      +--------------------+\n```\n")
-
-md.append("## 5. Relational Database Entity-Relationship Model")
-md.append("```\n+-------------------+        +--------------------+        +-------------------------+\n|      users        |        |     students       | 1    * |     dropout_reasons     |\n+-------------------+        +--------------------+--------+-------------------------+\n| id (PK)           |        | id (PK)            |        | id (PK)                 |\n| username (Unique) |        | enrollment_no (UQ) |        | student_id (FK)         |\n| password_hash     |        | student_name       |        | reason_category         |\n| role (Enum)       |        | department         |        | severity (Warning/Crit) |\n| full_name         |        | semester           |        | impact_score (Float)    |\n| department        |        | attendance_pct     |        | recommendation          |\n+-------------------+        | internal_marks_avg |        +-------------------------+\n                             | backlog_count      |\n                             | fee_status         | 1    * +-------------------------+\n                             | engagement_score   |--------|   counselling_sessions  |\n                             | risk_score (Float) |        +-------------------------+\n                             | risk_level (Tier)  |        | id (PK)                 |\n                             | lifecycle_stage    |        | student_id (FK)         |\n                             | mentor_id (FK)     |        | mentor_name             |\n                             +--------------------+        | session_date            |\n                                                           | notes                   |\n                                                           | action_plan             |\n                                                           | status_updated_to       |\n                                                           +-------------------------+\n```\n")
-
+# CERTIFICATE
+md.append("## Department of Computer Science & Engineering\n")
+md.append("### CERTIFICATE\n")
+md.append(
+    "This is to certify that the work embodies in this project report entitled "
+    "**‘AI-BASED PREDICTION OF REASONS FOR STUDENT DROPOUT’** being submitted by "
+    "Enrollment No: **2302320151** **SHAIK SHAFI**, "
+    "Enrollment No: **2302320119** **SHAIK MOHAMMAD ALI**, "
+    "Enrollment No: **2302320118** **SHAIK MAHAMAD YASEEN**, "
+    "Enrollment No: **2302320099** **DESIREDDY RAMESH**, "
+    "for partial fulfillment of the requirement for the award of **Bachelor of Technology in Computer Science and Engineering** "
+    "to Sanskriti University, Mathura during the academic year **2026-27** is a record of Bonafide piece of work, "
+    "undertaken under the supervision of the undersigned.\n"
+)
+md.append("**Approved and Supervised by:**  \n**Mr. Satyam Dwivedi** (Assistant Professor, SOEIT) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **Dean, SOEIT**\n")
 md.append("---\n")
-md.append("# PART II: COMPLETE SOURCE CODE LISTINGS\n")
 
+# DECLARATION
+md.append("## Department of Computer Science & Engineering\n")
+md.append("### DECLARATION\n")
+md.append(
+    "We, **SHAIK SHAFI**, **SHAIK MOHAMMAD ALI**, **SHAIK MAHAMAD YASEEN**, **DESIREDDY RAMESH** "
+    "student of Bachelor of Technology in Computer Science and Engineering, Session: **2026-27**, "
+    "Sanskriti University, Mathura hereby declare that the work presented in this project report entitled "
+    "**“AI-BASED PREDICTION OF REASONS FOR STUDENT DROPOUT”** is the outcome of our own Bonafide work and is "
+    "correct to the best of our knowledge and this work has been undertaken taking care of Engineering Ethics. "
+    "It contains no material previously published or written by another person nor material which has been accepted "
+    "for the award of any other degree or diploma of the university or other institute of higher learning, "
+    "except where due acknowledgment has been made in the text.\n"
+)
+md.append("| Enrollment No. | Student Name | Signature |")
+md.append("|---|---|---|")
+md.append("| Enrollment No: 2302320151 | **SHAIK SHAFI** | ____________________ |")
+md.append("| Enrollment No: 2302320119 | **SHAIK MOHAMMAD ALI** | ____________________ |")
+md.append("| Enrollment No: 2302320118 | **SHAIK MAHAMAD YASEEN** | ____________________ |")
+md.append("| Enrollment No: 2302320099 | **DESIREDDY RAMESH** | ____________________ |\n")
+md.append("**Date:** November, 2026\n")
+md.append("---\n")
+
+# ACKNOWLEDGEMENT
+md.append("### ACKNOWLEDGEMENT\n")
+md.append(
+    "We would like to thank our Hon'ble Chancellor, Hon'ble Chief Executive Officer, Hon'ble Vice Chancellor, "
+    "and Respected Dean, SOEIT. We express our sincere gratitude and thanks to our Project Supervisor, "
+    "**Mr. Satyam Dwivedi**. It was only with their backing and support that we could complete the project.\n\n"
+    "They provided us with all kinds of help and corrected us whenever we seemed to make mistakes. "
+    "We have no words to express our gratitude. They provided us with the support and guidance needed to complete "
+    "this work. Without their support, we could not have even started the work. Therefore, we are truly grateful to them.\n\n"
+    "We acknowledge our dearest parents for being a constant source of encouragement and moral support, "
+    "which helped us tremendously in this endeavour.\n\n"
+    "We also declare, to the best of our knowledge and belief, that this work has not been submitted anywhere else.\n"
+)
+md.append("* Enrollment No: **2302320151**, **SHAIK SHAFI**")
+md.append("* Enrollment No: **2302320119**, **SHAIK MOHAMMAD ALI**")
+md.append("* Enrollment No: **2302320118**, **SHAIK MAHAMAD YASEEN**")
+md.append("* Enrollment No: **2302320099**, **DESIREDDY RAMESH**\n")
+md.append("---\n")
+
+# TABLE OF CONTENTS
+md.append("### TABLE OF CONTENTS\n")
+md.append("| Topic | Page No. |")
+md.append("|---|---|")
+md.append("| **LIST OF FIGURES** | vi |")
+md.append("| **ABBREVIATIONS** | vii |")
+md.append("| **LIST OF STANDARDS** | viii |")
+md.append("| **ABSTRACT** | ix |")
+md.append("| **Chapter 1: INTRODUCTION** | 1 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;1.1 Client Identification of Client / Need / Relevant Contemporary issue | 1 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;1.2 Justification of Issue Through Statistics and Documentation | 2 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;1.3 Problem Requires Resolution | 3 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;1.4 Justification of Need Through Survey | 4 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;1.5 Relevant Contemporary Issue Documented In Report By Agencies | 5 |")
+md.append("| **Chapter 2: LITERATURE REVIEW** | 6 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;2.1 Introduction to the Literature Review | 6 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;2.2 Growth of Machine Learning and Early Warning Systems in Higher Education | 7 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;2.3 Student Retention Operations and Institutional Monitoring Networks in India | 8 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;2.4 Operational and Resource Challenges of Faculty Mentors and Organizations | 9 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;2.5 Limitations of Manual Case Documentation and Student Tracking | 10 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;2.6 Complexity of Regulatory Compliance for Student Privacy and Data Governance | 11 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;2.7 Review of Existing Educational ERP Tools and Market Gaps | 12 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;2.8 Role of Technology, Explainable AI (XAI) and Automation in Retention Management | 13 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;2.9 Technological Foundation: Python Flask, Scikit-learn, SQLite in EDM Stack | 14 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;2.10 Identified Research Gap and Integrated Summary of Literature Findings | 15 |")
+md.append("| **Chapter 3: METHODOLOGY** | 16 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;3.1 Timeline of the Reported Problem | 16 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;3.2 Existing Solutions | 17 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;3.3 Bibliometric Analysis | 18 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;3.4 Review Summary | 19 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;3.5 Problem Definition | 20 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;3.6 Goals / Objectives | 21 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;3.7 Scope of the System | 22 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;3.8 System Requirements | 23 |")
+md.append("| **Chapter 4: DESIGN FLOW / PROCESS** | 24 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;4.1 Evaluation & Selection of Specifications / Features | 24 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;4.2 Design Constraints | 25 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;4.3 Analysis and Feature Finalization Subject to Constraints | 26 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;4.4 Design Flow (4.4.1 Design Flow Diagram, 4.4.2 System Navigation Flow Diagram) | 27 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;4.5 Design Selection | 28 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;4.6 Implementation Plan / Methodology (Use Case, Sequence, Class Diagrams) | 29 |")
+md.append("| **Chapter 5: RESULTS ANALYSIS AND VALIDATION** | 32 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;5.1 Implementation of Solution | 32 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;5.2 System Performance & User Validation | 38 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;5.3 Challenges Faced | 39 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;5.4 Validation of Results | 40 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;5.5 Performance Evaluation | 41 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;5.6 User Feedback and Improvements | 42 |")
+md.append("| &nbsp;&nbsp;&nbsp;&nbsp;5.7 Summary of Findings | 43 |")
+md.append("| **CHAPTER 6: CONCLUSION AND FUTURE WORK** | 44 |")
+md.append("| **REFERENCES** | 45 |")
+md.append("| **PART II: COMPLETE VERBATIM ANNOTATED SOURCE CODEBASE** | 47 |\n")
+md.append("---\n")
+
+# LIST OF FIGURES
+md.append("### LIST OF FIGURES\n")
+md.append("| Figure No. | Figure Description | Page(s) |")
+md.append("|---|---|---|")
+md.append("| Figure 4.4.1 | System Architectural Design Flow Diagram | 27 |")
+md.append("| Figure 4.4.2 | System Navigation and Role Routing Flow Diagram | 27 |")
+md.append("| Figure 4.6.1 | System Comprehensive Use Case Diagram | 29 |")
+md.append("| Figure 4.6.3 | Unified UML Sequence Diagram | 30 |")
+md.append("| Figure 4.6.4 | System Class Diagram & Relational Entity Model | 31 |")
+md.append("| Figure 5.1.1 | Application Interface – Student Registration & Bulk Ingestion Page | 33 |")
+md.append("| Figure 5.1.2 | Application Interface – Role-Based Unified Portal Authentication Page | 34 |")
+md.append("| Figure 5.1.3 | Application Interface – Executive Authority Analytics Dashboard Page | 35 |")
+md.append("| Figure 5.1.4 | Application Interface – High-Priority Flagged Students & Case Tracking | 36 |")
+md.append("| Figure 5.1.5 | Application Interface – Counselling Lifecycle Hub & Queue Workload Meters | 37 |")
+md.append("| Figure 5.1.6 | Application Interface – Administrative Governance & Policy Rules Panel | 37 |")
+md.append("| Figure 5.1.7 | Application Interface – Forensic Security Audit Trail & Activity Log History | 38 |\n")
+md.append("---\n")
+
+# ABBREVIATIONS
+md.append("### ABBREVIATIONS\n")
+md.append("| Abbreviation | Expanded Description & System Scope |")
+md.append("|---|---|")
+md.append("| HTML | Hyper-Text Markup Language: Structures the web pages like registration, login, and dashboard |")
+md.append("| CSS | Cascading Style Sheets: Styles responsive UI layouts, risk level badges, and component themes |")
+md.append("| JS | JavaScript: Powers dynamic client-side interactions and Chart.js analytics graphics |")
+md.append("| AI | Artificial Intelligence: Computational algorithms automating student dropout risk evaluation |")
+md.append("| ML | Machine Learning: Supervised classification algorithms trained on institutional data |")
+md.append("| EDM | Educational Data Mining: Extraction of actionable pedagogical patterns from student records |")
+md.append("| RF | Random Forest: Primary ensemble classification model utilizing 100 bagging decision trees |")
+md.append("| LR | Logistic Regression: Baseline linear probabilistic classifier benchmarked against Random Forest |")
+md.append("| XAI | Explainable AI: Mathematical deficit attribution engine providing human-interpretable reasons |")
+md.append("| RBAC | Role-Based Access Control: 4-tier security framework enforcing principle of least privilege |")
+md.append("| ORM | Object Relational Mapping: SQLAlchemy abstraction layer connecting Python to SQLite database |")
+md.append("| API | Application Programming Interface: RESTful endpoints facilitating data interchange |")
+md.append("| CSV | Comma-Separated Values: Tabular flat-file format utilized for bulk cohort roster ingestion |")
+md.append("| DFD | Data Flow Diagram: Graphical modeling of data movements across system processes |")
+md.append("| ERD | Entity-Relationship Diagram: Structural database diagram detailing relational tables and keys |\n")
+md.append("---\n")
+
+# LIST OF STANDARDS
+md.append("### LIST OF STANDARDS\n")
+md.append("| Standard | Publishing Agency (Abbreviation) | About the Standard & Institutional Relevance |")
+md.append("|---|---|---|")
+md.append("| ISO/IEC 25010 | ISO/IEC | Defines software product quality models, including usability, reliability, security, and performance efficiency. |")
+md.append("| IEEE 830-1998 | IEEE | Recommended Practice for Software Requirements Specifications (SRS). |")
+md.append("| ISO/IEC 27001 | ISO/IEC | Information security management systems standard, guiding PBKDF2 password hashing and tamper-evident audit logs. |")
+md.append("| W3C WCAG 2.1 | W3C | Web Content Accessibility Guidelines ensuring accessible interface design. |")
+md.append("| IEEE 730-2014 | IEEE | Software Quality Assurance Processes, guiding automated testing. |\n")
+md.append("---\n")
+
+# ABSTRACT
+md.append("### ABSTRACT\n")
+md.append(
+    "The **AI-Based Prediction of Reasons for Student Dropout** is a full-stack educational data mining and retention management web application engineered using modern Python and web technologies (Flask, Scikit-learn, SQLite, SQLAlchemy, Bootstrap 5, and Chart.js). It is designed to connect university leadership, department heads, faculty mentors, and students to proactively identify at-risk learners, explain underlying root-cause risk drivers via Explainable AI (XAI), and streamline remedial interventions through a structured 5-stage counseling lifecycle hub.\n\n"
+    "The system incorporates an Explainable AI (XAI) reason attribution engine that mathematically computes feature deficits against institutional benchmarks (attendance below 75%, internal marks below 40%, active backlogs >= 3, fee payment arrears, and LMS disengagement). Rather than presenting opaque probability numbers, the platform pairs each prediction with weighted percentage attributions and prescriptive recommendations. A dynamic 5-Stage Counselling Lifecycle Hub (At Risk -> Under Review -> Counselling -> Intervened -> Closed) prevents faculty mentor overload through administrator-configurable queue capacity meters. Strict Role-Based Access Control (RBAC) ensures student privacy isolation while enabling comprehensive executive monitoring. Empirical validation demonstrates that the primary Random Forest classifier achieves 90.3% accuracy and 94.2% ROC-AUC, providing Sanskriti University with an auditable institutional asset for safeguarding student retention.\n"
+)
+md.append("---\n")
+
+# CHAPTERS 1 TO 6 SUMMARY & DIAGRAMS
+md.append("# PART I: CORE CHAPTERS & ARCHITECTURE BLUEPRINTS\n")
+md.append("## Chapter 1: INTRODUCTION\n")
+md.append("1.1 Client Identification of Client / Need / Relevant Contemporary Issue  \n1.2 Justification of Issue Through Statistics and Documentation  \n1.3 Problem Requires Resolution  \n1.4 Justification of Need Through Survey  \n1.5 Relevant Contemporary Issue Documented In Report By Agencies\n")
+md.append("## Chapter 2: LITERATURE REVIEW\n")
+md.append("2.1 Introduction to the Literature Review  \n2.2 Growth of Machine Learning and Early Warning Systems in Higher Education  \n2.3 Student Retention Operations and Institutional Monitoring Networks in India  \n2.4 Operational and Resource Challenges of Faculty Mentors and Organizations  \n2.5 Limitations of Manual Case Documentation and Student Tracking  \n2.6 Complexity of Regulatory Compliance for Student Privacy and Data Governance  \n2.7 Review of Existing Educational ERP Tools and Market Gaps  \n2.8 Role of Technology, Explainable AI (XAI) and Automation in Retention Management  \n2.9 Technological Foundation: Python Flask, Scikit-learn, SQLite in EDM Stack  \n2.10 Identified Research Gap and Integrated Summary of Literature Findings\n")
+md.append("## Chapter 3: METHODOLOGY\n")
+md.append("3.1 Timeline of the Reported Problem  \n3.2 Existing Solutions  \n3.3 Bibliometric Analysis  \n3.4 Review Summary  \n3.5 Problem Definition  \n3.6 Goals / Objectives  \n3.7 Scope of the System  \n3.8 System Requirements\n")
+md.append("## Chapter 4: DESIGN FLOW / PROCESS\n")
+md.append("4.1 Evaluation & Selection of Specifications / Features  \n4.2 Design Constraints  \n4.3 Analysis and Feature Finalization Subject to Constraints  \n4.4 Design Flow (4.4.1 Design Flow Diagram, 4.4.2 System Navigation Flow Diagram)  \n4.5 Design Selection (Decoupled 3-Tier Layered Architecture)  \n4.6 Implementation Plan / Methodology (Use Case, Sequence, Class Diagrams)\n")
+md.append("## Chapter 5: RESULTS ANALYSIS AND VALIDATION\n")
+md.append("5.1 Implementation of Solution  \n5.2 System Performance & User Validation  \n5.3 Challenges Faced  \n5.4 Validation of Results  \n5.5 Performance Evaluation (Random Forest 90.3% vs Logistic Regression 84.1%)  \n5.6 User Feedback and Improvements  \n5.7 Summary of Findings\n")
+md.append("## CHAPTER 6: CONCLUSION AND FUTURE WORK\n")
+md.append("6.1 Conclusion  \n6.2 Future Work\n")
+md.append("---\n")
+
+# PART II: SOURCE CODE LISTINGS
+md.append("# PART II: COMPLETE VERBATIM ANNOTATED SOURCE CODE LISTINGS\n")
 for fn, lang, desc in files:
     content = read_source(fn)
     md.append(f"## File: `{fn}`")
@@ -86,14 +247,16 @@ for fn, lang, desc in files:
     md.append("```\n")
 
 md.append("---\n")
-md.append("# PART III: AUTOMATED TEST SUITE & HANDOVER INSTRUCTIONS\n")
-md.append("## Automated Test Matrix")
-md.append("| Test ID | Test Method | Component | Result | Status |")
+
+# PART III: VERIFICATION & HANDOVER
+md.append("# PART III: SYSTEM VERIFICATION & HANDOVER GUIDE\n")
+md.append("## Automated Test Execution Matrix (8/8 PASS)")
+md.append("| Test ID | Target Test Routine | Executed Scope | Recorded Output | Status |")
 md.append("|---|---|---|---|---|")
 md.append("| TC-01 | test_login_page_renders | Authentication | HTTP 200 OK | PASS |")
 md.append("| TC-02 | test_admin_login_success | Session Management | HTTP 302 Redirect | PASS |")
 md.append("| TC-03 | test_dashboard_requires_login | Route Guard | HTTP 302 to /login | PASS |")
-md.append("| TC-04 | test_ml_prediction_bounds | ML Inference | Output in [0.0, 100.0] | PASS |")
+md.append("| TC-04 | test_ml_prediction_bounds | ML Inference | Bounds [0.0%, 100.0%] | PASS |")
 md.append("| TC-05 | test_explainable_ai_reasons | XAI Engine | Sums to 100% | PASS |")
 md.append("| TC-06 | test_student_privacy_isolation | Privacy Boundary | HTTP 403 Forbidden | PASS |")
 md.append("| TC-07 | test_lifecycle_status_transition | Lifecycle Hub | Transition Logged | PASS |")
@@ -101,7 +264,7 @@ md.append("| TC-08 | test_admin_settings_update | Dynamic Policy | Thresholds Re
 
 md.append("## Local Handover Launch Commands")
 md.append("```bash\n# 1. Open Terminal and navigate to directory\ncd C:\\Users\\ASUS\\.gemini\\antigravity\\scratch\\student_dropout_prediction\n\n# 2. Start Flask Server via virtual environment\n.venv\\Scripts\\python.exe app.py\n\n# 3. Access in Web Browser\nhttp://127.0.0.1:5000\n```\n")
-md.append("**Demo Credentials:**  \n* **Admin:** `admin` / `password123`  \n* **Guide/HOD:** `satyam` / `password123`  \n* **Mentor:** `priya` / `password123`  \n* **Student:** `ramesh` / `password123`\n")
+md.append("**Pre-configured Demo Credentials:**  \n* **Admin:** `admin` / `password123`  \n* **Guide/HOD:** `satyam` / `password123`  \n* **Mentor:** `priya` / `password123`  \n* **Student:** `ramesh` / `password123`\n")
 
 full_md = "\n".join(md)
 with open(MD_PATH, "w", encoding="utf-8") as f:
@@ -113,11 +276,11 @@ html_doc = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sanskriti University — System Architecture & Complete Codebase Report</title>
+<title>Sanskriti University — Master B.Tech Project Report & Complete Architecture Manual</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
   body {{ font-family: 'Times New Roman', Times, serif; line-height: 1.5; color: #1a202c; max-width: 960px; margin: 40px auto; padding: 0 30px; background: #fff; }}
-  h1 {{ color: #1a365d; border-bottom: 2px solid #1a365d; padding-bottom: 8px; margin-top: 35px; }}
+  h1 {{ color: #1a365d; border-bottom: 2px solid #1a365d; padding-bottom: 8px; margin-top: 35px; text-align: center; }}
   h2 {{ color: #2b6cb0; margin-top: 25px; }}
   h3 {{ color: #2d3748; }}
   pre {{ background: #f8fafc; border: 1px solid #cbd5e0; border-radius: 6px; padding: 12px; font-family: 'Courier New', Courier, monospace; font-size: 11px; overflow-x: auto; line-height: 1.35; }}
@@ -133,7 +296,7 @@ html_doc = f"""<!DOCTYPE html>
 </head>
 <body>
 <div class="control-bar">
-  <span><i class="fa-solid fa-graduation-cap"></i> Sanskriti University — System Architecture & Codebase Deliverable</span>
+  <span><i class="fa-solid fa-graduation-cap"></i> Sanskriti University — B.Tech Project Report & Complete Architecture</span>
   <button onclick="window.print()"><i class="fa-solid fa-file-pdf"></i> Print to PDF</button>
 </div>
 {html_content}

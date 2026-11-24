@@ -26,26 +26,28 @@ def add_front_matter_and_ch1(pages, styles, LOGO_PATH, usable_width, make_table)
     # PAGE 1: COVER PAGE
     # =========================================================================
     p = new_page()
-    p.append(Spacer(1, 10))
-    p.append(Paragraph("AI-BASED PREDICTION OF REASONS FOR STUDENT DROPOUT", title_style))
     p.append(Spacer(1, 8))
+    p.append(Paragraph("AI-BASED PREDICTION OF REASONS FOR STUDENT DROPOUT", title_style))
+    p.append(Spacer(1, 6))
     p.append(Paragraph("A Project Report", cover_bold))
     p.append(Spacer(1, 4))
     p.append(Paragraph("Submitted in partial fulfillment of the award of Degree of Bachelor of Technology in Computer Science and Engineering", cover_sub))
-    p.append(Spacer(1, 18))
+    p.append(Spacer(1, 10))
     p.append(Paragraph("Submitted by", cover_bold))
-    p.append(Spacer(1, 6))
+    p.append(Spacer(1, 4))
+    p.append(Paragraph("Enrollment No : 2302320151, SHAIK SHAFI", cover_sub))
+    p.append(Paragraph("Enrollment No : 2302320119, SHAIK MOHAMMAD ALI", cover_sub))
+    p.append(Paragraph("Enrollment No : 2302320118, SHAIK MAHAMAD YASEEN", cover_sub))
     p.append(Paragraph("Enrollment No : 2302320099, DESIREDDY RAMESH", cover_sub))
-    p.append(Paragraph("Enrollment No : 2302320151, Shaik Shafi", cover_sub))
-    p.append(Spacer(1, 24))
+    p.append(Spacer(1, 14))
     if os.path.exists(LOGO_PATH):
-        p.append(Image(LOGO_PATH, width=130, height=102))
-    p.append(Spacer(1, 24))
+        p.append(Image(LOGO_PATH, width=115, height=90))
+    p.append(Spacer(1, 14))
     p.append(Paragraph("Under the supervision of", cover_bold))
     p.append(Spacer(1, 4))
     p.append(Paragraph("Mr. Satyam Dwivedi", cover_bold))
     p.append(Paragraph("Assistant Professor", cover_sub))
-    p.append(Spacer(1, 18))
+    p.append(Spacer(1, 10))
     p.append(Paragraph("School of Engineering and Information Technology (SOEIT)", cover_sub))
     p.append(Paragraph("SANSKRITI UNIVERSITY, MATHURA, U.P.", cover_bold))
     p.append(Paragraph("NOVEMBER, 2026", cover_sub))
@@ -55,19 +57,19 @@ def add_front_matter_and_ch1(pages, styles, LOGO_PATH, usable_width, make_table)
     # =========================================================================
     p = new_page()
     p.append(Paragraph("Department of Computer Science and Engineering – School of Engineering and Information Technology (SOEIT)", cover_sub))
-    p.append(Spacer(1, 12))
+    p.append(Spacer(1, 8))
     p.append(Paragraph("CERTIFICATE", h1_chap))
-    p.append(Spacer(1, 12))
+    p.append(Spacer(1, 8))
     p.append(Paragraph(
-        "This is to certify that the work embodied in this project report entitled <b>‘AI-Based Prediction of Reasons for Student Dropout’</b>, submitted by <b>DESIREDDY RAMESH</b> (Enrollment No: <b>2302320099</b>) and <b>Shaik Shafi</b> (Enrollment No: <b>2302320151</b>), in partial fulfillment of the requirement for the award of the degree of <b>Bachelor of Technology in Computer Science and Engineering</b> of <b>Sanskriti University, Mathura</b>, during the academic year <b>2026–2027</b>, is a record of bonafide work carried out by the candidates under the supervision of the undersigned.",
+        "This is to certify that the work embodied in this project report entitled <b>‘AI-Based Prediction of Reasons for Student Dropout’</b>, submitted by <b>SHAIK SHAFI</b> (Enrollment No: <b>2302320151</b>), <b>SHAIK MOHAMMAD ALI</b> (Enrollment No: <b>2302320119</b>), <b>SHAIK MAHAMAD YASEEN</b> (Enrollment No: <b>2302320118</b>), and <b>DESIREDDY RAMESH</b> (Enrollment No: <b>2302320099</b>), in partial fulfillment of the requirement for the award of the degree of <b>Bachelor of Technology in Computer Science and Engineering</b> of <b>Sanskriti University, Mathura</b>, during the academic year <b>2026–2027</b>, is a record of bonafide work carried out by the candidates under the supervision of the undersigned.",
         body_indent
     ))
-    p.append(Spacer(1, 8))
+    p.append(Spacer(1, 6))
     p.append(Paragraph(
         "The project demonstrates a rigorous end-to-end implementation of educational machine learning, explainable predictive analytics, and full-stack software engineering. It is an original investigation adhering to the highest standards of academic integrity, data ethics, and engineering principles.",
         body_indent
     ))
-    p.append(Spacer(1, 75))
+    p.append(Spacer(1, 40))
     sig_data = [
         [
             Paragraph("________________________________________<br/><b>(Signature of Faculty Guide)</b><br/><b>Mr. Satyam Dwivedi</b><br/>Assistant Professor, SOEIT<br/>Date: ____________________", tbl_text),
@@ -81,7 +83,7 @@ def add_front_matter_and_ch1(pages, styles, LOGO_PATH, usable_width, make_table)
         ('RIGHTPADDING', (0,0), (-1,-1), 0),
     ]))
     p.append(t_sig)
-    p.append(Spacer(1, 20))
+    p.append(Spacer(1, 14))
     p.append(Paragraph("<i>Note: Signature, date and seal fields are intentionally left blank. This certificate takes effect only after it has been signed by the Faculty Guide and the Dean.</i>", caption_style))
 
     # =========================================================================
@@ -89,28 +91,32 @@ def add_front_matter_and_ch1(pages, styles, LOGO_PATH, usable_width, make_table)
     # =========================================================================
     p = new_page()
     p.append(Paragraph("Department of Computer Science and Engineering – School of Engineering and Information Technology (SOEIT)", cover_sub))
-    p.append(Spacer(1, 12))
+    p.append(Spacer(1, 8))
     p.append(Paragraph("DECLARATION", h1_chap))
-    p.append(Spacer(1, 12))
+    p.append(Spacer(1, 8))
     p.append(Paragraph(
-        "We, <b>DESIREDDY RAMESH</b> (Enrollment No: <b>2302320099</b>) and <b>Shaik Shafi</b> (Enrollment No: <b>2302320151</b>), students of <b>Bachelor of Technology in Computer Science and Engineering</b>, Session <b>2026–2027</b>, Sanskriti University, Mathura, hereby declare that the work presented in this project report entitled <b>“AI-Based Prediction of Reasons for Student Dropout”</b> is the outcome of our own bonafide work, is correct to the best of our knowledge, and has been carried out with due regard to engineering ethics.",
+        "We, <b>SHAIK SHAFI</b> (Enrollment No: <b>2302320151</b>), <b>SHAIK MOHAMMAD ALI</b> (Enrollment No: <b>2302320119</b>), <b>SHAIK MAHAMAD YASEEN</b> (Enrollment No: <b>2302320118</b>), and <b>DESIREDDY RAMESH</b> (Enrollment No: <b>2302320099</b>), students of <b>Bachelor of Technology in Computer Science and Engineering</b>, Session <b>2026–2027</b>, Sanskriti University, Mathura, hereby declare that the work presented in this project report entitled <b>“AI-Based Prediction of Reasons for Student Dropout”</b> is the outcome of our own bonafide work, is correct to the best of our knowledge, and has been carried out with due regard to engineering ethics.",
         body_indent
     ))
-    p.append(Spacer(1, 8))
+    p.append(Spacer(1, 6))
     p.append(Paragraph(
         "The report contains no material previously published or written by another person, and no material accepted for the award of any other degree or diploma of this or any other institution, except where due acknowledgement has been made in the text and in the list of references.",
         body_indent
     ))
-    p.append(Spacer(1, 8))
+    p.append(Spacer(1, 6))
     p.append(Paragraph(
         "We further confirm that the software architecture, classification models, algorithmic feature deficit logic, and user interfaces documented herein were designed, tested, and implemented by our team in consultation with our project supervisor.",
         body_indent
     ))
-    p.append(Spacer(1, 85))
+    p.append(Spacer(1, 25))
     decl_data = [
         [
-            Paragraph("________________________________________<br/><b>(Signature of Candidate 1)</b><br/><b>DESIREDDY RAMESH</b><br/>Enrollment No: 2302320099<br/>Date: ____________________", tbl_text),
-            Paragraph("________________________________________<br/><b>(Signature of Candidate 2)</b><br/><b>Shaik Shafi</b><br/>Enrollment No: 2302320151<br/>Date: ____________________", tbl_text)
+            Paragraph("____________________________________<br/><b>(Signature of Candidate 1)</b><br/><b>SHAIK SHAFI</b><br/>Enrollment No: 2302320151<br/>Date: ______________", tbl_text),
+            Paragraph("____________________________________<br/><b>(Signature of Candidate 2)</b><br/><b>SHAIK MOHAMMAD ALI</b><br/>Enrollment No: 2302320119<br/>Date: ______________", tbl_text)
+        ],
+        [
+            Paragraph("<br/>____________________________________<br/><b>(Signature of Candidate 3)</b><br/><b>SHAIK MAHAMAD YASEEN</b><br/>Enrollment No: 2302320118<br/>Date: ______________", tbl_text),
+            Paragraph("<br/>____________________________________<br/><b>(Signature of Candidate 4)</b><br/><b>DESIREDDY RAMESH</b><br/>Enrollment No: 2302320099<br/>Date: ______________", tbl_text)
         ]
     ]
     t_decl = Table(decl_data, colWidths=[usable_width*0.5, usable_width*0.5])
@@ -118,6 +124,7 @@ def add_front_matter_and_ch1(pages, styles, LOGO_PATH, usable_width, make_table)
         ('VALIGN', (0,0), (-1,-1), 'TOP'),
         ('LEFTPADDING', (0,0), (-1,-1), 0),
         ('RIGHTPADDING', (0,0), (-1,-1), 0),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 4),
     ]))
     p.append(t_decl)
 
@@ -126,36 +133,35 @@ def add_front_matter_and_ch1(pages, styles, LOGO_PATH, usable_width, make_table)
     # =========================================================================
     p = new_page()
     p.append(Paragraph("ACKNOWLEDGEMENT", h1_chap))
-    p.append(Spacer(1, 10))
+    p.append(Spacer(1, 8))
     p.append(Paragraph(
-        "We express our sincere gratitude to the Hon’ble Chancellor, the Hon’ble Vice Chancellor, and the management of <b>Sanskriti University, Mathura</b>, for providing an academic environment in which students are encouraged to translate engineering theory and data science principles into robust, working software.",
+        "We would like to thank our Hon'ble Chancellor, Hon'ble Chief Executive Officer, Hon'ble Vice Chancellor, and Respected Dean, SOEIT. We express our sincere gratitude and thanks to our Project Supervisor, <b>Mr. Satyam Dwivedi</b>. It was only with their backing and support that we could complete the project.",
         body_indent
     ))
     p.append(Spacer(1, 6))
     p.append(Paragraph(
-        "We are deeply thankful to the <b>Dean of the School of Engineering and Information Technology (SOEIT)</b> for the institutional facilities, laboratory resources, and encouragement extended throughout this capstone project. We also extend our gratitude to the faculty members of the Department of Computer Science and Engineering for providing a rigorous foundation in algorithms, database engineering, web development, and applied machine learning.",
+        "They provided us with all kinds of help and corrected us whenever we seemed to make mistakes. We have no words to express our gratitude. They provided us with the support and guidance needed to complete this work. Without their support, we could not have even started the work. Therefore, we are truly grateful to them.",
         body_indent
     ))
     p.append(Spacer(1, 6))
     p.append(Paragraph(
-        "We owe special thanks to our Faculty Guide, <b>Mr. Satyam Dwivedi</b>, Assistant Professor, SOEIT, whose technical guidance, constructive reviews, and persistent encouragement shaped the design and architecture of this system. His rigorous evaluation of our progress, including the Mid-Term Checkpoint review, kept the project focused on solving institutional retention bottlenecks through Explainable AI (XAI) rather than generic black-box prediction.",
+        "We acknowledge our dearest parents for being a constant source of encouragement and moral support, which helped us tremendously in this endeavour.",
         body_indent
     ))
     p.append(Spacer(1, 6))
     p.append(Paragraph(
-        "We also acknowledge the open-source software communities and maintainers of Python, Flask, scikit-learn, SQLite, SQLAlchemy, Bootstrap 5, and Chart.js, whose well-documented libraries and tools made the implementation of this production-ready application possible.",
+        "We also declare, to the best of our knowledge and belief, that this work has not been submitted anywhere else.",
         body_indent
     ))
-    p.append(Spacer(1, 6))
-    p.append(Paragraph(
-        "Finally, we convey our deepest appreciation to our parents, family, and peers for their unconditional moral support, patience, and encouragement throughout the duration of this project work.",
-        body_indent
-    ))
-    p.append(Spacer(1, 40))
+    p.append(Spacer(1, 20))
     ack_data = [
         [
-            Paragraph("<b>DESIREDDY RAMESH</b><br/>Enrollment No: 2302320099<br/>B.Tech CSE, SOEIT<br/>Sanskriti University, Mathura", tbl_text),
-            Paragraph("<b>Shaik Shafi</b><br/>Enrollment No: 2302320151<br/>B.Tech CSE, SOEIT<br/>Sanskriti University, Mathura", tbl_text)
+            Paragraph("<b>SHAIK SHAFI</b><br/>Enrollment No: 2302320151<br/>B.Tech CSE, SOEIT<br/>Sanskriti University, Mathura", tbl_text),
+            Paragraph("<b>SHAIK MOHAMMAD ALI</b><br/>Enrollment No: 2302320119<br/>B.Tech CSE, SOEIT<br/>Sanskriti University, Mathura", tbl_text)
+        ],
+        [
+            Paragraph("<br/><b>SHAIK MAHAMAD YASEEN</b><br/>Enrollment No: 2302320118<br/>B.Tech CSE, SOEIT<br/>Sanskriti University, Mathura", tbl_text),
+            Paragraph("<br/><b>DESIREDDY RAMESH</b><br/>Enrollment No: 2302320099<br/>B.Tech CSE, SOEIT<br/>Sanskriti University, Mathura", tbl_text)
         ]
     ]
     t_ack = Table(ack_data, colWidths=[usable_width*0.5, usable_width*0.5])
@@ -497,7 +503,7 @@ def add_front_matter_and_ch1(pages, styles, LOGO_PATH, usable_width, make_table)
     t11_headers = ["Project Specification Item", "Implementation Detail & Environment Parameters"]
     t11_rows = [
         ["Project Title", "AI-Based Prediction of Reasons for Student Dropout"],
-        ["Candidate Team", "DESIREDDY RAMESH (2302320099) & Shaik Shafi (2302320151)"],
+        ["Candidate Team", "SHAIK SHAFI (2302320151), SHAIK MOHAMMAD ALI (2302320119), SHAIK MAHAMAD YASEEN (2302320118), DESIREDDY RAMESH (2302320099)"],
         ["Faculty Guide", "Mr. Satyam Dwivedi, Assistant Professor, SOEIT, Sanskriti University"],
         ["Academic Year", "2026–2027 (Evaluation: November 2026)"],
         ["Repository (GitHub)", "https://github.com/Shannu1423/student-dropout-prediction.git"],
