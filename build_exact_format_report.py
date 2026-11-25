@@ -165,7 +165,7 @@ def styles_dict():
         "ch_title": ParagraphStyle("ch_title", fontName="Times-Bold", fontSize=16, leading=22, alignment=TA_CENTER, spaceBefore=10, spaceAfter=20),
         "h2": ParagraphStyle("h2", fontName="Times-Bold", fontSize=13.5, leading=20, alignment=TA_LEFT, spaceBefore=18, spaceAfter=10),
         "h3": ParagraphStyle("h3", fontName="Times-Bold", fontSize=12.5, leading=19, alignment=TA_LEFT, spaceBefore=16, spaceAfter=8),
-        "body": ParagraphStyle("body", fontName="Times-Roman", fontSize=12, leading=25.5, alignment=TA_JUSTIFY, spaceAfter=12),
+        "body": ParagraphStyle("body", fontName="Times-Roman", fontSize=12, leading=26, alignment=TA_JUSTIFY, spaceAfter=14),
         "sig_right": ParagraphStyle("sig_right", fontName="Times-Roman", fontSize=12, leading=17, alignment=TA_RIGHT),
         "sig_left": ParagraphStyle("sig_left", fontName="Times-Roman", fontSize=12, leading=17, alignment=TA_LEFT),
         "caption": ParagraphStyle("caption", fontName="Times-Italic", fontSize=11, leading=15, alignment=TA_CENTER, spaceBefore=8, spaceAfter=16),

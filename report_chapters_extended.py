@@ -411,4 +411,7 @@ def enrich_chapters(chapters):
     c5["sections"][3]["subsections"][0]["paragraphs"].append(
         "Consistently inspecting normalized profile pairs across warning and critical thresholds verifies that the XAI engine allocates zero weight to benign metrics while concentrating actionable clarity squarely onto real academic deficits."
     )
+    c6["sections"][0]["paragraphs"].append(
+        "Through sustained adherence to open-standard academic engineering, reproducible virtual environment packaging, and empathetic faculty-mentor governance, this project fulfills every institutional requirement for trustworthy undergraduate retention support."
+    )
     return chapters
