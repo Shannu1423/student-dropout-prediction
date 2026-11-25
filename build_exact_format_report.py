@@ -29,6 +29,7 @@ from docx.oxml.ns import qn, nsdecls
 from report_chapters_1_2 import get_chapter_1, get_chapter_2
 from report_chapters_3_4 import get_chapter_3, get_chapter_4
 from report_chapters_5_6 import get_chapter_5, get_chapter_6, get_references
+from report_chapters_extended import enrich_chapters
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LOGO_PATH = os.path.join(BASE_DIR, "static", "images", "sanskriti_logo.png")
@@ -161,13 +162,13 @@ def styles_dict():
         "cover_stu": ParagraphStyle("cover_stu", fontName="Times-Bold", fontSize=12, leading=17, alignment=TA_CENTER, spaceAfter=2),
         "dept_hdr": ParagraphStyle("dept_hdr", fontName="Times-Bold", fontSize=13, leading=18, alignment=TA_CENTER, spaceBefore=10, spaceAfter=10),
         "front_h1": ParagraphStyle("front_h1", fontName="Times-Bold", fontSize=15, leading=20, alignment=TA_CENTER, spaceBefore=6, spaceAfter=16),
-        "ch_title": ParagraphStyle("ch_title", fontName="Times-Bold", fontSize=16, leading=22, alignment=TA_CENTER, spaceBefore=8, spaceAfter=18),
-        "h2": ParagraphStyle("h2", fontName="Times-Bold", fontSize=13.5, leading=19, alignment=TA_LEFT, spaceBefore=16, spaceAfter=8),
-        "h3": ParagraphStyle("h3", fontName="Times-Bold", fontSize=12.5, leading=18, alignment=TA_LEFT, spaceBefore=14, spaceAfter=6),
-        "body": ParagraphStyle("body", fontName="Times-Roman", fontSize=12, leading=21, alignment=TA_JUSTIFY, spaceAfter=10),
+        "ch_title": ParagraphStyle("ch_title", fontName="Times-Bold", fontSize=16, leading=22, alignment=TA_CENTER, spaceBefore=10, spaceAfter=20),
+        "h2": ParagraphStyle("h2", fontName="Times-Bold", fontSize=13.5, leading=20, alignment=TA_LEFT, spaceBefore=18, spaceAfter=10),
+        "h3": ParagraphStyle("h3", fontName="Times-Bold", fontSize=12.5, leading=19, alignment=TA_LEFT, spaceBefore=16, spaceAfter=8),
+        "body": ParagraphStyle("body", fontName="Times-Roman", fontSize=12, leading=25.5, alignment=TA_JUSTIFY, spaceAfter=12),
         "sig_right": ParagraphStyle("sig_right", fontName="Times-Roman", fontSize=12, leading=17, alignment=TA_RIGHT),
         "sig_left": ParagraphStyle("sig_left", fontName="Times-Roman", fontSize=12, leading=17, alignment=TA_LEFT),
-        "caption": ParagraphStyle("caption", fontName="Times-Italic", fontSize=11, leading=15, alignment=TA_CENTER, spaceBefore=6, spaceAfter=14),
+        "caption": ParagraphStyle("caption", fontName="Times-Italic", fontSize=11, leading=15, alignment=TA_CENTER, spaceBefore=8, spaceAfter=16),
         "tbl_hdr": ParagraphStyle("tbl_hdr", fontName="Times-Bold", fontSize=10.5, leading=14, alignment=TA_LEFT),
         "tbl_cell": ParagraphStyle("tbl_cell", fontName="Times-Roman", fontSize=10.5, leading=14, alignment=TA_LEFT),
         "tbl_cell_c": ParagraphStyle("tbl_cell_c", fontName="Times-Roman", fontSize=10.5, leading=14, alignment=TA_CENTER),
@@ -175,8 +176,8 @@ def styles_dict():
         "toc_sec": ParagraphStyle("toc_sec", fontName="Times-Roman", fontSize=9.5, leading=11.5, alignment=TA_LEFT, leftIndent=10),
         "toc_sub": ParagraphStyle("toc_sub", fontName="Times-Roman", fontSize=9.2, leading=11.2, alignment=TA_LEFT, leftIndent=20),
         "toc_pg": ParagraphStyle("toc_pg", fontName="Times-Roman", fontSize=9.5, leading=11.5, alignment=TA_CENTER),
-        "ref_grp": ParagraphStyle("ref_grp", fontName="Times-Bold", fontSize=12.5, leading=18, alignment=TA_LEFT, spaceBefore=12, spaceAfter=6),
-        "ref_item": ParagraphStyle("ref_item", fontName="Times-Roman", fontSize=11.5, leading=18, alignment=TA_LEFT, leftIndent=16, firstLineIndent=-16, spaceAfter=6),
+        "ref_grp": ParagraphStyle("ref_grp", fontName="Times-Bold", fontSize=12.5, leading=19, alignment=TA_LEFT, spaceBefore=14, spaceAfter=8),
+        "ref_item": ParagraphStyle("ref_item", fontName="Times-Roman", fontSize=11.5, leading=22, alignment=TA_LEFT, leftIndent=16, firstLineIndent=-16, spaceAfter=11),
     }
 
 
@@ -224,6 +225,7 @@ def get_standards():
         ("IEEE 830", "IEEE", "Provides clear specifications structure ensuring testable functional, security, and cross-platform performance requirements throughout documentation."),
         ("ISO/IEC 23053", "ISO / IEC", "Establishes framework governance for AI systems using machine learning, mandating transparent explainability and human-in-the-loop mentor oversight."),
         ("OWASP ASVS v4.0", "OWASP", "Guides application verification controls including fail-closed route authorization (HTTP 403), cryptographic PBKDF2 hashing, and append-only audit trails."),
+        ("WCAG 2.1 Level AA", "W3C WAI", "Recommends high-contrast typography, semantic table markup, keyboard navigation, and accessible color-paired risk indicators across student dashboards."),
         ("AISHE / NEP 2020", "Ministry of Education", "National policy benchmarks promoting proactive retention counseling, early deficit remediation, and equitable undergraduate degree completion."),
     ]
 
@@ -409,7 +411,7 @@ def assemble_pdf_story(st, collector, prev_pages, chapters, refs):
     std_rows = [[Paragraph("Standard (Abbreviation)", st["tbl_hdr"]), Paragraph("Publishing Agency", st["tbl_hdr"]), Paragraph("About the Standard", st["tbl_hdr"])]]
     for code, ag, ab in get_standards():
         std_rows.append([Paragraph(f"<b>{code}</b>", st["tbl_cell"]), Paragraph(ag, st["tbl_cell"]), Paragraph(ab, st["tbl_cell"])])
-    story.append(make_grid_table(std_rows, [1.45 * inch, 1.25 * inch, 3.50 * inch], vpad=10))
+    story.append(make_grid_table(std_rows, [1.45 * inch, 1.25 * inch, 3.50 * inch], vpad=15))
     story.append(SectionMarker("FRONT_END", "STDS", "LIST OF STANDARDS", collector))
 
     # ---- PAGES xi-xii: ABSTRACT ----
@@ -838,7 +840,7 @@ def build_docx(out_path, page_map, chapters, refs):
 
 
 def generate_all():
-    chapters = [get_chapter_1(), get_chapter_2(), get_chapter_3(), get_chapter_4(), get_chapter_5(), get_chapter_6()]
+    chapters = enrich_chapters([get_chapter_1(), get_chapter_2(), get_chapter_3(), get_chapter_4(), get_chapter_5(), get_chapter_6()])
     refs = get_references()
 
     dummy_prev = {"starts": {}, "ends": {}, "figs": []}
