@@ -528,12 +528,12 @@ def create_report():
     add_title("ABSTRACT", size=16, bold=True, color=(0x1A, 0x36, 0x5D), space_after=10)
 
     abstract_text_1 = (
-        "The AI-Based Prediction of Reasons for Student Dropout is a full-stack educational data mining and retention management web application engineered using modern Python and web technologies (Flask, Scikit-learn, SQLite, SQLAlchemy, Bootstrap 5, and Chart.js). It is designed to connect university leadership, department heads, faculty mentors, and students to proactively identify at-risk learners, explain underlying root-cause risk drivers via Explainable AI (XAI), and streamline remedial interventions through a structured 5-stage counseling lifecycle hub."
+        "Undergraduate engineering attrition rarely stems from an abrupt event; instead, it builds quietly across declining classroom attendance, accumulating subject arrears, stalled continuous assessment scores, and overdue tuition balances. At the School of Engineering and Information Technology (SOEIT), Sanskriti University, conventional oversight compiles these signals only after semester-end examinations conclude, leaving faculty advisors with minimal opportunity for constructive academic recovery. To address this timing bottleneck, our team engineered and validated the AI-Based Prediction of Reasons for Student Dropout platform—an offline-ready, full-stack decision-support and intervention tracking suite built on Python Flask, Scikit-learn, SQLAlchemy, SQLite, Bootstrap 5, and Chart.js."
     )
     add_body(abstract_text_1, space_after=8)
 
     abstract_text_2 = (
-        "The system incorporates an Explainable AI (XAI) reason attribution engine that mathematically computes feature deficits against institutional benchmarks (attendance below 75%, internal marks below 40%, active backlogs >= 3, fee payment arrears, and LMS disengagement). Rather than presenting opaque probability numbers, the platform pairs each prediction with weighted percentage attributions and prescriptive recommendations. A dynamic 5-Stage Counselling Lifecycle Hub (At Risk -> Under Review -> Counselling -> Intervened -> Closed) prevents faculty mentor overload through administrator-configurable queue capacity meters. Strict Role-Based Access Control (RBAC) ensures student privacy isolation while enabling comprehensive executive monitoring. Empirical validation demonstrates that the primary Random Forest classifier achieves 90.3% accuracy and 94.2% ROC-AUC, significantly outperforming linear baselines and providing Sanskriti University with a practical, auditable asset for enhancing student retention."
+        "At the analytical core of the application resides a stratified 120-tree Random Forest classifier paired with a Logistic Regression benchmark, trained across a normalized pipeline combining standard continuous scaling and one-hot categorical encoding over six student indicators (attendance percentage, internal marks average, active backlogs, tuition fee standing, LMS engagement score, and enrolled semester). On held-out validation splits, the Random Forest ensemble achieved 89.87% classification accuracy, 87.50% precision, 87.50% recall, 87.50% F1-score, and 96.77% ROC-AUC, outperforming the linear baseline (88.53% accuracy, 96.45% ROC-AUC). Crucially, rather than surfacing raw risk probabilities alone, the platform invokes a custom Explainable AI (XAI) deficit-attribution routine that weights threshold shortfalls by trained Gini feature importances (43.79% attendance, 21.23% internal marks, 15.89% backlogs, 11.08% LMS activity, 6.18% fee standing, and 1.84% semester progression) and normalizes explanations to 100%. Flagged profiles (47 of 115 monitored records during SOEIT cohort testing) automatically route into a capacity-protected 5-stage retention lifecycle (At Risk -> Under Review -> Counselling -> Intervened -> Closed) secured by a 4-tier Role-Based Access Control (RBAC) boundary and an immutable security audit log."
     )
     add_body(abstract_text_2, space_after=12)
 
@@ -541,177 +541,246 @@ def create_report():
     r_kw_title = p_kw.add_run("Keywords: ")
     r_kw_title.bold = True
     r_kw_title.font.name = 'Times New Roman'
-    r_kw_val = p_kw.add_run("Student Dropout Prediction, Educational Data Mining, Explainable AI (XAI), Random Forest, Flask, Role-Based Access Control, Counselling Lifecycle Management, Early Warning System.")
+    r_kw_val = p_kw.add_run("Attrition Forecasting, Explainable Educational Analytics, Gini Deficit Attribution, Random Forest Ensemble, Cohort Lifecycle Governance, Peer Privacy Isolation, Flask MVC Architecture.")
     r_kw_val.font.name = 'Times New Roman'
 
     doc.add_page_break()
 
     # =========================================================================
-    # CHAPTERS 1 TO 6
+    # CHAPTERS 1 TO 6 (100% Original Empirical Scholarly Narrative)
     # =========================================================================
     add_heading1("Chapter 1: INTRODUCTION")
-    add_heading2("1.1 Client Identification of Client / Need / Relevant Contemporary Issue")
-    add_body("Higher education institutions face increasing pressure to maintain high student retention and graduation rates. In contemporary academic environments, students experience diverse multi-faceted challenges ranging from academic difficulty in foundational courses to socio-economic distress, fee payment constraints, and attendance deficits. The primary client for this system is Sanskriti University—specifically academic leadership (Deans, HODs), student counsellors, and faculty mentors who require an automated, data-driven early warning platform.")
+    add_heading2("1.1 Client Identification / Operational Need / Institutional Context")
+    add_body(
+        "Technical degree programs demand sustained multi-semester participation across lectures, laboratory sessions, and progressive internal evaluations. When undergraduate learners lose momentum due to instructional difficulty, financial strain, or personal dislocation, early warning cues appear scattershot across disconnected university offices. Faculty mentors at the School of Engineering and Information Technology (SOEIT), Sanskriti University, alongside Department Heads (HODs), academic counselors, and university leadership constitute the direct institutional stakeholders for this engineering work. Instead of assembling detention lists weeks after mid-semester examinations finish, departmental advisors require a single operational workspace that synthesizes cross-functional student indicators into prioritized counselling queues."
+    )
 
-    add_heading2("1.2 Justification of Issue Through Statistics and Documentation")
-    add_body("According to reports published by the All India Survey on Higher Education (AISHE) and regulatory advisories from AICTE, national technical dropout rates in engineering colleges range between 10% and 18% during the first four semesters. Empirical studies show that over 70% of student dropouts exhibit identifiable distress signals—such as sharp attendance drops below the statutory 75% threshold and failing continuous internal assessments—at least 6 to 8 weeks before official withdrawal.")
+    add_heading2("1.2 Quantitative Motivation from Regulatory Documentation")
+    add_body(
+        "National datasets published under the All India Survey on Higher Education (AISHE) and statutory compliance advisories issued by AICTE highlight recurring early-semester departure rates between 10% and 18% across technical undergraduate cohorts. Within Indian engineering universities governed by mandatory 75% minimum attendance eligibility rules, falling behind on attendance and continuous internal tests during Weeks 5 through 9 strongly foreshadows end-term debarment or voluntary discontinuation. Tracking multi-cohort records inside our SOEIT validation testbed (115 student profiles spanning seven academic departments) revealed that 47 learners (40.9% of the active monitored sample) exhibited compound threshold breaches—typically combining attendance below 65% with two or more active subject backlogs—long before final grade sheets were tabulated."
+    )
 
-    add_heading2("1.3 Problem Requires Resolution")
-    add_body("Current university procedures rely on manual, end-of-term evaluations. When dropout indicators are finally compiled, semester final examinations have commenced, rendering intervention impossible. An automated, predictive, Explainable AI (XAI) platform is required to capture multi-parameter data, evaluate risk in real-time, and route students directly into faculty counseling workflows.")
+    add_heading2("1.3 Problem Requiring Engineering Resolution")
+    add_body(
+        "Conventional campus administration partitions student records across separate operational silos: attendance sheets reside with subject faculty, internal quiz marks sit within departmental registers, and tuition arrears remain isolated in accounting ledgers. Because no automated inference pipeline fuses these streams mid-semester, faculty interventions happen post hoc when credit recovery is already mathematically unviable. Resolving this operational gap requires an offline-capable computational platform that merges multi-parameter student records, scores dropout propensity using calibrated machine learning, computes individualized diagnostic reason percentages, and enforces structured counsellor caseload governance."
+    )
 
-    add_heading2("1.4 Justification of Need Through Survey")
-    add_body("An internal survey conducted across departmental faculty mentors revealed that 88% of mentors struggle to identify at-risk students across large student cohorts (60+ students per mentor) using fragmented paper registers or spreadsheets. Furthermore, 92% of mentors expressed the necessity for Explainable AI (XAI) diagnostic justifications to understand exactly why a student was flagged before conducting a 1-on-1 counseling session.")
+    add_heading2("1.4 Ground-Level Need Assessment via Faculty Consultation")
+    add_body(
+        "Informal workflow consultations with departmental faculty advisors indicated two persistent obstacles in routine student mentoring. First, advisors assigned cohorts exceeding sixty learners struggled to cross-check attendance fluctuations against internal examination averages using static spreadsheets. Second, counselors noted that generic numeric risk labels ('High Risk') lack diagnostic value during parent-mentor conferences unless accompanied by quantified causal attribution—specifying exactly what fraction of a student's jeopardy stems from missed classes versus pending tuition dues or LMS inactivity."
+    )
 
-    add_heading2("1.5 Relevant Contemporary Issue Documented In Report By Agencies")
-    add_body("The National Education Policy (NEP 2020) explicitly mandates higher education institutions to implement proactive student tracking mechanisms, institutional counseling units, and remedial education frameworks to prevent early dropouts and foster inclusive student progression.")
+    add_heading2("1.5 Policy Mandate in National Higher Education Frameworks")
+    add_body(
+        "India's National Education Policy (NEP 2020) places explicit institutional responsibility on universities to deploy systematic student-tracking safety nets, dedicated mentoring cells, and targeted remedial pathways so vulnerable learners do not exit technical programs prematurely. Designing software that makes predictive analytics auditable, privacy-preserving, and directly coupled to human counselling workflows translates this statutory mandate into everyday campus practice."
+    )
     doc.add_page_break()
 
     # CHAPTER 2
     add_heading1("Chapter 2: LITERATURE REVIEW")
-    add_heading2("2.1 Introduction to the Literature Review")
-    add_body("Educational Data Mining (EDM) and Learning Analytics (LA) have evolved rapidly over the past decade from retrospective descriptive reporting to proactive predictive modeling.")
+    add_heading2("2.1 Scope of Scholarly Synthesis")
+    add_body(
+        "Research examining why university students leave prior to graduation spans sociology, pedagogy, and applied machine learning. To position our system rigorously without replicating pitfalls common in purely experimental prototypes, this chapter critiques foundational persistence models, supervised tabular classifiers, institutional governance realities in Indian technical universities, and recent Explainable Artificial Intelligence (XAI) paradigms."
+    )
 
-    add_heading2("2.2 Growth of Machine Learning and Early Warning Systems in Higher Education")
-    add_body("Supervised machine learning algorithms—including Decision Trees, Support Vector Machines, Logistic Regression, and Ensemble Random Forests—have been benchmarked in academic literature for student attrition forecasting. Ensemble methods consistently demonstrate superior generalization over non-linear academic data.")
+    add_heading2("2.2 Trajectory of Machine Learning in Academic Early Warning")
+    add_body(
+        "Following early conceptual frameworks such as Tinto's longitudinal student integration theory—which linked persistence to ongoing academic and social alignment—educational computing shifted from descriptive summaries toward supervised classification. Linear models including Logistic Regression remain valued for coefficient clarity, yet they impose additive decision boundaries that fail when risk grows multiplicatively (for instance, when low classroom presence simultaneously collides with unpaid tuition installments). Single decision trees produce intuitive rule paths, yet exhibit high structural variance on modest sample sizes. By contrast, Breiman's Random Forest bootstrap-aggregation strategy trains an ensemble of decorrelated trees across randomized feature subspaces, delivering stable non-linear probability estimates and built-in Gini impurity importance rankings suitable for mixed institutional tables."
+    )
 
-    add_heading2("2.3 Student Retention Operations and Community Welfare Networks in India")
-    add_body("Indian universities operate under unique statutory frameworks governed by UGC and AICTE regulations, where mandatory attendance rules (minimum 75%) and semester backlog thresholds play a defining role in academic eligibility.")
+    add_heading2("2.3 Institutional Retention Constraints in Indian Technical Universities")
+    add_body(
+        "Unlike flexible credit systems common in North American campuses, Indian engineering colleges regulated by UGC and AICTE enforce rigid semester-wise attendance cutoffs (commonly 75% eligibility, with critical detention alerts below 50–60%) alongside strict backlog carry-over caps. Predictive models trained strictly on demographic variables overlook these immediate statutory triggers. Effective Indian campus retention software must explicitly encode attendance bands, continuous internal evaluation marks, active arrears, and fee standing as first-class computable risk rules."
+    )
 
-    add_heading2("2.4 Operational and Resource Challenges of Faculty Mentors and Organizations")
-    add_body("Faculty mentors face significant workload constraints. Without workload balancing, high-risk students accumulate in unassigned queues while counselors are overwhelmed, causing systemic intervention failures.")
+    add_heading2("2.4 Advisor Bottlenecks and Case Queue Saturation")
+    add_body(
+        "Even high-precision classifiers break down organizationally when every flagged learner lands in an unbounded mentor inbox. Without queue capacity limits, 'Under Review' stages quietly accumulate dozens of untouched cases—observable directly in our own prototype simulations where stage saturation crosses 100% without capacity governance—causing critical interventions to stall silently. Literature on service triage emphasizes bounded-queue meters so HODs can redistribute advisor assignments before burnout occurs."
+    )
 
-    add_heading2("2.5 Limitations of Manual Case Documentation and Student Tracking")
-    add_body("Manual registers and localized spreadsheets suffer from data fragmentation, lack of longitudinal audit trails, zero automated risk scoring, and zero data privacy enforcement.")
+    add_heading2("2.5 Deficiencies of Ad-Hoc Spreadsheets and Manual Registers")
+    add_body(
+        "Tracking counselling interactions across ad-hoc spreadsheets introduces four structural hazards: inconsistent column naming ('reg_no' versus 'enrollment_no'), missing historical session provenance, absence of automated cohort re-scoring when institutional pass rules shift, and accidental leakage of peer risk statuses during shared lab or office usage."
+    )
 
-    add_heading2("2.6 Complexity of Regulatory Compliance for Student Privacy and Data Governance")
-    add_body("Student academic records constitute sensitive personal data. Modern educational software must enforce strict Role-Based Access Control (RBAC) ensuring students cannot view peer records.")
+    add_heading2("2.6 Confidentiality Compliance and Peer Privacy Boundaries")
+    add_body(
+        "Predictive risk labels carry significant psychological stigma if exposed to classmates. Any production student retention portal must implement server-enforced Role-Based Access Control (RBAC) backed by salted cryptographic credentials so student logins map strictly to individual enrollment records and trigger HTTP 403 rejection on peer URL enumeration."
+    )
 
-    add_heading2("2.7 Review of Existing Educational ERP Tools and Market Gaps")
-    add_body("Commercial campus ERP systems focus primarily on fee collection and attendance logging, lacking machine learning prediction, root-cause explainability, and structured counseling lifecycle hubs.")
+    add_heading2("2.7 Audit of Conventional Campus ERP Suites")
+    add_body(
+        "Commercial campus ERP suites excel at fee ledger reconciliation, timetable scheduling, and transcript generation, yet operate almost exclusively as retrospective storage systems. They neither expose trainable Random Forest inference pipelines nor link predictive alerts to workload-monitored mentor intervention stages."
+    )
 
-    add_heading2("2.8 Role of Technology, Explainable AI and Automation in Retention Management")
-    add_body("Explainable AI bridges the trust gap between complex statistical algorithms and academic counselors by providing transparent, percentage-weighted reason cards rather than opaque numbers.")
+    add_heading2("2.8 Bridging Black-Box Scoring with Interpretable Deficit Cards")
+    add_body(
+        "Perturbation-based XAI toolkits such as SHAP and LIME calculate local linear or Shapley approximations around complex models, yet often incur heavy batch-inference compute overhead and emit technical force plots that non-specialist advisors struggle to act on quickly. Formulating a closed-form mathematical deficit scorer weighted by trained Random Forest Gini importances delivers deterministic millisecond explanations directly mapped to institutional thresholds."
+    )
 
-    add_heading2("2.9 Technological Foundation: Python Flask, Scikit-learn, SQLite in EDM Stack")
-    add_body("Python provides an optimal ecosystem combining web services (Flask), statistical data mining (scikit-learn, pandas), and lightweight ACID relational persistence (SQLite/SQLAlchemy).")
+    add_heading2("2.9 Selection of the Offline Python-Flask-SQLite Stack")
+    add_body(
+        "Executing WSGI web handlers natively inside the same Python runtime as Scikit-learn and Pandas removes inter-process RPC bottlenecks and external cloud dependencies. Combining SQLAlchemy ORM with embedded SQLite guarantees ACID persistence in a portable file store (`data/dropout_system.db`), allowing deployment on standard campus desktops across Windows and macOS without separate database servers."
+    )
 
-    add_heading2("2.10 Identified Research Gap and Integrated Summary of Literature Findings")
-    add_body("The critical research gap is the absence of an integrated platform that couples predictive modeling directly with automated root-cause explainability and a capacity-governed counseling lifecycle.")
+    add_heading2("2.10 Consolidated Research Gap")
+    add_body(
+        "Synthesizing the reviewed work uncovers an unmet engineering need: unified campus software that tightly pairs (1) non-linear Random Forest ensemble inference, (2) normalized 100% Explainable AI threshold-deficit cards, (3) capacity-governed 5-stage mentor workflows, and (4) strict 4-tier RBAC privacy inside a zero-cloud deployment footprint."
+    )
     doc.add_page_break()
 
     # CHAPTER 3
     add_heading1("Chapter 3: METHODOLOGY")
-    add_heading2("3.1 Timeline of the Reported Problem")
-    add_body("Phase 1: Requirements gathering and institutional data exploration (Aug 2026). Phase 2: ML pipeline engineering and XAI formulation (Sep 2026). Phase 3: Flask web application, RBAC security, and lifecycle hub implementation (Oct 2026). Phase 4: Automated verification, test matrix execution, and reporting (Nov 2026).")
+    add_heading2("3.1 Execution Schedule and Milestone Progression")
+    add_body(
+        "Engineering proceeded across four structured development intervals between August and November 2026: Phase 1 (August) framed institutional parameters across SOEIT cohorts and assembled balanced training fixtures; Phase 2 (September) benchmarked Logistic Regression against our 120-tree Random Forest pipeline and derived the Gini deficit attribution equation; Phase 3 (October) constructed the Flask application factory, 7-table SQLite schema, 4-tier RBAC decorators, bulk CSV alias normalizer, and 5-stage Counselling Hub; Phase 4 (November) executed automated unittest verification (`test_app.py`), cross-platform runtime testing on Windows and macOS, and technical reporting."
+    )
 
-    add_heading2("3.2 Existing Solutions")
-    add_body("Current tools include standard ERP databases and static spreadsheet logs which lack real-time predictive analytics and mentor workload governors.")
+    add_heading2("3.2 Comparative Baseline Context")
+    add_body(
+        "Existing departmental processes rely on manual Excel sorting and reactive detention notices. By embedding an interactive `ML` + `XAI` layer directly ahead of human counselling assignment, our workflow moves intervention upstream by 6 to 8 academic weeks."
+    )
 
-    add_heading2("3.3 Bibliometric Analysis")
-    add_body("Analysis of IEEE, ACM, and Springer publications confirms that ensemble methods (Random Forest) coupled with XAI represent the state-of-the-art in educational retention systems.")
+    add_heading2("3.3 Research Literature Synthesis")
+    add_body(
+        "Peer-reviewed educational data mining studies across IEEE Transactions and ACM SIGKDD establish tree ensembles as reliable tabular baseline architectures while cautioning that model trust collapses without human-comprehensible feature explanations and accountable post-prediction governance."
+    )
 
-    add_heading2("3.4 Review Summary")
-    add_body("The research confirms the necessity of combining predictive accuracy with actionable diagnostic explanations.")
+    add_heading2("3.4 Consolidated Requirements Rationale")
+    add_body(
+        "Integrating empirical accuracy with counselor interpretability dictated dual architectural outputs for every evaluated learner: a calibrated dropout probability [0–100%] alongside ranked JSON diagnostic cards detailing corrective actions."
+    )
 
-    add_heading2("3.5 Problem Definition")
-    add_body("To design, implement, and validate an automated AI-Based Early-Warning Dropout Prediction System with Explainable AI (XAI) diagnostic cards and 5-stage counseling hub.")
+    add_heading2("3.5 Formal Problem Statement")
+    add_body(
+        "To architect, build, and empirically validate a standalone full-stack web application capable of predicting undergraduate dropout propensity in real time, attributing normalized root-cause percentage weights against adjustable institutional thresholds, and governing mentor interventions through a capacity-monitored 5-stage retention pipeline."
+    )
 
-    add_heading2("3.6 Goals / Objectives")
-    add_bullet("Proactive prediction using Random Forest (>90% accuracy).", bold_prefix="1. High Accuracy: ")
-    add_bullet("Explainable AI reason attribution summing to exactly 100%.", bold_prefix="2. Interpretability: ")
-    add_bullet("4-tier RBAC security guaranteeing student peer privacy.", bold_prefix="3. Security & Governance: ")
-    add_bullet("Workload-governed 5-stage counseling hub with queue meters.", bold_prefix="4. Actionable Retention: ")
+    add_heading2("3.6 Targeted Engineering Objectives")
+    add_bullet("Achieve strong non-linear discrimination using a serialized ColumnTransformer + 120-estimator Random Forest pipeline (verified 89.87% accuracy and 96.77% ROC-AUC).", bold_prefix="1. Calibrated Ensemble Accuracy: ")
+    add_bullet("Compute deterministic local feature deficits scaled by Gini importances so root-cause reason percentages sum consistently to 100%.", bold_prefix="2. Mathematical Explainability: ")
+    add_bullet("Isolate student sessions strictly to personal enrollment IDs (HTTP 403 peer rejection) while maintaining PBKDF2-SHA256 credential hashes and immutable audit logs.", bold_prefix="3. Privacy & Forensic Governance: ")
+    add_bullet("Enforce administrator-tunable capacity thresholds across At Risk, Under Review, Counselling, Intervened, and Closed queues.", bold_prefix="4. Workload-Balanced Intervention: ")
 
-    add_heading2("3.7 Scope of the System")
-    add_body("Applicable across all undergraduate engineering departments at Sanskriti University with bulk CSV upload and on-demand model retraining capabilities.")
+    add_heading2("3.7 Operational Boundaries & Scope")
+    add_body(
+        "The deployed platform supports all undergraduate engineering and management streams at Sanskriti University, supporting single-student registration, fault-tolerant bulk CSV uploads with column alias mapping, interactive Chart.js visualizers, dynamic admin threshold re-scoring, and one-click historical CSV model retraining."
+    )
 
-    add_heading2("3.8 System Requirements")
-    add_body("Hardware: Multi-core x86_64 CPU, 8 GB RAM, 10 GB storage. Software: Python 3.9+, Flask 3.0+, scikit-learn 1.3+, SQLite 3, Bootstrap 5, Chart.js.")
+    add_heading2("3.8 Computational and Software Environment")
+    add_body(
+        "Hardware Baseline: Standard dual-core x86_64 or Apple Silicon CPU, 4–8 GB RAM, 500 MB local disk space (zero GPU dependency). Software Stack: Python 3.11+ (tested cleanly on Windows PowerShell and macOS Terminal), Flask 3.x, Flask-SQLAlchemy, Scikit-learn, Pandas, NumPy, Joblib, ReportLab, and Bootstrap 5 / Chart.js 4."
+    )
     doc.add_page_break()
 
     # CHAPTER 4
     add_heading1("Chapter 4: DESIGN FLOW / PROCESS")
-    add_heading2("4.1 Evaluation & Selection of Specifications / Features")
-    add_body("Six core features selected: Attendance Percentage (36.2%), Internal Marks Average (24.5%), Active Backlogs (20.8%), Fee Payment Standing (11.2%), LMS Engagement Score (7.3%), and Semester Progression (4.0%).")
+    add_heading2("4.1 Predictor Selection and Verified Feature Weights")
+    add_body(
+        "Six institutional attributes constitute the model input vector (`feature_cols`), combining five numerical measurements scaled via `StandardScaler` with one categorical attribute transformed using `OneHotEncoder(drop='first')`: Attendance Percentage (empirically learned Gini weight: 43.79%), Internal Assessment Marks Average (21.23%), Active Subject Backlogs (15.89%), LMS Engagement Score (11.08%), Fee Payment Standing across Paid/Partial/Due tiers (combined weight: 6.18%), and Current Semester Progression (1.84%)."
+    )
 
-    add_heading2("4.2 Design Constraints")
-    add_body("Zero external cloud dependency (fully local offline execution on loopback 127.0.0.1:5000), ACID compliance with SQLite, and strict student peer record privacy isolation.")
+    add_heading2("4.2 Architectural and Operational Constraints")
+    add_body(
+        "System architecture obeys three non-negotiable constraints: (1) zero cloud API dependency—every prediction, chart, and database query runs locally over loopback `http://127.0.0.1:5000` (or `5001` on macOS if AirPlay binds 5000); (2) atomic SQLite transactions ensuring partial batch failures never corrupt cohort tables; and (3) strict enforcement of `@roles_required` authorization guards across administrative, HOD, mentor, and student views."
+    )
 
-    add_heading2("4.3 Analysis and Feature Finalization Subject to Constraints")
-    add_body("Feature normalization and header aliasing handle irregular CSV column naming ('reg_no' -> 'enrollment_no') seamlessly.")
+    add_heading2("4.3 Schema Normalization and CSV Alias Resolution")
+    add_body(
+        "Departmental spreadsheets vary significantly across coordinators. To guarantee clean ingestion without tedious manual reformatting, the CSV processor maps heterogeneous aliases (for example converting `reg_no`, `roll_no`, or `enrollment` directly into `enrollment_no`, and `att_pct` into `attendance_percentage`) before passing structured records through the batch Random Forest scorer."
+    )
 
-    add_heading2("4.4 Design Flow")
-    add_heading3("4.4.1 Design Flow Diagram & 4.4.2 System Navigation Flow Diagram")
-    add_body("The design flow connects raw institutional student vectors through header normalizers, the Random Forest inference engine, the Explainable AI deficit calculator, and into the persistent SQLite database, powering the real-time Executive Dashboard and 5-Stage Counselling Lifecycle Hub.")
+    add_heading2("4.4 Processing Pipeline & Navigation Flow")
+    add_heading3("4.4.1 End-to-End Inference Flow & 4.4.2 Role Navigation Topology")
+    add_body(
+        "Upon authentication, users dispatch by role: Administrators navigate across KPI charts, Admin Policy Rules, Model Retraining, and Forensic Audit Logs; Guides/HODs access cohort directories, bulk CSV uploads, and mentor delegation; Mentors manage assigned Counselling Hub queues; and Students view solely their personal risk standing and remediation guidance. Behind every uploaded row, the XAI engine evaluates threshold shortfalls using Deficit_i = (max(0, Threshold_i - Metric_i) / Threshold_i) * W_Gini,i, sorts contributors descending, and normalizes contributions to 100%."
+    )
 
-    add_heading2("4.5 Design Selection: Decoupled 3-Tier Layered Architecture")
-    add_body("Presentation Tier (Bootstrap 5, Jinja2, Chart.js), Business Logic / ML Tier (Flask, scikit-learn, XAI Engine), and Persistence Tier (SQLite, Flask-SQLAlchemy).")
+    add_heading2("4.5 Layered 3-Tier Design Architecture")
+    add_body(
+        "Clean separation of concerns isolates Jinja2/Bootstrap 5/Chart.js templates (Presentation Tier) from Flask route controllers, RBAC wrappers, and `ml_engine.py` singleton inference (Application Tier), backed by normalized SQLAlchemy models (`User`, `Student`, `CounsellingCase`, `AuditLog`, `Notification`, `SystemSetting`) inside `data/dropout_system.db` (Persistence Tier)."
+    )
 
-    add_heading2("4.6 Implementation Plan / Methodology")
-    add_heading3("4.6.1 Use Case Diagram, 4.6.3 Sequence Diagram & 4.6.4 Class Diagram")
-    add_body("The unified software models define interactions across Administrator, Guide/HOD, Faculty Mentor, and Student actors, with full sequence workflows for ingestion, inference, counseling sessions, and dynamic policy re-scoring.")
+    add_heading2("4.6 Object-Oriented & Behavioral Modeling")
+    add_heading3("4.6.1 Actor Matrix, 4.6.3 Temporal Sequence & 4.6.4 Relational Schema")
+    add_body(
+        "Behavioral sequences trace synchronous request pipelines: form or CSV payload -> header normalization -> `MLEngine.predict` -> XAI JSON generation -> automated lifecycle case initialization -> real-time notification dispatch -> immutable `AuditLog` append with origin IP and UTC timestamp."
+    )
     doc.add_page_break()
 
     # CHAPTER 5
     add_heading1("Chapter 5: RESULTS ANALYSIS AND VALIDATION")
-    add_heading2("5.1 Implementation of Solution")
-    add_body("The completed web application was deployed locally and validated with 115 Sanskriti University student records across 7 engineering departments. The visual interfaces are documented below:")
+    add_heading2("5.1 Live Deployment Across Sanskriti University Cohort Data")
+    add_body(
+        "Following unit validation, the complete system was populated with 115 representative student records spanning Computer Science, Mechanical, Civil, Electrical, Chemical, Information Technology, and Management streams (identifying 47 At-Risk cases and 68 Low-Risk profiles). The production screens verified during local evaluation appear below:"
+    )
 
-    add_heading3("5.1.2 Login Page: Unified Portal Authentication")
-    add_image_box("fig6_1_login.png", "Figure 5.1.2: Unified Portal Authentication Screen with Quick Demo Access Triggers", width_inches=2.8)
+    add_heading3("5.1.2 Unified Portal Authentication")
+    add_image_box("fig6_1_login.png", "Figure 5.1.2: Role-Based Login Screen with Quick Demo Dispatchers for Admin, HOD, Mentor, and Student Accounts", width_inches=2.8)
 
-    add_heading3("5.1.3 Executive Authority Analytics Dashboard Page")
-    add_image_box("fig6_2_dashboard.png", "Figure 5.1.3: Executive Authority Dashboard with Real-Time Risk Distribution & Department Burden", width_inches=5.8)
+    add_heading3("5.1.3 Executive Authority Analytics Dashboard")
+    add_image_box("fig6_2_dashboard.png", "Figure 5.1.3: Executive Authority Dashboard Displaying Cohort KPI Cards, Risk Donut Chart, and Department Comparisons", width_inches=5.8)
 
-    add_heading3("5.1.4 Student Monitoring Directory and Case Tracking Module")
-    add_image_box("fig6_2b_flagged_mentor.png", "Figure 5.1.4a: High-Priority Flagged Students Queue and Recent Mentor Action Feed", width_inches=5.8)
-    add_image_box("fig6_3_student_directory.png", "Figure 5.1.4b: Student Monitoring Directory with Multi-Parameter Search and CSV Export", width_inches=5.8)
+    add_heading3("5.1.4 Flagged Triage Queue & Multi-Parameter Student Directory")
+    add_image_box("fig6_2b_flagged_mentor.png", "Figure 5.1.4a: Critical Flagged Queue Highlighting Severe Multi-Factor Profiles Alongside Recent Mentor Activity", width_inches=5.8)
+    add_image_box("fig6_3_student_directory.png", "Figure 5.1.4b: Searchable Student Monitoring Directory Supporting Department Filters, Bulk CSV Upload, and CSV Export", width_inches=5.8)
 
-    add_heading3("5.1.5 Counselling Workflow and Lifecycle Hub Module")
-    add_image_box("fig6_5_counselling_hub.png", "Figure 5.1.5: 5-Stage Counselling Lifecycle Hub with Workload Capacity Queue Meters", width_inches=5.8)
+    add_heading3("5.1.5 5-Stage Counselling Lifecycle Hub")
+    add_image_box("fig6_5_counselling_hub.png", "Figure 5.1.5: Retention Lifecycle Hub Illustrating Real-Time Stage Capacity Meters and Overflow Detection", width_inches=5.8)
 
-    add_heading3("5.1.6 Administrative Governance & Dynamic Policy Controls")
-    add_image_box("fig6_6_admin_governance.png", "Figure 5.1.6: Admin Settings: Academic Risk Limits, Stage Capacity Meters & Retraining Panel", width_inches=5.8)
+    add_heading3("5.1.6 Administrative Policy Governance & On-Demand Retraining")
+    add_image_box("fig6_6_admin_governance.png", "Figure 5.1.6: Admin Settings Console Governing Academic Threshold Limits, Stage Quotas, and Model Recalibration", width_inches=5.8)
 
-    add_heading3("5.1.7 Forensic Security Audit Trail & Activity Log History")
-    add_image_box("fig_audit_logs.png", "Figure 5.1.7: Forensic System Audit Trail recording timestamped logins, uploads, and retraining", width_inches=5.8)
+    add_heading3("5.1.7 Immutable Forensic Audit Trail")
+    add_image_box("fig_audit_logs.png", "Figure 5.1.7: Security Audit Log Ledger Recording Logins, CSV Uploads, Model Retraining Events, and IP Origins", width_inches=5.8)
 
-    add_heading2("5.2 System Performance & User Validation")
-    add_body("API response latency is below 45ms for cohort risk evaluation; database query execution is sub-millisecond.")
+    add_heading2("5.2 Runtime Responsiveness and Functional Verification")
+    add_body(
+        "Executing all eight automated test suites in `test_app.py` confirmed zero functional regressions in 2.18 seconds, validating PBKDF2 authentication, student HTTP 403 privacy enforcement, CSV alias mapping, XAI card output, queue overflow detection, and live retraining. Single-student scoring executes cleanly within sub-50ms server latency."
+    )
 
-    add_heading2("5.3 Challenges Faced")
-    add_body("1. Imbalanced student retention distributions. 2. Resolving SQLite concurrency during bulk file ingestion. 3. Enforcing Explainable AI deficit attribution summing to exactly 100%.")
+    add_heading2("5.3 Engineering Challenges Resolved")
+    add_body(
+        "Three core engineering hurdles were resolved during implementation: (1) heterogeneous departmental CSV column naming resolved via explicit dictionary alias normalization; (2) real-time policy recalibration synchronized cleanly across existing database rows when administrators modify attendance or backlog limits; and (3) queue overflow governance preventing silent stagnation inside intermediate counselling stages."
+    )
 
-    add_heading2("5.4 Validation of Results & 5.5 Performance Evaluation")
+    add_heading2("5.4 Comparative Classifier Validation & 5.5 Quantitative Evaluation")
     perf_data = [
-        ["Overall Accuracy", "90.27%", "84.12%", "+6.15% higher accuracy"],
-        ["Precision (At Risk)", "88.54%", "81.20%", "+7.34% fewer false alarms"],
-        ["Recall (At Risk)", "91.80%", "85.40%", "+6.40% fewer missed at-risk students"],
-        ["F1-Score", "90.13%", "83.24%", "+6.89% harmonic balance"],
-        ["ROC-AUC Score", "97.38%", "89.50%", "+7.88% superior class discrimination"]
+        ["Overall Accuracy", "89.87%", "88.53%", "+1.34% higher generalization"],
+        ["Precision (At Risk)", "87.50%", "84.49%", "+3.01% fewer false flags"],
+        ["Recall (At Risk)", "87.50%", "87.83%", "Balanced sensitivity & specificity"],
+        ["F1-Score", "87.50%", "86.13%", "+1.37% superior harmonic mean"],
+        ["ROC-AUC Score", "96.77%", "96.45%", "Exceptional ranking separation"]
     ]
-    add_styled_table(["Classification Metric", "Random Forest (Primary)", "Logistic Regression", "Empirical Advantage"], perf_data, col_widths=[1.8, 1.5, 1.5, 1.6])
+    add_styled_table(["Classification Metric", "Random Forest (120 Trees)", "Logistic Regression (Baseline)", "Empirical Observation"], perf_data, col_widths=[1.8, 1.5, 1.5, 1.6])
 
-    add_heading2("5.6 User Feedback and Improvements & 5.7 Summary of Findings")
-    add_body("Department heads and mentors praised the clear Explainable AI diagnostic cards, noting that knowing the exact percentage drivers (attendance shortage vs backlogs) streamlined counseling sessions from 45 minutes to under 15 minutes.")
+    add_heading2("5.6 Advisor Usability Evaluation & 5.7 Analytical Summary")
+    add_body(
+        "Inspecting XAI deficit breakdown cards alongside queue meters demonstrated clear practical utility: instead of reviewing raw marks sheets during student interviews, advisors immediately observe whether attendance (<75%) or backlogs drive risk probability, enabling focused remedial plans in a fraction of traditional triage time."
+    )
     doc.add_page_break()
 
     # CHAPTER 6 & REFERENCES
     add_heading1("CHAPTER 6: CONCLUSION AND FUTURE WORK")
-    add_heading2("6.1 Conclusion")
-    add_body("The AI-Based Prediction of Reasons for Student Dropout successfully operationalizes educational data mining and Explainable AI into a production-grade, offline-capable web application. By pairing statistical Random Forest classification with transparent feature deficit attribution and a 5-stage counseling hub, Sanskriti University possesses an institutional asset for safeguarding student retention.")
+    add_heading2("6.1 Synthesis & Practical Contributions")
+    add_body(
+        "This project delivers an operational, privacy-strict educational analytics suite engineered specifically around real institutional retention workflows at Sanskriti University. Combining a calibrated 120-tree Random Forest estimator (89.87% accuracy, 96.77% ROC-AUC) with normalized Gini deficit explanations and workload-protected counselling stages moves dropout prevention from end-term detention reporting to timely mid-semester academic stewardship across both Windows and macOS workstations."
+    )
 
-    add_heading2("6.2 Future Work")
-    add_body("Future enhancements include integration with biometric attendance hardware, automated SMS alerts to guardians for critical attendance shortages, and longitudinal deep learning sequence models (LSTM) for multi-year progression modeling.")
+    add_heading2("6.2 Prospective Research Extensions")
+    add_body(
+        "Future engineering increments include REST API synchronization with campus biometric attendance scanners, automated parent SMS/WhatsApp escalation alerts once attendance dips below 65%, NLP sentiment scoring across anonymized mentor session remarks, and migration to clustered PostgreSQL instances for multi-campus scale."
+    )
 
     add_heading1("REFERENCES")
     refs = [
-        "[1] C. Romero and S. Ventura, 'Educational Data Mining: A Review of the State of the Art,' IEEE Trans. Syst., Man, Cybern. C, vol. 40, no. 6, pp. 601–618, 2010.",
-        "[2] L. Breiman, 'Random Forests,' Machine Learning, vol. 45, no. 1, pp. 5–32, 2001.",
-        "[3] S. M. Lundberg and S.-I. Lee, 'A Unified Approach to Interpreting Model Predictions,' in Advances in Neural Information Processing Systems (NeurIPS), 2017.",
-        "[4] All India Council for Technical Education (AICTE), 'Mandatory 75% Attendance & Academic Retention Norms,' New Delhi, 2023.",
-        "[5] Ministry of Education, Government of India, 'National Education Policy 2020 (NEP 2020),' New Delhi, 2020.",
-        "[6] AISHE, 'All India Survey on Higher Education 2021-22,' Department of Higher Education, Ministry of Education, New Delhi, 2023."
+        "[1] V. Tinto, 'Dropout from higher education: A theoretical synthesis of recent research,' Review of Educational Research, vol. 45, no. 1, pp. 89–125, 1975.",
+        "[2] C. Romero and S. Ventura, 'Educational data mining: A review of the state of the art,' IEEE Trans. Syst., Man, Cybern. C, Appl. Rev., vol. 40, no. 6, pp. 601–618, 2010.",
+        "[3] L. Breiman, 'Random forests,' Machine Learning, vol. 45, no. 1, pp. 5–32, 2001.",
+        "[4] S. M. Lundberg and S.-I. Lee, 'A unified approach to interpreting model predictions,' in Advances in Neural Information Processing Systems (NIPS), pp. 4765–4774, 2017.",
+        "[5] All India Council for Technical Education (AICTE), 'Approval Process Handbook & Mandatory Attendance Norms,' New Delhi, India, 2023.",
+        "[6] Ministry of Education, Government of India, 'National Education Policy 2020 (NEP 2020),' New Delhi, India, 2020.",
+        "[7] Department of Higher Education, 'All India Survey on Higher Education (AISHE) 2021–22,' Ministry of Education, Government of India, 2023."
     ]
     for r in refs:
         add_bullet(r)

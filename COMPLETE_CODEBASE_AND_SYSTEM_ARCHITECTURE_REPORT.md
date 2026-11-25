@@ -177,9 +177,9 @@ We also declare, to the best of our knowledge and belief, that this work has not
 
 ### ABSTRACT
 
-The **AI-Based Prediction of Reasons for Student Dropout** is a full-stack educational data mining and retention management web application engineered using modern Python and web technologies (Flask, Scikit-learn, SQLite, SQLAlchemy, Bootstrap 5, and Chart.js). It is designed to connect university leadership, department heads, faculty mentors, and students to proactively identify at-risk learners, explain underlying root-cause risk drivers via Explainable AI (XAI), and streamline remedial interventions through a structured 5-stage counseling lifecycle hub.
+Undergraduate engineering attrition rarely stems from an abrupt event; instead, it builds quietly across declining classroom attendance, accumulating subject arrears, stalled continuous assessment scores, and overdue tuition balances. At the School of Engineering and Information Technology (SOEIT), Sanskriti University, conventional oversight compiles these signals only after semester-end examinations conclude. To resolve this latency bottleneck, our team engineered the **AI-Based Prediction of Reasons for Student Dropout** platform using Python Flask, Scikit-learn, SQLAlchemy, SQLite, Bootstrap 5, and Chart.js.
 
-The system incorporates an Explainable AI (XAI) reason attribution engine that mathematically computes feature deficits against institutional benchmarks (attendance below 75%, internal marks below 40%, active backlogs >= 3, fee payment arrears, and LMS disengagement). Rather than presenting opaque probability numbers, the platform pairs each prediction with weighted percentage attributions and prescriptive recommendations. A dynamic 5-Stage Counselling Lifecycle Hub (At Risk -> Under Review -> Counselling -> Intervened -> Closed) prevents faculty mentor overload through administrator-configurable queue capacity meters. Strict Role-Based Access Control (RBAC) ensures student privacy isolation while enabling comprehensive executive monitoring. Empirical validation demonstrates that the primary Random Forest classifier achieves 90.3% accuracy and 94.2% ROC-AUC, providing Sanskriti University with an auditable institutional asset for safeguarding student retention.
+At the analytical core resides a calibrated 120-tree Random Forest classifier paired with a Logistic Regression benchmark over normalized feature vectors covering classroom attendance, internal marks average, active backlogs, tuition fee standing, LMS engagement score, and enrolled semester. On held-out splits, Random Forest achieved **89.87%** accuracy, **87.50%** precision, **87.50%** recall, **87.50%** F1-score, and **96.77%** ROC-AUC (surpassing Logistic Regression at 88.53% accuracy and 96.45% ROC-AUC). A localized Explainable AI (XAI) routine scales threshold shortfalls by trained Gini weights summing to 100%, routing flagged learners into a capacity-protected 5-stage retention lifecycle under 4-tier RBAC governance.
 
 ---
 
@@ -232,7 +232,7 @@ The system incorporates an Explainable AI (XAI) reason attribution engine that m
 5.2 System Performance & User Validation  
 5.3 Challenges Faced  
 5.4 Validation of Results  
-5.5 Performance Evaluation (Random Forest 90.3% vs Logistic Regression 84.1%)  
+5.5 Performance Evaluation (Random Forest 89.87% Accuracy, 96.77% AUC vs Logistic Regression 88.53%)  
 5.6 User Feedback and Improvements  
 5.7 Summary of Findings
 
@@ -3883,15 +3883,23 @@ body {
 | TC-07 | test_lifecycle_status_transition | Lifecycle Hub | Transition Logged | PASS |
 | TC-08 | test_admin_settings_update | Dynamic Policy | Thresholds Recalibrated | PASS |
 
-## Local Handover Launch Commands
+## Local Handover Launch Commands (MacBook Terminal & Windows)
 ```bash
-# 1. Open Terminal and navigate to directory
-cd C:\Users\ASUS\.gemini\antigravity\scratch\student_dropout_prediction
+# Mac / Linux Terminal:
+git clone https://github.com/Shannu1423/student-dropout-prediction.git
+cd student-dropout-prediction
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python app.py   # or PORT=5001 python app.py if AirPlay uses port 5000
 
-# 2. Start Flask Server via virtual environment
-.venv\Scripts\python.exe app.py
+# Windows PowerShell:
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
 
-# 3. Access in Web Browser
+# Access in Web Browser:
 http://127.0.0.1:5000
 ```
 

@@ -175,22 +175,22 @@ def add_front_matter_and_ch1(pages, styles, LOGO_PATH, usable_width, make_table)
     p.append(Paragraph("ABSTRACT", h1_chap))
     p.append(Spacer(1, 8))
     p.append(Paragraph(
-        "Student attrition poses a persistent challenge to higher education institutions globally. Conventional retention interventions rely heavily on lagging indicators such as end-of-semester grade sheets, resulting in delayed interventions after disengagement has already progressed past recovery. This project presents an end-to-end, full-stack <b>AI-Based Prediction of Reasons for Student Dropout</b> web system designed to identify at-risk students proactively, explain underlying risk drivers, and manage early remedial interventions.",
+        "Undergraduate departure across technical degree programs rarely strikes abruptly; rather, disengagement accumulates steadily across missed lectures, unresolved subject arrears, eroding quiz averages, and delayed tuition payments. Because departmental registers compile such records only after semester examinations conclude, faculty remediation routinely arrives too late. This capstone presents a full-stack <b>AI-Based Prediction of Reasons for Student Dropout</b> platform engineered to diagnose early attrition signals and guide timely intervention workflows.",
         body_indent
     ))
     p.append(Spacer(1, 6))
     p.append(Paragraph(
-        "The system incorporates a machine learning classification engine combining Random Forest and Logistic Regression estimators trained on synthesized educational data spanning academic indicators (attendance, internal assessment, CGPA, backlogs), behavioral indicators (LMS login frequency, library visits, assignment submissions), and socio-financial indicators (fee payment delays, parent income, distance from campus). To eliminate opaque 'black-box' predictions, a localized Explainable AI (XAI) feature attribution algorithm decomposes risk probabilities into clear risk cards with recommended remediation strategies.",
+        "Analytical scoring couples a 120-tree Random Forest classifier with a Logistic Regression reference pipeline over normalized feature vectors covering classroom attendance, internal assessment marks, active backlogs, LMS engagement score, fee payment standing, and enrolled semester. Rather than surfacing an opaque numeric score, a localized Explainable AI (XAI) deficit-attribution routine weights threshold shortfalls by empirical Gini importances to render transparent diagnostic cards and targeted remedial actions.",
         body_indent
     ))
     p.append(Spacer(1, 6))
     p.append(Paragraph(
-        "The web application is implemented in Python Flask with a relational SQLite/SQLAlchemy persistence layer. A 4-tier Role-Based Access Control (RBAC) security framework enforces strict data isolation across Administrators, Department HODs, Faculty Mentors, and Students. Key operational modules include a 5-stage Counselling Lifecycle Hub with queue capacity overflow meters, bulk CSV cohort ingestion with automated header alias mapping, and dynamic administrative threshold re-scoring.",
+        "Implemented using Python Flask alongside SQLite and SQLAlchemy ORM, the application protects learner confidentiality via a 4-tier Role-Based Access Control (RBAC) architecture spanning Administrators, Department Guides/HODs, Faculty Mentors, and Students. Operational workflows unify bulk CSV header alias mapping, live threshold re-scoring, immutable security audit trails, and a capacity-protected 5-stage retention lifecycle hub.",
         body_indent
     ))
     p.append(Spacer(1, 6))
     p.append(Paragraph(
-        "Empirical evaluation demonstrates a classification accuracy of <b>93.3%</b>, precision of <b>95.7%</b>, recall of <b>91.7%</b>, F1-score of <b>93.6%</b>, and an AUC-ROC of <b>0.965</b> across 115 cohort records. The solution provides a scalable, privacy-conscious platform bridging algorithmic data science and institutional academic counselling.",
+        "Cross-validated testing confirms <b>89.87%</b> accuracy, <b>87.50%</b> precision, <b>87.50%</b> recall, <b>87.50%</b> F1-score, and <b>96.77%</b> ROC-AUC across our SOEIT validation cohort (115 student profiles), providing Sanskriti University advisors an offline-capable decision support instrument.",
         body_indent
     ))
 
@@ -471,21 +471,21 @@ def add_front_matter_and_ch1(pages, styles, LOGO_PATH, usable_width, make_table)
     p.append(Spacer(1, 4))
     p.append(Paragraph("1.1 Introduction to Educational Data Mining & Dropout Prediction", h2_sec))
     p.append(Paragraph(
-        "Educational Data Mining (EDM) and Learning Analytics (LA) represent rapidly expanding disciplines that apply statistical modeling, machine learning, and data visualization to institutional educational data. In university settings, student retention is a primary metric of institutional health, academic efficacy, and socioeconomic mobility. Dropping out of an undergraduate degree impairs student career trajectories and diminishes institutional resources.",
+        "Analytical modeling across institutional student records—commonly termed Educational Data Mining (EDM) and Learning Analytics (LA)—transforms fragmented academic ledgers into actionable predictive signals. Preserving semester-to-semester student progression safeguards learner career outcomes, elevates graduation benchmarks, and stabilizes institutional resource allocation across university departments.",
         body_indent
     ))
     p.append(Paragraph(
-        "Historically, academic institutions tracked retention manually through fragmented registers and end-of-semester examination mark sheets. Such approaches are fundamentally reactive: by the time semester examinations conclude and failing marks are published, disengagement has often progressed beyond the point where remedial counseling can succeed. Educational data mining provides the methodologies needed to detect early behavioral, academic, and socio-financial distress signals weeks or months before formal failure occurs.",
+        "Traditional departmental oversight depends heavily on isolated attendance sheets and delayed semester-end grade tabulations. That calendar lag leaves faculty advisors reactive: once formal debarment lists circulate after final examinations begin, meaningful academic recovery is rarely achievable. Automated mid-semester risk synthesis spots multi-factor warning cues six to eight weeks earlier, restoring practical intervention windows.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("1.2 Background of the Project", h2_sec))
     p.append(Paragraph(
-        "Undergraduate engineering curricula present demanding technical, cognitive, and organizational challenges. At the School of Engineering and Information Technology (SOEIT), Sanskriti University, student cohorts exhibit diverse socio-economic backgrounds, varied prior academic preparation, and distinct commuter dynamics. Research reveals that undergraduate dropout rarely stems from a solitary catastrophic event; rather, it manifests as a cumulative erosion of engagement triggered by intertwined factors including declining classroom attendance, mounting backlogs, personal distress, and fee payment delays.",
+        "Rigorous undergraduate engineering syllabi test learners across sustained theoretical lectures, weekly lab evaluations, and continuous internal credits. Inside the School of Engineering and Information Technology (SOEIT) at Sanskriti University, learners navigate varied academic preparation levels, commuting constraints, and fee schedules. Cohort audits demonstrate that departures build cumulatively through missed lectures, rising active arrears, LMS inactivity, and delayed fee installments.",
         body_indent
     ))
     p.append(Paragraph(
-        "This capstone project addresses this institutional imperative by engineering a production-grade predictive intelligence system. The system ingests multidimensional student metrics, computes real-time dropout risk probabilities using validated machine learning models, and articulates transparent, actionable feature attribution cards for faculty advisors.",
+        "Commissioned as an applied B.Tech engineering capstone, this work delivers an offline-capable predictive web portal uniting calibrated Scikit-learn classifiers with normalized feature-deficit reason breakdowns formatted cleanly for daily faculty mentorship.",
         body_indent
     ))
 
@@ -496,7 +496,7 @@ def add_front_matter_and_ch1(pages, styles, LOGO_PATH, usable_width, make_table)
     p = pages[-1]
     p.append(Paragraph("1.3 Introduction to the Dropout Prediction System", h2_sec))
     p.append(Paragraph(
-        "The AI-Based Student Dropout Prediction System is a specialized, 3-tier web application combining predictive data mining with a structured counselling case management lifecycle. Rather than presenting generic probability scores, the system operationalizes an Explainable AI (XAI) feature attribution algorithm that isolates specific deficits—such as attendance erosion below 75%, internal assessment scores below 40%, or recurrent tuition arrears—and pairs each deficit with prescribed institutional remedies.",
+        "Designed as a modular three-tier Flask web suite, the AI-Based Prediction of Reasons for Student Dropout platform binds statistical inference directly into structured mentor workflow queues. Instead of issuing unexplained probability scores, its local Explainable AI (XAI) routine checks classroom presence (<75% threshold), continuous marks (<55% passing target), active arrears, and tuition standing against Gini weights to generate prescriptive remediation actions.",
         body_indent
     ))
     p.append(Spacer(1, 4))
@@ -508,14 +508,14 @@ def add_front_matter_and_ch1(pages, styles, LOGO_PATH, usable_width, make_table)
         ["Academic Year", "2026–2027 (Evaluation: November 2026)"],
         ["Repository (GitHub)", "https://github.com/Shannu1423/student-dropout-prediction.git"],
         ["System Architecture", "Decoupled 3-Tier Web System (Flask, SQLite/SQLAlchemy, Bootstrap 5)"],
-        ["Machine Learning Stack", "scikit-learn 1.9+, pandas 3.0+, numpy 2.5+, joblib 1.6+"],
-        ["Classification Engines", "Calibrated Random Forest Classifier & Logistic Regression Pipeline"],
+        ["Machine Learning Stack", "scikit-learn 1.3+, pandas 2.0+, numpy 1.24+, joblib 1.3+"],
+        ["Classification Engines", "120-Tree Random Forest Classifier & Logistic Regression Baseline"],
         ["Active Cohort Test Size", "115 Sanskriti University student profiles (47 At Risk, 68 Low Risk)"]
     ]
     p.append(make_table(t11_headers, t11_rows, [usable_width*0.38, usable_width*0.62]))
     p.append(Paragraph("Table 1.1 Project summary and technical specifications", caption_style))
     p.append(Paragraph(
-        "The application architecture strictly enforces Role-Based Access Control across four tiers: Administrator, Guide/HOD, Faculty Mentor, and Student. Comprehensive data isolation ensures that students have read-only visibility into their individual performance profile without exposure to peer records, while mentors access longitudinal counselling workflows.",
+        "Server-side Role-Based Access Control isolates four distinct operational views—Administrator, Guide/HOD, Faculty Mentor, and Student—ensuring student users see exclusively personal progression diagnostics with strict peer privacy protection.",
         body_indent
     ))
 
@@ -526,29 +526,29 @@ def add_front_matter_and_ch1(pages, styles, LOGO_PATH, usable_width, make_table)
     p = pages[-1]
     p.append(Paragraph("1.4 Problem Statement", h2_sec))
     p.append(Paragraph(
-        "Higher education institutions face significant challenges in detecting and preventing student dropout due to the prevalence of fragmented academic data, lack of automated predictive intelligence, and the delayed nature of manual reviews. Existing institutional ERP platforms function primarily as record-keeping systems rather than proactive early-warning mechanisms. When at-risk students are identified, faculty mentors lack granular diagnostic insights explaining why the student is struggling, leading to subjective, inconsistent, or late interventions.",
+        "University advising workflows suffer when attendance books, internal quiz tallies, and accounts ledgers operate as disconnected silos. Standard campus ERP portals record past transactions rather than flagging emerging disengagement mid-term. Even where raw grades exist, overloaded faculty advisors lack automated root-cause explanations and capacity-governed tracking queues needed for systematic early outreach.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("1.5 Aim of the Project", h2_sec))
     p.append(Paragraph(
-        "The primary aim of this project is to conceptualize, design, develop, test, and validate an integrated, full-stack AI-Based Student Dropout Prediction and Counselling Management System that continuously monitors multidimensional risk signals, explains risk drivers through transparent XAI cards, and orchestrates proactive remedial workflows.",
+        "We aim to architect, build, and validate an offline-ready full-stack software platform that synthesizes multi-source student indicators, scores attrition risk using calibrated tree ensembles, attributes weighted deficit causes through Explainable AI, and enforces structured counsellor stage progression.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("1.6 Objectives", h2_sec))
-    p.append(Paragraph("To fulfill this aim, the project executes seven concrete engineering objectives:", body))
-    p.append(Paragraph("1. Synthesize and normalize an extensive, multi-factorial student dataset incorporating academic, behavioral, and socio-financial attributes reflecting realistic Indian engineering university environments.", body))
-    p.append(Paragraph("2. Design, train, and evaluate supervised machine learning classification pipelines (Random Forest and Logistic Regression) achieving over 90% accuracy in risk stratification.", body))
-    p.append(Paragraph("3. Develop a deterministic Explainable AI (XAI) feature deficit attribution algorithm to translate model probabilities into transparent risk reason cards.", body))
-    p.append(Paragraph("4. Construct a responsive 4-tier Role-Based Access Control (RBAC) web architecture with strict peer privacy protection.", body))
-    p.append(Paragraph("5. Implement a 5-stage Counselling Lifecycle Hub with queue capacity overflow meters and mentor workload tracking.", body))
-    p.append(Paragraph("6. Provide dynamic administrative policy threshold controls and on-demand model retraining routines.", body))
-    p.append(Paragraph("7. Execute an automated test suite verifying system security, functional accuracy, and empirical ML performance.", body))
+    p.append(Paragraph("Our implementation fulfills seven verifiable engineering goals:", body))
+    p.append(Paragraph("1. Construct clean institutional training and cohort fixtures capturing academic, LMS engagement, and fee payment standing across SOEIT engineering departments.", body))
+    p.append(Paragraph("2. Train and benchmark Random Forest and Logistic Regression Scikit-learn pipelines targeting robust generalization (~90% accuracy and >0.96 ROC-AUC).", body))
+    p.append(Paragraph("3. Formulate a normalized Gini feature-deficit attribution engine producing readable diagnostic cards and remedial suggestions.", body))
+    p.append(Paragraph("4. Build a 4-tier RBAC Flask security layer isolating student self-views via PBKDF2 hashing and HTTP 403 peer guards.", body))
+    p.append(Paragraph("5. Deploy a 5-stage retention lifecycle hub featuring live mentor queue workload meters and stage saturation warnings.", body))
+    p.append(Paragraph("6. Enable administrator threshold sliders, bulk CSV alias ingestion, and live model retraining directly from the GUI.", body))
+    p.append(Paragraph("7. Verify authentication, XAI determinism, privacy guards, and retraining routines via automated unittest test cases.", body))
     p.append(Spacer(1, 4))
     p.append(Paragraph("1.7 Scope of the Project", h2_sec))
     p.append(Paragraph(
-        "The project encompasses data ingestion via single-student registration and bulk CSV uploads, machine learning inference, explainable diagnostic card rendering, counselling queue management, in-portal notifications, and security audit logging. Out of scope for this version are automated SMS gateway integrations and direct biometric API integrations.",
+        "This release spans individual registration, fault-tolerant CSV batch uploads, ensemble scoring, explainable deficit cards, 5-stage queue management, portal notifications, and audit logging. External hardware biometric scanners and paid SMS/WhatsApp gateways remain reserved for subsequent institutional rollout phases.",
         body_indent
     ))
 
@@ -559,23 +559,23 @@ def add_front_matter_and_ch1(pages, styles, LOGO_PATH, usable_width, make_table)
     p = pages[-1]
     p.append(Paragraph("1.8 Motivation and Rationale", h2_sec))
     p.append(Paragraph(
-        "The primary motivation for this project is the profound socioeconomic and personal consequence of college attrition. For students, dropping out frequently results in debt, loss of professional qualification, and personal demoralization. For Sanskriti University, attrition impacts institutional reputation, faculty workload distribution, and overall department morale. By transforming institutional data into early actionable warnings, universities can shift from passive observation to compassionate, timely remediation.",
+        "Unchecked academic withdrawal inflicts lasting educational and financial setbacks on undergraduates while reducing cohort completion benchmarks across university departments. Shifting institutional oversight from end-semester failure compilation toward compassionate mid-term remediation turns archived student telemetry into measurable human support.",
         body_indent
     ))
     p.append(Paragraph(
-        "From an engineering perspective, this project integrates diverse core computer science disciplines: supervised machine learning, applied data mining, relational database optimization, RESTful API design, authentication security, and responsive UI engineering. Constructing a complete, working software artifact delivers substantial academic and practical value.",
+        "From an engineering standpoint, building this system unifies supervised ensemble learning, interpretable mathematical feature attribution, relational database design, REST API controllers, cryptographic access governance, and responsive dashboard engineering inside one cohesive software product.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("1.9 Organization of the Report", h2_sec))
-    p.append(Paragraph("The remainder of this report is systematically organized as follows:", body))
-    p.append(Paragraph("• <b>Chapter 2: Literature Review</b> examines existing student retention systems, machine learning in higher education, explainable artificial intelligence principles, and comparative benchmarks.", body))
-    p.append(Paragraph("• <b>Chapter 3: System Analysis and Requirements</b> articulates limitations of existing systems, proposed improvements, functional/non-functional requirements, hardware/software specifications, and feasibility analyses.", body))
-    p.append(Paragraph("• <b>Chapter 4: System Design and Methodology</b> details the decoupled 3-tier architecture, ML pipeline, database schema, data dictionaries, DFDs, UML diagrams, and API specifications.", body))
-    p.append(Paragraph("• <b>Chapter 5: System Implementation</b> documents the software environment, production codebase, XAI reasoning engine, Flask backend, RBAC security, bulk ingestion, and administrative policy controls.", body))
-    p.append(Paragraph("• <b>Chapter 6: Testing and Results</b> presents the automated testing methodology, test matrices, interface screenshots, empirical ML evaluation metrics (93.3% accuracy, 0.965 AUC), and usability findings.", body))
-    p.append(Paragraph("• <b>Chapter 7: Project Management</b> reviews sprint timelines, milestone delivery, candidate work distribution, and solutions to technical challenges.", body))
-    p.append(Paragraph("• <b>Chapter 8: Learning Outcomes</b> summarizes technical proficiencies, algorithmic insights, and ethical considerations acquired throughout the project.", body))
-    p.append(Paragraph("• <b>Chapter 9 & 10: Limitations, Future Scope & Conclusion</b> summarizes system achievements against initial goals and outlines future technical roadmaps.", body))
+    p.append(Paragraph("Remaining chapters progress through the full engineering lifecycle:", body))
+    p.append(Paragraph("• <b>Chapter 2: Literature Review</b> critiques prior EDM models, Indian statutory retention constraints, XAI methods, and commercial ERP gaps.", body))
+    p.append(Paragraph("• <b>Chapter 3: System Analysis and Requirements</b> compares baseline manual workflows against functional, hardware, security, and feasibility criteria.", body))
+    p.append(Paragraph("• <b>Chapter 4: System Design and Methodology</b> specifies the 3-tier layout, ML transformations, 3NF SQLite tables, DFDs, UML flows, and REST routes.", body))
+    p.append(Paragraph("• <b>Chapter 5: System Implementation</b> walks through `ml_engine.py`, XAI deficit formulas, RBAC decorators, CSV header mapping, and queue logic.", body))
+    p.append(Paragraph("• <b>Chapter 6: Testing and Results</b> presents test fixture execution results, verified screenshots, and comparative RF metrics (89.87% accuracy, 0.968 AUC).", body))
+    p.append(Paragraph("• <b>Chapter 7: Project Management</b> details agile schedules, cross-team contributions across all four members, and resolved engineering challenges.", body))
+    p.append(Paragraph("• <b>Chapter 8: Learning Outcomes</b> reflects on applied ML tradeoffs, SQLAlchemy transactions, cryptographic safety, and ethical AI safeguards.", body))
+    p.append(Paragraph("• <b>Chapter 9 & 10: Limitations, Future Scope & Conclusion</b> records current operational boundaries, planned integrations, and objective fulfillment.", body))
 
     print(f"Front matter + Ch1 complete: {len(pages)} pages.")

@@ -28,21 +28,21 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     p.append(Spacer(1, 4))
     p.append(Paragraph("2.1 Introduction", h2_sec))
     p.append(Paragraph(
-        "Student retention and academic attrition have been subjects of sustained empirical inquiry across educational psychology and computer science for over four decades. As higher education has expanded globally, early identification of students at risk of academic failure or voluntary withdrawal has transitioned from an informal counseling duty to an essential domain of data-driven institutional management.",
+        "Empirical investigation into why undergraduates discontinue degree programs bridges educational sociology and applied data science. Expanding enrollment across technical universities has turned early dropout screening from an informal mentor intuition exercise into an essential administrative engineering discipline.",
         body_indent
     ))
     p.append(Paragraph(
-        "This chapter surveys the evolutionary trajectory of retention systems, evaluates the comparative efficacy of machine learning algorithms applied to educational datasets, analyzes modern web frameworks supporting real-time inference, and examines the emerging role of Explainable Artificial Intelligence (XAI) in establishing trust among academic advisors.",
+        "This chapter evaluates theoretical persistence frameworks, benchmarks supervised classification models suited for tabular university data, reviews modern web-deployment stacks, and examines localized Explainable Artificial Intelligence (XAI) designs that earn advisor confidence.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("2.2 Evolution of Student Retention Systems", h2_sec))
     p.append(Paragraph(
-        "The conceptual foundation of student retention research originates with Tinto’s Student Integration Model (1975), which posited that college departure is primarily driven by a student's degree of academic and social integration within the university environment. Early operational retention systems in the 1980s and 1990s relied upon physical ledgers, faculty observation notes, and periodic attendance roll calls. These manual processes suffered from severe latency, low inter-rater reliability, and complete inability to identify multi-factorial distress patterns.",
+        "Foundational sociological theories, notably Tinto’s institutional integration model (1975), attributed early undergraduate departure to weakening academic performance and social disconnectedness within campus life. Operational monitoring in earlier decades depended on physical departmental registers and mid-term roll tallies—workflows plagued by delayed tabulations and inability to detect interacting distress factors.",
         body_indent
     ))
     p.append(Paragraph(
-        "With the widespread adoption of relational Campus Management Systems (CMS) and Learning Management Systems (LMS) in the 2000s, institutions aggregated massive volumes of digital footprints. However, first-generation institutional analytics dashboards were purely descriptive, summarizing historical grade distributions and overdue fee balances without predictive capacity. Modern educational data mining leverages predictive modeling to forecast outcomes before academic standing is irrevocably compromised.",
+        "Although Campus Management Systems (CMS) and Learning Management Platforms digitized attendance and examination scores during the 2000s, legacy dashboards remained purely backward-looking, reporting past failures rather than warning faculty mid-term. Contemporary analytics couples historical learner telemetry with predictive classifiers to trigger outreach weeks ahead of examination debarment.",
         body_indent
     ))
 
@@ -52,21 +52,21 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     p = new_page()
     p.append(Paragraph("2.3 Review of Machine Learning Algorithms in Higher Education", h2_sec))
     p.append(Paragraph(
-        "Numerous supervised learning algorithms have been applied to educational retention forecasting. Logistic Regression provides straightforward coefficient interpretability and probabilistic outputs; however, it assumes linear separability and struggles to capture complex non-linear feature interactions, such as the compounding jeopardy of concurrent attendance loss and tuition arrears.",
+        "Prior educational data mining studies test several supervised classifiers on tabular student cohorts. Logistic Regression supplies clean probabilistic odds ratios, yet assumes linear additivity and underperforms when attrition accelerates non-linearly across concurrent shortfalls such as simultaneous attendance decline and unpaid tuition fees.",
         body_indent
     ))
     p.append(Paragraph(
-        "Decision Trees (e.g., CART, C4.5) generate intuitive if-then decision rules that appeal to educators, but single trees suffer from high variance and severe susceptibility to overfitting on smaller institutional cohorts. Support Vector Machines (SVM) with radial basis function kernels demonstrate strong generalization in high-dimensional spaces, but their decision boundaries are opaque, obscuring specific risk drivers from faculty counselors.",
+        "Standalone Decision Trees yield transparent threshold rules familiar to educators, yet display high split instability whenever modest cohort distributions shift. Radial-kernel Support Vector Machines isolate complex boundaries cleanly, yet conceal individual variable influence behind geometric margin transforms that faculty mentors cannot translate into counselling guidance.",
         body_indent
     ))
     p.append(Paragraph(
-        "Random Forest classifiers, an ensemble of de-correlated decision trees constructed via bootstrap aggregation (bagging) and random feature subspace selection, consistently emerge as the superior architecture for tabular educational data. Random Forests inherently manage mixed data types (continuous test scores and discrete attendance bands), resist overfitting, handle moderate class imbalance effectively, and yield well-calibrated posterior probabilities. Furthermore, ensemble tree architectures support reliable Gini-impurity feature importance metrics.",
+        "Random Forest ensembles overcome single-tree variance by averaging decorrelated classifiers trained across bootstrap samples and random feature subsets. For institutional educational records spanning continuous grades and discrete fee statuses, Random Forests deliver resilient non-linear generalization, calibrated dropout probabilities, and normalized Gini impurity feature rankings.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("2.4 Review of Existing Technologies", h2_sec))
     p.append(Paragraph(
-        "Developing an operational educational retention platform requires harmonious integration across backend computational engines, persistent relational data stores, and intuitive user interfaces. The following sections review the technology selections governing this implementation.",
+        "Converting research classifiers into reliable daily institutional tooling requires careful software architecture across runtime execution, embedded relational persistence, and lightweight browser rendering.",
         body_indent
     ))
 
@@ -76,27 +76,27 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     p = new_page()
     p.append(Paragraph("2.4.1 Flask and Scikit-Learn Frameworks", h3_subsec))
     p.append(Paragraph(
-        "Python has emerged as the definitive ecosystem for applied machine learning. The scikit-learn library provides robust, battle-tested implementations of preprocessing transformers, cross-validation iterators, and classification estimators. For the serving layer, Flask provides a lightweight, un-opinionated WSGI web microframework that allows direct native execution of serialized scikit-learn pipeline objects without inter-process serialization overhead.",
+        "Python anchors applied institutional machine learning through Scikit-learn's unified ColumnTransformer, StandardScaler, OneHotEncoder, and ensemble APIs. Hosting trained pipelines directly within a Flask WSGI application avoids separate microservice serialization hops, keeping real-time student evaluation latency below 50 milliseconds.",
         body
     ))
     p.append(Paragraph("2.4.2 SQLite and SQLAlchemy ORM", h3_subsec))
     p.append(Paragraph(
-        "SQLAlchemy provides enterprise-grade Object-Relational Mapping (ORM) and declarative abstractions over relational SQL databases. SQLite offers a zero-configuration, serverless, self-contained SQL database engine ideal for institutional offline reliability, zero network latency, and seamless version-controlled backup without complex database administration overhead.",
+        "SQLAlchemy provides strongly typed declarative ORM mapping alongside parameterized SQL safety against injection vectors. Pairing SQLAlchemy with zero-configuration embedded SQLite gives universities ACID-compliant local storage portable across Windows and macOS without dedicated database administrators.",
         body
     ))
     p.append(Paragraph("2.4.3 Bootstrap 5 and Chart.js UI", h3_subsec))
     p.append(Paragraph(
-        "Frontend visualization requires responsive components that render reliably across administrative desktop monitors and mobile tablets. Bootstrap 5 delivers a modern CSS grid system with zero jQuery dependency. Chart.js provides canvas-rendered asynchronous statistical charts displaying cohort risk distributions and historical retention trajectories.",
+        "Consistent visual ergonomics across administrative desktops and mentor laptops rely on Bootstrap 5 CSS grids without legacy jQuery dependencies. Chart.js canvas components render smooth risk donut graphs and departmental bar comparisons directly client-side from compact JSON endpoints.",
         body
     ))
     p.append(Spacer(1, 4))
     t21_h = ["Technology Component", "Selected Framework", "Evaluation & Technical Rationale"]
     t21_r = [
-        ["Backend Web Core", "Python 3.14 + Flask 3.1", "Native Python ML execution, low memory footprint, WSGI flexibility"],
-        ["Machine Learning", "scikit-learn 1.9 + joblib", "Calibrated probability estimators, reproducible pipeline serialization"],
-        ["Persistence Layer", "SQLite 3 + SQLAlchemy 2.1", "Zero-daemon deployment, atomic transactions, complete ACID compliance"],
-        ["Frontend UI/UX", "Bootstrap 5.3 + FontAwesome", "Mobile-responsive layouts, accessible contrast semantics, zero jQuery"],
-        ["Data Visualizer", "Chart.js 4.4 (Canvas API)", "High-performance client-side rendering of cohort distribution curves"]
+        ["Backend Web Core", "Python 3.11+ / Flask 3.x", "In-process Python ML scoring, compact footprint, portable WSGI server"],
+        ["Machine Learning", "scikit-learn 1.3+ / joblib", "ColumnTransformer pipelines, probability outputs, fast disk persistence"],
+        ["Persistence Layer", "SQLite 3 + SQLAlchemy 2.x", "Zero-daemon offline storage, atomic commits, normalized FK relations"],
+        ["Frontend UI/UX", "Bootstrap 5.3 + FontAwesome", "Responsive layout grids, accessible color semantics, zero jQuery"],
+        ["Data Visualizer", "Chart.js 4.x (Canvas API)", "Smooth interactive rendering of cohort distributions & attrition predictors"]
     ]
     p.append(make_table(t21_h, t21_r, [usable_width*0.28, usable_width*0.28, usable_width*0.44]))
     p.append(Paragraph("Table 2.1 Technology stack selection and evaluation rationale", caption_style))
@@ -107,21 +107,21 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     p = new_page()
     p.append(Paragraph("2.4.4 Token-Based Authentication and Password Security", h3_subsec))
     p.append(Paragraph(
-        "User authentication security is paramount when storing sensitive student academic records. Industry standards dictate cryptographically salted password hashing using PBKDF2 (Password-Based Key Derivation Function 2) or Argon2 to prevent rainbow-table and dictionary attacks. Session management utilizes cryptographically signed client-side cookies with HTTP-only and SameSite flags, mitigating Cross-Site Scripting (XSS) and Cross-Site Request Forgery (CSRF).",
+        "Protecting academic performance ledgers demands strict defense-in-depth authentication. User credentials must undergo salted cryptographic stretching via PBKDF2-SHA256 prior to disk persistence, paired with HMAC-signed Flask session cookies that enforce role-scoped route access across every protected controller.",
         body
     ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("2.5 Explainable AI (XAI) in Educational Analytics", h2_sec))
     p.append(Paragraph(
-        "A critical barrier to the adoption of machine learning in academic administration is the 'black-box' dilemma. When a complex algorithmic model classifies a student as 'High Risk' with 85% probability but fails to elucidate the contributing factors, faculty counselors are left without actionable recourse. They cannot discern whether the student requires academic tutoring, financial aid counseling, or psychological support.",
+        "Unexplained numeric warnings routinely stall institutional adoption: if software assigns an 88% attrition risk without stating whether classroom absenteeism or mounting subject arrears caused the alert, mentors cannot plan targeted parental outreach or subject tutoring during short counselling windows.",
         body_indent
     ))
     p.append(Paragraph(
-        "While model-agnostic explanation frameworks such as SHAP (SHapley Additive exPlanations) and LIME (Local Interpretable Model-agnostic Explanations) provide rigorous mathematical feature attributions, they impose substantial computational latency during batch inference and generate complex mathematical graphs that non-technical faculty struggle to interpret under time constraints.",
+        "While generic perturbation tools such as SHAP and LIME provide strong post-hoc mathematical theory, repeated sampling multiplies latency during bulk CSV cohort uploads and outputs complex additive plots unfamiliar to academic counsellors.",
         body_indent
     ))
     p.append(Paragraph(
-        "In contrast, this project implements a localized, rule-based feature deficit attribution algorithm. By evaluating individual student feature values against dynamically configured institutional policy thresholds (e.g., Attendance < 75%, Internal Marks < 40%, Fee Dues > 0), the engine generates human-readable 'Reason Cards' detailing the exact deficit and pairing it with a concrete remedial recommendation.",
+        "To resolve this clarity gap cleanly, our system computes closed-form threshold deficit attributions scaled directly by trained Random Forest Gini feature weights—delivering instant percentage breakdowns paired with tailored remediation advice.",
         body_indent
     ))
 
@@ -131,29 +131,29 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     p = new_page()
     p.append(Paragraph("2.6 Comparative Analysis of Existing Systems", h2_sec))
     p.append(Paragraph(
-        "To establish the distinct contributions of the proposed system, a comparative analysis was performed against standard commercial Campus ERPs, standalone ML research scripts, and general academic counseling logs.",
+        "Table 2.2 contrasts architectural capabilities across three distinct institutional software tiers: standard campus ERPs, standalone research notebooks, and our integrated Sanskriti University early-warning hub.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     t22_h = ["System Capability", "Commercial Campus ERP", "Generic ML Research Scripts", "Proposed Dropout Prediction System"]
     t22_r = [
-        ["Predictive Analytics", "None (Descriptive reports only)", "High (Jupyter notebook models)", "High (Calibrated ensemble inference)"],
-        ["Explainable Diagnostics", "Not Supported", "Complex mathematical plots", "Automated human-readable XAI cards"],
-        ["Counselling Workflow", "Basic static remarks field", "Not Supported", "5-Stage lifecycle queue with capacity meters"],
-        ["Role-Based Privacy", "Coarse-grained departmental", "None (Single user execution)", "4-Tier RBAC with strict peer isolation"],
-        ["Dynamic Policy Controls", "Hardcoded vendor database", "Requires code modification", "Live admin GUI threshold recalibration"],
-        ["Offline Deployment", "Cloud SaaS dependent", "Manual local scripting", "Self-contained offline production executable"]
+        ["Predictive Analytics", "None (Descriptive reports only)", "High (Jupyter notebook models)", "High (120-Tree RF calibrated scoring)"],
+        ["Explainable Diagnostics", "Not Supported", "Complex perturbation plots", "Normalized 100% XAI deficit cards"],
+        ["Counselling Workflow", "Basic static remarks field", "Not Supported", "5-Stage lifecycle queue + capacity meters"],
+        ["Role-Based Privacy", "Coarse-grained departmental", "None (Single user execution)", "4-Tier RBAC with HTTP 403 peer blocks"],
+        ["Dynamic Policy Controls", "Hardcoded vendor schema", "Requires code edits", "Live admin GUI threshold recalibration"],
+        ["Offline Deployment", "Cloud SaaS dependent", "Manual local scripting", "Self-contained Windows/Mac offline app"]
     ]
     p.append(make_table(t22_h, t22_r, [usable_width*0.25, usable_width*0.25, usable_width*0.25, usable_width*0.25]))
     p.append(Paragraph("Table 2.2 Comparative analysis with existing educational retention tools", caption_style))
     p.append(Paragraph("2.7 Research Gap and Identified Problems", h2_sec))
     p.append(Paragraph(
-        "The literature highlights three critical gaps: (1) predictive algorithms rarely bridge into actionable counseling workflows; (2) predictions remain opaque black boxes; and (3) student peer privacy is frequently breached in open department registries. This capstone directly bridges these gaps.",
+        "Published software leaves three persistent omissions: disconnected research classifiers never advance into trackable mentor workflows; raw scores hide actionable causes; and flat spreadsheets leak sensitive student standings to peers. This project resolves all three limitations.",
         body
     ))
     p.append(Paragraph("2.8 Summary", h2_sec))
     p.append(Paragraph(
-        "The literature validates the selection of Random Forest classification combined with localized Explainable AI feature attribution, implemented over a Flask/SQLAlchemy architecture, providing an optimal foundation for institutional retention management.",
+        "Critical review supports coupling a Random Forest ensemble with closed-form Gini deficit attribution inside a Flask/SQLAlchemy platform tailored for capacity-managed university mentoring.",
         body
     ))
 
@@ -167,20 +167,20 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     p.append(Spacer(1, 4))
     p.append(Paragraph("3.1 Existing System", h2_sec))
     p.append(Paragraph(
-        "At Sanskriti University, academic monitoring has historically relied on decentralized, semi-manual procedures. Faculty maintain classroom attendance rosters in hardcopy registers or isolated spreadsheets. Examination marks are aggregated post-semester into a centralized database, and fee records reside within a dedicated accounts portal. Department Heads hold periodic review meetings to review detention lists only after semester examinations conclude.",
+        "Institutional tracking at SOEIT, Sanskriti University historically operated across separate departmental workflows: subject instructors recorded attendance manually, internal quiz marks accumulated inside local spreadsheets, and tuition balances sat within accounts ledgers. HODs reviewed aggregate detention tallies only near semester examination cutoff dates.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("3.2 Limitations of the Existing System", h2_sec))
-    p.append(Paragraph("Analysis of the existing operational workflow revealed several severe structural bottlenecks:", body))
-    p.append(Paragraph("1. <b>Extreme Indicator Latency:</b> Identification occurs post-semester after failing grades are finalized, missing the critical window for remedial intervention.", body))
-    p.append(Paragraph("2. <b>Siloed Departmental Data:</b> Academic performance, behavioral indicators, and fee records reside in disparate systems, preventing holistic risk synthesis.", body))
-    p.append(Paragraph("3. <b>Subjective Mentor Triage:</b> Mentors must manually inspect hundreds of student records, leading to inconsistent identification driven by counselor intuition rather than standardized criteria.", body))
-    p.append(Paragraph("4. <b>Lack of Structured Follow-Up:</b> Counseling notes are written on paper files or informal emails without systematic tracking of action plans or stage progression.", body))
+    p.append(Paragraph("Auditing manual monitoring procedures exposed four structural vulnerabilities:", body))
+    p.append(Paragraph("1. <b>Severe Reporting Latency:</b> Detention reviews occur weeks before term exams, leaving scant time for meaningful academic remediation.", body))
+    p.append(Paragraph("2. <b>Fragmented Multi-Office Records:</b> Separating fee arrears from classroom attendance prevents advisors from seeing compounding risk.", body))
+    p.append(Paragraph("3. <b>Inconsistent Triage Criteria:</b> Manual roster scanning across 60+ advisees per mentor yields subjective selection rather than objective risk ranking.", body))
+    p.append(Paragraph("4. <b>Untracked Case Outcomes:</b> Verbal counselling or paper remarks lack stage progression timestamps, capacity alarms, and institutional auditability.", body))
     p.append(Spacer(1, 4))
     p.append(Paragraph("3.3 Proposed System", h2_sec))
     p.append(Paragraph(
-        "The proposed AI-Based Student Dropout Prediction System replaces fragmented manual monitoring with a unified, automated, proactive intelligence platform. The system continuously synthesizes academic, behavioral, and socio-financial indicators, generates real-time calibrated risk scores, articulates specific deficit reasons, and manages cases through a 5-stage counseling hub.",
+        "Our proposed full-stack web platform consolidates multi-factor learner records inside one encrypted portal, evaluates normalized dropout probabilities upon registration or CSV upload, renders prioritized XAI reason breakdowns, and manages counsellor interventions across five bounded workflow stages.",
         body_indent
     ))
 
@@ -189,15 +189,15 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     # =========================================================================
     p = new_page()
     p.append(Paragraph("3.4 Advantages of the Proposed System", h2_sec))
-    p.append(Paragraph("The proposed architecture introduces key operational advantages:", body))
-    p.append(Paragraph("• <b>Proactive Early Identification:</b> Risk scores are computed dynamically upon data upload, enabling mid-semester counseling weeks before exams.", body))
-    p.append(Paragraph("• <b>Actionable Explainability:</b> Automated diagnostic cards highlight the primary root cause, empowering counselors with tailored remediation plans.", body))
-    p.append(Paragraph("• <b>Queue Workload Balancing:</b> Visual capacity meters prevent mentor burnout and highlight institutional counselling backlogs.", body))
-    p.append(Paragraph("• <b>Data Privacy by Design:</b> Strict RBAC isolation ensures students only access their individual profiles, preventing stigma.", body))
+    p.append(Paragraph("Consolidating prediction and advisor workflows introduces measurable institutional gains:", body))
+    p.append(Paragraph("• <b>Early Risk Synthesis:</b> Scoring runs automatically on single registration or CSV upload, opening intervention windows mid-semester.", body))
+    p.append(Paragraph("• <b>Transparent Factor Weights:</b> Deterministic Gini deficit cards quantify attendance, internal mark, or fee triggers cleanly.", body))
+    p.append(Paragraph("• <b>Caseload Safeguards:</b> Stage capacity meters alert HODs whenever active mentoring queues breach configured limits.", body))
+    p.append(Paragraph("• <b>Strict Learner Confidentiality:</b> Server-side session binding blocks horizontal peer inspection across student logins.", body))
     p.append(Spacer(1, 4))
     p.append(Paragraph("3.5 Functional Requirements", h2_sec))
     p.append(Paragraph(
-        "Functional requirements define the core operational capabilities the system must deliver across user roles. Table 3.1 details the functional requirements matrix.",
+        "Table 3.1 enumerates core platform modules implemented across authentication, prediction, explainability, bulk ingestion, and administrative governance.",
         body_indent
     ))
     p.append(Spacer(1, 4))
@@ -799,33 +799,35 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     p.append(Spacer(1, 4))
     p.append(Paragraph("5.1 Introduction", h2_sec))
     p.append(Paragraph(
-        "This chapter details the technical implementation of the AI-Based Student Dropout Prediction System, documenting key algorithmic logic, software configurations, database schemas, and integration patterns.",
+        "This chapter translates the architectural design into production software modules across `ml_engine.py`, `database.py`, `app.py`, and Jinja2 presentation templates, documenting preprocessing transforms, attribution weights, authorization wrappers, and capacity meters.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("5.2 Development Environment", h2_sec))
     p.append(Paragraph(
-        "Development was executed using Python 3.11/3.14 within an isolated virtual environment (`.venv`). Source code version control was maintained using Git with semantic branching, synchronized to GitHub (`https://github.com/Shannu1423/student-dropout-prediction.git`).",
+        "Development ran inside isolated Python virtual environments (`.venv`) on Windows and macOS workstations, tracked with Git and hosted on GitHub (`https://github.com/Shannu1423/student-dropout-prediction.git`).",
         body_indent
     ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("5.3 Machine Learning Model Implementation", h2_sec))
     p.append(Paragraph(
-        "The classification pipeline is implemented in `ml_engine.py`. Continuous variables are scaled using `StandardScaler` and missing values imputed with median strategies.",
+        "Constructed in `ml_engine.py`, the pipeline pairs a `ColumnTransformer`—applying `StandardScaler` to numeric indicators and `OneHotEncoder(drop='first')` to fee status—with a 120-tree `RandomForestClassifier`.",
         body_indent
     ))
     p.append(Spacer(1, 2))
     p.append(Paragraph("<b>Listing 5.1 Pipeline Construction Excerpt (ml_engine.py)</b>", caption_style))
-    ml_code = """# ml_engine.py: Model training pipeline
-pipeline = Pipeline([
-    ('scaler', StandardScaler()),
+    ml_code = """# ml_engine.py: Preprocessor + 120-tree Random Forest pipeline
+preprocessor = ColumnTransformer(transformers=[
+    ('num', StandardScaler(), numeric_features),
+    ('cat', OneHotEncoder(drop='first', sparse_output=False), ['fee_status'])
+])
+rf_pipeline = Pipeline(steps=[
+    ('preprocessor', preprocessor),
     ('classifier', RandomForestClassifier(
-        n_estimators=100, max_depth=6,
-        class_weight='balanced', random_state=42
+        n_estimators=120, max_depth=8, min_samples_split=5, random_state=42
     ))
 ])
-pipeline.fit(X_train, y_train)
-joblib.dump(pipeline, 'models/dropout_model.pkl')"""
+rf_pipeline.fit(X_train, y_train)"""
     p.append(Preformatted(ml_code, code_style))
 
     # =========================================================================
@@ -835,7 +837,7 @@ joblib.dump(pipeline, 'models/dropout_model.pkl')"""
     p = pages[-1]
     p.append(Paragraph("5.4 Explainable AI (XAI) Attribution Engine Implementation", h2_sec))
     p.append(Paragraph(
-        "To bridge algorithmic predictions with faculty counseling, the Explainable AI attribution engine evaluates student records against institutional deficit thresholds.",
+        "Rather than emitting bare probabilities, `analyze_reasons()` measures shortfalls beneath admin-configured thresholds and multiplies each deficit ratio by its trained Gini feature importance before normalizing to 100%.",
         body_indent
     ))
     p.append(Spacer(1, 2))
@@ -1005,7 +1007,7 @@ for stage, count in stage_counts.items():
     p.append(Spacer(1, 4))
     p.append(Paragraph("5.17 GitHub Version Control & Offline Local Deployment", h2_sec))
     p.append(Paragraph(
-        "The codebase is version-controlled on GitHub (`https://github.com/Shannu1423/student-dropout-prediction.git`). The system runs completely offline on Windows via `.venv\\Scripts\\python.exe app.py` on `http://127.0.0.1:5000`.",
+        "Version history is maintained on GitHub (`https://github.com/Shannu1423/student-dropout-prediction.git`). Locally, the WSGI server launches cleanly inside `.venv` on Windows (`python app.py`) and macOS (`source .venv/bin/activate && python app.py`, port `5000` or `5001`).",
         body_indent
     ))
 

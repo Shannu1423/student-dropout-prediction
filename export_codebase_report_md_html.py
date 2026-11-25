@@ -214,8 +214,8 @@ md.append("---\n")
 # ABSTRACT
 md.append("### ABSTRACT\n")
 md.append(
-    "The **AI-Based Prediction of Reasons for Student Dropout** is a full-stack educational data mining and retention management web application engineered using modern Python and web technologies (Flask, Scikit-learn, SQLite, SQLAlchemy, Bootstrap 5, and Chart.js). It is designed to connect university leadership, department heads, faculty mentors, and students to proactively identify at-risk learners, explain underlying root-cause risk drivers via Explainable AI (XAI), and streamline remedial interventions through a structured 5-stage counseling lifecycle hub.\n\n"
-    "The system incorporates an Explainable AI (XAI) reason attribution engine that mathematically computes feature deficits against institutional benchmarks (attendance below 75%, internal marks below 40%, active backlogs >= 3, fee payment arrears, and LMS disengagement). Rather than presenting opaque probability numbers, the platform pairs each prediction with weighted percentage attributions and prescriptive recommendations. A dynamic 5-Stage Counselling Lifecycle Hub (At Risk -> Under Review -> Counselling -> Intervened -> Closed) prevents faculty mentor overload through administrator-configurable queue capacity meters. Strict Role-Based Access Control (RBAC) ensures student privacy isolation while enabling comprehensive executive monitoring. Empirical validation demonstrates that the primary Random Forest classifier achieves 90.3% accuracy and 94.2% ROC-AUC, providing Sanskriti University with an auditable institutional asset for safeguarding student retention.\n"
+    "Undergraduate engineering attrition rarely stems from an abrupt event; instead, it builds quietly across declining classroom attendance, accumulating subject arrears, stalled continuous assessment scores, and overdue tuition balances. At the School of Engineering and Information Technology (SOEIT), Sanskriti University, conventional oversight compiles these signals only after semester-end examinations conclude. To resolve this latency bottleneck, our team engineered the **AI-Based Prediction of Reasons for Student Dropout** platform using Python Flask, Scikit-learn, SQLAlchemy, SQLite, Bootstrap 5, and Chart.js.\n\n"
+    "At the analytical core resides a calibrated 120-tree Random Forest classifier paired with a Logistic Regression benchmark over normalized feature vectors covering classroom attendance, internal marks average, active backlogs, tuition fee standing, LMS engagement score, and enrolled semester. On held-out splits, Random Forest achieved **89.87%** accuracy, **87.50%** precision, **87.50%** recall, **87.50%** F1-score, and **96.77%** ROC-AUC (surpassing Logistic Regression at 88.53% accuracy and 96.45% ROC-AUC). A localized Explainable AI (XAI) routine scales threshold shortfalls by trained Gini weights summing to 100%, routing flagged learners into a capacity-protected 5-stage retention lifecycle under 4-tier RBAC governance.\n"
 )
 md.append("---\n")
 
@@ -230,7 +230,7 @@ md.append("3.1 Timeline of the Reported Problem  \n3.2 Existing Solutions  \n3.3
 md.append("## Chapter 4: DESIGN FLOW / PROCESS\n")
 md.append("4.1 Evaluation & Selection of Specifications / Features  \n4.2 Design Constraints  \n4.3 Analysis and Feature Finalization Subject to Constraints  \n4.4 Design Flow (4.4.1 Design Flow Diagram, 4.4.2 System Navigation Flow Diagram)  \n4.5 Design Selection (Decoupled 3-Tier Layered Architecture)  \n4.6 Implementation Plan / Methodology (Use Case, Sequence, Class Diagrams)\n")
 md.append("## Chapter 5: RESULTS ANALYSIS AND VALIDATION\n")
-md.append("5.1 Implementation of Solution  \n5.2 System Performance & User Validation  \n5.3 Challenges Faced  \n5.4 Validation of Results  \n5.5 Performance Evaluation (Random Forest 90.3% vs Logistic Regression 84.1%)  \n5.6 User Feedback and Improvements  \n5.7 Summary of Findings\n")
+md.append("5.1 Implementation of Solution  \n5.2 System Performance & User Validation  \n5.3 Challenges Faced  \n5.4 Validation of Results  \n5.5 Performance Evaluation (Random Forest 89.87% Accuracy, 96.77% AUC vs Logistic Regression 88.53%)  \n5.6 User Feedback and Improvements  \n5.7 Summary of Findings\n")
 md.append("## CHAPTER 6: CONCLUSION AND FUTURE WORK\n")
 md.append("6.1 Conclusion  \n6.2 Future Work\n")
 md.append("---\n")
@@ -262,8 +262,8 @@ md.append("| TC-06 | test_student_privacy_isolation | Privacy Boundary | HTTP 40
 md.append("| TC-07 | test_lifecycle_status_transition | Lifecycle Hub | Transition Logged | PASS |")
 md.append("| TC-08 | test_admin_settings_update | Dynamic Policy | Thresholds Recalibrated | PASS |\n")
 
-md.append("## Local Handover Launch Commands")
-md.append("```bash\n# 1. Open Terminal and navigate to directory\ncd C:\\Users\\ASUS\\.gemini\\antigravity\\scratch\\student_dropout_prediction\n\n# 2. Start Flask Server via virtual environment\n.venv\\Scripts\\python.exe app.py\n\n# 3. Access in Web Browser\nhttp://127.0.0.1:5000\n```\n")
+md.append("## Local Handover Launch Commands (MacBook Terminal & Windows)")
+md.append("```bash\n# Mac / Linux Terminal:\ngit clone https://github.com/Shannu1423/student-dropout-prediction.git\ncd student-dropout-prediction\npython3 -m venv .venv\nsource .venv/bin/activate\npip install -r requirements.txt\npython app.py   # or PORT=5001 python app.py if AirPlay uses port 5000\n\n# Windows PowerShell:\npython -m venv .venv\n.venv\\Scripts\\activate\npip install -r requirements.txt\npython app.py\n\n# Access in Web Browser:\nhttp://127.0.0.1:5000\n```\n")
 md.append("**Pre-configured Demo Credentials:**  \n* **Admin:** `admin` / `password123`  \n* **Guide/HOD:** `satyam` / `password123`  \n* **Mentor:** `priya` / `password123`  \n* **Student:** `ramesh` / `password123`\n")
 
 full_md = "\n".join(md)
