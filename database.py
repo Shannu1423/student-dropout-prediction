@@ -1,4 +1,5 @@
 from datetime import datetime
+import hashlib
 import json
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -19,9 +20,12 @@ class User(db.Model):
     counselling_sessions = db.relationship('CounsellingCase', backref='mentor', lazy=True)
 
     def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+        # Use pbkdf2:sha256 for cross-platform compatibility (macOS Python 3.9 LibreSSL lacks hashlib.scrypt)
+        self.password_hash = generate_password_hash(password, method='pbkdf2:sha256')
 
     def check_password(self, password):
+        if self.password_hash.startswith('scrypt:') and not hasattr(hashlib, 'scrypt'):
+            return False
         return check_password_hash(self.password_hash, password)
 
 class Student(db.Model):
