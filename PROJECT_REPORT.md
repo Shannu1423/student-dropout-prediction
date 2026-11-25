@@ -16,8 +16,10 @@
 <br>
 
 **Submitted by:**
-* **DESIREDDY RAMESH** &mdash; Enrollment No: `2302320099`
 * **SHAIK SHAFI** &mdash; Enrollment No: `2302320151`
+* **SHAIK MOHAMMAD ALI** &mdash; Enrollment No: `2302320119`
+* **SHAIK MAHAMAD YASEEN** &mdash; Enrollment No: `2302320118`
+* **DESIREDDY RAMESH** &mdash; Enrollment No: `2302320099`
 
 <br>
 
@@ -40,7 +42,7 @@
 
 ## CERTIFICATE
 
-This is to certify that the work embodied in this project report entitled **‘AI-Based Prediction of Reasons for Student Dropout’**, submitted by **DESIREDDY RAMESH** (Enrollment No: **2302320099**) and **SHAIK SHAFI** (Enrollment No: **2302320151**), in partial fulfillment of the requirement for the award of the degree of **Bachelor of Technology in Computer Science and Engineering** of **Sanskriti University, Mathura**, during the academic year **2026&ndash;2027**, is a record of bonafide work carried out by the candidates under the supervision of the undersigned.
+This certifies that the B.Tech capstone documentation titled **‘AI-Based Prediction of Reasons for Student Dropout’**, authored by **SHAIK SHAFI** (`2302320151`), **SHAIK MOHAMMAD ALI** (`2302320119`), **SHAIK MAHAMAD YASEEN** (`2302320118`), and **DESIREDDY RAMESH** (`2302320099`) toward partial fulfillment of the **Bachelor of Technology in Computer Science and Engineering** at **Sanskriti University, Mathura** during session **2026&ndash;2027**, constitutes an authentic record of independent engineering work supervised by the undersigned.
 
 <br><br>
 
@@ -74,7 +76,7 @@ Date: ____________________
 
 ## DECLARATION
 
-We, **DESIREDDY RAMESH** (Enrollment No: **2302320099**) and **SHAIK SHAFI** (Enrollment No: **2302320151**), students of **Bachelor of Technology in Computer Science and Engineering**, Session **2026&ndash;2027**, Sanskriti University, Mathura, hereby declare that the work presented in this project report entitled **“AI-Based Prediction of Reasons for Student Dropout”** is the outcome of our own bonafide work, is correct to the best of our knowledge, and has been carried out with due regard to engineering ethics. The report contains no material previously published or written by another person, and no material accepted for the award of any other degree or diploma of this or any other institution, except where due acknowledgement has been made in the text and in the list of references.
+We, **SHAIK SHAFI** (`2302320151`), **SHAIK MOHAMMAD ALI** (`2302320119`), **SHAIK MAHAMAD YASEEN** (`2302320118`), and **DESIREDDY RAMESH** (`2302320099`), candidates enrolled in **Bachelor of Technology in Computer Science and Engineering**, Session **2026&ndash;2027**, Sanskriti University, Mathura, affirm that the software artifact and technical findings presented in **“AI-Based Prediction of Reasons for Student Dropout”** represent our original engineering creation. No unacknowledged external text or previously awarded degree submission appears in this report; all scholarly sources consulted have been formally cited in the References chapter.
 
 <br><br><br>
 
@@ -83,18 +85,32 @@ We, **DESIREDDY RAMESH** (Enrollment No: **2302320099**) and **SHAIK SHAFI** (En
 <td style="border:none; background:transparent; width:50%; vertical-align:top;">
 ________________________________________<br>
 **(Signature of Candidate 1)**<br>
-**DESIREDDY RAMESH**<br>
-Enrollment No: `2302320099`<br>
-B.Tech CSE &ndash; Sanskriti University<br>
-Date: ____________________
+**SHAIK SHAFI**<br>
+Enrollment No: `2302320151`<br>
+B.Tech CSE &ndash; Sanskriti University
 </td>
 <td style="border:none; background:transparent; width:50%; vertical-align:top; text-align:right;">
 ________________________________________<br>
 **(Signature of Candidate 2)**<br>
-**SHAIK SHAFI**<br>
-Enrollment No: `2302320151`<br>
-B.Tech CSE &ndash; Sanskriti University<br>
-Date: ____________________
+**SHAIK MOHAMMAD ALI**<br>
+Enrollment No: `2302320119`<br>
+B.Tech CSE &ndash; Sanskriti University
+</td>
+</tr>
+<tr style="border:none; background:transparent;">
+<td style="border:none; background:transparent; width:50%; vertical-align:top; padding-top:20px;">
+________________________________________<br>
+**(Signature of Candidate 3)**<br>
+**SHAIK MAHAMAD YASEEN**<br>
+Enrollment No: `2302320118`<br>
+B.Tech CSE &ndash; Sanskriti University
+</td>
+<td style="border:none; background:transparent; width:50%; vertical-align:top; text-align:right; padding-top:20px;">
+________________________________________<br>
+**(Signature of Candidate 4)**<br>
+**DESIREDDY RAMESH**<br>
+Enrollment No: `2302320099`<br>
+B.Tech CSE &ndash; Sanskriti University
 </td>
 </tr>
 </table>
@@ -110,31 +126,21 @@ Date: ____________________
 
 # ACKNOWLEDGEMENT
 
-We express our sincere gratitude to the Hon’ble Chancellor, the Hon’ble Vice Chancellor, and the management of **Sanskriti University, Mathura**, for providing an academic environment in which students are encouraged to translate engineering theory and data science principles into robust, working software.
+We extend genuine appreciation to the Hon'ble Chancellor, Chief Executive Officer, Vice Chancellor, and Respected Dean of SOEIT at **Sanskriti University, Mathura**, for nurturing an engineering curriculum focused on solving institutional challenges through applied software engineering. Above all, we are deeply grateful to our Project Supervisor, **Mr. Satyam Dwivedi**, Assistant Professor (SOEIT), whose continuous technical critiques guided every phase of this work—most notably prompting us to pair probability predictions with normalized Explainable AI reason cards and workload-bounded counselling stages.
 
-We are deeply thankful to the **Dean of the School of Engineering and Information Technology (SOEIT)** for the institutional facilities, laboratory resources, and encouragement extended throughout this capstone project. We also extend our gratitude to the faculty members of the Department of Computer Science and Engineering for providing a rigorous foundation in algorithms, database engineering, web development, and applied machine learning.
-
-We owe special thanks to our Faculty Guide, **Mr. Satyam Dwivedi**, Assistant Professor, SOEIT, whose technical guidance, constructive reviews, and persistent encouragement shaped the design and architecture of this system. His rigorous evaluation of our progress, including the Mid-Term Checkpoint review, kept the project focused on solving institutional retention bottlenecks through Explainable AI (XAI) rather than generic black-box prediction.
-
-We also acknowledge the open-source software communities and maintainers of Python, Flask, scikit-learn, SQLite, SQLAlchemy, Bootstrap 5, and Chart.js, whose well-documented libraries and tools made the implementation of this production-ready application possible.
-
-Finally, we convey our deepest appreciation to our parents, family, and peers for their unconditional moral support, patience, and encouragement throughout the duration of this project work.
+We also thank our families and classmates for steady encouragement across late debugging and data-testing sprints, as well as the open-source maintainers behind Python, Flask, Scikit-learn, SQLAlchemy, SQLite, Bootstrap 5, and Chart.js. Each signing candidate verifies that this capstone submission represents authentic effort prepared specifically for this B.Tech evaluation.
 
 <br><br>
 
 <table style="width:100%; border:none; background:transparent;">
 <tr style="border:none; background:transparent;">
 <td style="border:none; background:transparent; width:50%; vertical-align:top;">
-**DESIREDDY RAMESH**<br>
-Enrollment No: `2302320099`<br>
-B.Tech CSE, SOEIT<br>
-Sanskriti University, Mathura
+**SHAIK SHAFI** (`2302320151`)<br>
+**SHAIK MOHAMMAD ALI** (`2302320119`)
 </td>
 <td style="border:none; background:transparent; width:50%; vertical-align:top; text-align:right;">
-**SHAIK SHAFI**<br>
-Enrollment No: `2302320151`<br>
-B.Tech CSE, SOEIT<br>
-Sanskriti University, Mathura
+**SHAIK MAHAMAD YASEEN** (`2302320118`)<br>
+**DESIREDDY RAMESH** (`2302320099`)
 </td>
 </tr>
 </table>  
@@ -146,19 +152,17 @@ Sanskriti University, Mathura
 
 # ABSTRACT
 
-Student attrition represents a critical challenge in higher education, affecting institutional reputation, financial sustainability, and the academic trajectories of vulnerable learners. Conventional academic administration relies heavily on retrospective measures &mdash; end-of-term grade registers, delayed attendance compilations, and informal faculty warnings &mdash; by which time academic disengagement or financial distress has often reached an irreversible threshold. This project, **AI-Based Prediction of Reasons for Student Dropout**, presents a fully realized, multi-tier early-warning and decision-support web application developed for **Sanskriti University**. The system shifts institutional intervention from reactive damage control to proactive, algorithmic risk mitigation.
+Undergraduate engineering attrition rarely strikes abruptly; rather, disengagement builds incrementally across declining lecture attendance, mounting subject arrears, eroding internal test scores, and delayed fee installments. At the School of Engineering and Information Technology (SOEIT), Sanskriti University, conventional oversight compiles detention metrics only after term examinations finish, narrowing opportunities for timely academic recovery. **AI-Based Prediction of Reasons for Student Dropout** delivers an offline-ready full-stack web suite designed to pull risk triage weeks upstream into proactive mid-semester intervention.
 
-The core computational engine utilizes machine learning classification algorithms implemented with Python and `scikit-learn`. A primary **Random Forest Classifier** (100 ensemble estimators) is benchmarked against a baseline **Logistic Regression** model across six key behavioral and socio-academic features: class attendance percentage, internal examination averages, active subject backlog counts, fee payment compliance status, Learning Management System (LMS) engagement scores, and academic semester progression. The trained model demonstrates high predictive discrimination, achieving **90.4% empirical classification accuracy** and an **Area Under the ROC Curve (ROC-AUC) of 0.942**.
+Inside the analytical engine (`ml_engine.py`), a 120-tree **Random Forest Classifier** benchmarked against a **Logistic Regression** baseline runs across normalized feature vectors spanning attendance percentage, continuous internal marks, active backlogs, tuition payment standing, LMS engagement score, and current semester. On held-out stratified splits, the Random Forest pipeline records **89.87% accuracy**, **87.50% precision**, **87.50% recall**, **87.50% F1-score**, and **96.77% ROC-AUC** (outperforming Logistic Regression at 88.53% accuracy and 96.45% ROC-AUC).
 
-Crucially, unlike opaque predictive models, the system incorporates an **Explainable AI (XAI) Reason Attribution Engine**. By combining normalized Gini feature importances with individual student deficits calculated against institutional benchmarks, the engine outputs human-interpretable percentage-weighted root causes (e.g., *Attendance Deficit: 41%, Active Backlogs: 24%, Fee Overdue: 18%, Low LMS Engagement: 12%*), providing mentors with clear diagnostic justifications.
+Crucially, rather than displaying opaque scores, our localized **Explainable AI (XAI) Deficit Attribution Routine** weights threshold shortfalls by empirical Gini importances (`Attendance 43.79%`, `Internal Marks 21.23%`, `Backlogs 15.89%`, `LMS Activity 11.08%`, `Tuition Standing 6.18%`, `Semester 1.84%`) normalized to 100%, surfacing readable diagnostic reason cards alongside remedial recommendations.
 
-The software architecture is engineered as a three-tier web application using Python Flask, SQLite, and Flask-SQLAlchemy. It features an integrated **5-Stage Counselling Lifecycle Hub** (`At Risk` $\rightarrow$ `Under Review` $\rightarrow$ `Counselling` $\rightarrow$ `Intervened` $\rightarrow$ `Closed` $\rightarrow$ `Low Risk`) that prioritizes students by predicted risk severity and prevents mentor overload through administrator-configurable queue capacity meters. An **Admin Policy Control Panel** allows institutional leadership to customize backlog, attendance, marks, and fee threshold limits, with one-click re-scoring across all student cohorts. Strict **Role-Based Access Control (RBAC)** guarantees absolute student data privacy, restricting student portal views to personal academic cards while providing faculty and executive leadership with scoped caseloads, real-time analytics dashboards, and tamper-evident audit logs.
-
-The system was validated using an automated test suite comprising eight comprehensive unit and integration tests covering authentication, inference, lifecycle progression, batch CSV ingestion, policy enforcement, and privacy isolation. The completed application provides educational institutions with a deployable, auditable, and interpretable platform for improving student retention and academic success.
+Built on Python Flask and SQLite/SQLAlchemy, the application protects learner confidentiality through **4-tier Role-Based Access Control (RBAC)** blocking peer inspection with HTTP 403, while coordinating advisor caseloads inside a capacity-monitored **5-Stage Counselling Lifecycle Hub** (`At Risk` $\rightarrow$ `Under Review` $\rightarrow$ `Counselling` $\rightarrow$ `Intervened` $\rightarrow$ `Closed`). All eight automated integration tests in `test_app.py` pass cleanly across both Windows and macOS workstations.
 
 <br>
 
-**Keywords:** Student Dropout Prediction, Educational Data Mining (EDM), Explainable AI (XAI), Random Forest, Flask, Scikit-learn, Role-Based Access Control, Counselling Lifecycle Management, Early Warning System.
+**Keywords:** Attrition Forecasting, Explainable Educational Analytics, Gini Deficit Attribution, Random Forest Ensemble, Cohort Lifecycle Governance, Peer Privacy Isolation, Flask MVC Architecture.
 
 <div align="center"><strong>v</strong></div>
 <div style="page-break-after: always;"></div>
@@ -431,28 +435,24 @@ The system was validated using an automated test suite comprising eight comprehe
 # INTRODUCTION
 
 ## 1.1 Introduction to Educational Data Mining & Dropout Prediction
-Higher education institutions worldwide face persistent challenges in retaining enrolled students through to successful degree completion. The phenomenon of university dropout represents not merely an institutional loss of tuition and resources, but a significant personal, financial, and emotional setback for students and their families. In traditional university settings, monitoring student retention has been largely manual, fragmented, and retrospective. Data concerning lecture attendance, continuous assessment marks, semester backlog examinations, fee clearance, and virtual learning environment engagement are typically maintained in disparate departmental spreadsheets or legacy enterprise resource databases. Consequently, academic advisors and heads of departments often identify struggling students only after end-of-semester examination failures or formal withdrawal requests, when remedial intervention is least effective.
+Undergraduate degree completion across engineering campuses depends on consistent participation across theory lectures, laboratory coursework, progressive internal quizzes, and fee compliance. In practice, traditional university departments monitor attrition reactively through isolated spreadsheets compiled late in the term. Once formal debarment notices issue near end-semester exams, faculty remediation arrives too late for effective recovery.
 
-Educational Data Mining (EDM) and predictive machine learning offer a transformative paradigm. By analyzing historical behavioral patterns, modern data mining techniques can identify latent early indicators of academic disengagement weeks or months before a student reaches a crisis point. Furthermore, integrating predictive modeling with **Explainable AI (XAI)** bridges the crucial gap between automated algorithmic alerts and actionable pedagogical counseling, ensuring that faculty mentors understand exactly *why* an individual student is at risk and what specific remedial steps are required.
+Applying computational data mining and statistical modeling over institutional records shifts retention management upstream into mid-semester action. Pairing calibrated classification algorithms with transparent **Explainable AI (XAI)** bridges statistical scoring and day-to-day faculty mentoring: rather than guessing whether low grades or financial arrears triggered a warning alert, advisors immediately read quantified causal reasons.
 
 ## 1.2 Background of the Project
-Sanskriti University provides multi-disciplinary undergraduate and postgraduate education across engineering, management, humanities, and applied sciences. Within the School of Engineering and Information Technology (SOEIT), academic progression requires sustained student engagement across continuous internal assessments, laboratory sessions, mandatory 75% lecture attendance, and timely semester fee clearance.
-
-Historically, identifying students in distress relied upon periodic mid-term attendance compilations and informal observations by class coordinators. This approach suffered from four systemic deficiencies:
-1. **Temporal Delay:** Attendance and internal marks were compiled manually at the end of each month, creating a 3- to 4-week blind spot during which disengaged students could not be supported.
-2. **Isolated Indicators:** A student with 72% attendance might appear acceptable in an attendance review, but when coupled with two uncleared backlogs and an overdue fee installment, their combined dropout probability increases dramatically. Manual processes fail to synthesize multi-variable non-linear correlations.
-3. **Black-Box Frustration:** When statistical risk flags were raised, faculty mentors received no diagnostic breakdown explaining whether the primary driver was academic comprehension, financial distress, or attendance shortage.
-4. **Lack of Lifecycle Tracking:** Once a student was flagged, no centralized system tracked whether counseling was held, what remedial action plan was prescribed, or whether the student successfully normalized their academic standing.
-
-To resolve these institutional bottlenecks, this capstone project was undertaken to engineer a unified, AI-driven Student Dropout Prediction and Counselling Lifecycle Management platform.
+At the School of Engineering and Information Technology (SOEIT), Sanskriti University, technical degree progression revolves around statutory attendance eligibility (`>= 75%`), continuous internal evaluation benchmarks, active subject backlogs, and semester fee standing. Past informal monitoring exposed four operational weaknesses:
+1. **Calendar Delay:** Compiling monthly attendance manually leaves 3–4 week visibility gaps while learner engagement drops.
+2. **Siloed Risk Signals:** A learner holding 72% attendance may slip past single-metric checks even when paired with two active arrears and overdue tuition fees.
+3. **Opaque Warning Alerts:** Raw numeric scores offer no causal clarity ahead of mentor-guardian meetings.
+4. **Untracked Interventions:** Verbal or paper notes lack stage progression tracking, capacity bounds, and forensic audit logs.
 
 ## 1.3 Introduction to the Dropout Prediction System
-The **AI-Based Prediction of Reasons for Student Dropout** system is an end-to-end web portal and machine learning software suite designed specifically for Sanskriti University. The application unifies predictive analytics with practical, day-to-day academic administration:
-* **Machine Learning Classification:** Integrates a trained **Random Forest Classifier** and baseline **Logistic Regression** pipeline to evaluate real-time dropout risk probabilities (0% to 100%).
-* **Explainable AI (XAI) Attribution:** Calculates feature deficit percentages against administrator-configurable benchmarks to generate human-readable diagnostic cards (e.g., *Attendance Deficit: 41%, Active Backlogs: 24%, Fee Overdue: 18%*).
-* **5-Stage Counselling Lifecycle Hub:** Routes flagged students through a structured intervention queue (`At Risk` $\rightarrow$ `Under Review` $\rightarrow$ `Counselling` $\rightarrow$ `Intervened` $\rightarrow$ `Closed` $\rightarrow$ `Low Risk`) with workload capacity meters preventing mentor burnout.
-* **Administrative Governance:** Empowers administrators to adjust backlog and attendance thresholds dynamically, trigger on-demand model retraining, and re-score entire student cohorts in one click.
-* **Role-Based Security:** Features dedicated interfaces for System Administrators, Department Heads, Faculty Mentors, and Students, guaranteeing complete data isolation and FERPA/data protection compliance.
+Our **AI-Based Prediction of Reasons for Student Dropout** web suite unifies data ingestion, calibrated risk scoring, diagnostic explanation, and mentor case governance:
+* **120-Tree Random Forest Engine:** Benchmarked against Logistic Regression inside `ml_engine.py` achieving **89.87% accuracy** and **96.77% ROC-AUC**.
+* **Normalized XAI Attribution:** Computes threshold shortfalls weighted by empirical Gini feature weights (`Attendance 43.79%`, `Internal Marks 21.23%`, `Backlogs 15.89%`, `LMS Activity 11.08%`, `Tuition Standing 6.18%`, `Semester 1.84%`) normalized to 100%.
+* **5-Stage Counselling Hub:** Guides cases across `At Risk` $\rightarrow$ `Under Review` $\rightarrow$ `Counselling` $\rightarrow$ `Intervened` $\rightarrow$ `Closed` protected by queue saturation meters.
+* **Dynamic Policy Panel:** Allows administrators to adjust statutory thresholds live and trigger instant batch re-scoring.
+* **4-Tier RBAC Privacy:** Segregates Administrator, HOD, Mentor, and Student views, blocking peer lookup attempts with strict HTTP 403/redirect guards.
 
 ```
 Table 1.1 Project summary and technical specifications
@@ -463,7 +463,8 @@ Project Title            AI-Based Prediction of Reasons for Student Dropout
 Project Type             Machine Learning & Full-Stack Web Application (Undergraduate Capstone Project)
 Academic Department      Department of Computer Science and Engineering
 School / University      School of Engineering and Information Technology (SOEIT), Sanskriti University, Mathura
-Student Candidates       DESIREDDY RAMESH (2302320099) & SHAIK SHAFI (2302320151)
+Student Candidates       SHAIK SHAFI (2302320151), SHAIK MOHAMMAD ALI (2302320119),
+                         SHAIK MAHAMAD YASEEN (2302320118), DESIREDDY RAMESH (2302320099)
 Faculty Guide            Mr. Satyam Dwivedi, Assistant Professor, SOEIT
 Project Start Date       25/08/2026
 Mid-Term Review Date     28/09/2026
@@ -531,44 +532,38 @@ The remainder of this project report is organized as follows:
 # LITERATURE REVIEW
 
 ## 2.1 Introduction
-Educational Data Mining (EDM) is an emerging interdisciplinary research domain concerned with developing and applying computational methods to explore data originating from educational environments. This chapter examines academic literature and technological frameworks related to student attrition modeling, predictive classification algorithms, Explainable Artificial Intelligence (XAI), and web application architectures in higher education.
+Analyzing undergraduate departure draws across institutional sociology, university governance policies, and applied tabular machine learning. This review critiques foundational student integration theories, evaluates supervised classification architectures over mixed academic records, compares Explainable AI (XAI) strategies for advisor readiness, and isolates practical engineering gaps in commercial ERP suites.
 
 ## 2.2 Evolution of Student Retention Systems
-Research into student retention began with sociological and psychological models. Tinto’s (1975) seminal Student Integration Model established that academic persistence is determined by a student’s academic integration (grade performance, intellectual development) and social integration (peer relationships, faculty interactions). Bean and Metzner (1985) expanded this model for non-traditional students, emphasizing external factors such as finances, family responsibilities, and external employment.
-
-In the early 2000s, universities transitioned from paper records to electronic Student Information Systems (SIS). However, initial analytics remained purely descriptive: generating historical reports on attrition after the academic year had concluded. The advent of Learning Management Systems (LMS) such as Moodle, Canvas, and Blackboard provided fine-grained behavioral telemetry &mdash; login frequencies, assignment submission timestamps, and forum participation &mdash; enabling predictive rather than descriptive analytics (Siemens & Long, 2011).
+Foundational retention models (Tinto, 1975; Bean & Metzner, 1985) framed student continuation around longitudinal academic integration and external financial pressures. Campus record systems of subsequent decades digitized roll calls and marks sheets into relational databases yet generated only backward-looking semester summaries. Modern LMS engagement tracking (Siemens & Long, 2011) opened telemetry streams suited to proactive mid-term warning rather than delayed post-failure reporting.
 
 ## 2.3 Review of Machine Learning Algorithms in Higher Education
-A wide array of machine learning techniques have been explored for predicting student outcomes:
-1. **Decision Trees (ID3, C4.5, CART):** Widely utilized due to their intuitive, tree-structured rules. However, single decision trees suffer from high variance and severe overfitting on small educational cohorts (Han et al., 2011).
-2. **Random Forest (RF):** Breiman (2001) introduced bootstrap aggregation (bagging) of randomized decision trees. Extensive empirical studies (e.g., Berens et al., 2019; Marquez-Vera et al., 2016) demonstrate that Random Forest consistently outperforms individual decision trees, Naive Bayes, and k-Nearest Neighbors in predicting student attrition, achieving superior generalization and robustness against noisy educational data.
-3. **Logistic Regression (LR):** Serves as the classic statistical baseline for binary classification. While highly interpretable via odds ratios, standard logistic regression struggles to model complex non-linear interactions, such as the synergistic risk between poor attendance and fee overdue status.
-4. **Artificial Neural Networks (ANN) & Deep Learning:** While ANNs achieve high predictive accuracy on massive datasets, they act as opaque "black boxes" lacking human-interpretable explanations. In educational counseling, recommending that a student be intervened without explaining *why* severely undermines faculty trust.
+Prior educational analytics benchmarks compare four supervised families:
+1. **Single Decision Trees:** Offer readable branch splits yet exhibit high split variance whenever modest undergraduate cohorts shift across semesters (Han et al., 2011).
+2. **Random Forest Ensembles:** Bootstrap aggregation across randomized attribute subsets (Breiman, 2001) handles combined numerical/categorical variables robustly while mitigating overfitting in university datasets (Berens et al., 2019; Marquez-Vera et al., 2016).
+3. **Logistic Regression:** Provides fast linear baselines via log-odds yet misses compounding non-linear interactions such as simultaneous attendance decline and unpaid tuition fees.
+4. **Deep Neural Networks:** Demand larger training sets and produce opaque activation boundaries ill-suited to counselor-student sessions without auxiliary explanations.
 
 ```
-Table 2.1 Review of core technologies used in the system
+Table 2.1 Technology stack evaluation summary
 ------------------------------------------------------------------------------------------------------------------------
 Technology       Role in the Project        Key Characteristics & Justification
 ------------------------------------------------------------------------------------------------------------------------
-Python 3.10+     Core Programming Language  Rich scientific ecosystem (scikit-learn, pandas, numpy), rapid web prototyping.
-scikit-learn     Machine Learning Library   Production-grade algorithms, ensemble estimators, standardized preprocessing.
-Flask 3.1        Web Backend Framework      Lightweight WSGI microframework, granular route control, minimal architectural bloat.
-SQLAlchemy / SQLite Persistence & ORM       ACID-compliant relational storage, zero-config local operations, production schema parity.
-Bootstrap 5      Frontend CSS Framework     Mobile-first responsive grid, modern typography, zero-dependency components.
-Chart.js 4.4     Data Visualization Library Canvas-based interactive charting, responsive animation, light client footprint.
-Joblib           Artifact Serialization     Efficient disk serialization of scikit-learn pipelines, transformers, and models.
+Python 3.11+     Core Runtime Language      Unified environment hosting both web WSGI handling and Scikit-learn math.
+scikit-learn     Machine Learning Pipeline  ColumnTransformer scaling/one-hot encoding + 120-tree RF classifier.
+Flask 3.x        Web Microframework         Direct route control, PBKDF2 cookie sessions, zero microservice latency.
+SQLAlchemy / SQLite Persistence & ORM       Atomic transactions, foreign-key safety, offline cross-platform portability.
+Bootstrap 5      Frontend CSS Framework     Accessible semantic badges and responsive desktop/mobile layout grids.
+Chart.js 4.x     Analytics Visualizer       Smooth client-side donut and departmental bar charts via JSON APIs.
+Joblib           Pipeline Serialization     Fast disk persistence for models/dropout_models.pkl artifacts.
 ------------------------------------------------------------------------------------------------------------------------
 ```
 
 ## 2.4 Review of Existing Technologies
-Web-based predictive platforms require seamless synchronization between data ingestion, model inference, and interactive visualization. The Python scientific ecosystem represents the gold standard for applied data science. `scikit-learn` provides robust implementations of tree-based ensembles and linear models with cross-validation utilities. 
-
-For web deployment, Python microframeworks like Flask offer significant advantages over monolithic frameworks like Django. Flask’s minimalist design avoids unnecessary overhead, providing complete control over session handling, REST routing, and middleware integration. On the client side, Bootstrap 5 eliminates jQuery dependencies, enabling high-performance rendering across heterogeneous mobile and desktop browsers.
+Running Flask in the same Python process as Scikit-learn removes network serialization overhead during synchronous risk scoring. Paired with SQLAlchemy ORM over embedded SQLite, university labs gain ACID data durability across Windows and macOS without external database server installation.
 
 ## 2.5 Explainable AI (XAI) in Educational Analytics
-A critical flaw identified across prior EDM literature is the "Explanation Gap." Algorithmic predictions alone fail to drive institutional action; counselors require actionable diagnoses. Ribeiro et al. (2016) proposed LIME (Local Interpretable Model-agnostic Explanations), while Lundberg and Lee (2017) introduced SHAP (SHapley Additive exPlanations) based on cooperative game theory. While mathematically rigorous, calculating SHAP values on web servers introduces latency and requires statistical training for faculty mentors to interpret.
-
-In this project, a dedicated, domain-specific Explainable AI (XAI) algorithm was designed. It synthesizes tree-based Gini feature importances with localized parameter deficits computed against administrative policy rules. This achieves real-time (<5ms) explanation generation, outputting intuitive percentage contributions that any academic advisor can immediately understand and act upon.
+Generic model-agnostic tools—LIME (Ribeiro et al., 2016) and SHAP (Lundberg & Lee, 2017)—compute perturbation approximations that multiply batch CSV upload compute time and output intricate graphs unfamiliar to busy departmental mentors. Implementing a direct closed-form deficit scorer weighted by trained Gini importances executes in under 5ms per record and emits intuitive 100%-normalized reason cards mapped to university limits.
 
 ```
 Table 2.2 Comparative matrix of existing retention approaches vs proposed system
@@ -1774,21 +1769,22 @@ $$\text{Precision} = \frac{TP}{TP + FP}, \quad \text{Recall} = \frac{TP}{TP + FN
 ```
 Table 6.9 Empirical evaluation comparison: Random Forest vs Logistic Regression
 ------------------------------------------------------------------------------------------------------------------------
-Performance Metric          Random Forest (Primary Model)  Logistic Regression (Baseline)  Observed Advantage
+Performance Metric          Random Forest (120 Trees)      Logistic Regression (Baseline)  Observed Advantage
 ------------------------------------------------------------------------------------------------------------------------
-Classification Accuracy     90.40%                         84.20%                          + 6.20%
-ROC-AUC Score               0.9421                         0.8915                          + 0.0506
-Precision (At-Risk Class)   88.90%                         81.50%                          + 7.40%
-Recall (Sensitivity)        91.20%                         86.00%                          + 5.20%
-F1-Score (Harmonic Mean)    0.9003                         0.8369                          + 0.0634
-Inference Latency (per rec) 2.1 ms                         0.4 ms                          Negligible (sub-5ms)
-Feature Importance Ranking  Attendance (34%), Marks (26%), Coefficients (Att: -1.82,       Non-linear tree splits
-                            Backlogs (21%), Fee (11%),     Backlogs: +1.45, Marks: -0.98)  capture feature interactions
-                            LMS (5%), Semester (3%)
+Classification Accuracy     89.87%                         88.53%                          + 1.34% higher generalization
+ROC-AUC Score               96.77%                         96.45%                          Superior ranking discrimination
+Precision (At-Risk Class)   87.50%                         84.49%                          + 3.01% fewer false alarms
+Recall (Sensitivity)        87.50%                         87.83%                          Balanced risk capture
+F1-Score (Harmonic Mean)    87.50%                         86.13%                          + 1.37% harmonic gain
+Inference Latency (per rec) < 15 ms                        < 5 ms                          Real-time sub-50ms target met
+Feature Importance Ranking  Attendance (43.79%),           Standardized linear coefficients Captures compounded non-linear
+                            Internal Marks (21.23%),       cannot capture combined shocks   attendance + backlog risks
+                            Backlogs (15.89%), LMS (11.08%),
+                            Fee Status (6.18%), Sem (1.84%)
 ------------------------------------------------------------------------------------------------------------------------
 ```
 
-The empirical findings confirm that Random Forest achieves superior classification performance across every evaluation metric. Specifically, achieving a **Recall of 91.2%** is critical in educational early-warning systems, as failing to detect a truly struggling student (False Negative) is far more detrimental than conducting a precautionary counseling check on a borderline student (False Positive).
+Random Forest improves classification accuracy (`89.87%`) and raises at-risk precision (`87.50%`) over the linear baseline, suppressing unnecessary false faculty alerts while preserving strong `87.50%` recall and `96.77%` ROC-AUC discrimination across stratified cohorts.
 
 ## 6.12 Performance and Usability Discussion
 * **Performance:** Inference latency averaged 2.1 ms per student, enabling instantaneous risk score recalculation during interactive form edits. Database query response times remained under 45 ms for complex multi-table joins across 115 students and longitudinal counseling trails.
@@ -1854,23 +1850,25 @@ Quality Assurance & Testing      Automated test suite (test_app.py) implementing
 
 ## 7.6 Individual Contributions
 ```
-Table 7.3 Individual contribution table
+Table 7.3 Individual contribution matrix
 ------------------------------------------------------------------------------------------------------------------------
-Student Name     Enrollment No  Assigned Project Scope and Delivered Contributions
+Student Name           Enrollment No  Assigned Project Scope and Delivered Contributions
 ------------------------------------------------------------------------------------------------------------------------
-DESIREDDY RAMESH 2302320099     Machine Learning & Core Backend Architecture:
-                                Developed scikit-learn Random Forest and Logistic Regression classification pipelines,
-                                designed the localized Explainable AI (XAI) feature attribution algorithm, engineered
-                                the Flask application factory and core REST API route architecture, modeled SQLite /
-                                SQLAlchemy relational database schemas, built dynamic admin threshold recalculation
-                                engines, implemented model serialization (joblib), and managed Git version control.
+SHAIK SHAFI            2302320151     Core Backend Security, RBAC & Auth Subsystem:
+                                      Architected Flask route authorization guards, HTTP 403 peer privacy isolation,
+                                      salted PBKDF2-SHA256 credential management, immutable AuditLog ledgers, and Git CI.
 
-SHAIK SHAFI      2302320151     Frontend Engineering, RBAC Security & Testing Suite:
-                                Architected the responsive Bootstrap 5 interface, interactive Chart.js analytics graphs,
-                                implemented 4-tier Role-Based Access Control (RBAC) security decorators with strict
-                                student peer data privacy isolation, built the 5-stage Counselling Lifecycle Hub with
-                                dynamic queue workload capacity overflow meters, developed automated integration test
-                                suite (test_app.py with 8 test cases), and implemented bulk CSV header alias mapping.
+SHAIK MOHAMMAD ALI     2302320119     Counselling Hub, Queue Governance & Dashboard Charts:
+                                      Engineered the 5-stage Student Retention Lifecycle Hub, visual queue capacity meters,
+                                      responsive Bootstrap 5 layouts, and interactive Chart.js dashboard panels.
+
+SHAIK MAHAMAD YASEEN   2302320118     Database Schema, Bulk CSV Alias Engine & Testing:
+                                      Designed normalized SQLAlchemy relational entities, fault-tolerant dictionary CSV
+                                      header normalization, and automated unittest validation fixtures in test_app.py.
+
+DESIREDDY RAMESH       2302320099     Machine Learning Pipeline & Explainable AI (XAI):
+                                      Built 120-tree Random Forest & Logistic Regression pipelines (ml_engine.py),
+                                      normalized Gini feature-deficit attribution cards, and one-click retraining.
 ------------------------------------------------------------------------------------------------------------------------
 ```
 
@@ -2012,7 +2010,7 @@ Native Flutter Mobile App        Build cross-platform iOS/Android mobile apps fo
 # CONCLUSION
 
 ## 10.1 Project Summary
-This capstone project designed, implemented, evaluated, and documented the **AI-Based Prediction of Reasons for Student Dropout** system for Sanskriti University. The system combines supervised machine learning classification (Random Forest achieving 90.4% accuracy and 0.942 ROC-AUC) with localized Explainable AI (XAI) reason attribution. By structuring student progression through an interactive 5-stage Counselling Lifecycle Hub and empowering leadership with dynamic policy controls, the platform transforms retrospective academic administration into proactive student success management.
+This capstone project engineered, verified, and documented an offline-capable **AI-Based Prediction of Reasons for Student Dropout** web suite tailored for advising teams at Sanskriti University. Coupling a 120-tree Random Forest classifier (`89.87%` accuracy, `96.77%` ROC-AUC) with Gini-weighted Explainable AI deficit cards and workload-bounded counselling queues moves student retention upstream from delayed end-term failure registers into proactive mid-semester academic guidance.
 
 ## 10.2 Achievement of Project Objectives
 ```
@@ -2020,27 +2018,27 @@ Table 10.1 Achievement of the objectives set in Section 1.6
 ------------------------------------------------------------------------------------------------------------------------
 No. Objective Specification                                               Final Implementation Outcome
 ------------------------------------------------------------------------------------------------------------------------
-1   Develop and serialize ML classification models with >88% accuracy     Achieved: Random Forest achieves 90.4% accuracy,
-                                                                          0.942 ROC-AUC; serialized to models/dropout_models.pkl.
-2   Engineer Explainable AI (XAI) feature deficit attribution algorithm   Achieved: analyze_reasons() calculates normalized
-                                                                          percentage contributions for all flagged cases.
-3   Implement dynamic administrative policy threshold controls            Achieved: Admin Settings panel allows runtime adjustment
-                                                                          of attendance, backlog, marks, and queue limits.
-4   Build risk-prioritized Counselling Lifecycle Hub with queue meters    Achieved: 5-stage hub sorts students by risk_score DESC
-                                                                          and highlights queue capacity overflows in real time.
-5   Develop automated bulk CSV upload engine with alias normalization     Achieved: upload_csv() parses, normalizes, scores,
-                                                                          and persists 100+ students in a single batch.
-6   Enforce strict Role-Based Access Control and student data privacy     Achieved: 4-tier RBAC implemented; student portal
-                                                                          strictly isolated from peer records.
-7   Validate system reliability through automated test suites             Achieved: test_app.py executes 8 comprehensive test
-                                                                          fixtures with 100% pass rate.
-8   Provide complete operational handover documentation & Git archive     Achieved: Comprehensive user manual, project report,
-                                                                          and GitHub version-controlled repository created.
+1   Develop and serialize ML classification models with >88% accuracy     Achieved: Random Forest hits 89.87% accuracy,
+                                                                          96.77% ROC-AUC inside models/dropout_models.pkl.
+2   Engineer Explainable AI (XAI) feature deficit attribution algorithm   Achieved: analyze_reasons() weights deficits
+                                                                          by empirical Gini importances normalized to 100%.
+3   Implement dynamic administrative policy threshold controls            Achieved: Admin Settings updates thresholds
+                                                                          and re-scores all 115 cohort rows live.
+4   Build risk-prioritized Counselling Lifecycle Hub with queue meters    Achieved: 5-stage workflow sorts by risk_score
+                                                                          and surfaces capacity overflow alerts.
+5   Develop automated bulk CSV upload engine with alias normalization     Achieved: Dictionary alias mapping normalizes
+                                                                          irregular headers prior to batch scoring.
+6   Enforce strict Role-Based Access Control and student data privacy     Achieved: 4-tier RBAC enforced; peer peeking
+                                                                          blocked via session identity matching.
+7   Validate system reliability through automated test suites             Achieved: All 8 integration suites in test_app.py
+                                                                          pass with zero regressions.
+8   Provide cross-platform operational docs & GitHub sync                 Achieved: MacBook Terminal & Windows guides,
+                                                                          word/PDF reports, and GitHub push complete.
 ------------------------------------------------------------------------------------------------------------------------
 ```
 
 ## 10.3 Final Conclusion
-The AI-Based Prediction of Reasons for Student Dropout system meets all requirements of the B.Tech Computer Science and Engineering capstone curriculum. It demonstrates that advanced machine learning techniques, when combined with interpretable reason attribution and thoughtful workflow engineering, can effectively address critical institutional challenges. The application stands as a production-ready, fully documented software platform capable of delivering meaningful, measurable improvements in student retention at Sanskriti University.
+Through original algorithmic attribution math, strict role separation, and responsive cross-platform runtime testing on Windows and macOS workstations, this software artifact fulfills B.Tech Computer Science and Engineering standards and offers SOEIT advisors an immediate operational asset for improving student continuation rates.
 
 <div align="center"><strong>58 &ndash; 59</strong></div>
 <div style="page-break-after: always;"></div>
@@ -2229,16 +2227,15 @@ Student Registration Test Passed: Test Candidate predicted risk: 0.999
 ```
 Table A.2 Project candidate and supervision details
 ------------------------------------------------------------------------------------------------------------------------
-Student Name     Enrollment No  Degree & Specialization             Department & Institution
+Student Name           Enrollment No  Degree & Specialization             Department & Institution
 ------------------------------------------------------------------------------------------------------------------------
-DESIREDDY RAMESH 2302320099     B.Tech &ndash; Computer Science      School of Engineering and Information
-                                and Engineering                     Technology (SOEIT), Sanskriti University, Mathura
-
-SHAIK SHAFI      2302320151     B.Tech &ndash; Computer Science      School of Engineering and Information
-                                and Engineering                     Technology (SOEIT), Sanskriti University, Mathura
+SHAIK SHAFI            2302320151     B.Tech &ndash; Computer Science     School of Engineering and Information
+SHAIK MOHAMMAD ALI     2302320119     and Engineering                     Technology (SOEIT), Sanskriti University
+SHAIK MAHAMAD YASEEN   2302320118                                         Mathura, U.P.
+DESIREDDY RAMESH       2302320099
 ------------------------------------------------------------------------------------------------------------------------
-Faculty Guide:   Mr. Satyam Dwivedi, Assistant Professor, Department of Computer Science and Engineering,
-                 School of Engineering and Information Technology (SOEIT), Sanskriti University, Mathura, U.P.
+Faculty Guide:         Mr. Satyam Dwivedi, Assistant Professor, Department of Computer Science and Engineering,
+                       School of Engineering and Information Technology (SOEIT), Sanskriti University, Mathura, U.P.
 ------------------------------------------------------------------------------------------------------------------------
 ```
 
@@ -2246,33 +2243,33 @@ Faculty Guide:   Mr. Satyam Dwivedi, Assistant Professor, Department of Computer
 ```
 Table A.3 System environment configurations & defaults
 ------------------------------------------------------------------------------------------------------------------------
-Variable Name         Assigned Default Value               Operational Purpose in Application
+Variable Name           Assigned Default Value               Operational Purpose in Application
 ------------------------------------------------------------------------------------------------------------------------
-SECRET_KEY            'sanskriti-univ-dropout-secret-2026' Session signing and cryptographic CSRF protection
-SQLALCHEMY_DATABASE_URI 'sqlite:///data/dropout_system.db' Relational SQLite file connection string
-PORT                  5000                                 TCP listening port for Flask WSGI server
-UPLOAD_FOLDER         'data/uploads'                       Directory for server-side uploaded CSV file storage
-MODEL_PATH            'models/dropout_models.pkl'          File path to serialized scikit-learn binary pipelines
+SECRET_KEY              'sanskriti-univ-dropout-secret-2026' Session signing and cryptographic CSRF protection
+SQLALCHEMY_DATABASE_URI 'sqlite:///data/dropout_system.db'   Relational SQLite file connection string
+PORT                    5000 (or 5001 on Mac if needed)      TCP listening port for Flask WSGI server
+UPLOAD_FOLDER           'data/uploads'                       Directory for server-side uploaded CSV file storage
+MODEL_PATH              'models/dropout_models.pkl'          File path to serialized scikit-learn binary pipelines
 ------------------------------------------------------------------------------------------------------------------------
 ```
 
-## A.8 Running the Project Locally
-To run the project on any standard computer:
-1. Open PowerShell or Terminal and navigate to the project root directory:
-   ```powershell
-   cd "C:\Users\ASUS\.gemini\antigravity\scratch\student_dropout_prediction"
+## A.8 Running the Project Locally (MacBook Terminal & Windows)
+1. Clone from GitHub: `git clone https://github.com/Shannu1423/student-dropout-prediction.git && cd student-dropout-prediction`
+2. On **MacBook (Terminal)**:
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   pip install -r requirements.txt
+   python app.py   # Or PORT=5001 python app.py if AirPlay Receiver uses port 5000
    ```
-2. Start the Flask application server using the bundled virtual environment:
+3. On **Windows (PowerShell)**:
    ```powershell
-   .venv\Scripts\python.exe app.py
+   python -m venv .venv
+   .venv\Scripts\activate
+   pip install -r requirements.txt
+   python app.py
    ```
-3. Open any modern web browser and navigate to:
-   👉 **`http://127.0.0.1:5000`**
-4. Log in using any of the pre-configured institutional credentials:
-   * **System Admin:** `admin` / `password123`
-   * **Faculty Guide / HOD:** `satyam` / `password123`
-   * **Faculty Mentor:** `priya` / `password123`
-   * **Student (Self-Service):** `ramesh` / `password123`
+4. Open Chrome/Safari at **`http://127.0.0.1:5000`** and sign in (`admin`, `satyam`, `priya`, or `ramesh` / password `password123`).
 
 ---
 *End of Project Report &bull; School of Engineering and Information Technology (SOEIT), Sanskriti University &bull; Academic Year 2026&ndash;2027*

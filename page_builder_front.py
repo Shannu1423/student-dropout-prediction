@@ -61,12 +61,12 @@ def add_front_matter_and_ch1(pages, styles, LOGO_PATH, usable_width, make_table)
     p.append(Paragraph("CERTIFICATE", h1_chap))
     p.append(Spacer(1, 8))
     p.append(Paragraph(
-        "This is to certify that the work embodied in this project report entitled <b>‘AI-Based Prediction of Reasons for Student Dropout’</b>, submitted by <b>SHAIK SHAFI</b> (Enrollment No: <b>2302320151</b>), <b>SHAIK MOHAMMAD ALI</b> (Enrollment No: <b>2302320119</b>), <b>SHAIK MAHAMAD YASEEN</b> (Enrollment No: <b>2302320118</b>), and <b>DESIREDDY RAMESH</b> (Enrollment No: <b>2302320099</b>), in partial fulfillment of the requirement for the award of the degree of <b>Bachelor of Technology in Computer Science and Engineering</b> of <b>Sanskriti University, Mathura</b>, during the academic year <b>2026–2027</b>, is a record of bonafide work carried out by the candidates under the supervision of the undersigned.",
+        "This certifies that the B.Tech capstone project report titled <b>‘AI-Based Prediction of Reasons for Student Dropout’</b>, authored by <b>SHAIK SHAFI</b> (Enrollment No: <b>2302320151</b>), <b>SHAIK MOHAMMAD ALI</b> (Enrollment No: <b>2302320119</b>), <b>SHAIK MAHAMAD YASEEN</b> (Enrollment No: <b>2302320118</b>), and <b>DESIREDDY RAMESH</b> (Enrollment No: <b>2302320099</b>) toward partial fulfillment of the <b>Bachelor of Technology in Computer Science and Engineering</b> at <b>Sanskriti University, Mathura</b> during session <b>2026–2027</b>, constitutes an authentic record of supervised engineering development.",
         body_indent
     ))
     p.append(Spacer(1, 6))
     p.append(Paragraph(
-        "The project demonstrates a rigorous end-to-end implementation of educational machine learning, explainable predictive analytics, and full-stack software engineering. It is an original investigation adhering to the highest standards of academic integrity, data ethics, and engineering principles.",
+        "All predictive classifiers, localized Gini deficit attribution logic, role-isolated database views, and verification suites presented across this volume were independently engineered and empirically validated under faculty oversight.",
         body_indent
     ))
     p.append(Spacer(1, 40))
@@ -135,22 +135,22 @@ def add_front_matter_and_ch1(pages, styles, LOGO_PATH, usable_width, make_table)
     p.append(Paragraph("ACKNOWLEDGEMENT", h1_chap))
     p.append(Spacer(1, 8))
     p.append(Paragraph(
-        "We would like to thank our Hon'ble Chancellor, Hon'ble Chief Executive Officer, Hon'ble Vice Chancellor, and Respected Dean, SOEIT. We express our sincere gratitude and thanks to our Project Supervisor, <b>Mr. Satyam Dwivedi</b>. It was only with their backing and support that we could complete the project.",
+        "We extend sincere appreciation to the Hon'ble Chancellor, Chief Executive Officer, Vice Chancellor, and Respected Dean of SOEIT at <b>Sanskriti University, Mathura</b> for sustaining an environment committed to applied engineering research. Above all, we convey deep gratitude to our Faculty Supervisor, <b>Mr. Satyam Dwivedi</b>, Assistant Professor, SOEIT, whose continuous technical feedback made this capstone achievable.",
         body_indent
     ))
     p.append(Spacer(1, 6))
     p.append(Paragraph(
-        "They provided us with all kinds of help and corrected us whenever we seemed to make mistakes. We have no words to express our gratitude. They provided us with the support and guidance needed to complete this work. Without their support, we could not have even started the work. Therefore, we are truly grateful to them.",
+        "Throughout architectural prototyping, algorithmic tuning, and cohort validation, our supervisor identified subtle edge cases early and steered the implementation toward practical mentor usability. Constructive evaluation reviews pushed our team to pair raw predictions with transparent Explainable AI cards and queue safeguards.",
         body_indent
     ))
     p.append(Spacer(1, 6))
     p.append(Paragraph(
-        "We acknowledge our dearest parents for being a constant source of encouragement and moral support, which helped us tremendously in this endeavour.",
+        "We remain indebted to our families and classmates for steady encouragement across late debugging sprints and data preparation cycles, alongside the maintainers of Python, Flask, Scikit-learn, and SQLite.",
         body_indent
     ))
     p.append(Spacer(1, 6))
     p.append(Paragraph(
-        "We also declare, to the best of our knowledge and belief, that this work has not been submitted anywhere else.",
+        "Each contributing student verifies that this technical report reflects original engineering effort created strictly for this undergraduate evaluation.",
         body_indent
     ))
     p.append(Spacer(1, 20))

@@ -3,8 +3,7 @@
 ## System Administrator & Senior Handover Operational Manual
 
 * **Project Title:** AI-Based Prediction of Reasons for Student Dropout
-* **Student Name:** D. Ramesh
-* **Enrollment Number:** `2302320099`
+* **Team Members:** SHAIK SHAFI (`2302320151`), SHAIK MOHAMMAD ALI (`2302320119`), SHAIK MAHAMAD YASEEN (`2302320118`), DESIREDDY RAMESH (`2302320099`)
 * **Faculty Guide:** Mr. Satyam Dwivedi
 * **Target Audience:** Future Project Admins, Department HODs, Lab In-Charges, and Senior Successors
 
@@ -25,26 +24,28 @@
 
 ## 1. How to Run the Application Locally
 
-The application runs entirely offline on your laptop with zero cloud or third-party dependency requirements.
+The application runs entirely offline on Windows or MacBook workstations with zero cloud dependencies.
 
-### Step 1: Open PowerShell or Command Prompt
-Navigate to the project root directory:
-```powershell
-cd "C:\Users\ASUS\.gemini\antigravity\scratch\student_dropout_prediction"
+### On MacBook (macOS Terminal):
+```bash
+git clone https://github.com/Shannu1423/student-dropout-prediction.git
+cd student-dropout-prediction
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python app.py   # Or PORT=5001 python app.py if macOS AirPlay Receiver occupies port 5000
 ```
 
-### Step 2: Start the Web Server
-Using the bundled Python virtual environment:
+### On Windows (PowerShell):
 ```powershell
-.venv\Scripts\python.exe app.py
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
 ```
-*(Or if you have Python 3.10+ installed globally on your machine: `python app.py`)*
 
 ### Step 3: Access the Portal
-Open any web browser (Google Chrome, Microsoft Edge, Firefox) and visit:
-👉 **`http://127.0.0.1:5000`**
-
-To stop the server at any time, press `CTRL + C` in the PowerShell terminal.
+Open any web browser (Safari, Google Chrome, Microsoft Edge, Firefox) and visit **`http://127.0.0.1:5000`** (or `http://127.0.0.1:5001` if started on `PORT=5001`). Press `CTRL + C` to stop the server.
 
 ---
 
@@ -213,19 +214,16 @@ Every administrative action (logins, prediction re-evaluations, policy updates, 
 ## 9. System Maintenance, Backups & Verification
 
 ### Running Automated Test Verification:
-Before any demonstration or evaluation, you can verify that all 8 decoupled subsystems are 100% operational:
-```powershell
-cd "C:\Users\ASUS\.gemini\antigravity\scratch\student_dropout_prediction"
-.venv\Scripts\python.exe test_app.py
+Before any demonstration or evaluation, verify all 8 decoupled subsystems inside your activated `.venv`:
+```bash
+# Mac / Linux / Windows (inside activated .venv)
+python test_app.py
 ```
-*(All 8 tests should report `OK`: Authentication, Bulk CSV Upload, Counselling Lifecycle, ML Engine, RBAC Privacy Isolation, Stage Limits, Student Registration, and Admin Retraining).*
+*(All 8 suites pass cleanly: Authentication, Bulk CSV Upload, Counselling Lifecycle, ML Engine, RBAC Privacy Isolation, Stage Limits, Student Registration, and Admin Retraining).*
 
 ### Database Location & Reset:
 * The database file is located at: `data/dropout_system.db`.
-* To completely reset and seed the database with initial Sanskriti University demo accounts and sample cohorts, simply run:
-  ```powershell
-  .venv\Scripts\python.exe seed_data.py
-  ```
+* To completely reset and seed the database with initial Sanskriti University demo accounts and sample cohorts, run `python seed_data.py`.
 
 ---
-*Document prepared for Sanskriti University Academic Project Archive &bull; Student: D. Ramesh (2302320099) &bull; Faculty Guide: Mr. Satyam Dwivedi.*
+*Document prepared for Sanskriti University Academic Archive &bull; Candidates: SHAIK SHAFI (2302320151), SHAIK MOHAMMAD ALI (2302320119), SHAIK MAHAMAD YASEEN (2302320118), DESIREDDY RAMESH (2302320099) &bull; Faculty Guide: Mr. Satyam Dwivedi.*

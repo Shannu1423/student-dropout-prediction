@@ -260,20 +260,19 @@ def build_master_report():
     story.append(Paragraph("CERTIFICATE", styles['ChapterH1']))
     story.append(Spacer(1, 10))
     cert_text = (
-        "This is to certify that the work embodies in this project report entitled "
-        "<b>‘AI-BASED PREDICTION OF REASONS FOR STUDENT DROPOUT’</b> being submitted by "
+        "This certifies that the B.Tech capstone project documentation titled "
+        "<b>‘AI-BASED PREDICTION OF REASONS FOR STUDENT DROPOUT’</b>, authored by "
         "Enrollment No: <b>2302320151</b> <b>SHAIK SHAFI</b>, "
         "Enrollment No: <b>2302320119</b> <b>SHAIK MOHAMMAD ALI</b>, "
-        "Enrollment No: <b>2302320118</b> <b>SHAIK MAHAMAD YASEEN</b>, "
-        "Enrollment No: <b>2302320099</b> <b>DESIREDDY RAMESH</b>, "
-        "for partial fulfillment of the requirement for the award of <b>Bachelor of Technology in Computer Science and Engineering</b> "
-        "to Sanskriti University, Mathura during the academic year <b>2026-27</b> is a record of Bonafide piece of work, "
-        "undertaken under the supervision of the undersigned."
+        "Enrollment No: <b>2302320118</b> <b>SHAIK MAHAMAD YASEEN</b>, and "
+        "Enrollment No: <b>2302320099</b> <b>DESIREDDY RAMESH</b> "
+        "for partial fulfillment of the <b>Bachelor of Technology in Computer Science and Engineering</b> "
+        "at Sanskriti University, Mathura during the <b>2026–2027</b> academic session, constitutes a verified record of independent engineering work supervised by the undersigned."
     )
     story.append(Paragraph(cert_text, styles['BodyIndent']))
     story.append(Spacer(1, 10))
     story.append(Paragraph(
-        "The project demonstrates a rigorous end-to-end implementation of educational machine learning, explainable predictive analytics, and full-stack software engineering. It is an original investigation adhering to the highest standards of academic integrity, data ethics, and engineering principles.",
+        "Every machine learning pipeline, Gini feature-deficit attribution formula, 4-tier security isolation guard, and 5-stage mentoring module documented herein was engineered, tested via automated suites, and evaluated across campus cohort scenarios under faculty oversight.",
         styles['BodyIndent']
     ))
     story.append(Spacer(1, 60))
@@ -350,30 +349,27 @@ def build_master_report():
     story.append(Paragraph("ACKNOWLEDGEMENT", styles['ChapterH1']))
     story.append(Spacer(1, 10))
     ack_body_1 = (
-        "We would like to thank our Hon'ble Chancellor, Hon'ble Chief Executive Officer, Hon'ble Vice Chancellor, "
-        "and Respected Dean, SOEIT. We express our sincere gratitude and thanks to our Project Supervisor, "
-        "<b>Mr. Satyam Dwivedi</b>. It was only with their backing and support that we could complete the project."
+        "We extend genuine appreciation to the Hon'ble Chancellor, Chief Executive Officer, Vice Chancellor, "
+        "and Respected Dean of SOEIT at Sanskriti University, Mathura, for nurturing an engineering curriculum focused on solving institutional challenges through applied software engineering. Above all, we are deeply grateful to our Project Supervisor, "
+        "<b>Mr. Satyam Dwivedi</b>, Assistant Professor (SOEIT), whose mentorship guided every phase of this project."
     )
     story.append(Paragraph(ack_body_1, styles['BodyIndent']))
     story.append(Spacer(1, 8))
 
     ack_body_2 = (
-        "They provided us with all kinds of help and corrected us whenever we seemed to make mistakes. "
-        "We have no words to express our gratitude. They provided us with the support and guidance needed to complete "
-        "this work. Without their support, we could not have even started the work. Therefore, we are truly grateful to them."
+        "Throughout feature selection, Random Forest calibration, and workflow interface reviews, Mr. Dwivedi offered timely architectural critiques—encouraging us to couple predictive scores directly with normalized Explainable AI reason cards and workload-bounded counselling stages."
     )
     story.append(Paragraph(ack_body_2, styles['BodyIndent']))
     story.append(Spacer(1, 8))
 
     ack_body_3 = (
-        "We acknowledge our dearest parents for being a constant source of encouragement and moral support, "
-        "which helped us tremendously in this endeavour."
+        "We also thank our families and peers for continuous encouragement across coding and validation sprints, as well as the open-source contributors behind Python, Flask, Scikit-learn, and SQLite."
     )
     story.append(Paragraph(ack_body_3, styles['BodyIndent']))
     story.append(Spacer(1, 8))
 
     ack_body_4 = (
-        "We also declare, to the best of our knowledge and belief, that this work has not been submitted anywhere else."
+        "Each signing team member confirms that this capstone submission represents authentic engineering work created for this university evaluation."
     )
     story.append(Paragraph(ack_body_4, styles['BodyIndent']))
     story.append(Spacer(1, 25))
@@ -483,26 +479,26 @@ def build_master_report():
     story.append(Paragraph("ABBREVIATIONS", styles['ChapterH1']))
     story.append(Spacer(1, 8))
 
-    abbr_h = ["Abbreviation", "Expanded Description & System Scope"]
+    abbr_h = ["Abbreviation", "Project-Specific Scope & Application"]
     abbr_r = [
-        ["HTML", "Hyper-Text Markup Language: Structures the web pages like registration, login, and dashboard."],
-        ["CSS", "Cascading Style Sheets: Styles responsive UI layouts, risk level badges, and component themes."],
-        ["JS", "JavaScript: Powers dynamic client-side interactions and Chart.js analytics graphics."],
-        ["AI", "Artificial Intelligence: Computational algorithms automating student dropout risk evaluation."],
-        ["ML", "Machine Learning: Supervised classification algorithms trained on institutional data."],
-        ["EDM", "Educational Data Mining: Extraction of actionable pedagogical patterns from student records."],
-        ["RF", "Random Forest: Primary ensemble classification model utilizing 100 bagging decision trees."],
-        ["LR", "Logistic Regression: Baseline linear probabilistic classifier benchmarked against Random Forest."],
-        ["XAI", "Explainable AI: Mathematical deficit attribution engine providing human-interpretable reasons."],
-        ["RBAC", "Role-Based Access Control: 4-tier security framework enforcing principle of least privilege."],
-        ["ORM", "Object Relational Mapping: SQLAlchemy abstraction layer connecting Python to SQLite database."],
-        ["API", "Application Programming Interface: RESTful endpoints facilitating data interchange."],
-        ["CSV", "Comma-Separated Values: Tabular flat-file format utilized for bulk cohort roster ingestion."],
-        ["DFD", "Data Flow Diagram: Graphical modeling of data movements across system processes."],
-        ["ERD", "Entity-Relationship Diagram: Structural database diagram detailing relational tables and keys."],
-        ["UGC", "University Grants Commission: Statutory higher education regulatory commission in India."],
-        ["AICTE", "All India Council for Technical Education: National statutory council for technical education."],
-        ["AISHE", "All India Survey on Higher Education: National annual higher education statistical survey."]
+        ["HTML5", "Markup structure powering portal login, student directory, and lifecycle templates."],
+        ["CSS3", "Responsive layout styling, badge severity colors, and print formatting tokens."],
+        ["JS", "Client-side scripting executing asynchronous Chart.js cohort analytics panels."],
+        ["AI", "Automated decision-support inference evaluating student continuation risk."],
+        ["ML", "Supervised statistical models fitted over tabular academic and fee parameters."],
+        ["EDM", "Computational pattern extraction from longitudinal institutional student records."],
+        ["RF", "120-estimator Random Forest classifier serving as primary risk scorer."],
+        ["LR", "Standardized Logistic Regression model benchmarked against tree ensembles."],
+        ["XAI", "Gini-weighted threshold deficit attribution normalized cleanly to 100%."],
+        ["RBAC", "Four-tier authorization layer separating Admin, HOD, Mentor, and Student views."],
+        ["ORM", "SQLAlchemy relational model classes mapped directly onto embedded SQLite tables."],
+        ["API", "JSON and WSGI controller endpoints supporting modal updates and cohort metrics."],
+        ["CSV", "Comma-delimited roster export accepted by the alias-normalizing bulk uploader."],
+        ["DFD", "Process flow notation tracing records from CSV upload to mentor intervention."],
+        ["ERD", "Structural table mapping defining foreign-key links across users and cases."],
+        ["UGC", "University Grants Commission governing Indian higher-education compliance."],
+        ["AICTE", "Statutory technical education council specifying 75% attendance benchmarks."],
+        ["AISHE", "Annual national higher-education telemetry report issued by Ministry of Education."]
     ]
     story.append(make_table(abbr_h, abbr_r, [usable_width*0.22, usable_width*0.78]))
     story.append(PageBreak())
@@ -513,14 +509,14 @@ def build_master_report():
     story.append(Paragraph("LIST OF STANDARDS", styles['ChapterH1']))
     story.append(Spacer(1, 8))
 
-    std_h = ["Standard", "Publishing Agency (Abbreviation)", "About the Standard & Institutional Relevance"]
+    std_h = ["Standard", "Issuing Body", "Role in This Implementation"]
     std_r = [
-        ["ISO/IEC 25010", "ISO/IEC", "Defines software product quality models, including usability, reliability, security, and performance efficiency."],
-        ["IEEE 830-1998", "IEEE", "Recommended Practice for Software Requirements Specifications (SRS), governing functional and non-functional specifications."],
-        ["ISO/IEC 27001", "ISO/IEC", "Information security management systems standard, guiding PBKDF2 password hashing and tamper-evident audit logs."],
-        ["W3C WCAG 2.1", "W3C", "Web Content Accessibility Guidelines ensuring color contrast ratios, keyboard navigation, and responsive accessibility."],
-        ["IEEE 730-2014", "IEEE", "Software Quality Assurance Processes, guiding automated unit testing, integration tests, and defect tracking."],
-        ["PEP 8", "Python Software Foundation", "Style Guide for Python Code, governing consistent syntax, readability, and modular engineering."]
+        ["ISO/IEC 25010", "ISO/IEC", "Governs sub-50ms inference responsiveness, offline availability, and modular code separation."],
+        ["IEEE 830-1998", "IEEE", "Structures functional boundaries across authentication, CSV ingestion, XAI cards, and lifecycle queues."],
+        ["ISO/IEC 27001", "ISO/IEC", "Underpins salted PBKDF2-SHA256 credential hashing, HTTP 403 peer guards, and audit logs."],
+        ["W3C WCAG 2.1", "W3C", "Guides accessible foreground contrast across Critical/Moderate/Low risk badges and forms."],
+        ["IEEE 730-2014", "IEEE", "Verified through automated unittest verification suites inside test_app.py across eight scenarios."],
+        ["PEP 8", "Python Software Foundation", "Enforces uniform naming conventions and clean formatting across all backend Python modules."]
     ]
     story.append(make_table(std_h, std_r, [usable_width*0.24, usable_width*0.26, usable_width*0.50]))
     story.append(PageBreak())

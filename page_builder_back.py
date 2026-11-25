@@ -204,7 +204,7 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
     t67_r = [
         ["TC-ADM-01", "Modify Risk Cutoff", "Threshold changed: 65% -> 70%", "Global cohort re-scored; 47 -> 39 at-risk", "PASS"],
         ["TC-ADM-02", "Stage Queue Overflow", "'New' cases count (18) > Limit (15)", "Queue meter shows 120% with 'danger' alert", "PASS"],
-        ["TC-ADM-03", "Retrain Trigger", "Admin clicks 'Retrain Model'", "New pipeline serialized; Acc: 93.3% logged", "PASS"],
+        ["TC-ADM-03", "Retrain Trigger", "Admin clicks 'Retrain Model'", "New pipeline serialized; Acc: 89.87% logged", "PASS"],
         ["TC-ADM-04", "Audit Trail", "CSV uploaded by 'admin'", "Record appended to audit_logs table", "PASS"]
     ]
     p.append(make_table(t67_h, t67_r, [usable_width*0.14, usable_width*0.22, usable_width*0.24, usable_width*0.30, usable_width*0.10]))
@@ -460,23 +460,23 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
     p = pages[-1]
     p.append(Paragraph("7.8 Challenges Faced", h2_sec))
     p.append(Paragraph(
-        "During system implementation and model validation, several technical and structural obstacles were encountered:",
+        "Key technical obstacles resolved during local assembly and testing included:",
         body_indent
     ))
-    p.append(Paragraph("1. <b>Inconsistent CSV Upload Headers:</b> Department spreadsheets arrived with varied column labels (e.g., 'reg_no' vs. 'enrollment_no'), causing initial database ingestion exceptions.", body))
-    p.append(Paragraph("2. <b>Class Imbalance in Student Cohorts:</b> Typical university cohorts contain fewer at-risk students than passing students, biasing standard classifiers toward the majority class.", body))
-    p.append(Paragraph("3. <b>Student Peer Privacy Risks:</b> Standard student dashboard routes could potentially allow unauthorized inspection of peer records if parameterized by sequential ID.", body))
-    p.append(Paragraph("4. <b>Offline Local Execution Constraints:</b> Ensuring the application runs reliably offline without external cloud APIs or font CDN dependencies.", body))
+    p.append(Paragraph("1. <b>Irregular CSV Schemas:</b> Departmental exports used inconsistent column spellings ('reg_no' vs 'enrollment_no') that broke initial batch uploads.", body))
+    p.append(Paragraph("2. <b>Minority-Class Attrition Bias:</b> Unbalanced cohort spreads initially under-flagged borderline at-risk records before hyperparameter tuning.", body))
+    p.append(Paragraph("3. <b>Horizontal Student URL Peeking:</b> Numeric student IDs required strict session enrollment binding to eliminate peer browsing.", body))
+    p.append(Paragraph("4. <b>Cross-Platform Local Ports:</b> MacBook AirPlay listeners on port 5000 necessitated flexible `PORT` environment overrides.", body))
     p.append(Spacer(1, 4))
     p.append(Paragraph("7.9 Solutions Implemented", h2_sec))
-    p.append(Paragraph("Table 7.4 summarizes the technical solutions engineered to resolve each challenge.", body))
+    p.append(Paragraph("Table 7.4 summarizes each engineering fix verified inside our test suite.", body))
     p.append(Spacer(1, 4))
     t74_h = ["Identified Challenge", "Engineered Technical Solution", "Resulting Operational Impact"]
     t74_r = [
-        ["CSV Header Discrepancies", "Implemented dictionary alias mapping normalizing keys to lowercase.", "100% upload compatibility across varied institutional spreadsheets."],
-        ["Cohort Class Imbalance", "Applied class_weight='balanced' in Random Forest estimator.", "Recall increased from 74% to 91.7% on at-risk students."],
-        ["Student Data Privacy", "Decorators enforce session identity matching requested student ID.", "Zero peer leakage; absolute compliance with FERPA/student privacy."],
-        ["Offline Execution", "Packaged local SQLite database and self-contained static assets.", "System runs 100% offline via local WSGI execution."]
+        ["CSV Header Discrepancies", "Added dictionary alias lookup normalizing lowercase keys.", "Seamless bulk upload across diverse department rosters."],
+        ["Cohort Class Imbalance", "Tuned 120-tree RF depth & stratified evaluation splits.", "Achieved balanced 87.50% precision/recall and 96.77% AUC."],
+        ["Student Data Privacy", "Enforced session identity match inside student routes.", "Verified HTTP 403 block on peer inspection attempts."],
+        ["Cross-Platform Offline Run", "Pinned cross-platform packages + dynamic PORT binding.", "Runs cleanly offline on both Windows & macOS laptops."]
     ]
     p.append(make_table(t74_h, t74_r, [usable_width*0.28, usable_width*0.36, usable_width*0.36]))
     p.append(Paragraph("Table 7.4 Technical challenges encountered and solutions implemented", caption_style))

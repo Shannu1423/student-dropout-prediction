@@ -222,37 +222,37 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     p = new_page()
     p.append(Paragraph("3.6 Non-Functional Requirements", h2_sec))
     p.append(Paragraph(
-        "Non-functional requirements specify the architectural qualities, operational constraints, and performance parameters required for production deployment.",
+        "Quality attributes establish measurable runtime latency, offline self-containment, credential cryptography, and browser compatibility constraints governing deployment.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     t32_h = ["Quality Attribute", "Specification and Verification Criteria"]
     t32_r = [
-        ["Inference Latency", "Model inference and XAI attribution must execute under 50ms per single student."],
-        ["Bulk Throughput", "Ingestion and risk calculation for 500 student records must complete under 3 seconds."],
-        ["Data Privacy", "Zero peer data leakage; students strictly restricted to own record via session binding."],
-        ["System Availability", "Zero external cloud dependencies; application functions 100% offline via local SQLite."],
-        ["Cryptographic Security", "Passwords hashed using PBKDF2-SHA256 with 600,000 iterations and salt."],
-        ["Browser Compatibility", "Responsive layout fully functional on Chrome 90+, Edge 90+, Firefox 88+, Safari 14+."]
+        ["Inference Latency", "Ensemble scoring + Gini attribution execute under 50ms per single learner."],
+        ["Bulk Throughput", "Batch CSV ingestion and cohort scoring for 500 records finish within 3s."],
+        ["Data Privacy", "Horizontal student peer leakage blocked strictly by session ID checks (HTTP 403)."],
+        ["System Availability", "Zero external cloud dependencies; runs 100% offline over embedded SQLite."],
+        ["Cryptographic Security", "Credentials stored via salted PBKDF2-HMAC-SHA256 stretching routines."],
+        ["Browser Compatibility", "Verified rendering on Safari 15+, Chrome 90+, Edge 90+, and Firefox 88+."]
     ]
     p.append(make_table(t32_h, t32_r, [usable_width*0.30, usable_width*0.70]))
     p.append(Paragraph("Table 3.2 Non-functional requirements specification matrix", caption_style))
     p.append(Spacer(1, 4))
     p.append(Paragraph("3.7 Software Requirements", h2_sec))
     p.append(Paragraph(
-        "Table 3.3 documents the verified software runtime environment and package dependencies.",
+        "Table 3.3 lists pinned Python and frontend packages verified cleanly on Windows and macOS workstations.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     t33_h = ["Software Component", "Verified Production Version", "Role in System Architecture"]
     t33_r = [
-        ["Operating System", "Windows 10/11, Ubuntu 22.04 LTS", "Host server runtime environment"],
-        ["Programming Language", "Python 3.11 / 3.12 / 3.14", "Core runtime and computational engine"],
-        ["Web Microframework", "Flask 3.1.3", "WSGI application routing, HTTP request handling"],
-        ["ORM / Persistence", "SQLAlchemy 2.1.5 + SQLite 3", "Database modeling, query execution, transactions"],
-        ["Machine Learning", "scikit-learn 1.9.1, joblib 1.6", "Model training, inference, and serialization"],
-        ["Data Manipulation", "pandas 3.0.6, numpy 2.5.4", "Tabular dataset preprocessing and vector math"],
-        ["Frontend UI Toolkit", "Bootstrap 5.3.3 + FontAwesome 6", "Responsive layout, styling, and visual icons"]
+        ["Operating System", "Windows 10/11, macOS 13+, Ubuntu 22", "Cross-platform WSGI server runtime host"],
+        ["Programming Language", "Python 3.11+", "Core backend logic and Scikit-learn runtime"],
+        ["Web Microframework", "Flask 3.0+", "HTTP request routing, session cookies, REST endpoints"],
+        ["ORM / Persistence", "SQLAlchemy 2.0+ + SQLite 3", "Declarative ORM schema and ACID transactional commits"],
+        ["Machine Learning", "scikit-learn 1.3+, joblib 1.3+", "ColumnTransformer, Random Forest training & serialization"],
+        ["Data Manipulation", "pandas 2.0+, numpy 1.24+", "CSV alias normalization and numerical array processing"],
+        ["Frontend UI Toolkit", "Bootstrap 5.3 + Chart.js 4", "Mobile-ready layouts and interactive canvas visualizations"]
     ]
     p.append(make_table(t33_h, t33_r, [usable_width*0.28, usable_width*0.28, usable_width*0.44]))
     p.append(Paragraph("Table 3.3 Software requirements and version environment", caption_style))
@@ -263,36 +263,36 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     p = new_page()
     p.append(Paragraph("3.8 Hardware Requirements", h2_sec))
     p.append(Paragraph(
-        "The application is engineered for maximum resource efficiency, allowing operation on standard departmental hardware without dedicated GPU acceleration.",
+        "Designed without GPU acceleration requirements, the server operates smoothly on standard laboratory desktops or faculty laptops.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     t34_h = ["Hardware Component", "Minimum Host Server Specification", "Recommended Client Terminal Specification"]
     t34_r = [
-        ["Processor (CPU)", "Intel Core i3 / AMD Ryzen 3 (Dual Core 2.0 GHz)", "Intel Celeron / Core i3 (1.5 GHz)"],
-        ["System Memory (RAM)", "4 GB DDR4 (8 GB recommended for large cohorts)", "2 GB DDR3/DDR4"],
-        ["Persistent Storage", "500 MB free space (Application, SQLite, Models)", "100 MB free browser cache space"],
-        ["Network Interface", "Standard 10/100 Mbps Local Area Network (LAN)", "LAN / Wi-Fi connection to institutional host"],
-        ["Display Resolution", "1280 x 720 (HD) minimum", "1024 x 768 minimum, 1920 x 1080 recommended"]
+        ["Processor (CPU)", "x86_64 Dual Core / Apple Silicon M1+", "Any modern 1.5 GHz dual-core terminal"],
+        ["System Memory (RAM)", "4 GB DDR4 (8 GB recommended)", "2 GB minimum browser RAM"],
+        ["Persistent Storage", "500 MB free space (Code, SQLite DB, Pickle)", "100 MB free browser cache"],
+        ["Network Interface", "Local loopback (127.0.0.1) or campus LAN", "Campus Wi-Fi / Ethernet link to host"],
+        ["Display Resolution", "1280 x 720 (HD) minimum", "1920 x 1080 recommended"]
     ]
     p.append(make_table(t34_h, t34_r, [usable_width*0.28, usable_width*0.36, usable_width*0.36]))
     p.append(Paragraph("Table 3.4 Hardware specifications for host and client devices", caption_style))
     p.append(Spacer(1, 4))
     p.append(Paragraph("3.9 Feasibility Study", h2_sec))
     p.append(Paragraph(
-        "A formal three-factor feasibility study was conducted to evaluate project viability:",
+        "We evaluated deployment viability across three institutional dimensions prior to construction:",
         body_indent
     ))
     p.append(Paragraph(
-        "• <b>Technical Feasibility:</b> The system utilizes stable, production-grade open-source libraries (Python, Flask, scikit-learn). Offline model execution and SQLite persistence eliminate external API latency and cloud dependencies. Technical feasibility is highly favorable.",
+        "• <b>Technical Feasibility:</b> Mature open-source Python packages (Flask, Scikit-learn, SQLite) eliminate third-party cloud latency and single-vendor lock-in, confirming strong local execution resilience.",
         body
     ))
     p.append(Paragraph(
-        "• <b>Operational Feasibility:</b> The interface adheres to standard institutional UX patterns. Clear visual indicators (color-coded risk badges, queue progress bars) require minimal faculty training. Operational feasibility is confirmed.",
+        "• <b>Operational Feasibility:</b> Clear semantic alert tiers (Critical, High Risk, Moderate Risk, Low Risk) and visual queue meters enable HODs and advisors to adopt daily triage without heavy training.",
         body
     ))
     p.append(Paragraph(
-        "• <b>Economic Feasibility:</b> All software dependencies are open-source with permissive licenses (Apache 2.0, MIT, BSD), resulting in zero software licensing expenses. The system runs on existing departmental desktop computers. Economic feasibility is exceptional.",
+        "• <b>Economic Feasibility:</b> Permissive BSD/MIT licensing across every framework produces zero licensing expenditure while operating directly on existing university hardware.",
         body
     ))
 
@@ -302,21 +302,21 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     p = new_page()
     p.append(Paragraph("3.10 Use Case Analysis", h2_sec))
     p.append(Paragraph(
-        "System actors comprise four distinct operational roles with specific privileges and goals. Table 3.5 outlines the core actor-goal interaction matrix.",
+        "Four institutional personas interact with distinct workflows inside protected permission boundaries summarized in Table 3.5.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     t35_h = ["Actor Role", "Primary Use Case / Goal", "Operational Description and System Boundaries"]
     t35_r = [
-        ["Administrator", "System Management & Policy", "Configure global risk thresholds, trigger model retraining, view audit logs, adjust queue limits."],
-        ["Guide / HOD", "Department Cohort Oversight", "Inspect department risk registry, monitor cohort distributions, assign faculty mentors, escalate stalled cases."],
-        ["Faculty Mentor", "Student Counselling & Case Progression", "Review assigned at-risk students, inspect XAI reason cards, record counseling session notes, advance stage."],
-        ["Student", "Self-Assessment & Guidance", "View personal academic attendance, CGPA, risk status, and review assigned mentor guidance securely."]
+        ["Administrator", "System Management & Policy", "Edit global risk rules, trigger live retraining, audit security ledgers, set stage quotas."],
+        ["Guide / HOD", "Department Cohort Oversight", "Review cohort risk charts, ingest semester CSVs, delegate advisors, manage escalations."],
+        ["Faculty Mentor", "Student Counselling & Progression", "Inspect assigned advisee XAI deficit cards, record session notes, update intervention stages."],
+        ["Student", "Personal Monitoring & Advice", "Inspect strictly own attendance, continuous marks, risk standing, and remediation advice."]
     ]
     p.append(make_table(t35_h, t35_r, [usable_width*0.22, usable_width*0.32, usable_width*0.46]))
     p.append(Paragraph("Table 3.5 Use case actor-goal interaction summary", caption_style))
     p.append(Paragraph(
-        "Each user is strictly segregated by role. If an unauthorized actor attempts to access an administrative endpoint (e.g., `/admin/settings`), the security decorator intercepts the request, aborts execution with HTTP 403, and records the attempted violation in the security audit log.",
+        "Authorization wrappers evaluate active session credentials prior to running any protected controller: unprivileged requests hitting `/admin/settings` or foreign `/student/<id>` URLs abort immediately with HTTP 403 and log the attempt.",
         body_indent
     ))
 
@@ -330,22 +330,22 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     p.append(Spacer(1, 4))
     p.append(Paragraph("4.1 System Architecture", h2_sec))
     p.append(Paragraph(
-        "The system is architected as a decoupled, 3-tier web application structured across the Presentation Tier, Application Logic Tier, and Data Persistence Tier. This separation of concerns ensures that machine learning inference routines remain independent of web routing, enabling modular maintenance, rapid retraining, and robust unit testing.",
+        "Decoupling presentation templates, WSGI/ML inference logic, and relational SQLite persistence ensures classifier updates (`ml_engine.py`) and threshold tuning require zero HTML rewrites and simplify automated unit testing.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     t41_h = ["Architectural Tier", "Constituent Technologies", "Functional Responsibilities"]
     t41_r = [
-        ["Presentation Tier", "Bootstrap 5.3, HTML5, Jinja2, Chart.js", "Renders role-specific dashboards, modal forms, queue meters, and charts."],
-        ["Application Logic Tier", "Flask 3.1, Werkzeug, scikit-learn", "Enforces RBAC security, executes ML inference, computes XAI cards, routes APIs."],
-        ["Data Persistence Tier", "SQLAlchemy ORM, SQLite 3 Engine", "Guarantees ACID transactions, manages relational constraints, stores audit logs."]
+        ["Presentation Tier", "Bootstrap 5.3, HTML5, Jinja2, Chart.js", "Generates responsive role dashboards, modals, capacity bars, and analytics canvases."],
+        ["Application Logic Tier", "Flask 3.x, Werkzeug, Scikit-learn", "Enforces 4-tier RBAC, runs 120-tree RF scoring, computes Gini XAI deficits."],
+        ["Data Persistence Tier", "SQLAlchemy ORM, SQLite 3 Engine", "Maintains 3NF tables, ACID batch commits, session cases, and immutable audit logs."]
     ]
     p.append(make_table(t41_h, t41_r, [usable_width*0.25, usable_width*0.35, usable_width*0.40]))
     p.append(Paragraph("Table 4.1 Architectural tiers and decoupled system responsibilities", caption_style))
     p.append(Spacer(1, 4))
     p.append(Paragraph("4.2 Overall Architecture Overview", h2_sec))
     p.append(Paragraph(
-        "Figure 4.1 illustrates the architectural relationship between client browsers, the Flask WSGI server, the machine learning inference pipeline, and the persistent SQLite database.",
+        "Figure 4.1 maps end-to-end communication between client browsers, Flask security middleware, Scikit-learn inference pipelines, and SQLite persistence.",
         body_indent
     ))
 
@@ -863,7 +863,7 @@ rf_pipeline.fit(X_train, y_train)"""
     p.append(Spacer(1, 4))
     p.append(Paragraph("5.5 Backend Web Implementation (Flask & SQLAlchemy)", h2_sec))
     p.append(Paragraph(
-        "The web application utilizes the Flask Application Factory pattern, isolating configuration parameters and registering route blueprints cleanly.",
+        "An Application Factory inside `app.py` registers role-guarded controllers alongside SQLAlchemy context hooks (`create_app`) so tests and production servers isolate instances cleanly.",
         body_indent
     ))
 
@@ -874,13 +874,13 @@ rf_pipeline.fit(X_train, y_train)"""
     p = pages[-1]
     p.append(Paragraph("5.6 Database Implementation & Model Serialization", h2_sec))
     p.append(Paragraph(
-        "SQLAlchemy declarative base classes map Python objects directly to SQLite tables. Database indexes on `enrollment_no` and `student_id` optimize retrieval.",
+        "ORM tables enforce foreign-key relationships connecting learners, mentoring sessions, notifications, and audit logs while indexing enrollment numbers for instant lookups.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("5.7 Authentication and Session Management", h2_sec))
     p.append(Paragraph(
-        "Authentication is enforced via the `@roles_required` decorator, intercepting unauthorized access attempts and verifying session identity.",
+        "Protected handlers verify role entitlements inside `@roles_required`, terminating unauthorized access attempts early ahead of business execution.",
         body_indent
     ))
     p.append(Spacer(1, 2))
