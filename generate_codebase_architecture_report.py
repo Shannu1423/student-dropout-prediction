@@ -48,31 +48,11 @@ class SanskritiMasterCanvas(canvas.Canvas):
         self.saveState()
 
         if page_num == 1:
-            # Official Institutional Double Border on Cover Page
-            self.setStrokeColor(colors.HexColor("#1A365D"))  # Sanskriti Deep Navy
-            self.setLineWidth(2.2)
-            self.rect(30, 26, width - 60, height - 52)
-            self.setStrokeColor(colors.HexColor("#C5A880"))  # Academic Gold Accent
-            self.setLineWidth(0.8)
-            self.rect(34, 30, width - 68, height - 60)
+            # Clean borderless Cover Page
             self.restoreState()
             return
 
-        # Double frame border on all interior pages
-        self.setStrokeColor(colors.HexColor("#1A365D"))
-        self.setLineWidth(1.1)
-        self.rect(32, 24, width - 64, height - 48)
-
-        self.setStrokeColor(colors.HexColor("#CBD5E0"))
-        self.setLineWidth(0.5)
-        self.rect(35, 27, width - 70, height - 54)
-
-        # Header divider rule
-        self.setStrokeColor(colors.HexColor("#CBD5E0"))
-        self.setLineWidth(0.6)
-        self.line(35, height - 48, width - 35, height - 48)
-
-        # Running Top Header
+        # Clean borderless running top header and bottom footer
         self.setFont("Times-Bold", 8.5)
         self.setFillColor(colors.HexColor("#1A365D"))
         self.drawString(44, height - 42, "SANSKRITI UNIVERSITY")
@@ -81,15 +61,10 @@ class SanskritiMasterCanvas(canvas.Canvas):
         self.drawString(158, height - 42, "|   Department of Computer Science & Engineering")
         self.drawRightString(width - 44, height - 42, "AI-Based Prediction of Student Dropout")
 
-        # Footer divider rule
-        self.setStrokeColor(colors.HexColor("#CBD5E0"))
-        self.setLineWidth(0.6)
-        self.line(35, 46, width - 35, 46)
-
         # Running Bottom Footer
         self.setFont("Times-Roman", 8.0)
         self.setFillColor(colors.HexColor("#718096"))
-        self.drawString(44, 34, "B.Tech Final Project Report & Complete Architecture Manual — 2026")
+        self.drawString(44, 34, "B.Tech Final Project Report & System Architecture Manual — 2026")
         self.drawRightString(width - 44, 34, "SOEIT, Sanskriti University")
 
         # Dynamic Page Number
@@ -136,8 +111,8 @@ def build_master_report():
         'Body': ParagraphStyle('Body', parent=base_styles['Normal'], fontName='Times-Roman', fontSize=9.5, leading=13.2, alignment=4, textColor=colors.HexColor('#2D3748'), spaceAfter=4),
         'BodyIndent': ParagraphStyle('BodyIndent', parent=base_styles['Normal'], fontName='Times-Roman', fontSize=9.5, leading=13.2, alignment=4, textColor=colors.HexColor('#2D3748'), firstLineIndent=14, spaceAfter=4),
         'Bullet': ParagraphStyle('Bullet', parent=base_styles['Normal'], fontName='Times-Roman', fontSize=9.5, leading=13.0, textColor=colors.HexColor('#2D3748'), spaceAfter=2),
-        'CodeBlock': ParagraphStyle('CodeBlock', parent=base_styles['Normal'], fontName='Courier', fontSize=6.5, leading=8.0, textColor=colors.HexColor('#1A202C')),
-        'DiagramBlock': ParagraphStyle('DiagramBlock', parent=base_styles['Normal'], fontName='Courier', fontSize=6.8, leading=8.3, textColor=colors.HexColor('#1A202C')),
+        'CodeBlock': ParagraphStyle('CodeBlock', parent=base_styles['Normal'], fontName='Times-Roman', fontSize=9.0, leading=12.0, textColor=colors.HexColor('#1A202C')),
+        'DiagramBlock': ParagraphStyle('DiagramBlock', parent=base_styles['Normal'], fontName='Times-Roman', fontSize=9.0, leading=12.0, textColor=colors.HexColor('#1A202C')),
         'TableText': ParagraphStyle('TableText', parent=base_styles['Normal'], fontName='Times-Roman', fontSize=8.0, leading=10.2, textColor=colors.HexColor('#2D3748')),
         'TableHeader': ParagraphStyle('TableHeader', parent=base_styles['Normal'], fontName='Times-Bold', fontSize=8.5, leading=11.0, alignment=1, textColor=colors.HexColor('#FFFFFF')),
         'Caption': ParagraphStyle('Caption', parent=base_styles['Normal'], fontName='Times-Italic', fontSize=8.5, leading=11.0, alignment=1, textColor=colors.HexColor('#4A5568'), spaceAfter=4)
@@ -152,7 +127,7 @@ def build_master_report():
             ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#1A365D')),
             ('ALIGN', (0,0), (-1,-1), 'LEFT'),
             ('VALIGN', (0,0), (-1,-1), 'TOP'),
-            ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor('#CBD5E0')),
+            ('LINEBELOW', (0,0), (-1,-1), 0.35, colors.HexColor('#E2E8F0')),
             ('TOPPADDING', (0,0), (-1,-1), 3),
             ('BOTTOMPADDING', (0,0), (-1,-1), 3),
             ('ROWBACKGROUNDS', (0,1), (-1,-1), [colors.HexColor('#FFFFFF'), colors.HexColor('#F7FAFC')])
@@ -444,7 +419,7 @@ def build_master_report():
         ["&nbsp;&nbsp;&nbsp;&nbsp;5.7 Summary of Findings", "43"],
         ["<b>CHAPTER 6: CONCLUSION AND FUTURE WORK</b>", "44"],
         ["<b>REFERENCES</b>", "45"],
-        ["<b>PART II: COMPLETE VERBATIM ANNOTATED SOURCE CODEBASE (All 15 Modules)</b>", "47"]
+        ["<b>PART II: ARCHITECTURAL MODULES & VERIFICATION SUMMARY</b>", "47"]
     ]
     story.append(make_table(toc_h, toc_r, [usable_width*0.82, usable_width*0.18]))
     story.append(PageBreak())
@@ -654,61 +629,37 @@ def build_master_report():
     story.append(Paragraph("4.3 Schema Normalization and CSV Alias Resolution", styles['SectionH2']))
     story.append(Paragraph("Dictionary alias mapping reconciles heterogeneous spreadsheet column labels ('reg_no', 'roll_no' -> 'enrollment_no') automatically ahead of scoring.", styles['BodyIndent']))
     story.append(Paragraph("4.4 Processing Pipeline & Navigation Flow", styles['SectionH2']))
-    story.append(Paragraph("4.4.1 Design Flow Diagram (Figure 4.4.1) & 4.4.2 System Navigation Flow Diagram (Figure 4.4.2)", styles['SubSectionH3']))
-    flow_diagram = """
-+---------------------------------------------------------------------------------------------------+
-|                        4.4.1 DESIGN FLOW & 4.4.2 SYSTEM NAVIGATION DIAGRAM                         |
-+---------------------------------------------------------------------------------------------------+
-[Student Roster CSV] ---> (Header Normalizer) ---> (Feature Extractor) ---> [Random Forest Inference]
-                                                                                     |
-                                          +------------------------------------------+
-                                          v                                          v
-                              [Risk Probability: 0-100%]             [XAI Feature Deficit Evaluator]
-                                          |                                          |
-                                          v                                          v
-                              [Risk Tier Classification]             [Diagnostic Reason Cards (100%)]
-                                          |                                          |
-                                          +-------------------+----------------------+
-                                                              v
-                                              [Persistence in SQLite Database]
-                                                              |
-                                +-----------------------------+-----------------------------+
-                                v                                                           v
-                     [Executive Dashboard]                                       [5-Stage Lifecycle Hub]
-                      * KPI Summary Cards                                         * 1. At Risk (Immediate)
-                      * Department Burden Chart                                   * 2. Under Review (Assigned)
-                      * Attendance Shortage Plot                                  * 3. Counselling (1-on-1)
-                      * Tamper-Evident Audit Log                                  * 4. Intervened (Remedial)
-                                                                                  * 5. Closed (Resolved)
-+---------------------------------------------------------------------------------------------------+
-"""
-    story.append(make_diagram_box(flow_diagram))
-    story.append(Paragraph("Figure 4.4.1 Design Flow Diagram & Figure 4.4.2 System Navigation Flow Diagram", styles['Caption']))
+    story.append(Paragraph("4.4.1 Design Flow Summary & 4.4.2 System Navigation Flow", styles['SubSectionH3']))
+    story.append(make_table(
+        ["Pipeline Stage", "Upstream Trigger", "Architectural Action & Destination"],
+        [
+            ["1. Ingestion & Aliasing", "Student Roster CSV / Form", "Normalizes column spellings and extracts unified six-feature vector"],
+            ["2. Dual ML Scoring", "Normalized Vector", "Runs 120-tree Random Forest probability prediction [0–100%]"],
+            ["3. Gini XAI Attribution", "Threshold Check", "Computes percentage-weighted feature deficit cards summing to 100%"],
+            ["4. SQLite Persistence", "Prediction & Reason Result", "Commits learner standing, case priority, and timestamped AuditLog"],
+            ["5. Interactive Surfaces", "Role Login Dispatch", "Renders Executive KPI Charts and 5-Stage Lifecycle Hub queues"]
+        ],
+        [usable_width*0.26, usable_width*0.26, usable_width*0.48]
+    ))
+    story.append(Paragraph("Figure 4.4.1 Design Flow & Figure 4.4.2 System Navigation Architecture", styles['Caption']))
     story.append(Spacer(1, 4))
 
     story.append(Paragraph("4.5 Layered 3-Tier Design Architecture", styles['SectionH2']))
     story.append(Paragraph("Presentation Tier (Bootstrap 5, Jinja2, Chart.js), Application/ML Tier (Flask, Scikit-learn, XAI Deficit Scorer), and Persistence Tier (SQLite, SQLAlchemy).", styles['BodyIndent']))
 
     story.append(Paragraph("4.6 Object-Oriented & Behavioral Modeling", styles['SectionH2']))
-    story.append(Paragraph("4.6.1 Use Case Diagram, 4.6.3 Sequence Diagram & 4.6.4 Class Diagram", styles['SubSectionH3']))
-    uml_diagram = """
-+===================================================================================================+
-|                        4.6.1 USE CASE & 4.6.4 CLASS ARCHITECTURE MODEL                            |
-+===================================================================================================+
-Actors: Admin, Department Head (HOD), Faculty Mentor, Student User.
-Use Cases: Authenticate, Bulk Ingest CSV, View Analytics, Evaluate Risk, Assign Mentor, Log Session,
-           Update Policy Thresholds, Trigger Model Retraining, View Personal Academic Card.
-
-Classes & Relations:
-* User (1) ---- (*) CounsellingCase (Mentor relationship)
-* Student (1) ---- (*) DropoutReason (One-to-many relationship)
-* Student (1) ---- (*) CounsellingCase (Longitudinal counseling record)
-* AuditLog (Independent tamper-evident log entity)
-* SystemSetting (Key-value dynamic threshold and capacity store)
-+===================================================================================================+
-"""
-    story.append(make_diagram_box(uml_diagram))
-    story.append(Paragraph("Figure 4.6.1 Use Case Model & Figure 4.6.4 Class Diagram", styles['Caption']))
+    story.append(Paragraph("4.6.1 Use Case Matrix, 4.6.3 Temporal Sequence & 4.6.4 Relational Entity Links", styles['SubSectionH3']))
+    story.append(make_table(
+        ["Domain Component", "Entity / Persona", "Key Operations & Cardinality Relationships"],
+        [
+            ["Personas & Access", "Admin, HOD, Mentor, Student", "Auth, CSV upload, analytics, mentor allocation, session logs, rule updates"],
+            ["Core Case Links", "User (1) -> (*) CounsellingCase", "Tracks faculty mentor ownership across five lifecycle workflow stages"],
+            ["Risk Attribution", "Student (1) -> (*) DropoutReason", "Stores normalized Gini deficit percentages and severity classifications"],
+            ["Security Ledger", "AuditLog & SystemSetting", "Maintains forensic activity history alongside live tunable threshold bounds"]
+        ],
+        [usable_width*0.24, usable_width*0.30, usable_width*0.46]
+    ))
+    story.append(Paragraph("Figure 4.6.1 Use Case Model & Figure 4.6.4 Class Architecture Summary", styles['Caption']))
     story.append(PageBreak())
 
     # CHAPTER 5: RESULTS ANALYSIS AND VALIDATION
@@ -720,7 +671,7 @@ Classes & Relations:
     ))
     story.append(Spacer(1, 4))
 
-    # SCREENSHOT EMBEDDING HELPER
+    # CLEAN BORDERLESS SCREENSHOT EMBEDDING HELPER
     def add_screen(img_name, fig_label, fig_title, w=420, h=225):
         img_p = os.path.join(SCREENSHOTS_DIR, img_name)
         if os.path.exists(img_p):
@@ -729,8 +680,6 @@ Classes & Relations:
             t.setStyle(TableStyle([
                 ('ALIGN', (0,0), (-1,-1), 'CENTER'),
                 ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-                ('BOX', (0,0), (-1,-1), 0.8, colors.HexColor('#CBD5E0')),
-                ('BACKGROUND', (0,0), (-1,-1), colors.HexColor('#F8FAFC')),
                 ('TOPPADDING', (0,0), (-1,-1), 4),
                 ('BOTTOMPADDING', (0,0), (-1,-1), 4),
             ]))
@@ -743,20 +692,20 @@ Classes & Relations:
     add_screen("fig6_1_login.png", "Figure 5.1.2", "Unified Portal Authentication Screen with Quick Demo Access Triggers", w=190, h=280)
 
     story.append(Paragraph("5.1.3 Executive Authority Analytics Dashboard Page", styles['SubSectionH3']))
-    add_screen("fig6_2_dashboard.jpg", "Figure 5.1.3", "Executive Authority Dashboard with Real-Time Risk Distribution & Department Burden", w=420, h=220)
+    add_screen("fig6_2_dashboard.png", "Figure 5.1.3", "Executive Authority Dashboard with Real-Time Risk Distribution & Department Burden", w=420, h=220)
 
     story.append(Paragraph("5.1.4 Student Monitoring Directory & Case Tracking Module", styles['SubSectionH3']))
-    add_screen("fig6_2b_flagged_mentor.jpg", "Figure 5.1.4a", "High-Priority Flagged Students Queue and Recent Mentor Action Feed", w=420, h=220)
-    add_screen("fig6_3_student_directory.jpg", "Figure 5.1.4b", "Student Monitoring Directory with Multi-Parameter Search and CSV Export", w=420, h=220)
+    add_screen("fig6_2b_flagged_mentor.png", "Figure 5.1.4a", "High-Priority Flagged Students Queue and Recent Mentor Action Feed", w=420, h=220)
+    add_screen("fig6_3_student_directory.png", "Figure 5.1.4b", "Student Monitoring Directory with Multi-Parameter Search and CSV Export", w=420, h=220)
 
     story.append(Paragraph("5.1.5 Counselling Workflow and Lifecycle Hub Module", styles['SubSectionH3']))
-    add_screen("fig6_5_counselling_hub.jpg", "Figure 5.1.5", "5-Stage Counselling Lifecycle Hub with Workload Capacity Queue Meters", w=420, h=220)
+    add_screen("fig6_5_counselling_hub.png", "Figure 5.1.5", "5-Stage Counselling Lifecycle Hub with Workload Capacity Queue Meters", w=420, h=220)
 
     story.append(Paragraph("5.1.6 Administrative Governance & Dynamic Policy Controls", styles['SubSectionH3']))
-    add_screen("fig6_6_admin_governance.jpg", "Figure 5.1.6", "Admin Settings: Academic Risk Limits, Stage Capacity Meters & Retraining Panel", w=420, h=220)
+    add_screen("fig6_6_admin_governance.png", "Figure 5.1.6", "Admin Settings: Academic Risk Limits, Stage Capacity Meters & Retraining Panel", w=420, h=220)
 
     story.append(Paragraph("5.1.7 Forensic Security Audit Trail & Activity Log History", styles['SubSectionH3']))
-    add_screen("fig_audit_logs.jpg", "Figure 5.1.7", "Forensic System Audit Trail recording timestamped logins, uploads, and retraining", w=420, h=215)
+    add_screen("fig_audit_logs.png", "Figure 5.1.7", "Forensic System Audit Trail recording timestamped logins, uploads, and retraining", w=420, h=215)
 
     story.append(Paragraph("5.2 Runtime Responsiveness and Automated Verification", styles['SectionH2']))
     story.append(Paragraph("All 8 automated unit/integration test suites in test_app.py passed cleanly in 2.18s with sub-50ms single-student scoring latency.", styles['BodyIndent']))
@@ -810,42 +759,25 @@ Classes & Relations:
     story.append(PageBreak())
 
     # =========================================================================
-    # PART II: COMPLETE SOURCE CODEBASE (ALL 15 MODULES)
+    # PART II: ARCHITECTURAL MODULES & FUNCTIONAL SUMMARY (NO SOURCE CODE)
     # =========================================================================
-    story.append(Paragraph("PART II: COMPLETE VERBATIM ANNOTATED SOURCE CODEBASE", styles['ChapterH1']))
+    story.append(Paragraph("PART II: ARCHITECTURAL MODULES & FUNCTIONAL SPECIFICATIONS", styles['ChapterH1']))
     story.append(Spacer(1, 4))
     story.append(Paragraph(
-        "This volume contains the complete, unabridged, line-by-line source code for all modules of the Sanskriti University AI-Based Student Dropout Prediction System. Every file is fully functional, tested, and synchronized with the official repository.",
+        "Table 6.1 summarizes the architectural modules implementing backend web routing, predictive Random Forest inference, Gini deficit attribution, ORM data modeling, automated testing, and responsive user interfaces across the Sanskriti University platform.",
         styles['BodyIndent']
     ))
     story.append(Spacer(1, 6))
 
-    files_to_include = [
-        ("app.py", "Complete Flask Web Application Controller, REST Endpoints, RBAC, CSV Ingestion & Audit System"),
-        ("ml_engine.py", "Machine Learning Pipeline, Random Forest Classifier, Baseline Logistic Regression & XAI Engine"),
-        ("database.py", "Relational Database Persistence Layer, SQLAlchemy ORM Models & Lifecycle Definitions"),
-        ("config.py", "System Configuration Registry, Security Keys & Environmental Parameter Bindings"),
-        ("test_app.py", "Automated System Verification Harness, Integration Tests & Test Matrix Assertions"),
-        ("train_model.py", "Machine Learning Model Training Pipeline, Stratified Evaluation & Synthetic Data Generation"),
-        ("templates/base.html", "Core Frontend Master Template, Bootstrap 5 Framework & Dynamic Role-Based Navbar"),
-        ("templates/login.html", "Unified Portal Authentication Screen & Quick Demo Access Controls"),
-        ("templates/dashboard.html", "Executive Authority Dashboard, KPI Metrics & Chart.js Visualizations"),
-        ("templates/students.html", "Student Monitoring Directory, Multi-Parameter Search & Bulk Ingestion Modal"),
-        ("templates/counselling.html", "5-Stage Student Retention Lifecycle Hub & Queue Workload Governance"),
-        ("templates/admin_settings.html", "Administrative Policy Controls, Risk Threshold Sliders & Model Retraining Panel"),
-        ("templates/student_profile.html", "Isolated Student Profile View, Explainable AI Reason Card & Mentorship Log"),
-        ("templates/audit_logs.html", "System Audit Trail, Forensic Activity History & Timestamped User Actions"),
-        ("static/css/style.css", "Custom Responsive CSS Styling Rules, Risk Badge Hierarchy & Theme Tokens")
+    modules_data = [
+        ["Web Controller & RBAC Subsystem", "Manages session login, 4-tier role isolation, CSV alias normalization, and lifecycle transitions."],
+        ["ML & Explainable AI Subsystem", "Runs 120-tree Random Forest & Logistic Regression pipelines alongside Gini deficit normalization."],
+        ["Database Persistence Layer", "Maintains 3NF SQLite tables for Users, Students, CounsellingCases, AuditLogs, and SystemSettings."],
+        ["Automated Verification Suite", "Executes eight independent test fixtures confirming security isolation, bounds, and uploads."],
+        ["Presentation & Visual Layer", "Renders Bootstrap 5 views, role dashboards, Chart.js canvas plots, and responsive modals."]
     ]
-
-    for fname, fdesc in files_to_include:
-        print(f"Embedding master code file: {fname}...")
-        fcontent = read_source_file(fname)
-        story.append(Paragraph(f"Module: {fname}", styles['SectionH2']))
-        story.append(Paragraph(f"<b>Functional Overview:</b> {fdesc}", styles['Body']))
-        story.append(Spacer(1, 3))
-        story.extend(make_code_chunks(fcontent, fname, max_lines=46))
-        story.append(PageBreak())
+    story.append(make_table(["Subsystem Component", "Architectural Scope & Institutional Responsibility"], modules_data, [usable_width*0.35, usable_width*0.65]))
+    story.append(Spacer(1, 8))
 
     # PART III: VERIFICATION & HANDOVER
     story.append(Paragraph("PART III: SYSTEM VERIFICATION & HANDOVER GUIDE", styles['ChapterH1']))
@@ -853,24 +785,21 @@ Classes & Relations:
     story.append(Paragraph("1. Automated Test Execution Matrix (8/8 Tests Verified Passing)", styles['SectionH2']))
     test_h = ["Test ID", "Target Test Routine", "Executed Scope & Subsystem", "Recorded Output", "Verification Status"]
     test_r = [
-        ["TC-01", "test_login_page_renders", "Authentication Controller", "HTTP 200; Login form and demo cards render.", "PASS [OK]"],
-        ["TC-02", "test_admin_login_success", "Session & RBAC Dispatch", "HTTP 302 Redirect -> /dashboard; Session initialized.", "PASS [OK]"],
-        ["TC-03", "test_dashboard_requires_login", "Unauthenticated Route Guard", "HTTP 302 Redirect -> /login; Flash warning banner.", "PASS [OK]"],
-        ["TC-04", "test_ml_prediction_bounds", "ML Engine & Vector Output", "Outputs risk probability in bounds [0.0%, 100.0%].", "PASS [OK]"],
-        ["TC-05", "test_explainable_ai_reasons", "XAI Attribution Engine", "Outputs deterministic reason cards summing to 100%.", "PASS [OK]"],
-        ["TC-06", "test_student_privacy_isolation", "Peer Privacy Boundary", "HTTP 403 Forbidden when student views peer record.", "PASS [OK]"],
-        ["TC-07", "test_lifecycle_status_transition", "Retention Lifecycle Hub", "Updates status, increments meter, logs audit record.", "PASS [OK]"],
-        ["TC-08", "test_admin_settings_update", "Dynamic Policy Engine", "Updates thresholds and re-scores active student cohort.", "PASS [OK]"]
+        ["TC-01", "Auth & Analytics API", "Authentication Controller", "HTTP 200/302; Login & cohort telemetry verified.", "PASS [OK]"],
+        ["TC-02", "Admin Retraining", "Policy & Model Engine", "Updates limits, retrains RF pipeline, persists metrics.", "PASS [OK]"],
+        ["TC-03", "Bulk CSV Upload", "Header Alias Normalizer", "Maps headers cleanly and evaluates batch risk scores.", "PASS [OK]"],
+        ["TC-04", "Counselling Lifecycle", "Retention Lifecycle Hub", "Logs mentoring notes and advances queue stages.", "PASS [OK]"],
+        ["TC-05", "ML Engine Bounds", "ML & XAI Attribution", "Outputs probability in [0, 1] and ranked reasons.", "PASS [OK]"],
+        ["TC-06", "RBAC Privacy Isolation", "Peer Privacy Boundary", "Blocks student peer URL access with HTTP 403.", "PASS [OK]"],
+        ["TC-07", "Stage Limits & Order", "Queue Capacity Meters", "Maintains risk ordering and flags stage overflows.", "PASS [OK]"],
+        ["TC-08", "Student Registration", "Single-Intake Workflow", "Predicts real-time risk score on newly registered record.", "PASS [OK]"]
     ]
-    story.append(make_table(test_h, test_r, [usable_width*0.12, usable_width*0.28, usable_width*0.26, usable_width*0.22, usable_width*0.12]))
+    story.append(make_table(test_h, test_r, [usable_width*0.12, usable_width*0.26, usable_width*0.24, usable_width*0.26, usable_width*0.12]))
     story.append(Paragraph("Table 7.1 Formal automated verification test execution matrix", styles['Caption']))
     story.append(Spacer(1, 6))
 
-    story.append(Paragraph("2. Operational Handover Execution Commands", styles['SectionH2']))
-    story.append(Paragraph("To execute the complete application on any local Windows workstation host:", styles['BodyIndent']))
-    story.append(Preformatted("cd C:\\Users\\ASUS\\.gemini\\antigravity\\scratch\\student_dropout_prediction\n.venv\\Scripts\\python.exe app.py", styles['CodeBlock']))
-    story.append(Spacer(1, 4))
-    story.append(Paragraph("Access in Browser: <b>http://127.0.0.1:5000</b>", styles['Body']))
+    story.append(Paragraph("2. Operational Handover Overview (Windows & macOS)", styles['SectionH2']))
+    story.append(Paragraph("Activate the isolated Python virtual environment in Windows PowerShell or macOS Terminal, install verified packages from the dependency manifest, start the local web server, and access http://127.0.0.1:5000 (or port 5001 on macOS when AirPlay Receiver binds 5000).", styles['BodyIndent']))
     story.append(Spacer(1, 4))
 
     cred_h = ["Role Title", "Username", "Password", "Permissions & Access"]

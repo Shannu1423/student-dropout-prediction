@@ -228,16 +228,13 @@ def build_report():
     background-color: #fafafa;
   }}
 
-  /* Code Blocks & Terminal */
+  /* Code Blocks & Terminal - rendered cleanly in Times New Roman without borders */
   pre {{
     background-color: var(--code-bg);
-    border: 1px solid var(--code-border);
-    border-left: 4px solid var(--secondary-color);
     padding: 10px 14px;
-    border-radius: 4px;
     overflow-x: auto;
-    font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
-    font-size: 8.5pt;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 10pt;
     line-height: 1.4;
     page-break-inside: avoid;
     break-inside: avoid;
@@ -247,7 +244,7 @@ def build_report():
   }}
 
   code {{
-    font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+    font-family: 'Times New Roman', Times, serif;
     font-size: 9.5pt;
     background: #edf2f7;
     padding: 2px 4px;

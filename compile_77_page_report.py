@@ -41,32 +41,11 @@ class SanskritiCanvas(canvas.Canvas):
         self.saveState()
 
         if page_num == 1:
-            # Professional institutional double border on Cover Page
-            self.setStrokeColor(colors.HexColor("#1A365D"))  # Sanskriti Deep Navy
-            self.setLineWidth(1.8)
-            self.rect(34, 34, width - 68, height - 68)
-            self.setStrokeColor(colors.HexColor("#C5A880"))  # Institutional Gold Accent
-            self.setLineWidth(0.7)
-            self.rect(38, 38, width - 76, height - 76)
+            # Clean borderless Cover Page
             self.restoreState()
             return
 
-        # Double frame border on all body pages (Pages 2 to 77)
-        # Outer primary border
-        self.setStrokeColor(colors.HexColor("#1A365D"))
-        self.setLineWidth(1.1)
-        self.rect(36, 25, width - 72, height - 50)
-
-        # Inner subtle hairline border
-        self.setStrokeColor(colors.HexColor("#CBD5E0"))
-        self.setLineWidth(0.5)
-        self.rect(39, 28, width - 78, height - 56)
-
-        # Header divider line inside the border frame
-        self.setStrokeColor(colors.HexColor("#CBD5E0"))
-        self.setLineWidth(0.6)
-        self.line(39, height - 48, width - 39, height - 48)
-
+        # Clean borderless academic page header and footer (Pages 2 to 77)
         # Running Top Header
         self.setFont("Times-Bold", 8.5)
         self.setFillColor(colors.HexColor("#1A365D"))
@@ -75,11 +54,6 @@ class SanskritiCanvas(canvas.Canvas):
         self.setFillColor(colors.HexColor("#4A5568"))
         self.drawString(162, height - 42, "|   Department of Computer Science & Engineering")
         self.drawRightString(width - 48, height - 42, "AI-Based Prediction of Student Dropout")
-
-        # Footer divider line above page numbering
-        self.setStrokeColor(colors.HexColor("#CBD5E0"))
-        self.setLineWidth(0.6)
-        self.line(39, 46, width - 39, 46)
 
         # Footer text
         self.setFont("Times-Roman", 8.0)
@@ -123,7 +97,7 @@ def build_pdf():
         'SubSectionH3': ParagraphStyle('SubSectionH3', parent=base_styles['Normal'], fontName='Times-Bold', fontSize=10.5, leading=13.5, alignment=0, textColor=colors.HexColor('#2D3748'), spaceBefore=3, spaceAfter=2),
         'ReportBody': ParagraphStyle('ReportBody', parent=base_styles['Normal'], fontName='Times-Roman', fontSize=10.0, leading=13.0, alignment=4, textColor=colors.HexColor('#2D3748'), spaceAfter=3),
         'ReportBodyIndent': ParagraphStyle('ReportBodyIndent', parent=base_styles['Normal'], fontName='Times-Roman', fontSize=10.0, leading=13.0, alignment=4, textColor=colors.HexColor('#2D3748'), firstLineIndent=14, spaceAfter=3),
-        'CodeText': ParagraphStyle('CodeText', parent=base_styles['Normal'], fontName='Courier', fontSize=7.2, leading=9.0, textColor=colors.HexColor('#1A202C')),
+        'CodeText': ParagraphStyle('CodeText', parent=base_styles['Normal'], fontName='Times-Roman', fontSize=9.0, leading=12.0, textColor=colors.HexColor('#1A202C')),
         'TableText': ParagraphStyle('TableText', parent=base_styles['Normal'], fontName='Times-Roman', fontSize=8.0, leading=10.0, textColor=colors.HexColor('#2D3748')),
         'TableHeader': ParagraphStyle('TableHeader', parent=base_styles['Normal'], fontName='Times-Bold', fontSize=8.5, leading=10.5, alignment=1, textColor=colors.HexColor('#FFFFFF')),
         'Caption': ParagraphStyle('Caption', parent=base_styles['Normal'], fontName='Times-Italic', fontSize=8.8, leading=11.2, alignment=1, textColor=colors.HexColor('#4A5568'), spaceAfter=2)
@@ -138,7 +112,7 @@ def build_pdf():
             ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#1A365D')),
             ('ALIGN', (0,0), (-1,-1), 'LEFT'),
             ('VALIGN', (0,0), (-1,-1), 'TOP'),
-            ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor('#CBD5E0')),
+            ('LINEBELOW', (0,0), (-1,-1), 0.35, colors.HexColor('#E2E8F0')),
             ('TOPPADDING', (0,0), (-1,-1), 2.5),
             ('BOTTOMPADDING', (0,0), (-1,-1), 2.5),
             ('ROWBACKGROUNDS', (0,1), (-1,-1), [colors.HexColor('#FFFFFF'), colors.HexColor('#F7FAFC')])
@@ -147,15 +121,14 @@ def build_pdf():
         return t
 
     def make_diagram_box(ascii_str):
-        p = Preformatted(ascii_str.strip(), styles['CodeText'])
+        p = Paragraph(ascii_str.strip().replace('\n', '<br/>'), styles['CodeText'])
         t = Table([[p]], colWidths=[usable_width])
         t.setStyle(TableStyle([
             ('BACKGROUND', (0,0), (-1,-1), colors.HexColor('#F8FAFC')),
-            ('BOX', (0,0), (-1,-1), 0.8, colors.HexColor('#CBD5E0')),
-            ('TOPPADDING', (0,0), (-1,-1), 4),
-            ('BOTTOMPADDING', (0,0), (-1,-1), 4),
-            ('LEFTPADDING', (0,0), (-1,-1), 6),
-            ('RIGHTPADDING', (0,0), (-1,-1), 6),
+            ('TOPPADDING', (0,0), (-1,-1), 6),
+            ('BOTTOMPADDING', (0,0), (-1,-1), 6),
+            ('LEFTPADDING', (0,0), (-1,-1), 8),
+            ('RIGHTPADDING', (0,0), (-1,-1), 8),
         ]))
         return t
 

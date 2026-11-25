@@ -24,7 +24,7 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
         pages.append([])
         return pages[-1]
 
-    # Helper image wrapper with border
+    # Clean borderless screenshot frame wrapper
     def make_screenshot_frame(img_path, width, height):
         if not os.path.exists(img_path):
             return Paragraph(f"<i>[Screenshot image not found: {os.path.basename(img_path)}]</i>", caption_style)
@@ -33,12 +33,8 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
         t.setStyle(TableStyle([
             ('ALIGN', (0,0), (-1,-1), 'CENTER'),
             ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-            ('BOX', (0,0), (-1,-1), 0.75, colors.HexColor('#CBD5E0')),
-            ('BACKGROUND', (0,0), (-1,-1), colors.HexColor('#FFFFFF')),
             ('TOPPADDING', (0,0), (-1,-1), 2),
             ('BOTTOMPADDING', (0,0), (-1,-1), 2),
-            ('LEFTPADDING', (0,0), (-1,-1), 2),
-            ('RIGHTPADDING', (0,0), (-1,-1), 2),
         ]))
         return t
 
@@ -55,7 +51,7 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
         body_indent
     ))
     p.append(Paragraph(
-        "Verification ran programmatically through Python's standard <code>unittest</code> runner inside <code>test_app.py</code>, exercising eight integrated suites over isolated test client requests, CSV header alias ingestion, threshold rescoring triggers, and machine learning retraining pipelines.",
+        "Verification ran programmatically through Python's standard <i>unittest</i> runner inside <i>test_app.py</i>, exercising eight integrated suites over isolated test client requests, CSV header alias ingestion, threshold rescoring triggers, and machine learning retraining pipelines.",
         body_indent
     ))
     p.append(Spacer(1, 4))
@@ -65,7 +61,7 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
         body_indent
     ))
     p.append(Paragraph(
-        "Each test fixture isolates state inside controlled database contexts so integration assertions leave production Sanskriti University cohort tables (<code>data/dropout_system.db</code>) completely untouched.",
+        "Each test fixture isolates state inside controlled database contexts so integration assertions leave production Sanskriti University cohort tables (<i>data/dropout_system.db</i>) completely untouched.",
         body_indent
     ))
 
@@ -239,7 +235,7 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
         body_indent
     ))
     p.append(Spacer(1, 6))
-    dash_img = os.path.join(SCREENSHOTS_DIR, "fig6_2_dashboard.jpg")
+    dash_img = os.path.join(SCREENSHOTS_DIR, "fig6_2_dashboard.png")
     p.append(make_screenshot_frame(dash_img, width=420, height=222))
     p.append(Spacer(1, 4))
     p.append(Paragraph("Figure 6.2 Application Interface – Administrative / HOD executive overview dashboard", caption_style))
@@ -256,7 +252,7 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
         body_indent
     ))
     p.append(Spacer(1, 6))
-    flagged_img = os.path.join(SCREENSHOTS_DIR, "fig6_2b_flagged_mentor.jpg")
+    flagged_img = os.path.join(SCREENSHOTS_DIR, "fig6_2b_flagged_mentor.png")
     p.append(make_screenshot_frame(flagged_img, width=420, height=228))
     p.append(Spacer(1, 4))
     p.append(Paragraph("Figure 6.2b Application Interface – High priority flagged students and recent mentor activity feed", caption_style))
@@ -273,7 +269,7 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
         body_indent
     ))
     p.append(Spacer(1, 6))
-    dir_img = os.path.join(SCREENSHOTS_DIR, "fig6_3_student_directory.jpg")
+    dir_img = os.path.join(SCREENSHOTS_DIR, "fig6_3_student_directory.png")
     p.append(make_screenshot_frame(dir_img, width=420, height=226))
     p.append(Spacer(1, 4))
     p.append(Paragraph("Figure 6.3 Application Interface – Student monitoring directory and cohort risk registry", caption_style))
@@ -290,7 +286,7 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
         body_indent
     ))
     p.append(Spacer(1, 6))
-    hub_img = os.path.join(SCREENSHOTS_DIR, "fig6_5_counselling_hub.jpg")
+    hub_img = os.path.join(SCREENSHOTS_DIR, "fig6_5_counselling_hub.png")
     p.append(make_screenshot_frame(hub_img, width=420, height=225))
     p.append(Spacer(1, 4))
     p.append(Paragraph("Figure 6.5 Application Interface – 5-stage counselling lifecycle hub with queue capacity workload meters", caption_style))
@@ -307,7 +303,7 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
         body_indent
     ))
     p.append(Spacer(1, 6))
-    adm_img = os.path.join(SCREENSHOTS_DIR, "fig6_6_admin_governance.jpg")
+    adm_img = os.path.join(SCREENSHOTS_DIR, "fig6_6_admin_governance.png")
     p.append(make_screenshot_frame(adm_img, width=420, height=228))
     p.append(Spacer(1, 4))
     p.append(Paragraph("Figure 6.6 Application Interface – Dynamic policy controls, risk thresholds and retraining", caption_style))
@@ -319,7 +315,7 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
     p = pages[-1]
     p.append(Paragraph("6.11 Empirical Machine Learning Performance and Results", h2_sec))
     p.append(Paragraph(
-        "Predictive separation was benchmarked across stratified 25% held-out validation splits derived from balanced cohort distributions matching SOEIT parameters. Table 6.8 reports live verification metrics captured from <code>ml_engine.py</code>.",
+        "Predictive separation was benchmarked across stratified 25% held-out validation splits derived from balanced cohort distributions matching SOEIT parameters. Table 6.8 reports live verification metrics captured from <i>ml_engine.py</i>.",
         body_indent
     ))
     p.append(Spacer(1, 4))
@@ -449,7 +445,7 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
     p.append(Spacer(1, 4))
     p.append(Paragraph("7.7 Team Coordination and Version Control", h2_sec))
     p.append(Paragraph(
-        "Collaboration was coordinated using Git on GitHub under repository <code>https://github.com/Shannu1423/student-dropout-prediction.git</code>. Semantic commits provided an immutable development trail.",
+        "Collaboration was coordinated using Git on GitHub under repository <i>https://github.com/Shannu1423/student-dropout-prediction.git</i>. Semantic commits provided an immutable development trail.",
         body_indent
     ))
 
@@ -736,85 +732,54 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
     p.append(make_table(ta1_h, ta1_r, [usable_width*0.28, usable_width*0.42, usable_width*0.30]))
     p.append(Paragraph("Table A.1 Project repository and environment links", caption_style))
     p.append(Spacer(1, 4))
-    p.append(Paragraph("A.2 Repository Structure", h2_sec))
-    repo_ascii = """student_dropout_prediction/
-├── app.py                     # Flask application factory, routes, and RBAC
-├── config.py                  # Environment configurations and secret keys
-├── database.py                # SQLAlchemy ORM models (User, Student, Case, Log)
-├── ml_engine.py               # ML training, Random Forest pipeline, XAI rules
-├── requirements.txt           # Python dependency specifications
-├── test_app.py                # Automated integration test suite (8 tests)
-├── ADMIN_OPERATIONS_MANUAL.md # Senior and administrator operations manual
-├── PROJECT_REPORT.pdf         # Official 77-page B.Tech Final Project Report
-├── data/
-│   ├── dropout_system.db      # SQLite relational database (115 students)
-│   └── uploads/               # Server-side bulk CSV upload directory
-├── models/
-│   └── dropout_model.pkl      # Serialized scikit-learn ML pipeline
-├── static/                    # CSS, JavaScript, and Sanskriti University logo
-└── templates/                 # Jinja2 HTML responsive dashboard templates"""
-    p.append(make_diagram_box(repo_ascii))
+    p.append(Paragraph("A.2 Project Directory Architecture", h2_sec))
+    p.append(make_table(
+        ["Directory / Component", "Functional Purpose in Application"],
+        [
+            ["Web Controller Layer", "Routes HTTP sessions, role guards, CSV normalization, and lifecycle transitions."],
+            ["ML & XAI Scoring Layer", "Encapsulates ColumnTransformer scaling, Random Forest predictions, and Gini deficits."],
+            ["Persistence Schema Layer", "Defines relational SQLAlchemy ORM entities persisted inside embedded SQLite storage."],
+            ["Serialized Artifacts Folder", "Stores trained joblib classifier pipelines and uploaded institutional cohort CSV files."],
+            ["Presentation Assets", "Organizes responsive Jinja2 templates, Chart.js dashboards, styles, and university logo."],
+            ["Automated Test Harness", "Executes eight independent verification scenarios covering RBAC, XAI, and uploads."]
+        ],
+        [usable_width*0.34, usable_width*0.66]
+    ))
 
     # =========================================================================
     # PAGE 74: APPENDIX cont. (Numbered Page 63)
     # =========================================================================
     new_page()
     p = pages[-1]
-    p.append(Paragraph("A.3 Important API Endpoints", h2_sec))
+    p.append(Paragraph("A.3 Key Service Endpoints", h2_sec))
     p.append(Paragraph(
-        "Core application endpoints handle student lookup, risk recalculation, and queue telemetry.",
+        "Core HTTP services govern role login dispatch, batch cohort ingestion, live score recalculation, counseling session tracking, and threshold recalibration.",
         body_indent
     ))
     p.append(Spacer(1, 4))
-    p.append(Paragraph("A.4 Selected Code Snippets", h2_sec))
-    p.append(Paragraph("A.4.1 Machine Learning Inference & XAI Deficit Attribution (ml_engine.py)", h3_subsec))
-    ml_snip = """def predict_student_risk(features_dict):
-    \"\"\"Calculates probability and classifies student into risk tiers.\"\"\"
-    model = joblib.load('models/dropout_model.pkl')
-    vec = [[
-        features_dict['attendance_pct'], features_dict['internal_marks_pct'],
-        features_dict['cgpa'], features_dict['backlogs'],
-        features_dict['lms_logins_per_week'], features_dict['library_visits'],
-        features_dict['assignments_submitted_pct'], features_dict['fee_overdue'],
-        features_dict['parent_income_lpa'], features_dict['distance_from_campus_km']
-    ]]
-    prob = model.predict_proba(vec)[0][1] * 100.0
-    threshold = AdminSettings.get_high_risk_threshold()
-    return round(prob, 1), prob >= threshold"""
-    p.append(Preformatted(ml_snip, code_style))
+    p.append(Paragraph("A.4 Algorithmic Logic & Decision Specifications", h2_sec))
+    p.append(Paragraph("A.4.1 Calibrated Ensemble Inference & Deficit Attribution Logic", h3_subsec))
+    p.append(Paragraph(
+        "Incoming student vectors undergo continuous normalization via StandardScaler and categorical one-hot encoding before scoring through a 120-tree Random Forest ensemble. Whenever an attribute falls beneath institutional limits (for example, attendance below 75% or internal marks below 55%), its shortfall ratio is weighted by the trained Gini importance and normalized across active factors so explanations always sum to 100%.",
+        body_indent
+    ))
 
     # =========================================================================
     # PAGE 75: APPENDIX cont. (Numbered Page 64)
     # =========================================================================
     new_page()
     p = pages[-1]
-    p.append(Paragraph("A.4.2 Role-Based Access Control and Session Authorization (app.py)", h3_subsec))
-    snip2 = """def check_student_privacy(requested_student_id):
-    \"\"\"Enforces strict peer privacy isolation: students can only access self.\"\"\"
-    user_id = session.get('user_id')
-    user = User.query.get(user_id)
-    if user.role == 'student':
-        student = Student.query.filter_by(enrollment_no=user.username).first()
-        if not student or student.id != requested_student_id:
-            abort(403, description=\"Access Denied: You cannot view peer records.\")
-    return True"""
-    p.append(Preformatted(snip2, code_style))
+    p.append(Paragraph("A.4.2 Peer Privacy Enforcement & Session Verification Logic", h2_sec))
+    p.append(Paragraph(
+        "When an authenticated student navigates toward a profile endpoint, server-side authorization binds the active session identity strictly against the matching enrollment record. Any query attempting to view a classmate profile terminates immediately with HTTP 403 rejection and logs a forensic security event.",
+        body_indent
+    ))
     p.append(Spacer(1, 4))
-    p.append(Paragraph("A.4.3 Bulk Ingestion Header Alias Normalization Engine (app.py)", h3_subsec))
-    snip3 = """def process_uploaded_csv(filepath):
-    \"\"\"Parses CSV with alias header mapping and computes batch inference.\"\"\"
-    df = pd.read_csv(filepath)
-    df.columns = [HEADER_MAP.get(c.lower().strip(), c.lower().strip()) for c in df.columns]
-    inserted_count = 0
-    for _, row in df.iterrows():
-        student = Student.upsert_from_row(row)
-        score, at_risk = predict_student_risk(student.to_dict())
-        student.risk_score = score
-        student.is_at_risk = at_risk
-        inserted_count += 1
-    db.session.commit()
-    return inserted_count"""
-    p.append(Preformatted(snip3, code_style))
+    p.append(Paragraph("A.4.3 Spreadsheet Column Normalization Workflow", h2_sec))
+    p.append(Paragraph(
+        "Batch spreadsheet ingestion cleans raw header labels by converting strings to lowercase and mapping common institutional aliases (such as registration number, branch, or term) onto unified database column identifiers before atomic cohort risk evaluation.",
+        body_indent
+    ))
 
     # =========================================================================
     # PAGE 76: APPENDIX cont. (Numbered Page 65)
@@ -828,7 +793,7 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
         body_indent
     ))
     p.append(Spacer(1, 4))
-    audit_img = os.path.join(SCREENSHOTS_DIR, "fig_audit_logs.jpg")
+    audit_img = os.path.join(SCREENSHOTS_DIR, "fig_audit_logs.png")
     p.append(make_screenshot_frame(audit_img, width=420, height=218))
     p.append(Spacer(1, 4))
     p.append(Paragraph("Figure A.1 Application Interface – System audit trail and security log history", caption_style))
@@ -860,13 +825,11 @@ def add_back_chapters(pages, styles, usable_width, make_table, make_diagram_box)
     p.append(make_table(ta3_h, ta3_r, [usable_width*0.30, usable_width*0.34, usable_width*0.36]))
     p.append(Paragraph("Table A.3 System environment variables and runtime configurations", caption_style))
     p.append(Spacer(1, 4))
-    p.append(Paragraph("A.8 Running the Project Locally (MacBook Terminal & Windows Guide)", h2_sec))
-    p.append(Paragraph("1. Clone repository & enter folder: <code>cd student-dropout-prediction</code>", body))
-    p.append(Paragraph("2. Create & activate virtual environment:", body))
-    p.append(Preformatted("# Mac / Linux Terminal:\npython3 -m venv .venv && source .venv/bin/activate\n# Windows PowerShell:\npython -m venv .venv && .venv\\Scripts\\activate", code_style))
-    p.append(Paragraph("3. Install packages and launch server (use PORT=5001 on Mac if AirPlay holds 5000):", body))
-    p.append(Preformatted("pip install -r requirements.txt\npython app.py", code_style))
-    p.append(Paragraph("4. Open Chrome/Safari at <b>http://127.0.0.1:5000</b> and sign in (`admin`, `satyam`, `priya`, `ramesh` / `password123`).", body))
+    p.append(Paragraph("A.8 Local Deployment Overview (Windows & macOS)", h2_sec))
+    p.append(Paragraph("1. Launch a terminal inside the project folder and activate an isolated Python virtual environment.", body))
+    p.append(Paragraph("2. Install verified packages listed inside the project dependency manifest and initialize the local web server.", body))
+    p.append(Paragraph("3. Open Chrome, Edge, or Safari at <b>http://127.0.0.1:5000</b> (or port 5001 on macOS when AirPlay uses 5000).", body))
+    p.append(Paragraph("4. Sign in using any of the four role personas: Administrator (<b>admin</b>), Guide/HOD (<b>satyam</b>), Mentor (<b>priya</b>), or Student (<b>ramesh</b>).", body))
     p.append(Spacer(1, 6))
     p.append(Paragraph("<b>End of Sanskriti University B.Tech Final Project Report (Exact 77 Pages)</b>", caption_style))
 

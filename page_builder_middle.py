@@ -354,42 +354,20 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     # =========================================================================
     new_page()
     p = pages[-1]
-    p.append(Paragraph("Figure 4.1 Overall 3-Tier Architecture Diagram", caption_style))
-    arch_ascii = """
-+-----------------------------------------------------------------------------+
-|                            PRESENTATION TIER                                |
-|  [Admin Dashboard]   [HOD Overview]   [Mentor Hub]   [Student Portal View]  |
-|  Bootstrap 5.3 CSS   |  Chart.js Visualizer  |  Jinja2 Server-Side Engine   |
-+-----------------------------------------------------------------------------+
-                                      | HTTP Requests / JSON APIs
-                                      v
-+-----------------------------------------------------------------------------+
-|                          APPLICATION LOGIC TIER                             |
-|  +-------------------------+  +-------------------+  +-------------------+  |
-|  | Flask Web Router        |  | RBAC Security     |  | Case Lifecycle    |  |
-|  | WSGI Application Engine |  | Session Auth      |  | 5-Stage Hub       |  |
-|  +-------------------------+  +-------------------+  +-------------------+  |
-|                                      |
-|                                      v
-|  +-----------------------------------------------------------------------+  |
-|  | MACHINE LEARNING SUBSYSTEM (ml_engine.py)                             |  |
-|  | [Data Preprocessor] -> [Random Forest Classifier] -> [Probability]    |  |
-|  | [Rule Attributor]   -> [Deficit Diagnostic Engine]-> [XAI Reason Card]|  |
-|  +-----------------------------------------------------------------------+  |
-+-----------------------------------------------------------------------------+
-                                      | SQLAlchemy ORM Queries
-                                      v
-+-----------------------------------------------------------------------------+
-|                           PERSISTENCE TIER                                  |
-|  [SQLite 3 Database: data/dropout_system.db]                                |
-|  * users  * students  * counselling_cases  * audit_logs  * admin_settings   |
-+-----------------------------------------------------------------------------+
-"""
-    p.append(make_diagram_box(arch_ascii))
+    p.append(Paragraph("Figure 4.1 Overall 3-Tier Architecture Overview", caption_style))
+    p.append(make_table(
+        ["Tier Layer", "Active Modules & Components", "Primary Execution Role"],
+        [
+            ["1. Presentation Tier", "Admin Dashboard, HOD Registry, Mentor Counselling Hub, Student View (Bootstrap 5 & Chart.js)", "Captures authentication inputs, batch CSV files, policy updates, and renders live canvas analytics."],
+            ["2. Application & ML Tier", "Flask Factory & Router, 4-Tier RBAC Guards, Random Forest Classifier, XAI Deficit Engine", "Verifies role entitlements, computes 120-tree risk scores, and calculates normalized 100% Gini deficit reasons."],
+            ["3. Persistence Tier", "SQLite 3 Engine + SQLAlchemy ORM (users, students, counselling_cases, audit_logs, settings)", "Maintains ACID transactional commits, foreign-key integrity, and immutable security trail logs."]
+        ],
+        [usable_width*0.24, usable_width*0.40, usable_width*0.36]
+    ))
     p.append(Spacer(1, 6))
     p.append(Paragraph("4.3 Machine Learning Pipeline Architecture", h2_sec))
     p.append(Paragraph(
-        "The machine learning subsystem comprises five sequential stages: (1) feature normalization and encoding; (2) feature vector construction across 10 continuous and categorical variables; (3) probability estimation via calibrated Random Forest ensembles; (4) classification threshold evaluation; and (5) localized deficit attribution.",
+        "The analytical workflow links five deterministic phases: standardized continuous feature scaling, one-hot categorical encoding for tuition fee standing, 120-tree Random Forest probability inference, institutional policy cutoff evaluation, and weighted Gini deficit attribution.",
         body_indent
     ))
 
@@ -442,36 +420,21 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     # =========================================================================
     new_page()
     p = pages[-1]
-    p.append(Paragraph("Figure 4.2 Data Flow Diagram – Level 0 (Context Level)", caption_style))
-    dfd0_ascii = """
-       +------------------+                    +------------------+
-       |                  | -- Student Data -> |                  |
-       |  ADMINISTRATOR   | -- Policy Limits-> |                  |
-       |                  | <- Audit Logs ---- |                  |
-       +------------------+                    |                  |
-                                               |                  |
-       +------------------+                    |                  |
-       |                  | -- Review Request->|  AI-BASED        |
-       |   GUIDE / HOD    | <- Risk Alerts --- |  STUDENT         |
-       |                  | -- Mentor Assign-> |  DROPOUT         |
-       +------------------+                    |  PREDICTION      |
-                                               |  SYSTEM          |
-       +------------------+                    |  (PROCESS 0)     |
-       |                  | <- At-Risk Queue - |                  |
-       |  FACULTY MENTOR  | -- Case Remarks -> |                  |
-       |                  | -- Action Plans -> |                  |
-       +------------------+                    |                  |
-                                               |                  |
-       +------------------+                    |                  |
-       |                  | -- Credentials --> |                  |
-       |     STUDENT      | <- Own Profile --- |                  |
-       +------------------+                    +------------------+
-"""
-    p.append(make_diagram_box(dfd0_ascii))
+    p.append(Paragraph("Figure 4.2 Context-Level Data Flow Summary (Level 0 DFD)", caption_style))
+    p.append(make_table(
+        ["External Actor", "Inbound Data Supplied to System", "Outbound Intelligence Returned"],
+        [
+            ["Administrator", "Threshold rules, stage capacity quotas, retraining triggers, batch CSV files", "Global cohort analytics, retraining evaluation scores, immutable audit trails"],
+            ["Guide / HOD", "Department queries, bulk student spreadsheets, mentor allocations", "Department burden bar charts, high-priority flagged alerts, escalation flags"],
+            ["Faculty Mentor", "Session remarks, remedial action plans, stage progression updates", "Assigned student queue, 100%-normalized XAI deficit cards, queue saturation meters"],
+            ["Student", "Encrypted authentication credentials (self-enrollment lookup)", "Strictly isolated personal performance standing, attendance deficits, and mentor advice"]
+        ],
+        [usable_width*0.20, usable_width*0.40, usable_width*0.40]
+    ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("4.7 Data Flow Diagram – Level 1 (Subsystem Decomposition)", h2_sec))
     p.append(Paragraph(
-        "The Level 1 DFD decomposes Process 0 into four functional sub-processes: Authentication & Authorization (1.0), Ingestion & Preprocessing (2.0), ML Inference & XAI Reason Attribution (3.0), and Counselling Case Lifecycle Management (4.0).",
+        "Level 1 decomposition breaks the core system into five sequential operations: Role Authentication (1.0), CSV & Form Normalization (2.0), Random Forest & XAI Attribution (3.0), Lifecycle Counselling Governance (4.0), and Forensic Audit Recording (5.0).",
         body_indent
     ))
 
@@ -480,31 +443,22 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     # =========================================================================
     new_page()
     p = pages[-1]
-    p.append(Paragraph("Figure 4.3 Data Flow Diagram – Level 1", caption_style))
-    dfd1_ascii = """
-  [User Credentials] -> (1.0 Auth & RBAC) ---------> [User Store]
-                               |
-                        [Role Token]
-                               v
-  [CSV/Registration] -> (2.0 Ingest & Clean) ------> [Student Store]
-                               |
-                        [Clean Vector]
-                               v
-                        (3.0 ML & XAI Engine) -----> [Predictions]
-                               |
-                        [Risk & Reason Cards]
-                               v
-  [Mentor Actions] ---> (4.0 Counselling Hub) -----> [Case Store]
-                               |
-                        [Audit Events]
-                               v
-                        (5.0 Security Logger) -----> [Audit Store]
-"""
-    p.append(make_diagram_box(dfd1_ascii))
+    p.append(Paragraph("Figure 4.3 Subsystem Decomposition Flow (Level 1 DFD)", caption_style))
+    p.append(make_table(
+        ["Process ID", "Processing Stage", "Input Artifact -> Output Store"],
+        [
+            ["Process 1.0", "Authentication & RBAC Verification", "User Credentials -> Verified Session Token & Users Store"],
+            ["Process 2.0", "Cohort Ingestion & Header Alias Mapping", "Raw CSV / Form Entry -> Validated Student Record Store"],
+            ["Process 3.0", "Random Forest Scoring & Gini Attribution", "Feature Vector -> Risk Probability & XAI Reason Cards"],
+            ["Process 4.0", "5-Stage Counselling Hub & Capacity Check", "Mentor Remarks & Stage Moves -> Counselling Cases Store"],
+            ["Process 5.0", "Security Event & Origin Logging", "Authenticated Route Actions -> Immutable Audit Log Store"]
+        ],
+        [usable_width*0.18, usable_width*0.36, usable_width*0.46]
+    ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("4.8 Use Case Diagram", h2_sec))
     p.append(Paragraph(
-        "Figure 4.4 models actor interactions across system boundaries, distinguishing administrative system governance from mentor counseling and student self-service.",
+        "Use case separation cleanly partitions administrative policy controls from mentor session tracking and isolated student self-monitoring.",
         body_indent
     ))
 
@@ -513,51 +467,24 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     # =========================================================================
     new_page()
     p = pages[-1]
-    p.append(Paragraph("Figure 4.5 Activity Diagram – Risk Evaluation and Intervention Lifecycle", caption_style))
-    act_ascii = """
-   (Start: Student Data Ingestion)
-                  |
-                  v
-       [Validate Academic Fields]
-                  |
-                  +--- Is Valid CSV? ---> [No] -> (Raise Validation Error)
-                  |
-                 [Yes]
-                  v
-       [Construct Feature Vector]
-                  |
-                  v
-       [ML Ensemble Risk Scoring]
-                  |
-                  +--- Probability >= Threshold (65%)?
-                  |                        |
-                 [No]                     [Yes]
-                  |                        v
-                  |              [Generate XAI Deficit Cards]
-                  |                        |
-                  |                        v
-                  |              [Create Counselling Case: 'New']
-                  |                        |
-                  |                        v
-                  |              [Evaluate Queue Capacity Limit]
-                  |                        |
-                  |                        +--- Exceeds Limit? -> [Alert HOD]
-                  |                        v
-                  |              [Mentor Conducts Session & Records Action Plan]
-                  |                        |
-                  v                        v
-        (Persist Student)        (Transition: 'Resolved' or 'Escalated')
-                  |                        |
-                  +------------------------+
-                               |
-                               v
-                            (Finish)
-"""
-    p.append(make_diagram_box(act_ascii))
+    p.append(Paragraph("Figure 4.5 Risk Evaluation and Remedial Intervention Activity Flow", caption_style))
+    p.append(make_table(
+        ["Activity Step", "Operational Decision / Action Executed", "Resulting System Transition"],
+        [
+            ["Step 1", "Receive single-student form or bulk departmental CSV upload", "Validate numeric ranges and required academic fields"],
+            ["Step 2", "Normalize header aliases and scale numeric features", "Construct unified six-attribute model vector"],
+            ["Step 3", "Execute 120-tree Random Forest classification pipeline", "Output calibrated attrition probability (0.0% to 100.0%)"],
+            ["Step 4", "Compare probability against active risk cutoff threshold", "Route low risk directly; flag at-risk learners for XAI"],
+            ["Step 5", "Calculate weighted Gini deficit shortfalls normalized to 100%", "Generate ranked human-readable diagnostic cards"],
+            ["Step 6", "Assign learner to lifecycle stage and check stage capacity quota", "Trigger overflow alert to HOD if queue limit exceeded"],
+            ["Step 7", "Record 1-on-1 counseling remarks and track academic recovery", "Advance lifecycle toward Intervened or Closed resolution"]
+        ],
+        [usable_width*0.16, usable_width*0.44, usable_width*0.40]
+    ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("4.10 Sequence Diagram Overview", h2_sec))
     p.append(Paragraph(
-        "The Sequence Diagram captures temporal message passing between the Client Browser, Web Router, ML Inference Engine, and the Database layer during prediction recalculation.",
+        "Synchronous message sequencing coordinates browser submissions, Flask view routing, scikit-learn ensemble predictions, and relational SQLite persistence within a single HTTP request transaction.",
         body_indent
     ))
 
@@ -566,28 +493,23 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     # =========================================================================
     new_page()
     p = pages[-1]
-    p.append(Paragraph("Figure 4.6 Sequence Diagram – Prediction and Lifecycle Progression", caption_style))
-    seq_ascii = """
- Client Browser        Flask Router        ML Engine         SQLAlchemy DB
-       |                     |                 |                   |
-       |--- POST /upload --->|                 |                   |
-       |                     |--- parse CSV -->|                   |
-       |                     |                 |--- batch insert ->|
-       |                     |                 |<-- success -------|
-       |                     |--- predict() -->|                   |
-       |                     |<-- risk score --|                   |
-       |                     |--- XAI cards -->|                   |
-       |                     |<-- reason list -|                   |
-       |                     |--- save case ---------------------->|
-       |                     |<-- case created --------------------|
-       |<-- 200 OK Redirect -|                 |                   |
-       |                     |                 |                   |
-"""
-    p.append(make_diagram_box(seq_ascii))
+    p.append(Paragraph("Figure 4.6 Synchronous Prediction and Lifecycle Message Sequence", caption_style))
+    p.append(make_table(
+        ["Sequence Order", "Origin -> Target Component", "Synchronous Message Exchanged"],
+        [
+            ["1", "Client Browser -> Flask Router", "Submits student record or bulk CSV roster via HTTP POST"],
+            ["2", "Flask Router -> Normalizer", "Maps header aliases and validates field constraints"],
+            ["3", "Flask Router -> ML Engine", "Requests calibrated Random Forest risk score and tier"],
+            ["4", "ML Engine -> Flask Router", "Returns risk probability and 100%-normalized XAI deficit cards"],
+            ["5", "Flask Router -> SQLAlchemy DB", "Upserts student profile, initializes case stage, writes AuditLog"],
+            ["6", "Flask Router -> Client Browser", "Issues HTTP 302 redirect rendering updated cohort dashboard"]
+        ],
+        [usable_width*0.16, usable_width*0.36, usable_width*0.48]
+    ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("4.11 Entity Relationship (ER) Diagram", h2_sec))
     p.append(Paragraph(
-        "Figure 4.7 details entity relationships, cardinalities, primary keys, and foreign keys across the persistence tier.",
+        "Table 4.4b summarizes entity cardinalities, primary identifiers, and referential foreign-key constraints across the database store.",
         body_indent
     ))
 
@@ -596,30 +518,18 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     # =========================================================================
     new_page()
     p = pages[-1]
-    p.append(Paragraph("Figure 4.7 Entity Relationship Diagram", caption_style))
-    erd_ascii = """
-  +------------------+         1:N         +-----------------------+
-  |      USERS       |-------------------->|   COUNSELLING_CASES   |
-  | PK: id           |                     | PK: id                |
-  |     username     |                     | FK: student_id        |
-  |     password_hash|                     | FK: assigned_to (user)|
-  |     role         |                     |     stage             |
-  +------------------+                     |     notes             |
-          |                                +-----------------------+
-          | 1:N                                        ^
-          v                                            | 1:N
-  +------------------+         1:1                     |
-  |    AUDIT_LOGS    |                     +-----------------------+
-  | PK: id           |                     |       STUDENTS        |
-  | FK: user_id      |                     | PK: id                |
-  |     action       |                     |     enrollment_no (UQ)|
-  |     timestamp    |                     |     attendance_pct    |
-  |     status       |                     |     cgpa              |
-  +------------------+                     |     risk_score        |
-                                           |     is_at_risk        |
-                                           +-----------------------+
-"""
-    p.append(make_diagram_box(erd_ascii))
+    p.append(Paragraph("Figure 4.7 Relational Entity Relationship Structure", caption_style))
+    p.append(make_table(
+        ["Source Entity", "Cardinality", "Target Entity & Foreign Key Binding"],
+        [
+            ["USERS (PK: id)", "1 : N", "COUNSELLING_CASES (FK: assigned_mentor_id -> users.id)"],
+            ["STUDENTS (PK: id)", "1 : N", "COUNSELLING_CASES (FK: student_id -> students.id)"],
+            ["USERS (PK: id)", "1 : N", "AUDIT_LOGS (FK: user_id -> users.id)"],
+            ["USERS (PK: id)", "1 : N", "NOTIFICATIONS (FK: user_id -> users.id)"],
+            ["SYSTEM_SETTINGS", "Key-Value", "Independent global configuration store (policy cutoffs & capacities)"]
+        ],
+        [usable_width*0.26, usable_width*0.18, usable_width*0.56]
+    ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("4.12 Database Design & Relationships", h2_sec))
     p.append(Paragraph(
@@ -756,38 +666,21 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     p = pages[-1]
     p.append(Paragraph("4.18 Project Workflow", h2_sec))
     p.append(Paragraph(
-        "Figure 4.8 illustrates the complete agile project workflow from initial data synthesis to deployment.",
+        "Table 4.11 outlines the five agile development sprints conducted from data modeling through automated test verification.",
         body_indent
     ))
-    flow_ascii = """
- [Sprint 1: Aug 25 - Sep 07]
- * Educational domain research & indicator identification
- * Synthetic cohort dataset creation (115 profiles, 10 features)
-           |
-           v
- [Sprint 2: Sep 08 - Sep 21]
- * scikit-learn classification modeling (Random Forest & Logistic Regression)
- * Implementation of Explainable AI (XAI) feature deficit attribution logic
-           |
-           v
- [Sprint 3: Sep 22 - Oct 05]
- * Mid-Term Evaluation Checkpoint (Guide Review: Sep 28)
- * Flask backend routing, SQLite schema & SQLAlchemy ORM modeling
- * 4-Tier RBAC security implementation & student privacy isolation
-           |
-           v
- [Sprint 4: Oct 06 - Oct 19]
- * 5-Stage Counselling Lifecycle Hub & Queue Workload Capacity Meters
- * Bulk CSV file upload engine with automated header normalization
- * Chart.js analytics dashboards & dynamic admin policy controls
-           |
-           v
- [Sprint 5: Oct 20 - Nov 10]
- * Automated test suite development (test_app.py - 8 integration fixtures)
- * Offline packaging, documentation, operations manual, and GitHub sync
-"""
-    p.append(make_diagram_box(flow_ascii))
-    p.append(Paragraph("Figure 4.8 Project Execution and Agile Sprint Lifecycle Flowchart", caption_style))
+    p.append(make_table(
+        ["Sprint Interval", "Milestone Theme", "Delivered Outcomes"],
+        [
+            ["Sprint 1 (Aug 25 – Sep 07)", "Domain & Schema Modeling", "Identified six core retention indicators and assembled balanced SOEIT cohort profiles."],
+            ["Sprint 2 (Sep 08 – Sep 21)", "ML & Gini XAI Engine", "Trained 120-tree Random Forest & Logistic Regression models; derived 100% deficit scoring."],
+            ["Sprint 3 (Sep 22 – Oct 05)", "Mid-Term Review & RBAC", "Completed guide review (Sep 28), built SQLite ORM tables and 4-tier session security."],
+            ["Sprint 4 (Oct 06 – Oct 19)", "Lifecycle Hub & Ingestion", "Constructed 5-stage mentoring queues, workload meters, CSV normalizer, and admin sliders."],
+            ["Sprint 5 (Oct 20 – Nov 10)", "Testing & Documentation", "Executed eight unittest verification suites and cross-platform local server packaging."]
+        ],
+        [usable_width*0.26, usable_width*0.26, usable_width*0.48]
+    ))
+    p.append(Paragraph("Figure 4.8 Agile Sprint Progression and Delivery Summary", caption_style))
 
     # =========================================================================
     # PAGE 40: CHAPTER 5 (Numbered Page 29)
@@ -799,36 +692,32 @@ def add_middle_chapters(pages, styles, usable_width, make_table, make_diagram_bo
     p.append(Spacer(1, 4))
     p.append(Paragraph("5.1 Introduction", h2_sec))
     p.append(Paragraph(
-        "This chapter translates the architectural design into production software modules across `ml_engine.py`, `database.py`, `app.py`, and Jinja2 presentation templates, documenting preprocessing transforms, attribution weights, authorization wrappers, and capacity meters.",
+        "This chapter translates the architectural design into operational platform components covering statistical ensemble training, deficit attribution arithmetic, role-based access enforcement, CSV ingestion, and queue capacity tracking.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("5.2 Development Environment", h2_sec))
     p.append(Paragraph(
-        "Development ran inside isolated Python virtual environments (`.venv`) on Windows and macOS workstations, tracked with Git and hosted on GitHub (`https://github.com/Shannu1423/student-dropout-prediction.git`).",
+        "Implementation ran inside isolated Python virtual environments across Windows and macOS workstations, backed by Git version tracking on GitHub.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("5.3 Machine Learning Model Implementation", h2_sec))
     p.append(Paragraph(
-        "Constructed in `ml_engine.py`, the pipeline pairs a `ColumnTransformer`—applying `StandardScaler` to numeric indicators and `OneHotEncoder(drop='first')` to fee status—with a 120-tree `RandomForestClassifier`.",
+        "Continuous student attributes undergo standard zero-mean unit-variance scaling while tuition payment standing is one-hot encoded prior to feeding a 120-estimator Random Forest classifier (`max_depth=8`, `min_samples_split=5`). Model parameters serialize cleanly to local disk via Joblib for instant sub-50ms server inference.",
         body_indent
     ))
-    p.append(Spacer(1, 2))
-    p.append(Paragraph("<b>Listing 5.1 Pipeline Construction Excerpt (ml_engine.py)</b>", caption_style))
-    ml_code = """# ml_engine.py: Preprocessor + 120-tree Random Forest pipeline
-preprocessor = ColumnTransformer(transformers=[
-    ('num', StandardScaler(), numeric_features),
-    ('cat', OneHotEncoder(drop='first', sparse_output=False), ['fee_status'])
-])
-rf_pipeline = Pipeline(steps=[
-    ('preprocessor', preprocessor),
-    ('classifier', RandomForestClassifier(
-        n_estimators=120, max_depth=8, min_samples_split=5, random_state=42
+    p.append(Spacer(1, 4))
+    p.append(make_table(
+        ["Pipeline Component", "Configured Hyperparameter / Transform", "Functional Role"],
+        [
+            ["Numeric Scaler", "StandardScaler across 5 continuous features", "Normalizes attendance, marks, backlogs, engagement, semester"],
+            ["Categorical Encoder", "OneHotEncoder (drop first level)", "Encodes Paid, Partial, and Due tuition payment tiers cleanly"],
+            ["Primary Classifier", "Random Forest (120 trees, max depth 8)", "Computes calibrated dropout probabilities [0.0% to 100.0%]"],
+            ["Benchmark Model", "Logistic Regression (max_iter = 500)", "Supplies comparative linear separation metrics in dashboards"]
+        ],
+        [usable_width*0.25, usable_width*0.35, usable_width*0.40]
     ))
-])
-rf_pipeline.fit(X_train, y_train)"""
-    p.append(Preformatted(ml_code, code_style))
 
     # =========================================================================
     # PAGE 41: CHAPTER 5 cont. (Numbered Page 30)
@@ -837,33 +726,25 @@ rf_pipeline.fit(X_train, y_train)"""
     p = pages[-1]
     p.append(Paragraph("5.4 Explainable AI (XAI) Attribution Engine Implementation", h2_sec))
     p.append(Paragraph(
-        "Rather than emitting bare probabilities, `analyze_reasons()` measures shortfalls beneath admin-configured thresholds and multiplies each deficit ratio by its trained Gini feature importance before normalizing to 100%.",
+        "To eliminate black-box confusion during faculty counselling, the deficit attribution algorithm checks each learner indicator against active institutional thresholds (`attendance < 75%`, `marks < 55%`, `backlogs >= 1`, `engagement < 40`, and overdue tuition). Shortfall ratios are scaled by learned Random Forest Gini weights and normalized strictly to 100%.",
         body_indent
     ))
-    p.append(Spacer(1, 2))
-    p.append(Paragraph("<b>Listing 5.2 Algorithmic Reason Attribution (ml_engine.py)</b>", caption_style))
-    xai_code = """def get_dropout_reasons(student_dict, thresholds):
-    reasons = []
-    if student_dict.get('attendance_pct', 100) < thresholds['attendance']:
-        reasons.append({
-            'factor': 'Critical Attendance Shortage',
-            'value': f"{student_dict['attendance_pct']}%",
-            'severity': 'danger',
-            'recommendation': 'Issue formal attendance warning; schedule mentor conference.'
-        })
-    if student_dict.get('internal_marks_pct', 100) < thresholds['internal_marks']:
-        reasons.append({
-            'factor': 'Low Internal Assessment Performance',
-            'value': f"{student_dict['internal_marks_pct']}%",
-            'severity': 'danger',
-            'recommendation': 'Enroll student in subject remedial tutoring classes.'
-        })
-    return reasons"""
-    p.append(Preformatted(xai_code, code_style))
+    p.append(Spacer(1, 4))
+    p.append(make_table(
+        ["Risk Factor Evaluated", "Nominal Threshold", "Severity Escalation Logic & Prescribed Advice"],
+        [
+            ["Attendance Deficit", "Warning < 75% / Critical < 60%", "Flags urgent detention notice and parent conference when < 60%"],
+            ["Internal Assessment", "Warning < 55% / Critical < 40%", "Prescribes departmental remedial tutoring and bi-weekly mock tests"],
+            ["Active Backlogs", "Warning >= 1 / Critical >= 3", "Triggers structured arrear clearance study plan with faculty advisor"],
+            ["LMS Engagement", "Critical < 40.0 score", "Prompts advisor check-in regarding portal access and assignment completion"],
+            ["Tuition Standing", "Fee Status: Due or Partial", "Routes learner to financial aid office for scholarship / installment review"]
+        ],
+        [usable_width*0.24, usable_width*0.28, usable_width*0.48]
+    ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("5.5 Backend Web Implementation (Flask & SQLAlchemy)", h2_sec))
     p.append(Paragraph(
-        "An Application Factory inside `app.py` registers role-guarded controllers alongside SQLAlchemy context hooks (`create_app`) so tests and production servers isolate instances cleanly.",
+        "An Application Factory architecture cleanly separates runtime settings, database binding hooks, and view routes so both production servers and automated verification tests operate over isolated database contexts.",
         body_indent
     ))
 
@@ -880,26 +761,19 @@ rf_pipeline.fit(X_train, y_train)"""
     p.append(Spacer(1, 4))
     p.append(Paragraph("5.7 Authentication and Session Management", h2_sec))
     p.append(Paragraph(
-        "Protected handlers verify role entitlements inside `@roles_required`, terminating unauthorized access attempts early ahead of business execution.",
+        "Every administrative, HOD, mentor, and student route is protected by server-side role verification middleware. Requests lacking an authenticated session redirect cleanly to the login portal, while mismatched role entitlements terminate immediately with HTTP 403 rejection and a security audit entry.",
         body_indent
     ))
-    p.append(Spacer(1, 2))
-    p.append(Paragraph("<b>Listing 5.3 RBAC Authorization Decorator (app.py)</b>", caption_style))
-    rbac_code = """def roles_required(*allowed_roles):
-    def decorator(f):
-        @wraps(f)
-        def decorated_function(*args, **kwargs):
-            if 'user_id' not in session:
-                flash('Please log in to access this page.', 'warning')
-                return redirect(url_for('login'))
-            user = User.query.get(session['user_id'])
-            if not user or user.role not in allowed_roles:
-                flash('Access denied: insufficient operational privileges.', 'danger')
-                return abort(403)
-            return f(*args, **kwargs)
-        return decorated_function
-    return decorator"""
-    p.append(Preformatted(rbac_code, code_style))
+    p.append(Spacer(1, 4))
+    p.append(make_table(
+        ["Role Entitlement Guard", "Permitted Personas", "Unauthorized Request Behavior"],
+        [
+            ["Login Verification", "All Authenticated Portal Accounts", "Redirects unauthenticated traffic to `/login` with flash alert"],
+            ["Executive / Policy Scope", "Administrator & Guide / HOD", "Blocks mentors and students with HTTP 403 Access Denied"],
+            ["Personal Profile Scope", "Self-Student Record Binding", "Prevents students from opening any peer enrollment profile"]
+        ],
+        [usable_width*0.28, usable_width*0.30, usable_width*0.42]
+    ))
 
     # =========================================================================
     # PAGE 43: CHAPTER 5 cont. (Numbered Page 32)
@@ -908,30 +782,28 @@ rf_pipeline.fit(X_train, y_train)"""
     p = pages[-1]
     p.append(Paragraph("5.8 Student Profile & Risk Recalculation Engine", h2_sec))
     p.append(Paragraph(
-        "The recalculation engine allows counselors to adjust hypothetical student grades or attendance and observe real-time risk trajectory changes immediately.",
+        "During counselling conferences, advisors can adjust simulated attendance, internal test scores, or backlog values directly inside a student profile to preview updated risk percentages in real time before saving session plans.",
         body_indent
     ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("5.9 Bulk CSV Ingestion & Header Normalization", h2_sec))
     p.append(Paragraph(
-        "To prevent ingestion failures caused by varying spreadsheet headers, the CSV parser implements automated alias mapping before database insertion.",
+        "To eliminate upload errors caused by mismatched spreadsheet headers across engineering departments, incoming CSV files pass through an automated lowercase dictionary normalizer before validation and batch scoring.",
         body_indent
     ))
-    p.append(Spacer(1, 2))
-    p.append(Paragraph("<b>Listing 5.4 Header Alias Mapping Dictionary (app.py)</b>", caption_style))
-    csv_code = """HEADER_MAP = {
-    'enrollment': 'enrollment_no', 'reg_no': 'enrollment_no',
-    'student_name': 'name', 'full_name': 'name',
-    'dept': 'department', 'branch': 'department',
-    'sem': 'semester', 'term': 'semester',
-    'attendance': 'attendance_pct', 'att_pct': 'attendance_pct',
-    'internal': 'internal_marks_pct', 'internals': 'internal_marks_pct',
-    'gpa': 'cgpa', 'grade_point': 'cgpa',
-    'fees_overdue': 'fee_overdue', 'backlog_count': 'backlogs'
-}
-normalized_row = {HEADER_MAP.get(k.lower().strip(), k.lower().strip()): v
-                  for k, v in raw_row.items()}"""
-    p.append(Preformatted(csv_code, code_style))
+    p.append(Spacer(1, 4))
+    p.append(make_table(
+        ["Canonical Database Field", "Accepted Spreadsheet Header Aliases"],
+        [
+            ["enrollment_no", "enrollment, reg_no, roll_no, student_id"],
+            ["name", "student_name, full_name"],
+            ["department & semester", "dept, branch, sem, term"],
+            ["attendance_percentage", "attendance, att_pct"],
+            ["internal_marks_avg", "internal_marks, internals, marks"],
+            ["backlog_count & fee_status", "backlogs, active_backlogs, fee, fees_overdue"]
+        ],
+        [usable_width*0.35, usable_width*0.65]
+    ))
 
     # =========================================================================
     # PAGE 44: CHAPTER 5 cont. (Numbered Page 33)
@@ -940,24 +812,21 @@ normalized_row = {HEADER_MAP.get(k.lower().strip(), k.lower().strip()): v
     p = pages[-1]
     p.append(Paragraph("5.10 Counselling Lifecycle Hub & Queue Workload Implementation", h2_sec))
     p.append(Paragraph(
-        "The Counselling Hub visualizes active student caseloads across 5 stages. Queue workload meters compute stage saturation against institutional limits.",
+        "The Counselling Lifecycle Hub tracks student progression across five operational stages sorted descending by predicted risk severity. Live queue capacity meters compute saturation percentages against administrator-configured limits and surface immediate visual overflow warnings whenever caseloads exceed safe mentoring bounds.",
         body_indent
     ))
-    p.append(Spacer(1, 2))
-    p.append(Paragraph("<b>Listing 5.5 Queue Capacity Computation (app.py)</b>", caption_style))
-    queue_code = """# Compute stage saturation percentage
-stage_counts = {s: CounsellingCase.query.filter_by(stage=s).count()
-                for s in ['New', 'Under Review', 'In Progress', 'Resolved', 'Escalated']}
-queue_meters = {}
-for stage, count in stage_counts.items():
-    limit = StageLimit.query.filter_by(stage_name=stage).first().max_limit
-    pct = round((count / max(limit, 1)) * 100, 1)
-    queue_meters[stage] = {
-        'count': count, 'limit': limit, 'pct': pct,
-        'overflow': count > limit,
-        'color': 'danger' if count > limit else ('warning' if pct >= 80 else 'success')
-    }"""
-    p.append(Preformatted(queue_code, code_style))
+    p.append(Spacer(1, 4))
+    p.append(make_table(
+        ["Lifecycle Stage", "Queue Priority Ordering", "Saturation Meter Alert Thresholds"],
+        [
+            ["1. At Risk", "Highest priority (descending risk)", "Green < 80% | Amber 80–99% | Red Overflow >= 100%"],
+            ["2. Under Review", "Preliminary advisor evaluation", "Monitors unassigned bottlenecks against stage limit"],
+            ["3. Counselling", "Active 1-on-1 faculty mentoring", "Tracks concurrent active student counselling sessions"],
+            ["4. Intervened", "Remedial plan or fee relief active", "Records targeted interventions and next follow-up date"],
+            ["5. Closed / Low Risk", "Resolved and stable baseline cohort", "Archives stabilized cases once deficits clear thresholds"]
+        ],
+        [usable_width*0.24, usable_width*0.32, usable_width*0.44]
+    ))
     p.append(Spacer(1, 4))
     p.append(Paragraph("5.11 Escalation Engine & In-Portal Notifications", h2_sec))
     p.append(Paragraph(

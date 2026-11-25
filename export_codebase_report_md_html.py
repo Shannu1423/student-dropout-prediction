@@ -235,16 +235,25 @@ md.append("## CHAPTER 6: CONCLUSION AND FUTURE WORK\n")
 md.append("6.1 Conclusion  \n6.2 Future Work\n")
 md.append("---\n")
 
-# PART II: SOURCE CODE LISTINGS
-md.append("# PART II: COMPLETE VERBATIM ANNOTATED SOURCE CODE LISTINGS\n")
+# PART II: ARCHITECTURAL MODULES & INTERFACES (NO SOURCE CODE)
+md.append("# PART II: SYSTEM ARCHITECTURE & APPLICATION SCREENSHOTS\n")
+md.append("| Subsystem Component | Architectural Scope & Responsibility |")
+md.append("|---|---|")
 for fn, lang, desc in files:
-    content = read_source(fn)
-    md.append(f"## File: `{fn}`")
-    md.append(f"**Description:** {desc}  ")
-    md.append(f"**Line Count:** {len(content.splitlines())} lines\n")
-    md.append(f"```{lang}")
-    md.append(content)
-    md.append("```\n")
+    md.append(f"| **{fn}** | {desc} |")
+md.append("")
+
+md.append("## Verified Application Screenshots (All 7 Core Views)\n")
+for img_fn, fig_lbl in [
+    ("fig6_1_login.png", "Figure 5.1.2: Unified Portal Authentication Screen"),
+    ("fig6_2_dashboard.png", "Figure 5.1.3: Executive Authority Analytics Dashboard"),
+    ("fig6_2b_flagged_mentor.png", "Figure 5.1.4a: High-Priority Flagged Queue & Mentor Action Feed"),
+    ("fig6_3_student_directory.png", "Figure 5.1.4b: Student Monitoring Directory"),
+    ("fig6_5_counselling_hub.png", "Figure 5.1.5: 5-Stage Counselling Lifecycle Hub"),
+    ("fig6_6_admin_governance.png", "Figure 5.1.6: Administrative Governance & Policy Controls"),
+    ("fig_audit_logs.png", "Figure 5.1.7: Immutable Forensic Security Audit Trail"),
+]:
+    md.append(f'<div align="center" style="margin:18px 0;"><img src="static/images/screenshots/{img_fn}" alt="{fig_lbl}" style="max-width:100%;"><br><em>{fig_lbl}</em></div>\n')
 
 md.append("---\n")
 
@@ -283,9 +292,9 @@ html_doc = f"""<!DOCTYPE html>
   h1 {{ color: #1a365d; border-bottom: 2px solid #1a365d; padding-bottom: 8px; margin-top: 35px; text-align: center; }}
   h2 {{ color: #2b6cb0; margin-top: 25px; }}
   h3 {{ color: #2d3748; }}
-  pre {{ background: #f8fafc; border: 1px solid #cbd5e0; border-radius: 6px; padding: 12px; font-family: 'Courier New', Courier, monospace; font-size: 11px; overflow-x: auto; line-height: 1.35; }}
-  table {{ width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 12px; }}
-  th, td {{ border: 1px solid #cbd5e0; padding: 6px 10px; text-align: left; }}
+  pre {{ background: #f8fafc; padding: 12px; font-family: 'Times New Roman', Times, serif; font-size: 11px; overflow-x: auto; line-height: 1.35; }}
+  table {{ width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 12px; font-family: 'Times New Roman', Times, serif; }}
+  th, td {{ border-bottom: 1px solid #cbd5e0; padding: 6px 10px; text-align: left; }}
   th {{ background: #1a365d; color: #fff; }}
   tr:nth-child(even) {{ background: #f7fafc; }}
   code {{ background: #edf2f7; padding: 2px 5px; border-radius: 4px; font-size: 12px; font-family: monospace; }}

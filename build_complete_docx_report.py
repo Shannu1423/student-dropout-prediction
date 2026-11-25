@@ -440,8 +440,7 @@ def create_report():
         ["  5.6 User Feedback and Improvements", "42"],
         ["  5.7 Summary of Findings", "43"],
         ["CHAPTER 6: CONCLUSION AND FUTURE WORK", "44"],
-        ["REFERENCES", "45"],
-        ["PART II: COMPLETE SOURCE CODEBASE LISTINGS (All 15 Modules)", "47"]
+        ["REFERENCES", "45"]
     ]
     add_styled_table(["Topic", "Page No."], toc_data, col_widths=[5.2, 1.2])
     doc.add_page_break()
@@ -802,47 +801,7 @@ def create_report():
     for r in refs:
         add_bullet(r)
 
-    doc.add_page_break()
-
-    # PART II: SOURCE CODE
-    add_heading1("PART II: COMPLETE SOURCE CODEBASE LISTINGS (All 15 Modules)")
-    add_body("This volume contains the complete, unabridged, line-by-line source code for all modules of the Sanskriti University AI-Based Student Dropout Prediction System:")
-
-    files_to_include = [
-        ("app.py", "Complete Flask Web Application Controller, REST Endpoints, RBAC, CSV Ingestion & Audit System"),
-        ("ml_engine.py", "Machine Learning Pipeline, Random Forest Classifier, Baseline Logistic Regression & XAI Engine"),
-        ("database.py", "Relational Database Persistence Layer, SQLAlchemy ORM Models & Lifecycle Definitions"),
-        ("config.py", "System Configuration Registry, Security Keys & Environmental Parameter Bindings"),
-        ("test_app.py", "Automated System Verification Harness, Integration Tests & Test Matrix Assertions"),
-        ("train_model.py", "Machine Learning Model Training Pipeline, Stratified Evaluation & Synthetic Data Generation"),
-        ("templates/base.html", "Core Frontend Master Template, Bootstrap 5 Framework & Dynamic Role-Based Navbar"),
-        ("templates/login.html", "Unified Portal Authentication Screen & Quick Demo Access Controls"),
-        ("templates/dashboard.html", "Executive Authority Dashboard, KPI Metrics & Chart.js Visualizations"),
-        ("templates/students.html", "Student Monitoring Directory, Multi-Parameter Search & Bulk Ingestion Modal"),
-        ("templates/counselling.html", "5-Stage Student Retention Lifecycle Hub & Queue Workload Governance"),
-        ("templates/admin_settings.html", "Administrative Policy Controls, Risk Threshold Sliders & Model Retraining Panel"),
-        ("templates/student_profile.html", "Isolated Student Profile View, Explainable AI Reason Card & Mentorship Log"),
-        ("templates/audit_logs.html", "System Audit Trail, Forensic Activity History & Timestamped User Actions"),
-        ("static/css/style.css", "Custom Responsive CSS Styling Rules, Risk Badge Hierarchy & Theme Tokens")
-    ]
-
-    for fname, fdesc in files_to_include:
-        fcontent = read_source_file(fname)
-        add_heading2(f"Module: {fname}")
-        add_body(fdesc, bold_prefix="Functional Overview: ", space_after=3)
-
-        lines = fcontent.splitlines()
-        code_p = doc.add_paragraph()
-        code_p.paragraph_format.line_spacing = 1.05
-        code_p.paragraph_format.space_before = Pt(2)
-        code_p.paragraph_format.space_after = Pt(8)
-        code_text = "\n".join(f"{idx:4d} | {l}" for idx, l in enumerate(lines, 1))
-        r_code = code_p.add_run(code_text)
-        r_code.font.name = 'Courier New'
-        r_code.font.size = Pt(7.0)
-        r_code.font.color.rgb = RGBColor(0x1A, 0x20, 0x2C)
-
-    # Save to all target paths
+    # Save to all target paths (without borders, without source code, pure Times New Roman, all 7 screenshots)
     for target_path in [TARGET_DOCX_1, TARGET_DOCX_2, TARGET_DOCX_3, TARGET_DOCX_4]:
         doc.save(target_path)
         print(f"Saved: {target_path} ({os.path.getsize(target_path)} bytes)")

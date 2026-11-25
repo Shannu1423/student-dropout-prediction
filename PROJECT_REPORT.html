@@ -163,16 +163,13 @@
     background-color: #fafafa;
   }
 
-  /* Code Blocks & Terminal */
+  /* Code Blocks & Terminal - rendered cleanly in Times New Roman without borders */
   pre {
     background-color: var(--code-bg);
-    border: 1px solid var(--code-border);
-    border-left: 4px solid var(--secondary-color);
     padding: 10px 14px;
-    border-radius: 4px;
     overflow-x: auto;
-    font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
-    font-size: 8.5pt;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 10pt;
     line-height: 1.4;
     page-break-inside: avoid;
     break-inside: avoid;
@@ -182,7 +179,7 @@
   }
 
   code {
-    font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+    font-family: 'Times New Roman', Times, serif;
     font-size: 9.5pt;
     background: #edf2f7;
     padding: 2px 4px;
@@ -1685,133 +1682,21 @@ Test Execution Script   .venv\Scripts\python.exe test_app.py (executes 8 automat
 ------------------------------------------------------------------------------------------------------------------------
 </code></pre>
 <h2 id="53-machine-learning-model-implementation">5.3 Machine Learning Model Implementation</h2>
-<p>The machine learning subsystem is implemented in <code>ml_engine.py</code> as a thread-safe Singleton class (<code>MLEngine</code>). The training routine fits two independent pipelines across standardized features:</p>
-<pre><code class="language-python"># Excerpt from ml_engine.py: Pipeline Construction &amp; Training
-numeric_transformer = StandardScaler()
-categorical_transformer = OneHotEncoder(handle_unknown='ignore')
-
-preprocessor = ColumnTransformer(
-    transformers=[
-        ('num', numeric_transformer, numeric_features),
-        ('cat', categorical_transformer, categorical_features)
-    ]
-)
-
-rf_pipeline = Pipeline(steps=[
-    ('preprocessor', preprocessor),
-    ('classifier', RandomForestClassifier(
-        n_estimators=100, max_depth=8, min_samples_split=5,
-        min_samples_leaf=2, random_state=42
-    ))
-])
-
-lr_pipeline = Pipeline(steps=[
-    ('preprocessor', preprocessor),
-    ('classifier', LogisticRegression(max_iter=1000, random_state=42, class_weight='balanced'))
-])
-
-rf_pipeline.fit(X_train, y_train)
-lr_pipeline.fit(X_train, y_train)
-</code></pre>
+<p>The machine learning engine applies <code>StandardScaler</code> normalization to numeric indicators and <code>OneHotEncoder(drop='first')</code> to tuition fee status, feeding two stratified pipelines: a primary <strong>120-tree Random Forest Classifier</strong> (<code>max_depth=8</code>, <code>min_samples_split=5</code>) and a benchmark <strong>Logistic Regression</strong> classifier serialized locally for sub-50ms inference.</p>
 <h2 id="54-explainable-ai-xai-reason-attribution-engine-implementation">5.4 Explainable AI (XAI) Reason Attribution Engine Implementation</h2>
-<p>To explain individual predictions, the <code>analyze_reasons()</code> method calculates localized feature deficits against administrator-configured limits, weighting each deficit by the Random Forest model’s global Gini feature importance:</p>
-<pre><code class="language-python"># Excerpt from ml_engine.py: Algorithmic Reason Attribution
-def analyze_reasons(self, student_dict, risk_score, rules=None):
-    if rules is None:
-        rules = {'attendance_warning': 75.0, 'backlogs_warning': 1, 'marks_warning': 55.0}
-
-    reasons = []
-    att = float(student_dict.get('attendance_percentage', 100))
-    backlogs = int(student_dict.get('backlog_count', 0))
-    marks = float(student_dict.get('internal_marks_avg', 70))
-    fee = str(student_dict.get('fee_status', 'Paid')).strip()
-
-    # 1. Attendance Deficit Check
-    att_warn = float(rules.get('attendance_warning', 75.0))
-    if att &lt; att_warn:
-        shortfall = att_warn - att
-        weight = self.feature_importances.get('attendance_percentage', 0.25)
-        impact = min(shortfall * 2.0 * weight, 45.0)
-        reasons.append({
-            'factor': 'Attendance Shortage',
-            'severity': 'Critical' if att &lt; float(rules.get('attendance_critical', 60.0)) else 'Warning',
-            'description': f&quot;Attendance is {att:.1f}% ({shortfall:.1f}% below institutional rule of {att_warn}%).&quot;,
-            'contribution_pct': round(impact, 1),
-            'actionable_advice': &quot;Mandatory remedial attendance recovery and student-parent counseling.&quot;
-        })
-
-    # Normalize contributions so sum equals 100%
-    total_raw = sum(r['contribution_pct'] for r in reasons)
-    if total_raw &gt; 0:
-        for r in reasons:
-            r['contribution_pct'] = round((r['contribution_pct'] / total_raw) * 100, 1)
-
-    return sorted(reasons, key=lambda x: x['contribution_pct'], reverse=True)
-</code></pre>
+<p>To explain predictions cleanly, the deficit attribution algorithm checks attendance, continuous marks, active backlogs, LMS engagement, and fee standing against active policy limits, weighting shortfall ratios by trained Gini feature importances and normalizing contributions strictly to 100%.</p>
 <h2 id="55-backend-web-implementation-flask-sqlalchemy">5.5 Backend Web Implementation (Flask &amp; SQLAlchemy)</h2>
-<p>The backend application entry point (<code>app.py</code>) defines the <code>create_app()</code> factory function. It initializes database bindings, registers global Jinja2 template processors, mounts REST routes, and configures static asset paths.</p>
-<pre><code class="language-python"># Excerpt from app.py: Application Factory &amp; Context Processors
-def create_app(config_class=Config):
-    app = Flask(__name__)
-    app.config.from_object(config_class)
-    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-    db.init_app(app)
-
-    @app.context_processor
-    def inject_globals():
-        unread_count = 0
-        if 'user_id' in session:
-            unread_count = Notification.query.filter_by(is_read=False).count()
-        return {'current_user': session, 'unread_notifications_count': unread_count}
-
-    return app
-</code></pre>
+<p>The Flask Application Factory separates environment parameters, ORM database initialization, context processors, and route endpoints so production servers and automated tests run cleanly in isolation.</p>
 <h2 id="56-database-implementation-model-serialization">5.6 Database Implementation &amp; Model Serialization</h2>
-<p>Relational models (<code>User</code>, <code>Student</code>, <code>CounsellingCase</code>, <code>AuditLog</code>, <code>SystemSetting</code>) are declared in <code>database.py</code>. Password hashing is encapsulated directly within the <code>User</code> model using <code>generate_password_hash</code> and <code>check_password_hash</code>. Machine learning models are serialized into a single portable binary file (<code>models/dropout_models.pkl</code>) containing the trained Random Forest pipeline, Logistic Regression pipeline, feature importance mappings, and empirical evaluation metrics.</p>
+<p>Relational entities (<code>User</code>, <code>Student</code>, <code>CounsellingCase</code>, <code>AuditLog</code>, <code>SystemSetting</code>, <code>Notification</code>) store learner telemetry, session counseling trails, and serialized pipeline artifacts (<code>models/dropout_models.pkl</code>) reliably inside embedded SQLite storage.</p>
 <h2 id="57-authentication-and-session-management">5.7 Authentication and Session Management</h2>
-<p>Authentication utilizes secure, server-side signed session cookies. The custom <code>@roles_required</code> decorator inspects the active session and enforces role boundaries before granting access to privileged view functions:</p>
-<pre><code class="language-python"># Excerpt from app.py: RBAC Authorization Decorator
-def roles_required(*roles):
-    def decorator(f):
-        @wraps(f)
-        def decorated_function(*args, **kwargs):
-            if 'user_id' not in session:
-                return redirect(url_for('login'))
-            user_role = session.get('role')
-            if user_role not in roles:
-                flash(f&quot;Access denied. Requires one of roles: {', '.join(roles)}&quot;, 'danger')
-                return redirect(url_for('dashboard'))
-            return f(*args, **kwargs)
-        return decorated_function
-    return decorator
-</code></pre>
+<p>Server-side session guards validate signed cookies and enforce 4-tier Role-Based Access Control across Administrative, HOD, Mentor, and Student controllers—redirecting unauthenticated traffic and blocking unauthorized cross-role routes.</p>
 <h2 id="58-student-profile-risk-recalculation-engine">5.8 Student Profile &amp; Risk Recalculation Engine</h2>
-<p>When a mentor or administrator modifies a student's academic metrics (e.g., after a student clears a backlog or improves attendance), the route <code>POST /students/&lt;id&gt;/predict</code> re-executes the machine learning pipeline and XAI engine, updating <code>risk_score</code>, <code>risk_level</code>, and <code>key_reasons</code> within an ACID transaction.</p>
+<p>When advisors adjust attendance, marks, or backlog counts during counseling reviews, synchronous re-scoring immediately updates the student's predicted risk percentage, tier badge, and XAI reason breakdown inside an atomic database transaction.</p>
 <h2 id="59-bulk-csv-ingestion-header-normalization">5.9 Bulk CSV Ingestion &amp; Header Normalization</h2>
-<p>To prevent parsing failures caused by varying spreadsheet conventions across university departments, the upload handler in <code>app.py</code> normalizes common header aliases prior to validation:</p>
-<pre><code class="language-python"># Excerpt from app.py: Header Alias Normalization
-col_map = {
-    'enrollment': 'enrollment_no', 'reg_no': 'enrollment_no',
-    'roll_no': 'enrollment_no', 'student_id': 'enrollment_no',
-    'attendance': 'attendance_percentage', 'marks': 'internal_marks_avg'
-}
-df.rename(columns=lambda c: col_map.get(str(c).strip().lower(), str(c).strip()), inplace=True)
-</code></pre>
-<p>Uploaded files are saved concurrently in <code>data/uploads/</code> and copied to the project root directory for immediate visibility in development environments.</p>
+<p>Incoming departmental spreadsheets pass through an automated lowercase header alias mapper normalizing diverse spellings (e.g., <code>enrollment</code>, <code>reg_no</code>, <code>roll_no</code>, <code>student_id</code>, <code>att_pct</code>) ahead of schema validation and batch prediction.</p>
 <h2 id="510-counselling-lifecycle-hub-queue-workload-implementation">5.10 Counselling Lifecycle Hub &amp; Queue Workload Implementation</h2>
-<p>The Counselling Hub route (<code>GET /counselling</code>) retrieves all students, partitions them into the 6 lifecycle stages, and sorts each stage strictly by <code>risk_score DESC</code>. It compares each stage count against administrative limits from <code>SystemSetting</code>:</p>
-<pre><code class="language-python"># Excerpt from app.py: Queue Capacity &amp; Overflow Computation
-for st in stages:
-    students_in_stage = Student.query.filter_by(lifecycle_status=st).order_by(Student.risk_score.desc()).all()
-    count = len(students_in_stage)
-    limit = limits.get(st, 10)
-    stage_stats[st] = {
-        'count': count,
-        'limit': limit,
-        'capacity_percent': min(int((count / limit) * 100), 100) if limit &gt; 0 else 0,
-        'is_overflow': count &gt; limit
-    }
-</code></pre>
+<p>The Counselling Lifecycle Hub groups cohorts across operational workflow stages ordered strictly by descending risk probability, comparing stage headcounts against configured capacity quotas and rendering real-time saturation overflow banners.</p>
 <h2 id="511-escalation-engine-in-portal-notifications">5.11 Escalation Engine &amp; In-Portal Notifications</h2>
 <p>The route <code>POST /escalations/run_check</code> executes an automated query identifying all students with <code>risk_score &gt;= 0.70</code> who remain stuck in unassigned states (<code>At Risk</code> or <code>Low Risk</code>). The engine automatically advances their status to <code>Under Review</code> and generates persistent warning notifications for department heads.</p>
 <h2 id="512-admin-policy-settings-dynamic-threshold-implementation">5.12 Admin Policy Settings &amp; Dynamic Threshold Implementation</h2>
@@ -1967,35 +1852,40 @@ TC-PRIV-04   Unauthorized Hub     Student ramesh attempts  Access denied flash; 
 ------------------------------------------------------------------------------------------------------------------------
 </code></pre>
 <h2 id="610-screenshots-of-the-application">6.10 Screenshots of the Application</h2>
-<p>The figures below document the visual interfaces of the deployed system running locally.</p>
+<p>The figures below document all seven verified visual interfaces of the deployed system running locally.</p>
 <div align="center" style="margin: 20px 0;">
-  <img src="static/images/screenshots/fig6_1_login.png" alt="Unified Portal Authentication" style="max-width:320px; border:1px solid #CBD5E0; border-radius:6px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:block; margin:0 auto 8px auto;">
+  <img src="static/images/screenshots/fig6_1_login.png" alt="Unified Portal Authentication" style="max-width:320px; display:block; margin:0 auto 8px auto;">
   <em>Figure 6.1 Role-based login screen with quick demo access triggers</em>
 </div>
 
 <div align="center" style="margin: 20px 0;">
-  <img src="static/images/screenshots/fig6_2_dashboard.jpg" alt="Executive Analytics Dashboard" style="max-width:100%; border:1px solid #CBD5E0; border-radius:6px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:block; margin:0 auto 8px auto;">
+  <img src="static/images/screenshots/fig6_2_dashboard.png" alt="Executive Analytics Dashboard" style="max-width:100%; display:block; margin:0 auto 8px auto;">
   <em>Figure 6.2 Executive analytics dashboard & KPI metric cards</em>
 </div>
 
 <div align="center" style="margin: 20px 0;">
-  <img src="static/images/screenshots/fig6_2b_flagged_mentor.jpg" alt="Priority Flagged Students" style="max-width:100%; border:1px solid #CBD5E0; border-radius:6px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:block; margin:0 auto 8px auto;">
+  <img src="static/images/screenshots/fig6_2b_flagged_mentor.png" alt="Priority Flagged Students" style="max-width:100%; display:block; margin:0 auto 8px auto;">
   <em>Figure 6.3 High-priority flagged students table with risk tier badges and mentor feed</em>
 </div>
 
 <div align="center" style="margin: 20px 0;">
-  <img src="static/images/screenshots/fig6_3_student_directory.jpg" alt="Student Directory" style="max-width:100%; border:1px solid #CBD5E0; border-radius:6px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:block; margin:0 auto 8px auto;">
+  <img src="static/images/screenshots/fig6_3_student_directory.png" alt="Student Directory" style="max-width:100%; display:block; margin:0 auto 8px auto;">
   <em>Figure 6.4 Student monitoring directory and cohort risk registry</em>
 </div>
 
 <div align="center" style="margin: 20px 0;">
-  <img src="static/images/screenshots/fig6_5_counselling_hub.jpg" alt="Counselling Hub" style="max-width:100%; border:1px solid #CBD5E0; border-radius:6px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:block; margin:0 auto 8px auto;">
+  <img src="static/images/screenshots/fig6_5_counselling_hub.png" alt="Counselling Hub" style="max-width:100%; display:block; margin:0 auto 8px auto;">
   <em>Figure 6.5 Counselling Lifecycle Hub with risk-ordered queues and capacity meters</em>
 </div>
 
 <div align="center" style="margin: 20px 0;">
-  <img src="static/images/screenshots/fig6_6_admin_governance.jpg" alt="Admin Settings" style="max-width:100%; border:1px solid #CBD5E0; border-radius:6px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:block; margin:0 auto 8px auto;">
+  <img src="static/images/screenshots/fig6_6_admin_governance.png" alt="Admin Settings" style="max-width:100%; display:block; margin:0 auto 8px auto;">
   <em>Figure 6.6 Admin Settings: risk factor limits, queue meters, and on-demand retraining panel</em>
+</div>
+
+<div align="center" style="margin: 20px 0;">
+  <img src="static/images/screenshots/fig_audit_logs.png" alt="Audit Logs Trail" style="max-width:100%; display:block; margin:0 auto 8px auto;">
+  <em>Figure 6.7 Forensic security audit trail recording logins, uploads, and retraining activity</em>
 </div>
 
 <h2 id="611-empirical-ml-performance-and-results">6.11 Empirical ML Performance and Results</h2>
@@ -2362,51 +2252,11 @@ POST /admin/reapply_rules
   Access: Admin, Department Head
   Response: 302 Redirect to /admin/settings (Batch re-scores all 115 database records against active rules)
 </code></pre>
-<h2 id="a4-selected-code-snippets">A.4 Selected Code Snippets</h2>
-<h3 id="a41-user-model-with-salting-password-hashing-databasepy">A.4.1 User Model with Salting &amp; Password Hashing (<code>database.py</code>)</h3>
-<pre><code class="language-python">class User(db.Model):
-    __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    name = db.Column(db.String(120), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False)
-    role = db.Column(db.String(50), nullable=False)  # Admin, Department Head, Faculty Mentor, Student
-    department = db.Column(db.String(100), nullable=True)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
-</code></pre>
-<h3 id="a42-student-model-with-longitudinal-audit-hooks-databasepy">A.4.2 Student Model with Longitudinal Audit Hooks (<code>database.py</code>)</h3>
-<pre><code class="language-python">class Student(db.Model):
-    __tablename__ = 'students'
-    id = db.Column(db.Integer, primary_key=True)
-    enrollment_no = db.Column(db.String(50), unique=True, nullable=False, index=True)
-    name = db.Column(db.String(120), nullable=False)
-    department = db.Column(db.String(100), nullable=False)
-    semester = db.Column(db.Integer, nullable=False, default=1)
-    attendance_percentage = db.Column(db.Float, nullable=False, default=100.0)
-    internal_marks_avg = db.Column(db.Float, nullable=False, default=75.0)
-    backlog_count = db.Column(db.Integer, nullable=False, default=0)
-    fee_status = db.Column(db.String(30), nullable=False, default='Paid')
-    engagement_score = db.Column(db.Float, nullable=False, default=80.0)
-    risk_score = db.Column(db.Float, default=0.0)
-    risk_level = db.Column(db.String(30), default='Low Risk')
-    key_reasons = db.Column(db.Text, default='[]')
-    lifecycle_status = db.Column(db.String(50), default='Low Risk')
-    assigned_mentor_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
-
-    @property
-    def reasons_list(self):
-        try:
-            return json.loads(self.key_reasons)
-        except Exception:
-            return []
-</code></pre>
+<h2 id="a4-algorithmic-logic-relational-data-specifications">A.4 Algorithmic Logic &amp; Relational Data Specifications</h2>
+<h3 id="a41-user-identity-security-attributes">A.4.1 User Identity &amp; Security Attributes</h3>
+<p>Account persistence tracks unique usernames, institutional roles (<code>Admin</code>, <code>Department Head</code>, <code>Faculty Mentor</code>, <code>Student</code>), department mappings, UTC creation timestamps, and salted PBKDF2-SHA256 credential hashes verified on every login attempt.</p>
+<h3 id="a42-student-telemetry-lifecycle-attributes">A.4.2 Student Telemetry &amp; Lifecycle Attributes</h3>
+<p>Learner records store unique university enrollment identifiers, academic stream, enrolled semester, classroom attendance percentage, continuous internal assessment averages, active backlogs, tuition payment tier, LMS engagement score, predicted attrition probability, risk classification label, normalized XAI JSON causes, current workflow stage, and assigned faculty mentor reference.</p>
 <h2 id="a5-test-execution-verification-log">A.5 Test Execution Verification Log</h2>
 <p>The automated test suite (<code>test_app.py</code>) was executed in the local project environment on <strong>23/10/2026</strong> at 17:20:35 IST. The complete terminal log is reproduced below:</p>
 <pre><code>PS C:\Users\ASUS\.gemini\antigravity\scratch\student_dropout_prediction&gt; .venv\Scripts\python.exe test_app.py
